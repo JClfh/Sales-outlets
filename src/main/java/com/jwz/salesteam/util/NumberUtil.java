@@ -3,12 +3,7 @@ package com.jwz.salesteam.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @author 13
- * @qq交流群 796794009
- * @email 2449207463@qq.com
- * @link https://github.com/newbee-ltd
- */
+
 public class NumberUtil {
 
     private NumberUtil() {
@@ -52,6 +47,17 @@ public class NumberUtil {
      */
     public static String genOrderNo() {
         StringBuffer buffer = new StringBuffer(String.valueOf(System.currentTimeMillis()));
+        int num = genRandomNum(4);
+        buffer.append(num);
+        return buffer.toString();
+    }
+
+    /**
+     * 生成职员id
+     *
+     */
+    public static String genEmpId() {
+        StringBuffer buffer = new StringBuffer("8009");
         int num = genRandomNum(4);
         buffer.append(num);
         return buffer.toString();

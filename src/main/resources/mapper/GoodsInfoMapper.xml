@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jwz.salesteam.mapper.GoodsInfoMapper" >
+<mapper namespace="com.jwz.salesteam.dao.GoodsInfoMapper" >
   <resultMap id="BaseResultMap" type="com.jwz.salesteam.entity.GoodsInfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
@@ -13,82 +13,11 @@
     <result column="update_time" property="updateTime" jdbcType="DATE" />
     <result column="is_del" property="isDel" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
+
   <sql id="Base_Column_List" >
     id, goods_id, goods_name, goods_selling_price, goods_cover_img, goods_detail_content, 
     goods_intro, create_time, update_time, is_del
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jwz.salesteam.entity.GoodsInfoExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from goods_info
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -98,12 +27,6 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from goods_info
     where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.jwz.salesteam.entity.GoodsInfoExample" >
-    delete from goods_info
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
   </delete>
   <insert id="insert" parameterType="com.jwz.salesteam.entity.GoodsInfo" >
     insert into goods_info (id, goods_id, goods_name, 
@@ -182,66 +105,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.jwz.salesteam.entity.GoodsInfoExample" resultType="java.lang.Integer" >
-    select count(*) from goods_info
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update goods_info
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.goodsId != null" >
-        goods_id = #{record.goodsId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.goodsName != null" >
-        goods_name = #{record.goodsName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.goodsSellingPrice != null" >
-        goods_selling_price = #{record.goodsSellingPrice,jdbcType=INTEGER},
-      </if>
-      <if test="record.goodsCoverImg != null" >
-        goods_cover_img = #{record.goodsCoverImg,jdbcType=VARCHAR},
-      </if>
-      <if test="record.goodsDetailContent != null" >
-        goods_detail_content = #{record.goodsDetailContent,jdbcType=VARCHAR},
-      </if>
-      <if test="record.goodsIntro != null" >
-        goods_intro = #{record.goodsIntro,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createTime != null" >
-        create_time = #{record.createTime,jdbcType=DATE},
-      </if>
-      <if test="record.updateTime != null" >
-        update_time = #{record.updateTime,jdbcType=DATE},
-      </if>
-      <if test="record.isDel != null" >
-        is_del = #{record.isDel,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update goods_info
-    set id = #{record.id,jdbcType=INTEGER},
-      goods_id = #{record.goodsId,jdbcType=VARCHAR},
-      goods_name = #{record.goodsName,jdbcType=VARCHAR},
-      goods_selling_price = #{record.goodsSellingPrice,jdbcType=INTEGER},
-      goods_cover_img = #{record.goodsCoverImg,jdbcType=VARCHAR},
-      goods_detail_content = #{record.goodsDetailContent,jdbcType=VARCHAR},
-      goods_intro = #{record.goodsIntro,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=DATE},
-      update_time = #{record.updateTime,jdbcType=DATE},
-      is_del = #{record.isDel,jdbcType=INTEGER}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.jwz.salesteam.entity.GoodsInfo" >
     update goods_info
     <set >
