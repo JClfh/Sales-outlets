@@ -1,0 +1,734 @@
+<html lang="en">
+
+<head>
+  <base href="./">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+  <meta name="author" content="Łukasz Holeczek">
+  <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+  <title>管理会员</title>
+  <!-- Icons-->
+  <link href="../vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+  <link href="../vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+  <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+</head>
+<script type="text/css">
+
+            </script>
+<style>
+  .div1 {
+    background: rgb(38, 202, 231);
+    color: rgb(252, 247, 247);
+  }
+</style>
+
+<body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
+  <header class="app-header navbar">
+    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="btn-group" role="group" aria-label="Button group">
+      <a class="btn" href="/main_message">
+        <i class="fa fa-share" aria-hidden="true"></i> &nbsp;返回会员</a>
+      <a class="btn" href="/shetuan">
+        <i class="icon-graph"></i> &nbsp;网站首页</a>
+      <a class="btn" href="/logout">
+        <i class="fa fa-share" aria-hidden="true"></i> &nbsp;退出</a>
+    </div>
+  
+  
+  </header>
+  <div class="app-body">
+
+
+    <div class="sidebar">
+      <nav class="sidebar-nav ps ps--active-y">
+        <ul class="nav">
+          <br>
+          <br>
+
+          <li class="nav-item nav-dropdown ">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-puzzle"></i> 职员管理</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" href="./admin_add_salesman.html">
+                  <i class="nav-icon icon-puzzle"></i>添加人员</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./admin_manage_members.html">
+                  <i class="nav-icon icon-puzzle"></i>管理人员</a>
+              </li>
+            </ul>
+          </li>
+          <br><br><br>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-cursor"></i> 商品管理</a>
+            <ul class="nav-dropdown-items">
+
+              <li class="nav-item">
+                <a class="nav-link" href="./admin_add_goods.html">
+                  <i class="nav-icon icon-cursor"></i> 发布商品</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./admin_manage_goods.html">
+                  <i class="nav-icon icon-cursor"></i> 编辑商品</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./admin_show_goods.html">
+                  <i class="nav-icon icon-cursor"></i> 商品展示</a>
+              </li>
+            </ul>
+          </li>
+          <br>
+
+        </ul>
+        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+          <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+        </div>
+        <div class="ps__rail-y" style="top: 0px; height: 445px; right: 0px;">
+          <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 297px;"></div>
+        </div>
+      </nav>
+      <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+    </div>
+    <main class="main">
+      <!-- Breadcrumb-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">你的位置：职员管理->管理人员</li>
+
+        <!-- Breadcrumb Menu-->
+        <li class="breadcrumb-menu d-md-down-none">
+
+        </li>
+      </ol>
+      <div id="itemsTemplate">
+        <div align="center">
+          <div class="center-in-center" style="width:95%;">
+            <div class="card">
+              <div class="card-header">
+                <div align="left">  <div align="left">
+                  <i class=" font-xl  cui-people"></i>
+                  搜索<input type="text" name="text-input" >
+                  <button class="btn btn-success" type="button"  v-on:click="cha()" data-toggle="modal">
+                    <i class="fa fa-search" aria-hidden="true"></i></button>
+
+                </div>
+                </div>
+              </div>
+              <div class="card-body collapse show" id="collapseExample">
+                <table class="table table-responsive-sm table-bordered">
+                  <thead>
+                    <tr align="center">
+                      <th width="125p">姓名</th>
+                      <th width="125p">性别</th>
+                      <th width="125p">联系电话</th>
+                      <th width="125p">地址</th>
+                      <th width="125p">登录ID</th>
+                      <th width="125p">登录口令</th>
+                      <th width="125p">职位</th>
+                      <th width="125p">禁用</th>
+                      <th width="125p">状态</th>
+                      <th width="125p">创建时间</th>
+                      <th width="125p">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
+
+                      <td align="center">{{item.empName}}</td>
+                      <td align="center">
+                        <span class="" v-if="item.empSex  === 0">男</span>
+                        <span class="" v-if="item.empSex  === 1">女</span>
+                      </td>
+                       <td align="center">{{item.empTel}}</td>
+                      <td align="center">{{item.empAddress}}</td>
+                      <td align="center">{{item.empId}}</td>
+                      <td align="center">{{item.empPwd}}</td>
+                      <td align="center"> 
+                        <p class="badge badge-info" style="font-size:17px"
+                          v-if="item.empType === 0">销售员</p>
+                        <p class="badge badge-success"  style="font-size:17px" v-if="item.empType === 1">跟单员</p>
+                        <p class="badge badge-warning"  style="font-size:17px" v-if="item.empType === 2">财务</p>
+                      </td>
+                      <td align="center"> 
+                        <label class="switch switch-label switch-pill switch-warning">
+                        <input class="switch-input" type="checkbox" checked="">
+                        <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+                      </label></td>
+                  
+                      <td align="center"> 
+                        <p class="badge badge-danger"  style="font-size:17px"
+                          v-if="item.isDel === 0">离职</p>
+                        <p class=""  style="font-size:17px" v-if="item.isDel === 1">在职</p>
+                      </td>
+                      <td align="center">{{item.createTime}}</td>
+
+                      <td align="center"> <button class="btn btn-primary" type="button" data-toggle="modal"
+                          v-on:click="edit(index)">
+                          <i class="fa fa-edit "></i>编辑</button>&nbsp;
+
+                        <button class="btn btn-danger" type="button" data-toggle="modal" v-on:click="del(index)"><i
+                            class="fa fa-close "></i>删除</button>&nbsp;
+                      
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <ul class="pagination" id="pagelist">
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);" onclick="app.first()">首页</a>
+                  </li>
+
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);" onclick="app.last()">上一页</a>
+                  </li>
+                  <li class="page-item" v-for="pageitem in pagesum">
+                    <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
+                  </li>
+
+                  <li class="page-item" v-for="pageitem in pageitem" v-if="pageindex>=4 && pageindex<=pagesum-3"
+                    v-show="pageitem>pageindex-3 && pageitem<pageindex+3 && pageindex>=4 && pageindex<=pagesum-3">
+                    <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
+                  </li>
+
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);" onclick="app.Next()">下一页</a>
+                  </li>
+
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);" onclick="app.lastone()">末页</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" style="color:cornflowerblue">{{pageindex}}/{{pagesum}}</a>
+                  </li>
+                  <li>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                  </li>
+                  <li class="page-item">
+                    <input class="form-control" id="page_1" size="16" type="text" style="width:60px">
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" style="color:cornflowerblue" v-on:click="jume();">转</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /删除-->
+        <div class="modal fade" id="dangerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">删除</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>是否执行删除操作</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">否</button>
+                <button class="btn btn-danger" type="button" v-on:click="delCheck()">确定</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /成功-->
+        <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-success" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>删除成功！</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
+        <div class="modal fade" id="editSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-success" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>编辑成功！</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
+
+
+        <!-- /警告-->
+        <div class="modal fade show" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">警告！！！！！</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>编辑失败</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
+
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+          <!-- /.modal-dialog-->
+        </div>
+        <!-- 编辑 -->
+        <div class="modal fade" id="primaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true" style="display: none;" aria-hidden="true">
+
+          <div class="modal-dialog modal-primary" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+
+                <h4 class="modal-title">编辑</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="card-body">
+                <form class="needs-validation" novalidate>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="text-input">编号</label>
+                    <div class="col-md-9">
+                      <input class="form-control" id="text-input" type="text" name="text-input"
+                        v-model="edititems.id" pattern="^[0-9]+$" disabled="disabled" required>
+
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="text-input">创建时间</label>
+                    <div class="col-md-9">
+                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="登录口令"
+                        v-model="edititems.createTime" required disabled="disabled">
+
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="text-input">姓名</label>
+                    <div class="col-md-9">
+                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="姓名"
+                        v-model="edititems.empName" 
+                        pattern="^[\u4e00-\u9fa5]{2,4}$|^[A-Za-z\s]{2,40}$" required>
+
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="select1">性别</label>
+                    <div class="col-md-9">
+                      <select class="form-control" id="select1" name="select1" v-model="edititems.empSex">
+                        <option value=0>男</option>
+                        <option value=1>女</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="text-input">联系电话</label>
+                    <div class="col-md-9">
+                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="联系电话"
+                        v-model="edititems.empTel" pattern="^[0-9]+$" required>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="text-input">地址</label>
+                    <div class="col-md-9">
+                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="地址"
+                        v-model="edititems.empAddress" required>
+
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="text-input">登录ID</label>
+                    <div class="col-md-9">
+                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="登录ID"
+                        v-model="edititems.empId"  required disabled="disabled">
+
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="text-input">登录口令</label>
+                    <div class="col-md-9">
+                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="登录口令"
+                        v-model="edititems.empPwd" required >
+
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="select1">职位</label>
+                    <div class="col-md-9">
+                      <select class="form-control" id="select1" name="select1" v-model="edititems.empSex">
+                        <option value=0>销售员</option>
+                        <option value=1>跟单员</option>
+                        <option value=2>财务</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label">状态</label>
+                    <div class="col-md-9 col-form-label">
+                      <div class="form-check form-check-inline mr-1">
+                        <input class="form-check-input" id="inline-radio1" type="radio" value="0" name="inline-radios"
+                          v-model="edititems.isDel">
+                        <label class="form-check-label" for="inline-radio1">在职</label>
+                      </div>
+                      <div class="form-check form-check-inline mr-1">
+                        <input class="form-check-input" id="inline-radio2" type="radio" value="1" name="inline-radios"
+                          v-model="edititems.isDel">
+                        <label class="form-check-label" for="inline-radio2">离职</label>
+                      </div>
+                    </div>
+                  </div>
+                 
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-info" type="button" v-on:click="save()">保存</button>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../vendors/jquery/js/jquery.min.js"></script>
+  <script src="../vendors/popper.js/js/popper.min.js"></script>
+  <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../vendors/pace-progress/js/pace.min.js"></script>
+  <script src="../vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+  <script src="../vendors/@coreui/coreui/js/coreui.min.js"></script>
+  <script src="../vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
+  <script src="../vendors/mock.js/js/mock.min.js"></script>
+  <script src="../vendors/vue.js/js/vue.min.js"></script>
+  <script>
+    function formatDate(time) {
+      var d = new Date(time);
+      var time=d.getFullYear() + '年'
+      if (d.getMonth() < 10)
+        time += "0";
+
+      time += d.getMonth()+1 + "月";
+
+      if (d.getDate() < 10)
+        time += "0";
+
+      time += d.getDate() + "日 ";
+      if (d.getHours() < 10)
+        time += "0";
+
+      time += d.getHours() + ":";
+      if (d.getMinutes() < 10)
+        time += '0';
+      time += d.getMinutes() + ":";
+
+      if (d.getSeconds() < 10)
+        time += '0';
+      time += d.getSeconds();
+
+      return time
+    }
+
+  </script>
+  <script>
+    var p, d, j;
+    var app;
+    var items;
+    $(function () {
+      Mock.mock("http://127.0.0.1:5500/users", {
+        "data|20-20": [{
+          id: "@increment()",//编号
+          empName: "@cname()",//名字
+          "empSex|1": ["0", "1"],//性别
+          empTel: "@increment()",//联系电话
+          "empAddress|1": ["@cname", "@name"],//地址
+          empId: "@cname()",//登录ID
+          empPwd: "@cname()",//登录口令   
+          "isDel|1": ["0", "1"],//离职状态
+          createTime:"@datetime()",//创建时间
+          "empType|1": ["0", "1", "2"]//职位
+
+        }],
+        suceess: true,  
+        code: 200,
+        msg: "Success"
+      });
+      $.getJSON("/admin/emp/list", function (response) {
+        items = response.data;
+        console.log(items)
+        page = Math.ceil(items.length / 5);
+        for(var i = 0 ; i <items.length; i ++){
+          items[i].createTime = items[i].createTime.toString().split("T")[0];
+        }
+        var pageitem = [];
+        for (var i = 0; i < page; i++) {
+          pageitem[i] = i + 1;
+        }
+        app = new Vue({
+          el: '#itemsTemplate',
+          data: {
+            items: items,
+            checkall: false,
+            pagesum: page,//总页码
+            pageindex: 1,//当前页码
+            pagesize: 5, //页面数据个数
+            pageitem: pageitem,
+            editIndex: -1,
+            edititems: { name: null },
+
+          },
+          computed: {
+            pageItems: function () {
+              var startIndex = (this.pageindex - 1) * this.pagesize;
+              var editIndex = startIndex + this.pagesize - 1;
+              return this.items.filter(function (value, index) {
+                return (
+                  index >= startIndex &&
+                  index <= editIndex
+                );
+              });
+            }
+          },
+          methods: {
+            //查询
+            cha: function () {
+              alert("查询")
+            },
+            // 删除
+            del: function (index) {
+              $('#dangerModal').modal('show');
+              d = index;
+              // alert(d)
+            },
+            delCheck: function () {
+              
+              //alert(this.items[d].id)
+              $.post("/admin/emp/del",
+                {
+                  id: this.items[d].id
+                }
+                , function (data) {
+                  if (data === true) {
+                   
+                    $('#dangerModal').modal('hide');
+                    $('#success').modal('show');
+                    app.items.splice(d, 1);
+                  } else {
+                    alert("失败");
+                  }
+                });
+              $('#dangerModal').modal('hide');
+            },
+            // 编辑
+            edit: function (index) {
+              var forms = document.getElementsByClassName('needs-validation')[0];
+              forms.classList.remove('was-validated');
+              this.editIndex = index;
+              this.edititems = JSON.parse(JSON.stringify(this.items[index]));
+              $('#primaryModal').modal('show');
+            },
+            save: function () {
+              // var com_id;
+              // $.get("/small_admin/com_id", function (data) {
+              //   com_id = data;
+              //   // alert(data)
+              // });
+              setTimeout(function () {
+                $.post("/admin/user/update",
+                  {
+                    id :app.edititems.id,
+                    empName: app.edititems.mem_id,
+                    empSex: app.edititems.empSex,
+                    empTel: app.edititems.empTel,
+                    empAddress:app.edititems.empAddress,
+                    empId:app.edititems.empId,
+                    empPwd:app.edititems.empPwd,
+                    isDel:app.edititems.isDel,
+                    empType:app.edititems.empType,
+                    createTime:app.edititems.createTime
+
+                  }, function (data) {
+                    if (data === true) {
+                      $('#primaryModal').modal('hide');
+                      $('#editSuccess').modal('show');
+                      app.items[app.editIndex].position = app.edititems.position
+                    } else {
+                      $('#danger').modal('show');
+                    }
+
+                  });
+
+              }, 500);
+
+
+            },
+            //页数
+            switch: function (x) {
+              $('.pagination li').removeClass('active');
+              x.parentNode.className = "page-item active";
+              this.pageindex = parseInt(x.innerHTML);
+            },
+            //首页
+            first: function () {
+              if (this.pageindex != 1) {
+                this.pageindex = 1;
+              }
+              this.$nextTick(function () {
+                $('.pagination li').removeClass('active');
+                var pidx = String(this.pageindex);
+                var li = document.getElementsByClassName("page-item");
+                for (var i = 0; i < li.length; i++) {
+                  if (li[i].childNodes[0].innerHTML === pidx) {
+                    li[i].className = "page-item active";
+                    break;
+                  }
+                }
+
+              })
+            },
+            //末页
+            lastone: function () {
+              if (this.pageindex != this.pagesum) {
+                this.pageindex = this.pagesum;
+              }
+              this.$nextTick(function () {
+                $('.pagination li').removeClass('active');
+                var pidx = String(this.pageindex);
+                var li = document.getElementsByClassName("page-item");
+                for (var i = 0; i < li.length; i++) {
+                  if (li[i].childNodes[0].innerHTML === pidx) {
+                    li[i].className = "page-item active";
+                    break;
+                  }
+                }
+              })
+            },
+            //上一页
+            last: function () {
+              if (this.pageindex != 1) {
+                this.pageindex--;
+              }
+              this.$nextTick(function () {
+                $('.pagination li').removeClass('active');
+                var pidx = String(this.pageindex);
+                var li = document.getElementsByClassName("page-item");
+                for (var i = 0; i < li.length; i++) {
+                  if (li[i].childNodes[0].innerHTML === pidx) {
+                    li[i].className = "page-item active";
+                    break;
+                  }
+                }
+              })
+
+            },
+            //下一页
+            Next: function () {
+              if (this.pageindex != app.pagesum) {
+                this.pageindex++;
+
+              }
+
+              this.$nextTick(function () {
+                $('.pagination li').removeClass('active');
+                var pidx = String(this.pageindex);
+                var li = document.getElementsByClassName("page-item");
+                for (var i = 0; i < li.length; i++) {
+                  if (li[i].childNodes[0].innerHTML === pidx) {
+                    li[i].className = "page-item active";
+                    break;
+                  }
+                }
+
+              })
+
+            },
+            //跳转页数
+            jume: function () {
+              var page = document.getElementById('page_1').value;
+              reg = /^\d+$/
+              if (page.length == 0) {
+                alert("请输入跳转页码");
+                return;
+              } else if (page < 1 || page > app.pagesum) {
+                alert("您输入的页码超过页数范围了！");
+                return;
+              } else if (reg.test(page) != true) {
+                alert("请输入数字！");
+                return;
+              }
+              this.pageindex = parseInt(page);
+              page = "";
+              this.$nextTick(function () {
+                $('.pagination li').removeClass('active');
+                var pidx = String(this.pageindex);
+                var li = document.getElementsByClassName("page-item");
+                for (var i = 0; i < li.length; i++) {
+                  if (li[i].childNodes[0].innerHTML === pidx) {
+                    li[i].className = "page-item active";
+                    break;
+
+                  }
+
+                }
+              })
+            }
+
+
+          }
+
+        });
+        return;
+      });
+    });
+
+
+
+  </script>
+</body>
+
+</html>

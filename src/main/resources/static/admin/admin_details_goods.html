@@ -1,0 +1,426 @@
+<html lang="en">
+
+<head>
+  <base href="./">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+  <meta name="author" content="Łukasz Holeczek">
+  <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+  <title>商品详情</title>
+  <!-- Icons-->
+  <link href="../vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+  <link href="../vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+  <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/product.css">
+  <link rel="stylesheet" href="../css/productlist.css">
+</head>
+<script type="text/css">
+
+            </script>
+<style>
+  .div1 {
+    background: rgb(38, 202, 231);
+    color: rgb(252, 247, 247);
+  }
+</style>
+
+<body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
+  <header class="app-header navbar">
+    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="btn-group" role="group" aria-label="Button group">
+      <a class="btn" href="/main_message">
+        <i class="fa fa-share" aria-hidden="true"></i> &nbsp;返回会员</a>
+      <a class="btn" href="/shetuan">
+        <i class="icon-graph"></i> &nbsp;网站首页</a>
+      <a class="btn" href="/logout">
+        <i class="fa fa-share" aria-hidden="true"></i> &nbsp;退出</a>
+    </div>
+
+
+  </header>
+  <div class="app-body">
+
+
+    <div class="sidebar">
+      <nav class="sidebar-nav ps ps--active-y">
+        <ul class="nav">
+          <br>
+          <br>
+
+          <li class="nav-item nav-dropdown ">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-puzzle"></i> 职员管理</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" href="./admin_add_salesman.html">
+                  <i class="nav-icon icon-puzzle"></i>添加</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./admin_manage_members.html">
+                  <i class="nav-icon icon-puzzle"></i>管理</a>
+              </li>
+            </ul>
+          </li>
+          <br><br><br>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-cursor"></i> 商品管理</a>
+            <ul class="nav-dropdown-items">
+
+              <li class="nav-item">
+                <a class="nav-link" href="./admin_add_goods.html">
+                  <i class="nav-icon icon-cursor"></i> 发布商品</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./admin_manage_goods.html">
+                  <i class="nav-icon icon-cursor"></i> 编辑商品</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./admin_show_goods.html">
+                  <i class="nav-icon icon-cursor"></i> 商品展示</a>
+              </li>
+            </ul>
+          </li>
+          <br>
+
+        </ul>
+        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+          <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+        </div>
+        <div class="ps__rail-y" style="top: 0px; height: 445px; right: 0px;">
+          <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 297px;"></div>
+        </div>
+      </nav>
+      <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+    </div>
+    <main class="main">
+      <!-- Breadcrumb-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">你的位置：商品管理->商品展示</li>
+        <li class="breadcrumb-menu d-md-down-none">
+          <div class="btn-group" role="group" aria-label="Button group">
+            <a class="btn" href="#">
+              <i class="icon-speech"></i>
+            </a>
+            <a class="btn" href="#">
+              概述 | </a>
+            <a class="btn" href="#">
+              详情 |</a>
+            <a class="btn" href="#">
+              用户评价 |</a>
+          </div>
+        </li>
+      </ol>
+      <div class="container-fluid" id="itemsTemplate">
+        <div class="card">
+          <div class="row">
+            <div class="col-sm-9">
+              <div class="row" style="padding: 50px;">
+                <div class="col-xs-8 col-sm-6">
+                  <div class="">
+                    <img src="<%= products.proImg %>" class="img-responsive" id="preview" width="300" height="300">
+                  </div>
+                </div>
+                <div class="col-xs-4 col-sm-6">
+                  <div class="card">
+                    <div class="form-group row">
+                      <label for="proName" class="col-1 col-form-label">商品名</label>
+                      <%=products.proName%>
+                    </div>
+
+                    <div class="form-group row">
+                      <label for="procost" class="col-1 col-form-label">价格</label>
+                      <%=products.procost%>
+                    </div>
+                    <del>8888</del>
+                    <div class="form-group row">
+                      <label for="procost" class="col-1 col-form-label">简介</label>
+                      <%= products.description %>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="加入购物车">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../vendors/jquery/js/jquery.min.js"></script>
+  <script src="../vendors/popper.js/js/popper.min.js"></script>
+  <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../vendors/pace-progress/js/pace.min.js"></script>
+  <script src="../vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+  <script src="../vendors/@coreui/coreui/js/coreui.min.js"></script>
+  <script src="../vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
+  <script src="../vendors/mock.js/js/mock.min.js"></script>
+  <script src="../vendors/vue.js/js/vue.min.js"></script>
+  <script>
+    var p, d, j;
+    var app;
+    var items;
+    $(function () {
+      Mock.mock("http://127.0.0.1:5500/users", {
+        "data|20-20": [{
+          id: "@increment()",//编号
+          goods_id: "@increment()",//商品编号
+          "goods_name|1": ["@cname", "@name"],//商品姓名
+          goods_selling_price: "@increment()",//商品零售价
+          goods_cost_price: "@increment()",//商品成本价
+          goods_cover_img: "@cname()",//商品图片
+          goods_detail_content: "@cname()",//商品信息描述 
+          goods_intro: "@cname()",//商品信息简介
+          create_time: "@datetime()",//创建时间
+          "emp_type|1": ["0", "1", "2"]//职位
+
+        }],
+        suceess: true,
+        code: 200,
+        msg: "Success"
+      });
+      $.getJSON("http://127.0.0.1:5500/users", function (response) {
+        items = response.data;
+        console.log(response.data)
+        page = Math.ceil(items.length / 5);
+        var pageitem = [];
+        for (var i = 0; i < page; i++) {
+          pageitem[i] = i + 1;
+        }
+        app = new Vue({
+          el: '#itemsTemplate',
+          data: {
+            items: items,
+            checkall: false,
+            pagesum: page,//总页码
+            pageindex: 1,//当前页码
+            pagesize: 5, //页面数据个数
+            pageitem: pageitem,
+            editIndex: -1,
+            edititems: { name: null },
+
+          },
+          computed: {
+            pageItems: function () {
+              var startIndex = (this.pageindex - 1) * this.pagesize;
+              var editIndex = startIndex + this.pagesize - 1;
+              return this.items.filter(function (value, index) {
+                return (
+                  index >= startIndex &&
+                  index <= editIndex
+                );
+              });
+            }
+          },
+          methods: {
+            //查询
+            cha: function () {
+              alert("查询")
+            },
+            // 删除
+            del: function (index) {
+              $('#dangerModal').modal('show');
+              d = index;
+              alert(d)
+            },
+            delCheck: function () {
+
+              alert(this.items[d].id)
+              $.post("/admin//user/del",
+                {
+                  id: this.items[d].id
+                }
+                , function (data) {
+                  if (data === true) {
+
+                    $('#dangerModal').modal('hide');
+                    $('#success').modal('show');
+                    app.items.splice(d, 1);
+                  } else {
+                    alert("失败");
+                  }
+                });
+              $('#dangerModal').modal('hide');
+            },
+            // 编辑
+            edit: function (index) {
+              var forms = document.getElementsByClassName('needs-validation')[0];
+              forms.classList.remove('was-validated');
+              this.editIndex = index;
+              this.edititems = JSON.parse(JSON.stringify(this.items[index]));
+              $('#primaryModal').modal('show');
+            },
+            save: function () {
+              // var com_id;
+              // $.get("/small_admin/com_id", function (data) {
+              //   com_id = data;
+              //   // alert(data)
+              // });
+              setTimeout(function () {
+                $.post("/admin/user/update",
+                  {
+                    id: app.edititems.id,
+                    com_id: com_id,
+                    mem_id: app.edititems.mem_id,
+                    stu_id: app.edititems.stu_id,
+                    position: app.edititems.position,
+                    mem_state: true,
+                    one_state: true,
+                    answerdate: app.edititems.answerdate,
+                    per_name: app.edititems.pre_name,
+                    stu_phone: app.edititems.stu_phone,
+                    apply_date: app.edititems.apply_date
+
+                  }, function (data) {
+                    if (data === true) {
+                      $('#primaryModal').modal('hide');
+                      $('#editSuccess').modal('show');
+                      app.items[app.editIndex].position = app.edititems.position
+                    } else {
+                      $('#danger').modal('show');
+                    }
+
+                  });
+
+              }, 500);
+
+
+            },
+            //页数
+            switch: function (x) {
+              $('.pagination li').removeClass('active');
+              x.parentNode.className = "page-item active";
+              this.pageindex = parseInt(x.innerHTML);
+            },
+            //首页
+            first: function () {
+              if (this.pageindex != 1) {
+                this.pageindex = 1;
+              }
+              this.$nextTick(function () {
+                $('.pagination li').removeClass('active');
+                var pidx = String(this.pageindex);
+                var li = document.getElementsByClassName("page-item");
+                for (var i = 0; i < li.length; i++) {
+                  if (li[i].childNodes[0].innerHTML === pidx) {
+                    li[i].className = "page-item active";
+                    break;
+                  }
+                }
+
+              })
+            },
+            //末页
+            lastone: function () {
+              if (this.pageindex != this.pagesum) {
+                this.pageindex = this.pagesum;
+              }
+              this.$nextTick(function () {
+                $('.pagination li').removeClass('active');
+                var pidx = String(this.pageindex);
+                var li = document.getElementsByClassName("page-item");
+                for (var i = 0; i < li.length; i++) {
+                  if (li[i].childNodes[0].innerHTML === pidx) {
+                    li[i].className = "page-item active";
+                    break;
+                  }
+                }
+              })
+            },
+            //上一页
+            last: function () {
+              if (this.pageindex != 1) {
+                this.pageindex--;
+              }
+              this.$nextTick(function () {
+                $('.pagination li').removeClass('active');
+                var pidx = String(this.pageindex);
+                var li = document.getElementsByClassName("page-item");
+                for (var i = 0; i < li.length; i++) {
+                  if (li[i].childNodes[0].innerHTML === pidx) {
+                    li[i].className = "page-item active";
+                    break;
+                  }
+                }
+              })
+
+            },
+            //下一页
+            Next: function () {
+              if (this.pageindex != app.pagesum) {
+                this.pageindex++;
+
+              }
+
+              this.$nextTick(function () {
+                $('.pagination li').removeClass('active');
+                var pidx = String(this.pageindex);
+                var li = document.getElementsByClassName("page-item");
+                for (var i = 0; i < li.length; i++) {
+                  if (li[i].childNodes[0].innerHTML === pidx) {
+                    li[i].className = "page-item active";
+                    break;
+                  }
+                }
+
+              })
+
+            },
+            //跳转页数
+            jume: function () {
+              var page = document.getElementById('page_1').value;
+              reg = /^\d+$/
+              if (page.length == 0) {
+                alert("请输入跳转页码");
+                return;
+              } else if (page < 1 || page > app.pagesum) {
+                alert("您输入的页码超过页数范围了！");
+                return;
+              } else if (reg.test(page) != true) {
+                alert("请输入数字！");
+                return;
+              }
+              this.pageindex = parseInt(page);
+              page = "";
+              this.$nextTick(function () {
+                $('.pagination li').removeClass('active');
+                var pidx = String(this.pageindex);
+                var li = document.getElementsByClassName("page-item");
+                for (var i = 0; i < li.length; i++) {
+                  if (li[i].childNodes[0].innerHTML === pidx) {
+                    li[i].className = "page-item active";
+                    break;
+
+                  }
+
+                }
+              })
+            }
+
+
+          }
+
+        });
+        return;
+      });
+    });
+
+
+
+  </script>
+</body>
+
+</html>

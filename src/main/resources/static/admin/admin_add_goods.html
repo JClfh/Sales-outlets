@@ -1,0 +1,476 @@
+<html lang="en">
+
+<head>
+  <base href="./">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+  <meta name="author" content="Łukasz Holeczek">
+  <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+  <title>发布商品</title>
+  <!-- Icons-->
+  <link href="../vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+  <link href="../vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+  <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+</head>
+<script type="text/css">
+
+            </script>
+<style>
+  .div1 {
+    background: rgb(38, 202, 231);
+    color: rgb(252, 247, 247);
+  }
+</style>
+
+<body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
+  <header class="app-header navbar">
+    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="btn-group" role="group" aria-label="Button group">
+      <a class="btn" href="/main_message">
+        <i class="fa fa-share" aria-hidden="true"></i> &nbsp;返回会员</a>
+      <a class="btn" href="/shetuan">
+        <i class="icon-graph"></i> &nbsp;网站首页</a>
+      <a class="btn" href="/logout">
+        <i class="fa fa-share" aria-hidden="true"></i> &nbsp;退出</a>
+    </div>
+
+
+  </header>
+  <div class="app-body">
+    <div class="sidebar">
+      <nav class="sidebar-nav ps ps--active-y">
+        <ul class="nav">
+          <br>
+          <br>
+
+          <li class="nav-item nav-dropdown ">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-puzzle"></i> 职员管理</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" href="./admin_add_salesman.html">
+                  <i class="nav-icon icon-puzzle"></i>添加</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./admin_manage_members.html">
+                  <i class="nav-icon icon-puzzle"></i>管理</a>
+              </li>
+            </ul>
+          </li>
+          <br><br><br>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-cursor"></i> 商品管理</a>
+            <ul class="nav-dropdown-items">
+
+              <li class="nav-item">
+                <a class="nav-link" href="./admin_add_goods.html">
+                  <i class="nav-icon icon-cursor"></i> 发布商品</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./admin_manage_goods.html">
+                  <i class="nav-icon icon-cursor"></i> 编辑商品</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./admin_show_goods.html">
+                  <i class="nav-icon icon-cursor"></i> 商品展示</a>
+              </li>
+            </ul>
+          </li>
+          <br>
+
+        </ul>
+        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+          <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+        </div>
+        <div class="ps__rail-y" style="top: 0px; height: 445px; right: 0px;">
+          <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 297px;"></div>
+        </div>
+      </nav>
+      <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+    </div>
+    <main class="main">
+      <!-- Breadcrumb-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">你的位置：商品管理->发布商品</li>
+      </ol>
+
+      <div align="center" id="itemsTemplate">
+        <div class="col-sm-12 col-md-10" align="center">
+
+          <div class="card border-primary" align="center">
+
+            <div class="card-body">
+              <div class="card" id="listTable">
+
+                <div class="card-header" align="center">
+                  <h2><i class="fa fa-shopping-bag" aria-hidden="true"></i> &nbsp;发布商品</h2>
+                </div>
+                <div class="card-body" align="center">
+
+                  <form class="needs-validation" novalidate>
+
+                    <div class="form-group row">
+
+                      <div class="card-body collapse show" id="collapseExample">
+                        <table class="table table-responsive-sm table-bordered">
+
+                          <tbody id="trlist" align="center">
+                            <tr>
+                              <td>商品名字</td>
+                              <td>
+                                <div class="col-md-9">
+                                  <input class="form-control" id="text-input" type="text" name="text-input"
+                                    v-model="addALL.goods_name" placeholder="商品名字"
+                                    required>
+                                  <div class="invalid-feedback">
+                                    商品名字不能为空！
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>商品零售价</td>
+                              <td>
+                                <div class="col-md-9">
+                                  <input class="form-control" id="text-input" type="text" name="text-input"
+                                    v-model="addALL.goods_selling_price" placeholder="商品零售价"
+                                    pattern="^[0-9]*$" required>
+                                  <div class="invalid-feedback">
+                                    商品零售价不能为空并只能输入数字！
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>商品成本价</td>
+                              <td>
+                                <div class="col-md-9">
+                                  <input class="form-control" id="text-input" type="text" name="text-input"
+                                    v-model="addALL.goods_cost_price" placeholder="商品成本价"
+                                    pattern="^[0-9]*$" required>
+                                  <div class="invalid-feedback">
+                                    商品零售价不能为空并只能输入数字！
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>商品图片</td>
+                              <td>
+                                <div class="col-md-9">
+                                    <img src="null" class="normalFace" id="avarimgs" 
+                                    v-bind:src="addALL.goods_cover_img"
+                                    onclick="fileSelect();" width="60" height="60" style="float:left;">
+                               <input type="file" name="pclogo" id="file" id="xdaTanFileImg"
+                                      onchange="xmTanUploadImg(this)"
+                                      accept="image/*" style="margin-top: 19px;margin-left: 3px">
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>商品信息描述</td>
+                              <td>
+                                <div class="col-md-9">
+                                  <input class="form-control" id="text-input" type="text" name="text-input"
+                                    v-model="addALL.goods_detail_content" placeholder="商品信息描述"
+                                   required>
+                                  <div class="invalid-feedback">
+                                    商品信息描述不能为空！
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>商品信息简介</td>
+                              <td>
+                                <div class="col-md-9">
+                                    <textarea id="description" class="form-control" rows="3" name="description" placeholder="商品信息简介"  v-model="addALL.goods_intro"></textarea>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                  </form>
+                  <button class="btn btn-primary" type="button" v-on:click="addB()">
+                    <i class="fa fa-check" aria-hidden="true"></i>提交</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- 保存 -->
+        <div class="modal fade" id="primaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-primary" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">保存</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>是否保存</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">否</button>
+                <button class="btn btn-danger" type="button" data-toggle="modal" v-on:click="addA()">确定</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /成功-->
+        <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-success" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>保存成功！</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
+        <div class="modal fade" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>已存在该商品</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">确定</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../vendors/jquery/js/jquery.min.js"></script>
+  <script src="../vendors/popper.js/js/popper.min.js"></script>
+  <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../vendors/pace-progress/js/pace.min.js"></script>
+  <script src="../vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+  <script src="../vendors/@coreui/coreui/js/coreui.min.js"></script>
+  <script src="../vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
+  <script src="../vendors/mock.js/js/mock.min.js"></script>
+  <script src="../vendors/vue.js/js/vue.min.js"></script>
+  <script>
+
+    function getTime() {
+      var time;
+      var date = new Date(); //创建时间对象   
+      var year = date.getFullYear(); //获取年 
+      var month = date.getMonth() + 1; //获取月  
+      var day = date.getDay(); //获取当日  
+      var hours = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
+      time = year + "-";
+
+      if (month < 10)
+        time += "0";
+
+      time += month + "-";
+
+      if (day < 10)
+        time += "0";
+
+      time += day + " ";
+      if (hours < 10)
+        time += "0";
+
+      time += hours + ":";
+      if (min < 10)
+        time += '0';
+      time += min + ":";
+
+      if (sec < 10)
+        time += '0';
+      time += sec;
+      return time;
+    }
+
+    function fileSelect() {
+        document.getElementById("file").click();
+
+    }
+
+    if (typeof FileReader == 'undefined') {
+        document.getElementById("xmTanDiv").InnerHTML = "<h1>当前浏览器不支持FileReader接口</h1>";
+        document.getElementById("xdaTanFileImg").setAttribute("disabled", "disabled");
+    }
+
+    //选择图片，马上预览
+    function xmTanUploadImg(obj) {
+        var file = obj.files[0];
+        console.log(obj);
+        console.log(file);
+        console.log("file.size = " + file.size);
+        var reader = new FileReader();
+        reader.onloadstart = function (e) {
+            console.log("开始读取....");
+        }
+        reader.onprogress = function (e) {
+            console.log("正在读取中....");
+        }
+        reader.onabort = function (e) {
+            console.log("中断读取....");
+        }
+        reader.onerror = function (e) {
+            console.log("读取异常....");
+        }
+        reader.onload = function (e) {
+            console.log("成功读取....");
+            var img = document.getElementById("avarimgs");
+            img.src = e.target.result;
+            var img = document.getElementById("avarimgs1");
+            img.src = e.target.result;
+            //或者 img.src = this.result;  //e.target == this
+        }
+        reader.readAsDataURL(file)
+    }
+  </script>
+  <script>
+    var p, d, j;
+    var app;
+    var item;
+    var checkValidity;
+    $(function () {
+
+      app = new Vue({
+        el: '#itemsTemplate',
+        data: {
+          addALL: {
+            id: 0,//主键标识
+            goods_id: 0,//商品编号
+            goods_name: "",//商品名字
+            goods_selling_price: "",//商品零售价
+            goods_cost_price: "",//商品成本价
+            goods_cover_img: "",//商品图片地址
+            goods_detail_content: "",//商品信息描述
+            goods_intro: "",//商品信息简介
+            create_time: getTime(),//记录创建日期
+            update_time: getTime(),//记录修改日期
+            is_del: 0//是否离职
+          },
+        },
+        methods: {
+          // 新增
+          addA: function () {
+
+            var forms = document.getElementsByClassName('needs-validation')[0];
+            forms.classList.add('was-validated');
+            if (forms.checkValidity() === true) {
+              var formData = new FormData();
+                var img = document.getElementById("avarimgs");
+                this.addALL.goods_cover_img = img.src;
+              formData.append("id",0);
+              formData.append("goodsId",0);
+              formData.append("goodsName",this.addALL.goods_name);
+              formData.append("goodsSellingPrice",this.addALL.goods_selling_price);
+              formData.append("goodsCostPrice",this.addALL.goods_cost_price);
+              formData.append("goodsCoverImg",this.addALL.goods_cover_img);
+              formData.append("goodsDetailContent", this.addALL.goods_detail_content);
+              formData.append("goodsIntro",this.addALL.goods_intro);
+              formData.append("createTime",new Date());
+              formData.append("updateTime",new Date());
+              formData.append("isDel",0)
+
+              $.ajax({
+                url: "/admin/goods/save",
+                type: "post",
+                //将/jsON转化为字符串传递
+                data: formData,
+                contentType : false,
+                processData : false,
+                //成功后的方法
+                success: function () {
+                  $('#primaryModal').modal('hide');
+                  $('#success').modal('show');
+                },
+                error: function (xhr, status, error) {
+                  $('#primaryModal').modal('hide');
+                  $('#danger').modal('show');
+                }
+              });
+              // $.post("/admin/goods/save",
+              //   {
+              //     id: 0,//主键标识
+              //     goods_id: 0,
+              //     goods_name: 0,
+              //     goods_selling_price: this.addALL.goods_selling_price,
+              //     goods_cost_price: this.addALL.goods_cost_price,
+              //     goods_cover_img: this.addALL.goods_cover_img,
+              //     goods_detail_content: this.addALL.goods_detail_content,
+              //     goods_intro: this.addALL.goods_intro,
+              //     create_time: getTime(),//记录创建日期
+              //     update_time: getTime(),//记录修改日期
+              //     is_del: 0
+              //
+              //   }, function (data) {
+              //     if (data === true) {
+              //       $('#primaryModal').modal('hide');
+              //       $('#success').modal('show');
+              //     } else {
+              //       $('#primaryModal').modal('hide');
+              //       $('#danger').modal('show');
+              //     }
+              //   });
+
+            }
+            $('#primaryModal').modal('hide');
+            forms.classList.add('was-validated');
+          },
+          addB: function () {
+            var forms = document.getElementsByClassName('needs-validation')[0];
+            forms.classList.add('was-validated');
+            if (forms.checkValidity() === true) {
+              $('#primaryModal').modal('show');
+            }
+          }
+
+        }
+
+      });
+      return;
+
+    });
+
+
+
+  </script>
+</body>
+
+</html>
