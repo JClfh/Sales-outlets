@@ -58,7 +58,7 @@ public class NumberUtil {
      */
     public static String genEmpId() {
         StringBuffer buffer = new StringBuffer("8009");
-        int num = genRandomNum(4);
+        int num = genRandomNum(5);
         buffer.append(num);
         return buffer.toString();
     }

@@ -198,4 +198,14 @@
     from emp_info
     order by id desc
   </select>
+
+  <select id="findByEmpName"  resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from emp_info
+    where emp_name  LIKE CONCAT(CONCAT('%', #{emp_name}), '%')
+    order by id desc
+  </select>
+
+
 </mapper>

@@ -24,4 +24,6 @@ public interface EmpInfoMapper {
     EmpInfo selectByEmpId(String emp_id);
 
     List<EmpInfo> findEmpInfoList();
+
+    List<EmpInfo> findByEmpName(String emp_name);
 }

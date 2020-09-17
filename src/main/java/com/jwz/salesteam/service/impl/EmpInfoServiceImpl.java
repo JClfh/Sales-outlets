@@ -70,4 +70,14 @@ public class EmpInfoServiceImpl implements EmpInfoService {
     public List<EmpInfo> getEmpList() {
         return empInfoMapper.findEmpInfoList();
     }
+
+    @Override
+    public EmpInfo selectByEmpId(String emp_id) {
+        return empInfoMapper.selectByEmpId(emp_id);
+    }
+
+    @Override
+    public List<EmpInfo> findByEmpName(String emp_name) {
+        return empInfoMapper.findByEmpName(emp_name);
+    }
 }

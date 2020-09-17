@@ -2,6 +2,7 @@ package com.jwz.salesteam.controller;
 
 import com.jwz.salesteam.common.ServiceResultEnum;
 import com.jwz.salesteam.entity.EmpInfo;
+import com.jwz.salesteam.entity.GoodsInfo;
 import com.jwz.salesteam.service.EmpInfoService;
 import com.jwz.salesteam.util.NumberUtil;
 import com.jwz.salesteam.util.Result;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.Buffer;
 import java.util.Date;
 import java.util.Objects;
 
@@ -32,12 +34,14 @@ public class adminController {
     private EmpInfoService empInfoService;
 
     /**
+     *
      * 添加职员信息
+     *
      */
     @RequestMapping(value = "/emp/save", method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation(value="添加职员信息")
-    public Result save(@RequestBody EmpInfo empInfo) {
+    public Result saveEmpInfo(@RequestBody EmpInfo empInfo) {
         if (StringUtils.isEmpty(empInfo.getEmpName())
                 || StringUtils.isEmpty(empInfo.getEmpTel())
                 || Objects.isNull(empInfo.getEmpSex())
@@ -45,10 +49,16 @@ public class adminController {
             return ResultGenerator.genFailResult("参数异常！");
         }
         String emp_id =  NumberUtil.genEmpId();
+        EmpInfo temp = empInfoService.selectByEmpId(emp_id);
+        //防止随机ID重复
+        while (temp != null){
+            emp_id =  NumberUtil.genEmpId();
+            temp = empInfoService.selectByEmpId(emp_id);
+        }
         empInfo.setEmpId(emp_id);
         empInfo.setEmpPwd(emp_id);
-        empInfo.setCreateTime(new Date());
-        empInfo.setUpdateTime(new Date());
+        //empInfo.setCreateTime(new Date());
+       // empInfo.setUpdateTime(new Date());
         String result = empInfoService.saveEmpInfo(empInfo);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
             return ResultGenerator.genSuccessResult();
@@ -58,12 +68,14 @@ public class adminController {
     }
 
     /**
+     *
      * 修改职员信息
+     *
      */
     @RequestMapping(value = "/emp/update", method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation(value="修改职员信息")
-    public Result update(@RequestBody EmpInfo empInfo) {
+    public Result updateEmpInfo(@RequestBody EmpInfo empInfo) {
         if (StringUtils.isEmpty(empInfo.getEmpId())
                 || StringUtils.isEmpty(empInfo.getEmpName())
                 || StringUtils.isEmpty(empInfo.getEmpTel())
@@ -81,12 +93,14 @@ public class adminController {
     }
 
     /**
+     *
      * 删除职员
+     *
      */
     @RequestMapping(value = "/emp/del/{id}", method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation(value="删除职员信息")
-    public Result del(@PathVariable("id") Integer id) {
+    public Result deleteEmpInfo(@PathVariable("id") Integer id) {
 
         if (empInfoService.delEmpInfo(id)>0) {
             return ResultGenerator.genSuccessResult();
@@ -96,28 +110,54 @@ public class adminController {
     }
 
     /**
+     *
      * 查看职员列表
+     *
      */
-    @RequestMapping(value = "/emp/list", method = RequestMethod.POST)
+    @RequestMapping(value = "/emp/list", method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation(value="查看职员信息列表")
-    public Result list() {
+    public Result getEmpList() {
         return ResultGenerator.genSuccessResult(empInfoService.getEmpList());
     }
 
-//    /**
-//     * 查看职员（搜索)
-//     */
-//    @RequestMapping(value = "/emp/del/{id}", method = RequestMethod.POST)
-//    @ResponseBody
-//    @ApiOperation(value="删除职员信息")
-//    public Result del(@PathVariable("id") Integer id) {
-//
-//        if (empInfoService.delEmpInfo(id)>0) {
-//            return ResultGenerator.genSuccessResult();
-//        } else {
-//            return ResultGenerator.genFailResult("删除失败");
-//        }
-//    }
+    /**
+     *
+     * 查看职员（搜索)
+     *
+     */
+    @RequestMapping(value = "/emp/findByName/{emp_name}", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value="查询职员信息")
+    public Result empInfoFindByName(@PathVariable("emp_name") String emp_name) {
+        return ResultGenerator.genSuccessResult(empInfoService.findByEmpName(emp_name));
+    }
+
+    /**
+     *
+     * 添加商品
+     *
+     */
+    @RequestMapping(value = "/goods/save", method = RequestMethod.POST)
+    @ResponseBody
+    public Result empInfoFindByName( GoodsInfo goodsInfo) {
+        System.out.println("sb");
+        System.out.println(goodsInfo.toString());
+//        String base64Data = pro_img.replace(/^data:image\/\w+;base64,/, "");
+//        String dataBuffer = new Buffer(base64Data, 'base64');
+        return ResultGenerator.genSuccessResult();
+    }
+
+    /**
+     *
+     * 删除商品
+     *
+     */
+
+    /**
+     *
+     *修改商品
+     *
+     */
 
 }

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--
+* CoreUI - Free Bootstrap Admin Template
+* @version v2.0.0
+* @link https://coreui.io
+* Copyright (c) 2018 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+
+<html lang="en">
+  <head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <title>登录</title>
+    <!-- Icons-->
+    <link href="vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+    <link href="vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <!-- Main styles for this application-->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+    <style>
+    body{
+        background-image: url('./images/1.jpg');
+    }
+    </style>
+  </head>
+  <body class="app flex-row align-items-center">
+      
+    <div class="container">
+        <form class="needs-validation" action="/form" method="post" novalidate>
+      <div class="row justify-content-center" id="bk">
+        <div class="col-md-6">
+          <div class="card mx-4">
+            <div class="card-body p-4">
+              <h1 style="text-align: center;">登录</h1>
+              
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="icon-user"></i>
+                  </span>
+                </div>
+                <input type="text" id="id" name="username" class="form-control" placeholder="用户名"  required>
+                <!-- <input class="form-control" type="text" placeholder="用户名" pattern="^[\u4e00-\u9fa5]{2,4}$|^[A-Za-z\s]{2,40}$" required> -->
+                <div class="invalid-feedback">
+                    用户名不能为空并只能输入中文或英文组成！
+                  </div>
+              </div>
+        
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="icon-lock"></i>
+                  </span>
+                </div>
+                <input type="password" id="pwd" name="password" class="form-control" placeholder="密码"  required>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-9 col-form-label">
+                  <div class="form-check form-check-inline mr-1">
+                    <input class="form-check-input" id="salesman" type="radio" value="option1" name="salesman">
+                    <label class="form-check-label" for="salesman">销售员</label>
+                  </div>
+                  <div class="form-check form-check-inline mr-1">
+                    <input class="form-check-input" id="merchandiser" type="radio" value="option2" name="merchandiser">
+                    <label class="form-check-label" for="merchandiser">跟单员</label>
+                  </div>
+                  <div class="form-check form-check-inline mr-1">
+                    <input class="form-check-input" id="finance" type="radio" value="option3" name="finance">
+                    <label class="form-check-label" for="finance">财务</label>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-block btn-success"type="submit" >登录</button>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+      </form>
+    </div>
+    <!-- CoreUI and necessary plugins-->
+    <script src="vendors/jquery/js/jquery.min.js"></script>
+    <script src="vendors/popper.js/js/popper.min.js"></script>
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/pace-progress/js/pace.min.js"></script>
+    <script src="vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+    <script src="vendors/@coreui/coreui/js/coreui.min.js"></script>
+
+    <script>
+        function zhu() {
+          alert("wewe");
+          var forms = document.getElementsByClassName('needs-validation')[0];
+              //forms.classList.remove('was-validated');
+              if (forms.checkValidity() === true) {
+                alert(1111);
+              }
+              forms.classList.add('was-validated');
+          }
+          </script>
+  </body>
+</html>

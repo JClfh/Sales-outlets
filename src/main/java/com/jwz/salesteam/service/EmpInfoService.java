@@ -24,4 +24,8 @@ public interface EmpInfoService {
     int delEmpInfo(Integer id);
 
     List <EmpInfo> getEmpList();
+
+    EmpInfo selectByEmpId(String emp_id);
+
+    List<EmpInfo> findByEmpName(String emp_name);
 }
