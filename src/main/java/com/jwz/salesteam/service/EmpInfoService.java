@@ -2,6 +2,8 @@ package com.jwz.salesteam.service;
 
 import com.jwz.salesteam.entity.EmpInfo;
 
+import java.util.List;
+
 /**
  * @author ：Jiang Weizan
  * @date ：Created in 2020/9/16 15:57
@@ -15,5 +17,11 @@ public interface EmpInfoService {
     /**
      *添加职员
      */
-    public String saveEmpInfo(EmpInfo empInfo);
+    String saveEmpInfo(EmpInfo empInfo);
+
+    String updateEmpInfo(EmpInfo empInfo);
+
+    int delEmpInfo(Integer id);
+
+    List <EmpInfo> getEmpList();
 }

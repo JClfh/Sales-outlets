@@ -26,8 +26,7 @@ import java.util.Objects;
 @Api(value = "hello|一个用来测试swagger注解的控制器")
 public class hello {
 
-    @Autowired
-    private EmpInfoService empInfoService;
+
 
     @GetMapping("/hello")
     @ApiOperation(value="根据用户编号获取用户姓名", notes="test: 仅1和2有正确返回")
@@ -36,27 +35,5 @@ public class hello {
         return "hello";
     }
 
-    /**
-     * 添加
-     */
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    @ResponseBody
-    public Result save(@RequestBody EmpInfo empInfo) {
-        if (Objects.isNull(empInfo.getEmpName())
-                || StringUtils.isEmpty(empInfo.getEmpTel())
-                || Objects.isNull(empInfo.getEmpSex())
-                || Objects.isNull(empInfo.getEmpType())) {
-            return ResultGenerator.genFailResult("参数异常！");
-        }
-        String emp_id =  NumberUtil.genEmpId();
-        empInfo.setEmpId(emp_id);
-        empInfo.setEmpPwd(emp_id);
-        String result = empInfoService.saveEmpInfo(empInfo);
-        return ResultGenerator.genSuccessResult(result);
-//        if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
-//            return ResultGenerator.genSuccessResult();
-//        } else {
-//            return ResultGenerator.genFailResult(result);
-//        }
-    }
+
 }
