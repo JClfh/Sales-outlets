@@ -13,7 +13,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import sun.misc.BASE64Decoder;
 
+import java.io.*;
 import java.nio.Buffer;
 import java.util.Date;
 import java.util.Objects;
@@ -140,11 +142,25 @@ public class adminController {
      */
     @RequestMapping(value = "/goods/save", method = RequestMethod.POST)
     @ResponseBody
-    public Result empInfoFindByName( GoodsInfo goodsInfo) {
+    public Result empInfoFindByName( GoodsInfo goodsInfo) throws IOException {
         System.out.println("sb");
         System.out.println(goodsInfo.toString());
-//        String base64Data = pro_img.replace(/^data:image\/\w+;base64,/, "");
-//        String dataBuffer = new Buffer(base64Data, 'base64');
+
+
+//取得返回json中的Content数据String content = JSONPath.read(json, "$.Content").toString());//去掉前面的“data:image/jpeg;base64,”的字样
+        String imgdata = goodsInfo.getGoodsCoverImg().replace("data:image/jpeg;base64,","");
+//解码base64
+        BASE64Decoder decoder = new BASE64Decoder();
+        byte[] data = decoder.decodeBuffer(imgdata);
+        for(int i =0 ; i < data.length ;i++) {
+            if(data[i] < 0) {
+                data[i] += 256;
+            }
+        }//写入保存成jpeg文件
+        FileOutputStream fos = new FileOutputStream ("D:\\test.jpg");
+        fos.write(data);
+        fos.flush();
+        fos.close();
         return ResultGenerator.genSuccessResult();
     }
 

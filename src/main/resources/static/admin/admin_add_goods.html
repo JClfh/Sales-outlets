@@ -132,7 +132,7 @@
                               <td>
                                 <div class="col-md-9">
                                   <input class="form-control" id="text-input" type="text" name="text-input"
-                                    v-model="addALL.goods_name" placeholder="商品名字"
+                                    v-model="addALL.goodsName" placeholder="商品名字"
                                     required>
                                   <div class="invalid-feedback">
                                     商品名字不能为空！
@@ -145,7 +145,7 @@
                               <td>
                                 <div class="col-md-9">
                                   <input class="form-control" id="text-input" type="text" name="text-input"
-                                    v-model="addALL.goods_selling_price" placeholder="商品零售价"
+                                    v-model="addALL.goodsSellingPrice" placeholder="商品零售价"
                                     pattern="^[0-9]*$" required>
                                   <div class="invalid-feedback">
                                     商品零售价不能为空并只能输入数字！
@@ -158,7 +158,7 @@
                               <td>
                                 <div class="col-md-9">
                                   <input class="form-control" id="text-input" type="text" name="text-input"
-                                    v-model="addALL.goods_cost_price" placeholder="商品成本价"
+                                    v-model="addALL.goodsCostPrice" placeholder="商品成本价"
                                     pattern="^[0-9]*$" required>
                                   <div class="invalid-feedback">
                                     商品零售价不能为空并只能输入数字！
@@ -171,11 +171,12 @@
                               <td>
                                 <div class="col-md-9">
                                     <img src="null" class="normalFace" id="avarimgs" 
-                                    v-bind:src="addALL.goods_cover_img"
+                                    v-bind:src="addALL.goodsCoverImg"
                                     onclick="fileSelect();" width="60" height="60" style="float:left;">
                                <input type="file" name="pclogo" id="file" id="xdaTanFileImg"
                                       onchange="xmTanUploadImg(this)"
-                                      accept="image/*" style="margin-top: 19px;margin-left: 3px">
+                                      accept="image/*" style="margin-top: 19px;margin-left: 3px" >
+
                                 </div>
                               </td>
                             </tr>
@@ -184,7 +185,7 @@
                               <td>
                                 <div class="col-md-9">
                                   <input class="form-control" id="text-input" type="text" name="text-input"
-                                    v-model="addALL.goods_detail_content" placeholder="商品信息描述"
+                                    v-model="addALL.goodsDetailContent" placeholder="商品信息描述"
                                    required>
                                   <div class="invalid-feedback">
                                     商品信息描述不能为空！
@@ -196,7 +197,7 @@
                               <td>商品信息简介</td>
                               <td>
                                 <div class="col-md-9">
-                                    <textarea id="description" class="form-control" rows="3" name="description" placeholder="商品信息简介"  v-model="addALL.goods_intro"></textarea>
+                                    <textarea id="description" class="form-control" rows="3" name="description" placeholder="商品信息简介"  v-model="addALL.goodsIntro"></textarea>
                                 </div>
                               </td>
                             </tr>
@@ -287,41 +288,7 @@
   <script src="../vendors/mock.js/js/mock.min.js"></script>
   <script src="../vendors/vue.js/js/vue.min.js"></script>
   <script>
-
-    function getTime() {
-      var time;
-      var date = new Date(); //创建时间对象   
-      var year = date.getFullYear(); //获取年 
-      var month = date.getMonth() + 1; //获取月  
-      var day = date.getDay(); //获取当日  
-      var hours = date.getHours();
-      var min = date.getMinutes();
-      var sec = date.getSeconds();
-      time = year + "-";
-
-      if (month < 10)
-        time += "0";
-
-      time += month + "-";
-
-      if (day < 10)
-        time += "0";
-
-      time += day + " ";
-      if (hours < 10)
-        time += "0";
-
-      time += hours + ":";
-      if (min < 10)
-        time += '0';
-      time += min + ":";
-
-      if (sec < 10)
-        time += '0';
-      time += sec;
-      return time;
-    }
-
+      
     function fileSelect() {
         document.getElementById("file").click();
 
@@ -355,8 +322,7 @@
             console.log("成功读取....");
             var img = document.getElementById("avarimgs");
             img.src = e.target.result;
-            var img = document.getElementById("avarimgs1");
-            img.src = e.target.result;
+
             //或者 img.src = this.result;  //e.target == this
         }
         reader.readAsDataURL(file)
@@ -372,38 +338,39 @@
       app = new Vue({
         el: '#itemsTemplate',
         data: {
+          file1:"",
           addALL: {
             id: 0,//主键标识
-            goods_id: 0,//商品编号
-            goods_name: "",//商品名字
-            goods_selling_price: "",//商品零售价
-            goods_cost_price: "",//商品成本价
-            goods_cover_img: "",//商品图片地址
-            goods_detail_content: "",//商品信息描述
-            goods_intro: "",//商品信息简介
-            create_time: getTime(),//记录创建日期
-            update_time: getTime(),//记录修改日期
+            goodsId: 0,//商品编号
+            goodsName: "",//商品名字
+            goodsSellingPrice: "",//商品零售价
+            goodsCostPrice: "",//商品成本价
+            goodsCoverImg: "",//商品图片地址
+            goodsDetailContent: "",//商品信息描述
+            goodsIntro: "",//商品信息简介
+            createTime: "",//记录创建日期
+            update_time: "",//记录修改日期
             is_del: 0//是否离职
-          },
+          }
         },
         methods: {
           // 新增
-          addA: function () {
 
+          addA: function () {
             var forms = document.getElementsByClassName('needs-validation')[0];
             forms.classList.add('was-validated');
             if (forms.checkValidity() === true) {
               var formData = new FormData();
                 var img = document.getElementById("avarimgs");
-                this.addALL.goods_cover_img = img.src;
+                this.addALL.goodsCoverImg = img.src;
               formData.append("id",0);
               formData.append("goodsId",0);
-              formData.append("goodsName",this.addALL.goods_name);
-              formData.append("goodsSellingPrice",this.addALL.goods_selling_price);
-              formData.append("goodsCostPrice",this.addALL.goods_cost_price);
-              formData.append("goodsCoverImg",this.addALL.goods_cover_img);
-              formData.append("goodsDetailContent", this.addALL.goods_detail_content);
-              formData.append("goodsIntro",this.addALL.goods_intro);
+              formData.append("goodsName",this.addALL.goodsName);
+              formData.append("goodsSellingPrice",this.addALL.goodsSellingPrice);
+              formData.append("goodsCostPrice",this.addALL.goodsCostPrice);
+              formData.append("goodsCoverImg",this.addALL.goodsCoverImg);
+              formData.append("goodsDetailContent", this.addALL.goodsDetailContent);
+              formData.append("goodsIntro",this.addALL.goodsIntro);
               formData.append("createTime",new Date());
               formData.append("updateTime",new Date());
               formData.append("isDel",0)
@@ -428,14 +395,14 @@
               // $.post("/admin/goods/save",
               //   {
               //     id: 0,//主键标识
-              //     goods_id: 0,
-              //     goods_name: 0,
-              //     goods_selling_price: this.addALL.goods_selling_price,
-              //     goods_cost_price: this.addALL.goods_cost_price,
-              //     goods_cover_img: this.addALL.goods_cover_img,
-              //     goods_detail_content: this.addALL.goods_detail_content,
-              //     goods_intro: this.addALL.goods_intro,
-              //     create_time: getTime(),//记录创建日期
+              //     goodsId: 0,
+              //     goodsName: 0,
+              //     goodsSellingPrice: this.addALL.goodsSellingPrice,
+              //     goodsCostPrice: this.addALL.goodsCostPrice,
+              //     goodsCoverImg: this.addALL.goodsCoverImg,
+              //     goodsDetailContent: this.addALL.goodsDetailContent,
+              //     goodsIntro: this.addALL.goodsIntro,
+              //     createTime: getTime(),//记录创建日期
               //     update_time: getTime(),//记录修改日期
               //     is_del: 0
               //

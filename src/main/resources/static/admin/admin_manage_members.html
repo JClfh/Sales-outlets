@@ -168,9 +168,9 @@
                       </label></td>
                   
                       <td align="center"> 
-                        <p class="badge badge-danger"  style="font-size:17px"
-                          v-if="item.isDel === 0">离职</p>
-                        <p class=""  style="font-size:17px" v-if="item.isDel === 1">在职</p>
+                        <p class=""  style="font-size:17px"
+                          v-if="item.isDel === 0">在职</p>
+                        <p class="badge badge-danger"  style="font-size:17px" v-if="item.isDel === 1">离职</p>
                       </td>
                       <td align="center">{{item.createTime}}</td>
 
@@ -194,7 +194,7 @@
                   <li class="page-item">
                     <a class="page-link" href="javascript:void(0);" onclick="app.last()">上一页</a>
                   </li>
-                  <li class="page-item" v-for="pageitem in pagesum">
+                  <li class="page-item" v-for="pageitem in pagesum" v-bind:class="{ 'active': pageitem == pageindex}">
                     <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
                   </li>
 
@@ -269,41 +269,19 @@
             <!-- /.modal-content-->
           </div>
         </div>
-        <div class="modal fade" id="editSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          style="display: none;" aria-hidden="true">
-          <div class="modal-dialog modal-success" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">提示</h4>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>编辑成功！</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
-              </div>
-            </div>
-            <!-- /.modal-content-->
-          </div>
-        </div>
-
-
-        <!-- /警告-->
-        <div class="modal fade show" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <!-- 失败-->
+        <div class="modal fade show" id="failDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-danger" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title">警告！！！！！</h4>
+                <h4 class="modal-title">通知</h4>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
               <div class="modal-body">
-                <p>编辑失败</p>
+                <p>删除失败</p>
               </div>
               <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
@@ -315,7 +293,7 @@
           <!-- /.modal-dialog-->
         </div>
         <!-- 编辑 -->
-        <div class="modal fade" id="primaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           aria-hidden="true" style="display: none;" aria-hidden="true">
 
           <div class="modal-dialog modal-primary" role="document">
@@ -409,12 +387,12 @@
                     <label class="col-md-3 col-form-label">状态</label>
                     <div class="col-md-9 col-form-label">
                       <div class="form-check form-check-inline mr-1">
-                        <input class="form-check-input" id="inline-radio1" type="radio" value="0" name="inline-radios"
+                        <input class="form-check-input" id="inline-radio1" type="radio" value=0 name="inline-radios"
                           v-model="edititems.isDel">
                         <label class="form-check-label" for="inline-radio1">在职</label>
                       </div>
                       <div class="form-check form-check-inline mr-1">
-                        <input class="form-check-input" id="inline-radio2" type="radio" value="1" name="inline-radios"
+                        <input class="form-check-input" id="inline-radio2" type="radio" value=1 name="inline-radios"
                           v-model="edititems.isDel">
                         <label class="form-check-label" for="inline-radio2">离职</label>
                       </div>
@@ -432,7 +410,51 @@
 
           </div>
         </div>
+        <!-- 编辑成功 -->
+        <div class="modal fade" id="editSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-success" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>编辑成功！</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
 
+        <!-- 失败-->
+        <div class="modal fade show" id="editFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">通知</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>编辑失败</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
+
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+          <!-- /.modal-dialog-->
+        </div>
       </div>
     </main>
   </div>
@@ -543,26 +565,23 @@
             del: function (index) {
               $('#dangerModal').modal('show');
               d = index;
-              // alert(d)
             },
             delCheck: function () {
-              
-              //alert(this.items[d].id)
-              $.post("/admin/emp/del",
-                {
-                  id: this.items[d].id
-                }
-                , function (data) {
-                  if (data === true) {
-                   
-                    $('#dangerModal').modal('hide');
-                    $('#success').modal('show');
-                    app.items.splice(d, 1);
-                  } else {
-                    alert("失败");
-                  }
-                });
-              $('#dangerModal').modal('hide');
+              $.ajax({
+                url: "/admin/emp/del/"+this.items[d].id,
+                type: "post",
+                success: function () {
+                $('#dangerModal').modal('hide');
+                $('#success').modal('show');
+                app.items.splice(d, 1);
+              },
+              error: function (xhr, status, error) {
+                $('#dangerModal').modal('hide');
+                $('#failDelModal').modal('show');
+              }
+              });
+
+
             },
             // 编辑
             edit: function (index) {
@@ -570,40 +589,43 @@
               forms.classList.remove('was-validated');
               this.editIndex = index;
               this.edititems = JSON.parse(JSON.stringify(this.items[index]));
-              $('#primaryModal').modal('show');
+              $('#editModal').modal('show');
             },
             save: function () {
-              // var com_id;
-              // $.get("/small_admin/com_id", function (data) {
-              //   com_id = data;
-              //   // alert(data)
-              // });
-              setTimeout(function () {
-                $.post("/admin/user/update",
-                  {
-                    id :app.edititems.id,
-                    empName: app.edititems.mem_id,
-                    empSex: app.edititems.empSex,
-                    empTel: app.edititems.empTel,
-                    empAddress:app.edititems.empAddress,
-                    empId:app.edititems.empId,
-                    empPwd:app.edititems.empPwd,
-                    isDel:app.edititems.isDel,
-                    empType:app.edititems.empType,
-                    createTime:app.edititems.createTime
+              var data = {
+                "id": this.edititems.id,//主键标识
+                "empId": this.edititems.empId,
+                "empPwd": this.edititems.empPwd,
+                "empName": this.edititems.empName,
+                "empSex": this.edititems.empSex,
+                "empType": this.edititems.empType,//职位
+                "empTel": this.edititems.empTel,//电话
+                "empAddress": this.edititems.empAddress,//地址
+                "createTime": this.edititems.createTime,//记录创建日期
+                "updateTime": new Date(),//记录修改日期
+                "isLock": 0,//是否锁住
+                "isDel":  this.edititems.isDel//是否离职
+              }
+              $.ajax({
+                url: "/admin/emp/update",
+                type: "post",
+                //将/jsON转化为字符串传递
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(data),
 
-                  }, function (data) {
-                    if (data === true) {
-                      $('#primaryModal').modal('hide');
-                      $('#editSuccess').modal('show');
-                      app.items[app.editIndex].position = app.edititems.position
-                    } else {
-                      $('#danger').modal('show');
-                    }
+                //成功后的方法
+                success: function () {
+                  $('#editModal').modal('hide');
+                  $('#success').modal('show');
+                  window.location.href = "/admin/admin_manage_members.html";
+                },
+                error: function (xhr, status, error) {
+                  $('#editModal').modal('hide');
+                  $('#editFailModal').modal('show');
+                }
+              });
 
-                  });
-
-              }, 500);
 
 
             },
