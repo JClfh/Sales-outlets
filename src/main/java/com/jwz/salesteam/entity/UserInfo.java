@@ -1,17 +1,30 @@
 package com.jwz.salesteam.entity;
 
+import java.util.Date;
+
 public class UserInfo {
+
     private Integer id;
 
-    private Boolean enabled;
+    private String userName;
 
-    private String password;
+    private Integer userSex;
 
-    private String username;
+    private String userTel;
 
-    private Boolean locked;
+    private Integer userVip;
 
-    private String role;
+    private String userAddress;
+
+    private Integer firstSaleman;
+
+    private String lastSaleman;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    private Integer isDel;
 
     public Integer getId() {
         return id;
@@ -21,43 +34,83 @@ public class UserInfo {
         this.id = id;
     }
 
-    public Boolean getEnabled() {
-        return enabled;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getUserSex() {
+        return userSex;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setUserSex(Integer userSex) {
+        this.userSex = userSex;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserTel() {
+        return userTel;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setUserTel(String userTel) {
+        this.userTel = userTel;
     }
 
-    public Boolean getLocked() {
-        return locked;
+    public Integer getUserVip() {
+        return userVip;
     }
 
-    public void setLocked(Boolean locked) {
-        this.locked = locked;
+    public void setUserVip(Integer userVip) {
+        this.userVip = userVip;
     }
 
-    public String getRole() {
-        return role;
+    public String getUserAddress() {
+        return userAddress;
     }
 
-    public void setRole(String role) {
-        this.role = role == null ? null : role.trim();
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
+    }
+
+    public Integer getFirstSaleman() {
+        return firstSaleman;
+    }
+
+    public void setFirstSaleman(Integer firstSaleman) {
+        this.firstSaleman = firstSaleman;
+    }
+
+    public String getLastSaleman() {
+        return lastSaleman;
+    }
+
+    public void setLastSaleman(String lastSaleman) {
+        this.lastSaleman = lastSaleman;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Integer getIsDel() {
+        return isDel;
+    }
+
+    public void setIsDel(Integer isDel) {
+        this.isDel = isDel;
     }
 }

@@ -138,21 +138,28 @@
                       <th class="text-center" scope="col">商品成本价</th>
                       <th class="text-center" scope="col">商品图片</th>
                       <th class="text-center" scope="col">创建日期</th>
+                          <th class="text-center" scope="col">状态</th>
                       <th class="text-center" scope="col">操作</th>
                       </tr>
                   </thead>
                   <tbody>
                           <tr class="protop" v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
-                              <td class="text-center proitem">{{item.goods_id}}</td>
-                              <td class="text-center proitem">{{item.goods_name}}</td>
-                              <td class="text-center proitem">{{item.goods_selling_price}}</td>
-                              <td class="text-center proitem">{{item.goods_cost_price}}</td>
-                              <td class="text-center proitem"><img v:src="{{item.goods_cover_img}}" width="100"  id="proImg"></td>
+                              <td class="text-center proitem" style=" vertical-align:middle">{{item.goodsId}}</td>
+                              <td class="text-center proitem" style=" vertical-align:middle">{{item.goodsName}}</td>
+                              <td class="text-center proitem" style=" vertical-align:middle">{{item.goodsSellingPrice}}</td>
+                              <td class="text-center proitem" style=" vertical-align:middle">{{item.goodsCostPrice}}</td>
+                              <td class="text-center proitem" style=" vertical-align:middle">
+                                  <img v-bind:src="item.goodsCoverImg" width="30" height="30" id="proImg"></td>
                          
-                              <td class="text-center proitem">
-                                {{item.create_time}}
+                              <td class="text-center proitem" style=" vertical-align:middle">
+                                {{item.createTime1}}
                               </td>
-                              <td  align="center" class="text-center proitem">
+                              <td align="center" style=" vertical-align:middle">
+                                  <span class="badge badge-success"  style="font-size:17px"
+                                     v-if="item.isDel === 0">上架</span>
+                                  <span class="badge badge-danger"  style="font-size:17px" v-if="item.isDel === 1">下架</span>
+                              </td>
+                              <td  align="center" class="text-center proitem" style=" vertical-align:middle">
                               <button class="btn btn-success" type="button" data-toggle="modal"
                               v-on:click="edit(index)">
                               <i class="fa fa-edit "></i>编辑</button>&nbsp;
@@ -171,7 +178,7 @@
                   <li class="page-item">
                     <a class="page-link" href="javascript:void(0);" onclick="app.last()">上一页</a>
                   </li>
-                  <li class="page-item" v-for="pageitem in pagesum">
+                  <li class="page-item" v-for="pageitem in pagesum" v-bind:class="{ 'active': pageitem == pageindex}">
                     <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
                   </li>
 
@@ -205,7 +212,7 @@
           </div>
         </div>
         <!-- /删除-->
-        <div class="modal fade" id="dangerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-danger" role="document">
             <div class="modal-content">
@@ -225,8 +232,8 @@
             </div>
           </div>
         </div>
-        <!-- /成功-->
-        <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <!-- 删除成功-->
+        <div class="modal fade" id="delSuccessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-success" role="document">
             <div class="modal-content">
@@ -246,41 +253,19 @@
             <!-- /.modal-content-->
           </div>
         </div>
-        <div class="modal fade" id="editSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          style="display: none;" aria-hidden="true">
-          <div class="modal-dialog modal-success" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">提示</h4>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>编辑成功！</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
-              </div>
-            </div>
-            <!-- /.modal-content-->
-          </div>
-        </div>
-
-
-        <!-- /警告-->
-        <div class="modal fade show" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          style="display: none;" aria-hidden="true">
+        <!-- 删除失败-->
+        <div class="modal fade show" id="delFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-danger" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title">警告！！！！！</h4>
+                <h4 class="modal-title">通知</h4>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
               <div class="modal-body">
-                <p>编辑失败</p>
+                <p>删除失败</p>
               </div>
               <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
@@ -291,8 +276,10 @@
           </div>
           <!-- /.modal-dialog-->
         </div>
+
+
         <!-- 编辑 -->
-        <div class="modal fade" id="primaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           aria-hidden="true" style="display: none;" aria-hidden="true">
 
           <div class="modal-dialog modal-success" role="document">
@@ -318,7 +305,7 @@
                     <label class="col-md-3 col-form-label" for="text-input">创建时间</label>
                     <div class="col-md-9">
                       <input class="form-control" id="text-input" type="text" name="text-input" placeholder="创建时间"
-                        v-model="edititems.create_time" required disabled="disabled">
+                        v-model="edititems.createTime1" required disabled="disabled">
 
                     </div>
                   </div>
@@ -326,7 +313,7 @@
                     <label class="col-md-3 col-form-label" for="text-input">商品名字</label>
                     <div class="col-md-9">
                       <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品名字"
-                        v-model="edititems.goods_name" 
+                        v-model="edititems.goodsName" 
                         required>
 
                     </div>
@@ -335,7 +322,7 @@
                     <label class="col-md-3 col-form-label" for="text-input">商品零售价</label>
                     <div class="col-md-9">
                       <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品零售价"
-                        v-model="edititems.goods_selling_price" pattern="^[0-9]+$" required>
+                        v-model="edititems.goodsSellingPrice" pattern="^[0-9]+$" required>
 
                     </div>
                   </div>
@@ -343,15 +330,15 @@
                     <label class="col-md-3 col-form-label" for="text-input">商品成本价</label>
                     <div class="col-md-9">
                       <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品成本价"
-                        v-model="edititems.goods_cost_price" required>
+                        v-model="edititems.goodsCostPrice" required>
 
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-md-3 col-form-label" for="text-input">商品图片</label>
                     <div class="col-md-9">
-                      <img src="null" class="normalFace" id="avarimgs" 
-                      v-bind:src="edititems.goods_cover_img"
+                      <img src="null" class="normalFace" id="avarimgs1"
+                      v-bind:src="edititems.goodsCoverImg"
                       onclick="fileSelect();" width="60" height="60" style="float:left;">
                  <input type="file" name="pclogo" id="file" id="xdaTanFileImg"
                         onchange="xmTanUploadImg(this)"
@@ -362,16 +349,31 @@
                     <label class="col-md-3 col-form-label" for="text-input">商品信息描述</label>
                     <div class="col-md-9">
                       <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品信息描述"
-                        v-model="edititems.goods_detail_content" required>
+                        v-model="edititems.goodsDetailContent" required>
 
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-md-3 col-form-label" for="text-input">商品信息简介</label>
                     <div class="col-md-9">
-                      <textarea id="description" class="form-control" rows="3" name="description" placeholder="商品信息简介"  v-model="edititems.goods_intro"></textarea>
+                      <textarea id="description" class="form-control" rows="3" name="description" placeholder="商品信息简介"  v-model="edititems.goodsIntro"></textarea>
                     </div>
                   </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">状态</label>
+                        <div class="col-md-9 col-form-label">
+                            <div class="form-check form-check-inline mr-1">
+                                <input class="form-check-input" id="inline-radio1" type="radio" value=0 name="inline-radios"
+                                       v-model="edititems.isDel">
+                                <label class="form-check-label" for="inline-radio1">上架</label>
+                            </div>
+                            <div class="form-check form-check-inline mr-1">
+                                <input class="form-check-input" id="inline-radio2" type="radio" value=1 name="inline-radios"
+                                       v-model="edititems.isDel">
+                                <label class="form-check-label" for="inline-radio2">下架</label>
+                            </div>
+                        </div>
+                    </div>
                 </form>
               </div>
               <div class="modal-footer">
@@ -383,7 +385,50 @@
 
           </div>
         </div>
+        <!-- 编辑成功 -->
+        <div class="modal fade" id="editSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-success" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>编辑成功！</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
+        <!-- 编辑失败-->
+        <div class="modal fade show" id="editFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">警告！！！！！</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>编辑失败</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
 
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+          <!-- /.modal-dialog-->
+        </div>
       </div>
     </main>
   </div>
@@ -428,8 +473,8 @@
         }
         reader.onload = function (e) {
             console.log("成功读取....");
-            var img = document.getElementById("avarimgs");
-            img.src = e.target.result;
+            // var img = document.getElementById("avarimgs");
+            // img.src = e.target.result;
             var img = document.getElementById("avarimgs1");
             img.src = e.target.result;
             //或者 img.src = this.result;  //e.target == this
@@ -445,26 +490,30 @@
       Mock.mock("http://127.0.0.1:5500/users", {
         "data|20-20": [{
           id: "@increment()",//编号
-          goods_id: "@increment()",//商品编号
-          "goods_name|1":  ["@cname", "@name"],//商品姓名
-          goods_selling_price: "@increment()",//商品零售价
-          goods_cost_price:"@increment()",//商品成本价
-          goods_cover_img: "@cname()",//商品图片
-          goods_detail_content: "@cname()",//商品信息描述 
-          goods_intro: "@cname()",//商品信息简介
-          create_time:"@datetime()",//创建时间
-          "emp_type|1": ["0", "1", "2"]//职位
+          goodsId: "@increment()",//商品编号
+          "goodsName|1":  ["@cname", "@name"],//商品姓名
+          goodsSellingPrice: "@increment()",//商品零售价
+          goodsCostPrice:"@increment()",//商品成本价
+          goodsCoverImg: "@cname()",//商品图片
+          goodsDetailContent: "@cname()",//商品信息描述 
+          goodsIntro: "@cname()",//商品信息简介
+          createTime:"@datetime()",//创建时间
+
 
         }],
         suceess: true,  
         code: 200,
         msg: "Success"
       });
-      $.getJSON("http://127.0.0.1:5500/users", function (response) {
+      $.getJSON("/admin/goods/list", function (response) {
         items = response.data;
         console.log(response.data)
         page = Math.ceil(items.length / 5);
+
         var pageitem = [];
+        for(var i = 0 ; i <items.length; i ++){
+          items[i].createTime1 = items[i].createTime.toString().split("T")[0];
+        }
         for (var i = 0; i < page; i++) {
           pageitem[i] = i + 1;
         }
@@ -500,28 +549,33 @@
             },
             // 删除
             del: function (index) {
-              $('#dangerModal').modal('show');
+              $('#delModal').modal('show');
               d = index;
-              alert(d)
+
             },
             delCheck: function () {
-              
-              alert(this.items[d].id)
-              $.post("/admin//user/del",
-                {
-                  id: this.items[d].id
-                }
-                , function (data) {
-                  if (data === true) {
-                   
-                    $('#dangerModal').modal('hide');
-                    $('#success').modal('show');
+              // alert(this.items[d].id)
+              $.ajax({
+                url: "/admin/goods/del/"+this.items[d].id,
+                type: "post",
+                success: function (data) {
+                  if(data.resultCode === 500){
+                    $('#delModal').modal('hide');
+                    $('#delFailModal').modal('show');
+                  }else{
+                    $('#delModal').modal('hide');
+                    $('#delSuccessModal').modal('show');
                     app.items.splice(d, 1);
-                  } else {
-                    alert("失败");
+                    app.pagesum = Math.ceil(app.items.length / 5);
                   }
-                });
-              $('#dangerModal').modal('hide');
+
+                },
+                error: function (xhr, status, error) {
+                  $('#delModal').modal('hide');
+                  $('#issue').modal('show');
+                }
+              });
+
             },
             // 编辑
             edit: function (index) {
@@ -529,39 +583,47 @@
               forms.classList.remove('was-validated');
               this.editIndex = index;
               this.edititems = JSON.parse(JSON.stringify(this.items[index]));
-              $('#primaryModal').modal('show');
+              $('#editModal').modal('show');
             },
             save: function () {
-              // var com_id;
-              // $.get("/small_admin/com_id", function (data) {
-              //   com_id = data;
-              //   // alert(data)
-              // });
-              setTimeout(function () {
-                $.post("/admin/user/update",
-                  {
-                    id :app.edititems.id,//编号
-                    goods_id: goods_id,//商品编号
-                    goods_name: app.edititems.goods_name,//商品姓名
-                    goods_selling_price: app.edititems.goods_selling_price,//商品零售价
-                    goods_cost_price:app.edititems.goods_cost_price,//商品成本价
-                    goods_cover_img:app.edititems.goods_cover_img,//商品图片
-                    goods_detail_content:app.edititems.goods_detail_content,//商品信息描述 
-                    goods_intro:app.edititems.goods_intro,//商品信息简介
-                    create_time:app.edititems.create_time,//创建时间
-                    emp_type:app.edititems.emp_type//职位
-                  }, function (data) {
-                    if (data === true) {
-                      $('#primaryModal').modal('hide');
-                      $('#editSuccess').modal('show');
-                      app.items[app.editIndex].position = app.edititems.position
-                    } else {
-                      $('#danger').modal('show');
+                var formData = new FormData();
+                var img = document.getElementById("avarimgs1");
+                this.edititems.goodsCoverImg = img.src;
+                formData.append("id", this.edititems.id);
+                formData.append("goodsId", this.edititems.goodsId);
+                formData.append("goodsName", this.edititems.goodsName);
+                formData.append("goodsSellingPrice", this.edititems.goodsSellingPrice);
+                formData.append("goodsCostPrice", this.edititems.goodsCostPrice);
+                formData.append("goodsCoverImg", this.edititems.goodsCoverImg);
+                formData.append("goodsDetailContent", this.edititems.goodsDetailContent);
+                formData.append("goodsIntro", this.edititems.goodsIntro);
+                formData.append("createTime", new Date(this.edititems.createTime));
+                formData.append("updateTime", new Date());
+                formData.append("isDel", this.edititems.isDel);
+
+                $.ajax({
+                    url: "/admin/goods/update",
+                    type: "post",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    //成功后的方法
+                    success: function (data) {
+                        console.log(data)
+                        if(data.resultCode === 500){
+                            $('#editModal').modal('hide');
+                            $('#editFailModal').modal('show');
+                        }else{
+                            $('#editModal').modal('hide');
+                            $('#editSuccess').modal('show');
+                        }
+
+                    },
+                    error: function (xhr, status, error) {
+                        $('#editModal').modal('hide');
+                        $('#issue').modal('show');
                     }
-
-                  });
-
-              }, 500);
+                });
 
 
             },

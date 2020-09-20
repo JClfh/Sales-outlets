@@ -274,6 +274,26 @@
             <!-- /.modal-content-->
           </div>
         </div>
+        <div class="modal fade" id="issue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>出现未知错误</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">确定</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
       </div>
     </main>
   </div>
@@ -355,69 +375,50 @@
         },
         methods: {
           // 新增
-
           addA: function () {
             var forms = document.getElementsByClassName('needs-validation')[0];
             forms.classList.add('was-validated');
             if (forms.checkValidity() === true) {
               var formData = new FormData();
-                var img = document.getElementById("avarimgs");
-                this.addALL.goodsCoverImg = img.src;
-              formData.append("id",0);
-              formData.append("goodsId",0);
-              formData.append("goodsName",this.addALL.goodsName);
-              formData.append("goodsSellingPrice",this.addALL.goodsSellingPrice);
-              formData.append("goodsCostPrice",this.addALL.goodsCostPrice);
-              formData.append("goodsCoverImg",this.addALL.goodsCoverImg);
+              var img = document.getElementById("avarimgs");
+              this.addALL.goodsCoverImg = img.src;
+              formData.append("id", 0);
+              formData.append("goodsId", 0);
+              formData.append("goodsName", this.addALL.goodsName);
+              formData.append("goodsSellingPrice", this.addALL.goodsSellingPrice);
+              formData.append("goodsCostPrice", this.addALL.goodsCostPrice);
+              formData.append("goodsCoverImg", this.addALL.goodsCoverImg);
               formData.append("goodsDetailContent", this.addALL.goodsDetailContent);
-              formData.append("goodsIntro",this.addALL.goodsIntro);
-              formData.append("createTime",new Date());
-              formData.append("updateTime",new Date());
-              formData.append("isDel",0)
+              formData.append("goodsIntro", this.addALL.goodsIntro);
+              formData.append("createTime", new Date());
+              formData.append("updateTime", new Date());
+              formData.append("isDel", 0)
 
               $.ajax({
                 url: "/admin/goods/save",
                 type: "post",
                 //将/jsON转化为字符串传递
                 data: formData,
-                contentType : false,
-                processData : false,
+                contentType: false,
+                processData: false,
                 //成功后的方法
-                success: function () {
-                  $('#primaryModal').modal('hide');
-                  $('#success').modal('show');
+                success: function (data) {
+
+                  if(data.resultCode === 500){
+                    $('#primaryModal').modal('hide');
+                    $('#danger').modal('show');
+                  }else{
+                    $('#primaryModal').modal('hide');
+                    $('#success').modal('show');
+                  }
+
                 },
                 error: function (xhr, status, error) {
                   $('#primaryModal').modal('hide');
-                  $('#danger').modal('show');
+                  $('#issue').modal('show');
                 }
               });
-              // $.post("/admin/goods/save",
-              //   {
-              //     id: 0,//主键标识
-              //     goodsId: 0,
-              //     goodsName: 0,
-              //     goodsSellingPrice: this.addALL.goodsSellingPrice,
-              //     goodsCostPrice: this.addALL.goodsCostPrice,
-              //     goodsCoverImg: this.addALL.goodsCoverImg,
-              //     goodsDetailContent: this.addALL.goodsDetailContent,
-              //     goodsIntro: this.addALL.goodsIntro,
-              //     createTime: getTime(),//记录创建日期
-              //     update_time: getTime(),//记录修改日期
-              //     is_del: 0
-              //
-              //   }, function (data) {
-              //     if (data === true) {
-              //       $('#primaryModal').modal('hide');
-              //       $('#success').modal('show');
-              //     } else {
-              //       $('#primaryModal').modal('hide');
-              //       $('#danger').modal('show');
-              //     }
-              //   });
-
             }
-            $('#primaryModal').modal('hide');
             forms.classList.add('was-validated');
           },
           addB: function () {

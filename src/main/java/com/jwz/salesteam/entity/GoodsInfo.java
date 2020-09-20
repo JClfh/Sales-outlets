@@ -11,6 +11,8 @@ public class GoodsInfo {
 
     private Integer goodsSellingPrice;
 
+    private Integer goodsCostPrice;
+
     private String goodsCoverImg;
 
     private String goodsDetailContent;
@@ -51,8 +53,16 @@ public class GoodsInfo {
         return goodsSellingPrice;
     }
 
+    public Integer getGoodsCostPrice() {
+        return goodsCostPrice;
+    }
+
     public void setGoodsSellingPrice(Integer goodsSellingPrice) {
         this.goodsSellingPrice = goodsSellingPrice;
+    }
+
+    public void setGoodsCostPrice(Integer goodsCostPrice) {
+        this.goodsCostPrice = goodsCostPrice;
     }
 
     public String getGoodsCoverImg() {

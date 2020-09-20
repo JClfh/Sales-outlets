@@ -1,6 +1,9 @@
 package com.jwz.salesteam.dao;
 
+import com.jwz.salesteam.entity.EmpInfo;
 import com.jwz.salesteam.entity.GoodsInfo;
+
+import java.util.List;
 
 public interface GoodsInfoMapper {
 
@@ -15,4 +18,10 @@ public interface GoodsInfoMapper {
     int updateByPrimaryKeySelective(GoodsInfo record);
 
     int updateByPrimaryKey(GoodsInfo record);
+
+    GoodsInfo selectByName(String goodsName);
+
+    List<GoodsInfo> findGoodsInfoList();
+
+    GoodsInfo selectByNameAndId(String goodsName, Integer id);
 }

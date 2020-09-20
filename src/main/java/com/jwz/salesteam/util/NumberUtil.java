@@ -62,4 +62,9 @@ public class NumberUtil {
         buffer.append(num);
         return buffer.toString();
     }
+
+    public static String getGoodsId() {
+        StringBuffer buffer = new StringBuffer(String.valueOf(System.currentTimeMillis()));
+        return buffer.toString();
+    }
 }

@@ -4,6 +4,7 @@ import com.jwz.salesteam.common.ServiceResultEnum;
 import com.jwz.salesteam.entity.EmpInfo;
 import com.jwz.salesteam.entity.GoodsInfo;
 import com.jwz.salesteam.service.EmpInfoService;
+import com.jwz.salesteam.service.GoodsInfoService;
 import com.jwz.salesteam.util.NumberUtil;
 import com.jwz.salesteam.util.Result;
 import com.jwz.salesteam.util.ResultGenerator;
@@ -35,6 +36,8 @@ public class adminController {
     @Autowired
     private EmpInfoService empInfoService;
 
+    @Autowired
+    private GoodsInfoService goodsInfoService;
     /**
      *
      * 添加职员信息
@@ -50,15 +53,7 @@ public class adminController {
                 || Objects.isNull(empInfo.getEmpType())) {
             return ResultGenerator.genFailResult("参数异常！");
         }
-        String emp_id =  NumberUtil.genEmpId();
-        EmpInfo temp = empInfoService.selectByEmpId(emp_id);
-        //防止随机ID重复
-        while (temp != null){
-            emp_id =  NumberUtil.genEmpId();
-            temp = empInfoService.selectByEmpId(emp_id);
-        }
-        empInfo.setEmpId(emp_id);
-        empInfo.setEmpPwd(emp_id);
+
         //empInfo.setCreateTime(new Date());
        // empInfo.setUpdateTime(new Date());
         String result = empInfoService.saveEmpInfo(empInfo);
@@ -142,26 +137,21 @@ public class adminController {
      */
     @RequestMapping(value = "/goods/save", method = RequestMethod.POST)
     @ResponseBody
-    public Result empInfoFindByName( GoodsInfo goodsInfo) throws IOException {
-        System.out.println("sb");
-        System.out.println(goodsInfo.toString());
-
-
-//取得返回json中的Content数据String content = JSONPath.read(json, "$.Content").toString());//去掉前面的“data:image/jpeg;base64,”的字样
-        String imgdata = goodsInfo.getGoodsCoverImg().replace("data:image/jpeg;base64,","");
-//解码base64
-        BASE64Decoder decoder = new BASE64Decoder();
-        byte[] data = decoder.decodeBuffer(imgdata);
-        for(int i =0 ; i < data.length ;i++) {
-            if(data[i] < 0) {
-                data[i] += 256;
-            }
-        }//写入保存成jpeg文件
-        FileOutputStream fos = new FileOutputStream ("D:\\test.jpg");
-        fos.write(data);
-        fos.flush();
-        fos.close();
-        return ResultGenerator.genSuccessResult();
+    public Result empInfoFindByName(GoodsInfo goodsInfo) throws IOException {
+        if (StringUtils.isEmpty(goodsInfo.getGoodsName())
+                || StringUtils.isEmpty(goodsInfo.getGoodsName())
+                || Objects.isNull(goodsInfo.getGoodsSellingPrice())
+                || Objects.isNull(goodsInfo.getGoodsCostPrice())) {
+            return ResultGenerator.genFailResult("参数异常！");
+        }
+        //empInfo.setCreateTime(new Date());
+        // empInfo.setUpdateTime(new Date());
+        String result = goodsInfoService.saveGoodsInfo(goodsInfo);
+        if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult(result);
+        }
     }
 
     /**
@@ -169,11 +159,51 @@ public class adminController {
      * 删除商品
      *
      */
+    @RequestMapping(value = "/goods/del/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value="删除商品信息")
+    public Result deleteGoodsInfo(@PathVariable("id") Integer id) {
 
+        if (goodsInfoService.delGoodsInfo(id)>0) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult("删除失败");
+        }
+    }
     /**
      *
      *修改商品
      *
      */
+    @RequestMapping(value = "/goods/update", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value="修改商品信息")
+    public Result updateGoodsInfo(GoodsInfo goodsInfo) {
+        if (StringUtils.isEmpty(goodsInfo.getGoodsName())
+                || StringUtils.isEmpty(goodsInfo.getGoodsName())
+                || Objects.isNull(goodsInfo.getGoodsSellingPrice())
+                || Objects.isNull(goodsInfo.getGoodsCostPrice())) {
+            return ResultGenerator.genFailResult("参数异常！");
+        }
+
+        String result = goodsInfoService.updateGoodsInfo(goodsInfo);
+        if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult(result);
+        }
+    }
+
+    /**
+     *
+     * 查看所有商品
+     */
+    @RequestMapping(value = "/goods/list", method = RequestMethod.GET)
+    @ResponseBody
+    @ApiOperation(value="查看商品列表")
+    public Result getGoodsList() {
+        return ResultGenerator.genSuccessResult(goodsInfoService.getGoodsInfoList());
+    }
+
 
 }

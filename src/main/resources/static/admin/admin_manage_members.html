@@ -130,51 +130,51 @@
                 <table class="table table-responsive-sm table-bordered">
                   <thead>
                     <tr align="center">
-                      <th width="125p">姓名</th>
-                      <th width="125p">性别</th>
-                      <th width="125p">联系电话</th>
-                      <th width="125p">地址</th>
-                      <th width="125p">登录ID</th>
-                      <th width="125p">登录口令</th>
-                      <th width="125p">职位</th>
-                      <th width="125p">禁用</th>
-                      <th width="125p">状态</th>
-                      <th width="125p">创建时间</th>
-                      <th width="125p">操作</th>
+                      <th class="text-center" scope="col">姓名</th>
+                      <th class="text-center" scope="col">性别</th>
+                      <th class="text-center" scope="col">联系电话</th>
+                      <th class="text-center" scope="col">地址</th>
+                      <th class="text-center" scope="col">登录ID</th>
+                      <th class="text-center" scope="col">登录口令</th>
+                      <th class="text-center" scope="col">职位</th>
+                      <th class="text-center" scope="col">禁用</th>
+                      <th class="text-center" scope="col">状态</th>
+                      <th class="text-center" scope="col">创建时间</th>
+                      <th class="text-center" scope="col">操作</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
 
-                      <td align="center">{{item.empName}}</td>
-                      <td align="center">
+                      <td align="center" style="vertical-align:middle">{{item.empName}}</td>
+                      <td align="center" style=" vertical-align:middle">
                         <span class="" v-if="item.empSex  === 0">男</span>
                         <span class="" v-if="item.empSex  === 1">女</span>
                       </td>
-                       <td align="center">{{item.empTel}}</td>
-                      <td align="center">{{item.empAddress}}</td>
-                      <td align="center">{{item.empId}}</td>
-                      <td align="center">{{item.empPwd}}</td>
-                      <td align="center"> 
+                       <td align="center" style=" vertical-align:middle">{{item.empTel}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.empAddress}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.empId}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.empPwd}}</td>
+                      <td align="center" style=" vertical-align:middle">
                         <p class="badge badge-info" style="font-size:17px"
                           v-if="item.empType === 0">销售员</p>
-                        <p class="badge badge-success"  style="font-size:17px" v-if="item.empType === 1">跟单员</p>
-                        <p class="badge badge-warning"  style="font-size:17px" v-if="item.empType === 2">财务</p>
+                        <span class="badge badge-success"  style="font-size:17px" v-if="item.empType === 1">跟单员</span>
+                        <span class="badge badge-warning"  style="font-size:17px" v-if="item.empType === 2">财务</span>
                       </td>
-                      <td align="center"> 
+                      <td align="center" style=" vertical-align:middle">
                         <label class="switch switch-label switch-pill switch-warning">
                         <input class="switch-input" type="checkbox" checked="">
                         <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
                       </label></td>
                   
-                      <td align="center"> 
-                        <p class=""  style="font-size:17px"
-                          v-if="item.isDel === 0">在职</p>
-                        <p class="badge badge-danger"  style="font-size:17px" v-if="item.isDel === 1">离职</p>
+                      <td align="center" style=" vertical-align:middle">
+                        <span class="badge badge-success"  style="font-size:17px"
+                          v-if="item.isDel === 0">在职</span>
+                        <span class="badge badge-danger"  style="font-size:17px" v-if="item.isDel === 1">离职</span>
                       </td>
-                      <td align="center">{{item.createTime}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.createTime}}</td>
 
-                      <td align="center"> <button class="btn btn-primary" type="button" data-toggle="modal"
+                      <td align="center" style=" vertical-align:middle"> <button class="btn btn-primary" type="button" data-toggle="modal"
                           v-on:click="edit(index)">
                           <i class="fa fa-edit "></i>编辑</button>&nbsp;
 
@@ -228,7 +228,7 @@
           </div>
         </div>
         <!-- /删除-->
-        <div class="modal fade" id="dangerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-danger" role="document">
             <div class="modal-content">
@@ -249,7 +249,7 @@
           </div>
         </div>
         <!-- /成功-->
-        <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal fade" id="delSuccessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-success" role="document">
             <div class="modal-content">
@@ -270,7 +270,7 @@
           </div>
         </div>
         <!-- 失败-->
-        <div class="modal fade show" id="failDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal fade show" id="delFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-danger" role="document">
             <div class="modal-content">
@@ -319,7 +319,7 @@
                     <label class="col-md-3 col-form-label" for="text-input">创建时间</label>
                     <div class="col-md-9">
                       <input class="form-control" id="text-input" type="text" name="text-input" placeholder="登录口令"
-                        v-model="edititems.createTime" required disabled="disabled">
+                        v-model="edititems.createTime1" required disabled="disabled">
 
                     </div>
                   </div>
@@ -375,7 +375,7 @@
                   <div class="form-group row">
                     <label class="col-md-3 col-form-label" for="select1">职位</label>
                     <div class="col-md-9">
-                      <select class="form-control" id="select1" name="select1" v-model="edititems.empSex">
+                      <select class="form-control" id="select1" name="select1" v-model="edititems.empType">
                         <option value=0>销售员</option>
                         <option value=1>跟单员</option>
                         <option value=2>财务</option>
@@ -411,7 +411,7 @@
           </div>
         </div>
         <!-- 编辑成功 -->
-        <div class="modal fade" id="editSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal fade" id="editSuccessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-success" role="document">
             <div class="modal-content">
@@ -431,8 +431,7 @@
             <!-- /.modal-content-->
           </div>
         </div>
-
-        <!-- 失败-->
+        <!-- 编辑失败-->
         <div class="modal fade show" id="editFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-danger" role="document">
@@ -455,6 +454,27 @@
           </div>
           <!-- /.modal-dialog-->
         </div>
+
+        <div class="modal fade" id="issue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>出现未知错误</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">确定</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
       </div>
     </main>
   </div>
@@ -468,35 +488,6 @@
   <script src="../vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
   <script src="../vendors/mock.js/js/mock.min.js"></script>
   <script src="../vendors/vue.js/js/vue.min.js"></script>
-  <script>
-    function formatDate(time) {
-      var d = new Date(time);
-      var time=d.getFullYear() + '年'
-      if (d.getMonth() < 10)
-        time += "0";
-
-      time += d.getMonth()+1 + "月";
-
-      if (d.getDate() < 10)
-        time += "0";
-
-      time += d.getDate() + "日 ";
-      if (d.getHours() < 10)
-        time += "0";
-
-      time += d.getHours() + ":";
-      if (d.getMinutes() < 10)
-        time += '0';
-      time += d.getMinutes() + ":";
-
-      if (d.getSeconds() < 10)
-        time += '0';
-      time += d.getSeconds();
-
-      return time
-    }
-
-  </script>
   <script>
     var p, d, j;
     var app;
@@ -525,7 +516,7 @@
         console.log(items)
         page = Math.ceil(items.length / 5);
         for(var i = 0 ; i <items.length; i ++){
-          items[i].createTime = items[i].createTime.toString().split("T")[0];
+          items[i].createTime1 = items[i].createTime.toString().split("T")[0];
         }
         var pageitem = [];
         for (var i = 0; i < page; i++) {
@@ -563,21 +554,27 @@
             },
             // 删除
             del: function (index) {
-              $('#dangerModal').modal('show');
+              $('#delModal').modal('show');
               d = index;
             },
             delCheck: function () {
               $.ajax({
                 url: "/admin/emp/del/"+this.items[d].id,
                 type: "post",
-                success: function () {
-                $('#dangerModal').modal('hide');
-                $('#success').modal('show');
-                app.items.splice(d, 1);
+                success: function (data) {
+                  if(data.resultCode === 500){
+                    $('#delModal').modal('hide');
+                    $('#delFailModal').modal('show');
+                  }else{
+                    $('#delModal').modal('hide');
+                    $('#delSuccessModal').modal('show');
+                    app.items.splice(d, 1);
+                  }
+
               },
               error: function (xhr, status, error) {
-                $('#dangerModal').modal('hide');
-                $('#failDelModal').modal('show');
+                $('#delModal').modal('hide');
+                $('#issue').modal('show');
               }
               });
 
@@ -615,14 +612,20 @@
                 data: JSON.stringify(data),
 
                 //成功后的方法
-                success: function () {
-                  $('#editModal').modal('hide');
-                  $('#success').modal('show');
-                  window.location.href = "/admin/admin_manage_members.html";
+                success: function (data) {
+                  if(data.resultCode === 500){
+                    $('#editModal').modal('hide');
+                    $('#editFailModal').modal('show');
+                  }else{
+                    $('#editModal').modal('hide');
+                    $('#editSuccessModalModal').modal('show');
+                    window.location.href = "/admin/admin_manage_members.html";
+                  }
                 },
                 error: function (xhr, status, error) {
                   $('#editModal').modal('hide');
-                  $('#editFailModal').modal('show');
+                  $('#issue').modal('show');
+
                 }
               });
 

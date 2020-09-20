@@ -4,6 +4,7 @@ import com.jwz.salesteam.common.ServiceResultEnum;
 import com.jwz.salesteam.dao.EmpInfoMapper;
 import com.jwz.salesteam.entity.EmpInfo;
 import com.jwz.salesteam.service.EmpInfoService;
+import com.jwz.salesteam.util.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,15 @@ public class EmpInfoServiceImpl implements EmpInfoService {
             return ServiceResultEnum.SAME_EMPINFO_EXIST.getResult();
 //            return "该职员已经存在";
         }
+        String emp_id =  NumberUtil.genEmpId();
+        EmpInfo temp1 = selectByEmpId(emp_id);
+        //防止随机ID重复
+        while (temp1 != null){
+            emp_id =  NumberUtil.genEmpId();
+            temp1 = selectByEmpId(emp_id);
+        }
+        empInfo.setEmpId(emp_id);
+        empInfo.setEmpPwd(emp_id);
         if (empInfoMapper.insertSelective(empInfo) > 0) {
             return ServiceResultEnum.SUCCESS.getResult();
 //            return "添加成功";
@@ -45,7 +55,7 @@ public class EmpInfoServiceImpl implements EmpInfoService {
             return ServiceResultEnum.DATA_NOT_EXIST.getResult();
         }
         EmpInfo temp2 = empInfoMapper.selectByTelAndName(empInfo.getEmpTel(), empInfo.getEmpName());
-        if (temp2 != null && !temp2.getEmpId().equals(empInfo.getEmpId())) {
+        if (temp2 != null) {
             //同名且不同id 不能继续修改
             return ServiceResultEnum.SAME_EMPINFO_EXIST.getResult();
         }

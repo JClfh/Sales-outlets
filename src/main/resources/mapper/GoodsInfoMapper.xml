@@ -6,6 +6,7 @@
     <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
     <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
     <result column="goods_selling_price" property="goodsSellingPrice" jdbcType="INTEGER" />
+    <result column="goods_cost_price" property="goodsCostPrice" jdbcType="INTEGER" />
     <result column="goods_cover_img" property="goodsCoverImg" jdbcType="VARCHAR" />
     <result column="goods_detail_content" property="goodsDetailContent" jdbcType="VARCHAR" />
     <result column="goods_intro" property="goodsIntro" jdbcType="VARCHAR" />
@@ -15,7 +16,7 @@
   </resultMap>
 
   <sql id="Base_Column_List" >
-    id, goods_id, goods_name, goods_selling_price, goods_cover_img, goods_detail_content, 
+    id, goods_id, goods_name, goods_selling_price, goods_cost_price, goods_cover_img, goods_detail_content,
     goods_intro, create_time, update_time, is_del
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -30,13 +31,13 @@
   </delete>
   <insert id="insert" parameterType="com.jwz.salesteam.entity.GoodsInfo" >
     insert into goods_info (id, goods_id, goods_name, 
-      goods_selling_price, goods_cover_img, goods_detail_content, 
+      goods_selling_price, goods_cost_price, goods_cover_img, goods_detail_content,
       goods_intro, create_time, update_time, 
       is_del)
     values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, 
-      #{goodsSellingPrice,jdbcType=INTEGER}, #{goodsCoverImg,jdbcType=VARCHAR}, #{goodsDetailContent,jdbcType=VARCHAR}, 
-      #{goodsIntro,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, 
-      #{isDel,jdbcType=INTEGER})
+      #{goodsSellingPrice,jdbcType=INTEGER}, #{goodsCostPrice,jdbcType=INTEGER},#{goodsCoverImg,jdbcType=VARCHAR},
+      #{goodsDetailContent,jdbcType=VARCHAR}, #{goodsIntro,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE},
+      #{updateTime,jdbcType=DATE}, #{isDel,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jwz.salesteam.entity.GoodsInfo" >
     insert into goods_info
@@ -52,6 +53,9 @@
       </if>
       <if test="goodsSellingPrice != null" >
         goods_selling_price,
+      </if>
+      <if test="goodsCostPrice != null" >
+        goods_cost_price,
       </if>
       <if test="goodsCoverImg != null" >
         goods_cover_img,
@@ -85,6 +89,9 @@
       <if test="goodsSellingPrice != null" >
         #{goodsSellingPrice,jdbcType=INTEGER},
       </if>
+      <if test="goodsCostPrice != null" >
+        #{goodsCostPrice,jdbcType=INTEGER},
+      </if>
       <if test="goodsCoverImg != null" >
         #{goodsCoverImg,jdbcType=VARCHAR},
       </if>
@@ -117,6 +124,9 @@
       <if test="goodsSellingPrice != null" >
         goods_selling_price = #{goodsSellingPrice,jdbcType=INTEGER},
       </if>
+      <if test="goodsCostPrice != null" >
+        goods_cost_price = #{goodsCostPrice,jdbcType=INTEGER},
+      </if>
       <if test="goodsCoverImg != null" >
         goods_cover_img = #{goodsCoverImg,jdbcType=VARCHAR},
       </if>
@@ -143,6 +153,7 @@
     set goods_id = #{goodsId,jdbcType=VARCHAR},
       goods_name = #{goodsName,jdbcType=VARCHAR},
       goods_selling_price = #{goodsSellingPrice,jdbcType=INTEGER},
+      goods_cost_price = #{goodsCostPrice,jdbcType=INTEGER},
       goods_cover_img = #{goodsCoverImg,jdbcType=VARCHAR},
       goods_detail_content = #{goodsDetailContent,jdbcType=VARCHAR},
       goods_intro = #{goodsIntro,jdbcType=VARCHAR},
@@ -151,4 +162,26 @@
       is_del = #{isDel,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByName" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List"/>
+    from goods_info
+    where  goods_name = #{goodsName,jdbcType=VARCHAR}
+    and is_del = 0 limit 1
+  </select>
+
+  <select id="findGoodsInfoList" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from goods_info
+    order by id desc
+  </select>
+  <select id="selectByNameAndId" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List"/>
+    from goods_info
+    where  goods_name = #{goodsName,jdbcType=VARCHAR} and id != #{id,jdbcType=INTEGER}
+    and is_del = 0 limit 1
+  </select>
 </mapper>

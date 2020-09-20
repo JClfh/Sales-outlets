@@ -264,6 +264,26 @@
             <!-- /.modal-content-->
           </div>
         </div>
+        <div class="modal fade" id="issue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>出现未知错误</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">确定</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
       </div>
     </main>
   </div>
@@ -333,14 +353,20 @@
                 data: JSON.stringify(data),
 
                 //成功后的方法
-                success: function () {
-                  $('#primaryModal').modal('hide');
-                  $('#success').modal('show');
+                success: function (data) {
+                  if(data.resultCode === 500){
+                    $('#primaryModal').modal('hide');
+                    $('#danger').modal('show');
+                  }else{
+                    $('#primaryModal').modal('hide');
+                    $('#success').modal('show');
+                  }
+
                   window.location.href ="/admin/admin_manage_members.html";
                 },
                 error: function (xhr, status, error) {
                   $('#primaryModal').modal('hide');
-                  $('#danger').modal('show');
+                  $('#issue').modal('show');
                 }
               });
               // $.post("/admin/emp/save",
