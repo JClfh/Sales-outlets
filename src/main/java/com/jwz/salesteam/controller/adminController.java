@@ -38,10 +38,11 @@ public class adminController {
 
     @Autowired
     private GoodsInfoService goodsInfoService;
+
     /**
-     *
      * 添加职员信息
-     *
+     * @param empInfo
+     * @return
      */
     @RequestMapping(value = "/emp/save", method = RequestMethod.POST)
     @ResponseBody
@@ -65,9 +66,9 @@ public class adminController {
     }
 
     /**
-     *
      * 修改职员信息
-     *
+     * @param empInfo
+     * @return
      */
     @RequestMapping(value = "/emp/update", method = RequestMethod.POST)
     @ResponseBody
@@ -90,9 +91,9 @@ public class adminController {
     }
 
     /**
-     *
-     * 删除职员
-     *
+     * 删除职员信息
+     * @param id
+     * @return
      */
     @RequestMapping(value = "/emp/del/{id}", method = RequestMethod.POST)
     @ResponseBody
@@ -107,9 +108,8 @@ public class adminController {
     }
 
     /**
-     *
      * 查看职员列表
-     *
+     * @return
      */
     @RequestMapping(value = "/emp/list", method = RequestMethod.GET)
     @ResponseBody
@@ -119,9 +119,9 @@ public class adminController {
     }
 
     /**
-     *
      * 查看职员（搜索)
-     *
+     * @param emp_name
+     * @return
      */
     @RequestMapping(value = "/emp/findByName/{emp_name}", method = RequestMethod.POST)
     @ResponseBody
@@ -131,13 +131,15 @@ public class adminController {
     }
 
     /**
-     *
-     * 添加商品
-     *
+     * 添加商品信息
+     * @param goodsInfo
+     * @return
+     * @throws IOException
      */
     @RequestMapping(value = "/goods/save", method = RequestMethod.POST)
     @ResponseBody
-    public Result empInfoFindByName(GoodsInfo goodsInfo) throws IOException {
+    @ApiOperation(value="添加商品信息")
+    public Result saveGoodsInfo(GoodsInfo goodsInfo) throws IOException {
         if (StringUtils.isEmpty(goodsInfo.getGoodsName())
                 || StringUtils.isEmpty(goodsInfo.getGoodsName())
                 || Objects.isNull(goodsInfo.getGoodsSellingPrice())
@@ -156,8 +158,9 @@ public class adminController {
 
     /**
      *
-     * 删除商品
-     *
+     * 删除商品信息
+     * @param id
+     * @return
      */
     @RequestMapping(value = "/goods/del/{id}", method = RequestMethod.POST)
     @ResponseBody
@@ -170,10 +173,12 @@ public class adminController {
             return ResultGenerator.genFailResult("删除失败");
         }
     }
+
+
     /**
-     *
-     *修改商品
-     *
+     * 修改商品信息
+     * @param goodsInfo
+     * @return
      */
     @RequestMapping(value = "/goods/update", method = RequestMethod.POST)
     @ResponseBody
@@ -195,8 +200,8 @@ public class adminController {
     }
 
     /**
-     *
      * 查看所有商品
+     * @return
      */
     @RequestMapping(value = "/goods/list", method = RequestMethod.GET)
     @ResponseBody
@@ -204,6 +209,19 @@ public class adminController {
     public Result getGoodsList() {
         return ResultGenerator.genSuccessResult(goodsInfoService.getGoodsInfoList());
     }
+
+    /**
+     * 查看商品（搜索)
+     * @param goods_name
+     * @return
+     */
+    @RequestMapping(value = "/goods/findByName/{goods_name}", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value="查询商品信息")
+    public Result goodsInfoFindByName(@PathVariable("goods_name") String goods_name) {
+        return ResultGenerator.genSuccessResult(goodsInfoService.findByGoodsName(goods_name));
+    }
+
 
 
 }

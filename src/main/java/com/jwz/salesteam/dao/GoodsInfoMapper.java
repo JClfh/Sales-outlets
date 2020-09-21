@@ -24,4 +24,6 @@ public interface GoodsInfoMapper {
     List<GoodsInfo> findGoodsInfoList();
 
     GoodsInfo selectByNameAndId(String goodsName, Integer id);
+
+    List<GoodsInfo> findByGoodsName(String goods_name);
 }

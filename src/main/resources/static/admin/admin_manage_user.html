@@ -8,7 +8,7 @@
   <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
   <meta name="author" content="Łukasz Holeczek">
   <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
-  <title>编辑商品</title>
+  <title>管理用户</title>
   <!-- Icons-->
   <link href="../vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
   <link href="../vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
@@ -16,8 +16,6 @@
   <link href="../vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
   <link href="../css/style.css" rel="stylesheet">
   <link href="../vendors/pace-progress/css/pace.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../css/product.css">
-  <link rel="stylesheet" href="../css/prolist.css">
 </head>
 <script type="text/css">
 
@@ -108,7 +106,7 @@
     <main class="main">
       <!-- Breadcrumb-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item">你的位置：商品管理->编辑商品</li>
+        <li class="breadcrumb-item">你的位置：职员管理->管理人员</li>
 
         <!-- Breadcrumb Menu-->
         <li class="breadcrumb-menu d-md-down-none">
@@ -129,48 +127,47 @@
                 </div>
                 </div>
               </div>
-              <div id="collapseExample">
-                <table class="table table-light table-striped" >
+              <div class="card-body collapse show" id="collapseExample">
+                <table class="table table-responsive-sm table-bordered">
                   <thead>
-                      <tr>
-                      <th class="text-center" scope="col">商品编号</th>
-                      <th class="text-center" scope="col">商品名字</th>
-                      <th class="text-center" scope="col">商品零售价</th>
-                      <th class="text-center" scope="col">商品成本价</th>
-                      <th class="text-center" scope="col">商品图片</th>
-                      <th class="text-center" scope="col">创建日期</th>
-                          <th class="text-center" scope="col">状态</th>
-                      <th class="text-center" scope="col">操作</th>
-                      </tr>
+                    <tr align="center">
+                      <th width="125p">客户姓名</th>
+                      <th width="125p">客户性别</th>
+                      <th width="125p">客户联系电话</th>
+                      <th width="125p">vip等级</th>
+                      <th width="125p">客户地址</th>
+                      <th width="125p">初次接待销售员ID</th>
+                      <th width="125p">上一次接待销售员ID</th>
+                      <th width="125p">创建日期</th>
+                      <th width="125p">操作</th>
+                    </tr>
                   </thead>
                   <tbody>
-                          <tr class="protop" v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
-                              <td class="text-center proitem" style=" vertical-align:middle">{{item.goodsId}}</td>
-                              <td class="text-center proitem" style=" vertical-align:middle">{{item.goodsName}}</td>
-                              <td class="text-center proitem" style=" vertical-align:middle">{{item.goodsSellingPrice}}</td>
-                              <td class="text-center proitem" style=" vertical-align:middle">{{item.goodsCostPrice}}</td>
-                              <td class="text-center proitem" style=" vertical-align:middle">
-                                  <img v-bind:src="item.goodsCoverImg" width="30" height="30" id="proImg"></td>
-                         
-                              <td class="text-center proitem" style=" vertical-align:middle">
-                                {{item.createTime1}}
-                              </td>
-                              <td align="center" style=" vertical-align:middle">
-                                  <span class="badge badge-success"  style="font-size:17px"
-                                     v-if="item.isDel === 0">上架</span>
-                                  <span class="badge badge-danger"  style="font-size:17px" v-if="item.isDel === 1">下架</span>
-                              </td>
-                              <td  align="center" class="text-center proitem" style=" vertical-align:middle">
-                              <button class="btn btn-success" type="button" data-toggle="modal"
-                              v-on:click="edit(index)">
-                              <i class="fa fa-edit "></i>编辑</button>&nbsp;
-                            <button class="btn btn-danger" type="button" data-toggle="modal" v-on:click="del(index)"><i
-                                class="fa fa-close "></i>删除</button>&nbsp;
-                          </td>
-                          </tr>
-                        
+                    <tr v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
+
+                      <td align="center">{{item.userName}}</td>
+                      <td align="center">
+                        <span class="" v-if="item.userSex  === 0">男</span>
+                        <span class="" v-if="item.userSex  === 1">女</span>
+                      </td>
+                       <td align="center">{{item.userTel}}</td>
+                       <td align="center">{{item.userVip}}</td>
+                      <td align="center">{{item.userAddress}}</td>
+                      <td align="center">{{item.firstSaleman}}</td>s
+                      <td align="center">{{item.lastSaleman}}</td>
+                      <td align="center">{{item.createTime}}</td>
+                      <td align="center"> <button class="btn btn-primary" type="button" data-toggle="modal"
+                          v-on:click="edit(index)" data-target="#editModal">
+                          <i class="fa fa-edit "></i>编辑</button>&nbsp;
+
+                        <button class="btn btn-danger" type="button" data-toggle="modal" v-on:click="del(index)"><i
+                            class="fa fa-close "></i>删除</button>&nbsp;
+                      
+
+                      </td>
+                    </tr>
                   </tbody>
-              </table>
+                </table>
                 <ul class="pagination" id="pagelist">
                   <li class="page-item">
                     <a class="page-link" href="javascript:void(0);" onclick="app.first()">首页</a>
@@ -213,7 +210,7 @@
           </div>
         </div>
         <!-- /删除-->
-        <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal fade" id="dangerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-danger" role="document">
             <div class="modal-content">
@@ -233,8 +230,8 @@
             </div>
           </div>
         </div>
-        <!-- 删除成功-->
-        <div class="modal fade" id="delSuccessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <!-- /成功-->
+        <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-success" role="document">
             <div class="modal-content">
@@ -254,13 +251,13 @@
             <!-- /.modal-content-->
           </div>
         </div>
-        <!-- 删除失败-->
-        <div class="modal fade show" id="delFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-             style="display: none;" aria-hidden="true">
+        <!-- 失败-->
+        <div class="modal fade show" id="failDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-danger" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title">警告</h4>
+                <h4 class="modal-title">通知</h4>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
@@ -277,13 +274,11 @@
           </div>
           <!-- /.modal-dialog-->
         </div>
-
-
         <!-- 编辑 -->
         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           aria-hidden="true" style="display: none;" aria-hidden="true">
 
-          <div class="modal-dialog modal-success" role="document">
+          <div class="modal-dialog modal-primary" role="document">
             <div class="modal-content">
               <div class="modal-header">
 
@@ -295,9 +290,9 @@
               <div class="card-body">
                 <form class="needs-validation" novalidate>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">商品编号</label>
+                    <label class="col-md-3 col-form-label" for="text-input">编号</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品编号"
+                      <input class="form-control" id="text-input" type="text" name="text-input"
                         v-model="edititems.id" pattern="^[0-9]+$" disabled="disabled" required>
 
                     </div>
@@ -305,76 +300,44 @@
                   <div class="form-group row">
                     <label class="col-md-3 col-form-label" for="text-input">创建时间</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="创建时间"
-                        v-model="edititems.createTime1" required disabled="disabled">
+                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="时间"
+                        v-model="edititems.createTime" required disabled="disabled">
 
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">商品名字</label>
+                    <label class="col-md-3 col-form-label" for="text-input">姓名</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品名字"
-                        v-model="edititems.goodsName" 
-                        required>
+                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="姓名"
+                        v-model="edititems.userName" 
+                        pattern="^[\u4e00-\u9fa5]{2,4}$|^[A-Za-z\s]{2,40}$" required>
 
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">商品零售价</label>
+                    <label class="col-md-3 col-form-label" for="select1">性别</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品零售价"
-                        v-model="edititems.goodsSellingPrice" pattern="^[0-9]+$" required>
+                      <select class="form-control" id="select1" name="select1" v-model="edititems.userSex">
+                        <option value=0>男</option>
+                        <option value=1>女</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="text-input">联系电话</label>
+                    <div class="col-md-9">
+                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="联系电话"
+                        v-model="edititems.userTel" pattern="^[0-9]+$" required>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="text-input">地址</label>
+                    <div class="col-md-9">
+                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="地址"
+                        v-model="edititems.empAddress" required>
 
                     </div>
                   </div>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">商品成本价</label>
-                    <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品成本价"
-                        v-model="edititems.goodsCostPrice" required>
-
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">商品图片</label>
-                    <div class="col-md-9">
-                      <img src="null" class="normalFace" id="avarimgs1"
-                      v-bind:src="edititems.goodsCoverImg"
-                      onclick="fileSelect();" width="60" height="60" style="float:left;">
-                 <input type="file" name="pclogo" id="file" id="xdaTanFileImg"
-                        onchange="xmTanUploadImg(this)"
-                        accept="image/*" style="margin-top: 19px;margin-left: 3px">
-                  </div>
-                  </div>     
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">商品信息描述</label>
-                    <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品信息描述"
-                        v-model="edititems.goodsDetailContent" required>
-
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">商品信息简介</label>
-                    <div class="col-md-9">
-                      <textarea id="description" class="form-control" rows="3" name="description" placeholder="商品信息简介"  v-model="edititems.goodsIntro"></textarea>
-                    </div>
-                  </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">状态</label>
-                        <div class="col-md-9 col-form-label">
-                            <div class="form-check form-check-inline mr-1">
-                                <input class="form-check-input" id="inline-radio1" type="radio" value=0 name="inline-radios"
-                                       v-model="edititems.isDel">
-                                <label class="form-check-label" for="inline-radio1">上架</label>
-                            </div>
-                            <div class="form-check form-check-inline mr-1">
-                                <input class="form-check-input" id="inline-radio2" type="radio" value=1 name="inline-radios"
-                                       v-model="edititems.isDel">
-                                <label class="form-check-label" for="inline-radio2">下架</label>
-                            </div>
-                        </div>
-                    </div>
                 </form>
               </div>
               <div class="modal-footer">
@@ -387,7 +350,7 @@
           </div>
         </div>
         <!-- 编辑成功 -->
-        <div class="modal fade" id="editSuccessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal fade" id="editSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-success" role="document">
             <div class="modal-content">
@@ -407,19 +370,20 @@
             <!-- /.modal-content-->
           </div>
         </div>
-        <!-- 编辑失败-->
+
+        <!-- 失败-->
         <div class="modal fade show" id="editFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-danger" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title">警告</h4>
+                <h4 class="modal-title">通知</h4>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
               <div class="modal-body">
-                <p>编辑失败,存在同名商品！</p>
+                <p>编辑失败</p>
               </div>
               <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
@@ -429,28 +393,6 @@
             <!-- /.modal-content-->
           </div>
           <!-- /.modal-dialog-->
-        </div>
-
-        <!--问题-->
-        <div class="modal fade" id="issue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-             style="display: none;" aria-hidden="true">
-          <div class="modal-dialog modal-danger" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">提示</h4>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>出现未知错误</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-danger" type="button" data-dismiss="modal">确定</button>
-              </div>
-            </div>
-            <!-- /.modal-content-->
-          </div>
         </div>
       </div>
     </main>
@@ -466,44 +408,33 @@
   <script src="../vendors/mock.js/js/mock.min.js"></script>
   <script src="../vendors/vue.js/js/vue.min.js"></script>
   <script>
-    function fileSelect() {
-        document.getElementById("file").click();
+    function formatDate(time) {
+      var d = new Date(time);
+      var time=d.getFullYear() + '年'
+      if (d.getMonth() < 10)
+        time += "0";
 
-    }
-    if (typeof FileReader == 'undefined') {
-        document.getElementById("xmTanDiv").InnerHTML = "<h1>当前浏览器不支持FileReader接口</h1>";
-        document.getElementById("xdaTanFileImg").setAttribute("disabled", "disabled");
+      time += d.getMonth()+1 + "月";
+
+      if (d.getDate() < 10)
+        time += "0";
+
+      time += d.getDate() + "日 ";
+      if (d.getHours() < 10)
+        time += "0";
+
+      time += d.getHours() + ":";
+      if (d.getMinutes() < 10)
+        time += '0';
+      time += d.getMinutes() + ":";
+
+      if (d.getSeconds() < 10)
+        time += '0';
+      time += d.getSeconds();
+
+      return time
     }
 
-    //选择图片，马上预览
-    function xmTanUploadImg(obj) {
-        var file = obj.files[0];
-        console.log(obj);
-        console.log(file);
-        console.log("file.size = " + file.size);
-        var reader = new FileReader();
-        reader.onloadstart = function (e) {
-            console.log("开始读取....");
-        }
-        reader.onprogress = function (e) {
-            console.log("正在读取中....");
-        }
-        reader.onabort = function (e) {
-            console.log("中断读取....");
-        }
-        reader.onerror = function (e) {
-            console.log("读取异常....");
-        }
-        reader.onload = function (e) {
-            console.log("成功读取....");
-            // var img = document.getElementById("avarimgs");
-            // img.src = e.target.result;
-            var img = document.getElementById("avarimgs1");
-            img.src = e.target.result;
-            //或者 img.src = this.result;  //e.target == this
-        }
-        reader.readAsDataURL(file)
-    }
   </script>
   <script>
     var p, d, j;
@@ -513,30 +444,29 @@
       Mock.mock("http://127.0.0.1:5500/users", {
         "data|20-20": [{
           id: "@increment()",//编号
-          goodsId: "@increment()",//商品编号
-          "goodsName|1":  ["@cname", "@name"],//商品姓名
-          goodsSellingPrice: "@increment()",//商品零售价
-          goodsCostPrice:"@increment()",//商品成本价
-          goodsCoverImg: "@cname()",//商品图片
-          goodsDetailContent: "@cname()",//商品信息描述 
-          goodsIntro: "@cname()",//商品信息简介
+          userName: "@cname()",//名字
+          "userSex|1": ["0", "1"],//性别
+          userTel: "@increment()",//联系电话
+          userVip: "@increment()",//vip
+          "userAddress|1": ["@cname", "@name"],//地址
+          firstSaleman: "@cname()",//初次接待销售员ID
+          lastSaleman: "@cname()",//上一次接待销售员ID 
           createTime:"@datetime()",//创建时间
-
-
+          updateTime: "@datetime()",//记录修改日期
+           "isDel|1": ["0", "1"]//删除
         }],
         suceess: true,  
         code: 200,
         msg: "Success"
       });
-      $.getJSON("/admin/goods/list", function (response) {
+      $.getJSON("/admin/emp/list", function (response) {
         items = response.data;
-        console.log(response.data)
+        console.log(items)
         page = Math.ceil(items.length / 5);
-
-        var pageitem = [];
         for(var i = 0 ; i <items.length; i ++){
-          items[i].createTime1 = items[i].createTime.toString().split("T")[0];
+          items[i].createTime = items[i].createTime.toString().split("T")[0];
         }
+        var pageitem = [];
         for (var i = 0; i < page; i++) {
           pageitem[i] = i + 1;
         }
@@ -572,32 +502,24 @@
             },
             // 删除
             del: function (index) {
-              $('#delModal').modal('show');
+              $('#dangerModal').modal('show');
               d = index;
-
             },
             delCheck: function () {
-              // alert(this.items[d].id)
               $.ajax({
-                url: "/admin/goods/del/"+this.items[d].id,
+                url: "/admin/emp/del/"+this.items[d].id,
                 type: "post",
-                success: function (data) {
-                  if(data.resultCode === 500){
-                    $('#delModal').modal('hide');
-                    $('#delFailModal').modal('show');
-                  }else{
-                    $('#delModal').modal('hide');
-                    $('#delSuccessModal').modal('show');
-                    app.items.splice(d, 1);
-                    app.pagesum = Math.ceil(app.items.length / 5);
-                  }
-
-                },
-                error: function (xhr, status, error) {
-                  $('#delModal').modal('hide');
-                  $('#issue').modal('show');
-                }
+                success: function () {
+                $('#dangerModal').modal('hide');
+                $('#success').modal('show');
+                app.items.splice(d, 1);
+              },
+              error: function (xhr, status, error) {
+                $('#dangerModal').modal('hide');
+                $('#failDelModal').modal('show');
+              }
               });
+
 
             },
             // 编辑
@@ -609,44 +531,40 @@
               $('#editModal').modal('show');
             },
             save: function () {
-                var formData = new FormData();
-                var img = document.getElementById("avarimgs1");
-                this.edititems.goodsCoverImg = img.src;
-                formData.append("id", this.edititems.id);
-                formData.append("goodsId", this.edititems.goodsId);
-                formData.append("goodsName", this.edititems.goodsName);
-                formData.append("goodsSellingPrice", this.edititems.goodsSellingPrice);
-                formData.append("goodsCostPrice", this.edititems.goodsCostPrice);
-                formData.append("goodsCoverImg", this.edititems.goodsCoverImg);
-                formData.append("goodsDetailContent", this.edititems.goodsDetailContent);
-                formData.append("goodsIntro", this.edititems.goodsIntro);
-                formData.append("createTime", new Date(this.edititems.createTime));
-                formData.append("updateTime", new Date());
-                formData.append("isDel", this.edititems.isDel);
+              var data = {
+                "id": this.edititems.id,//主键标识
+                "userName": this.edititems.userName,//名字
+                "userSex": this.edititems.userSex,//性别
+                "userTel": this.edititems.userTel,//联系电话
+                "userVip": this.edititems.userVip,//vip
+                "userAddress": this.edititems.userAddress,//地址
+                "firstSaleman": this.edititems.firstSaleman,//初次接待销售员ID
+                "lastSaleman": this.edititems.lastSaleman,//上一次接待销售员ID 
+                "createTime": this.edititems.createTime,//记录创建日期
+                "updateTime": new Date(),//记录修改日期
+                "isLock": 0,//是否锁住
+                "isDel":  this.edititems.isDel////删除
+              }
+              $.ajax({
+                url: "/admin/emp/update",
+                type: "post",
+                //将/jsON转化为字符串传递
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(data),
 
-                $.ajax({
-                    url: "/admin/goods/update",
-                    type: "post",
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    //成功后的方法
-                    success: function (data) {
-                        console.log(data)
-                        if(data.resultCode === 500){
-                            $('#editModal').modal('hide');
-                            $('#editFailModal').modal('show');
-                        }else{
-                            $('#editModal').modal('hide');
-                            $('#editSuccessModal').modal('show');
-                        }
-                      Vue.set(app.items, app.editIndex, app.edititems);
-                    },
-                    error: function (xhr, status, error) {
-                        $('#editModal').modal('hide');
-                        $('#issue').modal('show');
-                    }
-                });
+                //成功后的方法
+                success: function () {
+                  $('#editModal').modal('hide');
+                  $('#success').modal('show');
+                  window.location.href = "/admin/admin_manage_members.html";
+                },
+                error: function (xhr, status, error) {
+                  $('#editModal').modal('hide');
+                  $('#editFailModal').modal('show');
+                }
+              });
+
 
 
             },

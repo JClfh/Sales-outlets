@@ -55,7 +55,7 @@ public class EmpInfoServiceImpl implements EmpInfoService {
             return ServiceResultEnum.DATA_NOT_EXIST.getResult();
         }
         EmpInfo temp2 = empInfoMapper.selectByTelAndName(empInfo.getEmpTel(), empInfo.getEmpName());
-        if (temp2 != null) {
+        if (temp2 != null && !temp2.getEmpId().equals(empInfo.getEmpId())) {
             //同名且不同id 不能继续修改
             return ServiceResultEnum.SAME_EMPINFO_EXIST.getResult();
         }

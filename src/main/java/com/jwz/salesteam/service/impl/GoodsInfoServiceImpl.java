@@ -87,4 +87,9 @@ public class GoodsInfoServiceImpl implements GoodsInfoService {
         }
         return ServiceResultEnum.DB_ERROR.getResult();
     }
+
+    @Override
+    public List<GoodsInfo> findByGoodsName(String goods_name) {
+        return goodsInfoMapper.findByGoodsName(goods_name);
+    }
 }

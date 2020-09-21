@@ -37,12 +37,9 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="btn-group" role="group" aria-label="Button group">
-      <a class="btn" href="/main_message">
-        <i class="fa fa-share" aria-hidden="true"></i> &nbsp;返回会员</a>
-      <a class="btn" href="/shetuan">
-        <i class="icon-graph"></i> &nbsp;网站首页</a>
-      <a class="btn" href="/logout">
-        <i class="fa fa-share" aria-hidden="true"></i> &nbsp;退出</a>
+      <span class="btn"> 欢迎回来，尊敬的管理员！</span>
+      <a class="btn" href="/api/emp/logout">
+        <i class="fa fa-share" aria-hidden="true"></i>退出</a>
     </div>
   
   
@@ -61,12 +58,16 @@
               <i class="nav-icon icon-puzzle"></i> 职员管理</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./admin_add_salesman.html">
+                <a class="nav-link" href="./admin_add_member.html">
                   <i class="nav-icon icon-puzzle"></i>添加人员</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="./admin_manage_members.html">
                   <i class="nav-icon icon-puzzle"></i>管理人员</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./admin_manage_user.html">
+                  <i class="nav-icon icon-puzzle"></i>管理客户</a>
               </li>
             </ul>
           </li>
@@ -119,7 +120,7 @@
               <div class="card-header">
                 <div align="left">  <div align="left">
                   <i class=" font-xl  cui-people"></i>
-                  搜索<input type="text" name="text-input" >
+                  搜索<input type="text" name="text-input" v-model="keyword" >
                   <button class="btn btn-success" type="button"  v-on:click="cha()" data-toggle="modal">
                     <i class="fa fa-search" aria-hidden="true"></i></button>
 
@@ -172,7 +173,7 @@
                           v-if="item.isDel === 0">在职</span>
                         <span class="badge badge-danger"  style="font-size:17px" v-if="item.isDel === 1">离职</span>
                       </td>
-                      <td align="center" style=" vertical-align:middle">{{item.createTime}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.createTime1}}</td>
 
                       <td align="center" style=" vertical-align:middle"> <button class="btn btn-primary" type="button" data-toggle="modal"
                           v-on:click="edit(index)">
@@ -437,13 +438,13 @@
           <div class="modal-dialog modal-danger" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title">通知</h4>
+                <h4 class="modal-title">警告</h4>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
               <div class="modal-body">
-                <p>编辑失败</p>
+                <p>编辑失败，存在同一个人！</p>
               </div>
               <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
@@ -526,6 +527,7 @@
           el: '#itemsTemplate',
           data: {
             items: items,
+            keyword: "",
             checkall: false,
             pagesum: page,//总页码
             pageindex: 1,//当前页码
@@ -550,7 +552,38 @@
           methods: {
             //查询
             cha: function () {
-              alert("查询")
+              console.log(this.keyword);
+              if(this.keyword === ""){
+                $.ajax({
+                  url: "/admin/emp/list",
+                  type: "get",
+                  success: function (res) {
+                    console.log(res.data)
+                    app.items = res.data
+                    app.pagesum = Math.ceil(app.items.length / 5);
+                    app.pageindex = 1
+                  },
+                  error: function (xhr, status, error) {
+                    $('#issue').modal('show');
+                  }
+                });
+              }else{
+                $.ajax({
+                  url: "/admin/emp/findByName/"+this.keyword,
+                  type: "post",
+                  success: function (res) {
+                    console.log(res.data)
+                    app.items = res.data
+                    app.pagesum = Math.ceil(app.items.length / 5);
+                    app.pageindex = 1
+                  },
+                  error: function (xhr, status, error) {
+                    $('#issue').modal('show');
+                  }
+                });
+              }
+
+
             },
             // 删除
             del: function (index) {
@@ -613,14 +646,18 @@
 
                 //成功后的方法
                 success: function (data) {
+                  console.log(data)
                   if(data.resultCode === 500){
                     $('#editModal').modal('hide');
                     $('#editFailModal').modal('show');
                   }else{
                     $('#editModal').modal('hide');
-                    $('#editSuccessModalModal').modal('show');
-                    window.location.href = "/admin/admin_manage_members.html";
+                    $('#editSuccessModal').modal('show');
+
                   }
+                  app.edititems.empSex = parseInt(app.edititems.empSex);
+                  Vue.set(app.items, app.editIndex, app.edititems);
+                  console.log(app.edititems)
                 },
                 error: function (xhr, status, error) {
                   $('#editModal').modal('hide');

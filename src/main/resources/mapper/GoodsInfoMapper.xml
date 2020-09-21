@@ -177,11 +177,21 @@
     from goods_info
     order by id desc
   </select>
+
   <select id="selectByNameAndId" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List"/>
     from goods_info
     where  goods_name = #{goodsName,jdbcType=VARCHAR} and id != #{id,jdbcType=INTEGER}
-    and is_del = 0 limit 1
+    limit 1
   </select>
+
+  <select id="findByGoodsName"  resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from goods_info
+    where goods_name  LIKE CONCAT(CONCAT('%', #{goods_name}), '%')
+    order by id desc
+  </select>
+
 </mapper>

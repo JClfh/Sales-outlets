@@ -24,4 +24,6 @@ public interface GoodsInfoService {
     int delGoodsInfo(Integer id);
 
     String updateGoodsInfo(GoodsInfo goodsInfo);
+
+    List<GoodsInfo> findByGoodsName(String goods_name);
 }
