@@ -19,11 +19,15 @@ public interface EmpInfoMapper {
 
     int updateByPrimaryKey(EmpInfo record);
 
-    EmpInfo selectByTelAndName(String emp_tel ,String emp_name);
+    EmpInfo selectByTelAndNameAndId(String emp_tel ,String emp_name,Integer id);
 
     EmpInfo selectByEmpId(String emp_id);
 
     List<EmpInfo> findEmpInfoList();
 
     List<EmpInfo> findByEmpName(String emp_name);
+
+    EmpInfo selectByTel(String empTel);
+
+    EmpInfo selectByTelAndId(String emp_tel, Integer id);
 }

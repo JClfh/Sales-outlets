@@ -122,7 +122,7 @@
               <div class="card-header">
                 <div align="left">  <div align="left">
                   <i class=" font-xl  cui-people"></i>
-                  搜索<input type="text" name="text-input" >
+                  搜索<input type="text" name="text-input" v-model="keyword">
                   <button class="btn btn-success" type="button"  v-on:click="cha()" data-toggle="modal">
                     <i class="fa fa-search" aria-hidden="true"></i></button>
 
@@ -551,6 +551,7 @@
             pageitem: pageitem,
             editIndex: -1,
             edititems: { name: null },
+            keyword: ""
 
           },
           computed: {
@@ -568,7 +569,41 @@
           methods: {
             //查询
             cha: function () {
-              alert("查询")
+              if(this.keyword === ""){
+                $.ajax({
+                  url: "/admin/goods/list",
+                  type: "get",
+                  success: function (res) {
+                    console.log(res.data)
+                    app.items = res.data
+                    app.pagesum = Math.ceil(app.items.length / 5);
+                    app.pageindex = 1
+                    for(var i = 0 ; i <app.items.length; i ++){
+                      app.items[i].createTime1 = app.items[i].createTime.toString().split("T")[0];
+                    }
+                  },
+                  error: function (xhr, status, error) {
+                    $('#issue').modal('show');
+                  }
+                });
+              }else{
+                $.ajax({
+                  url: "/admin/goods/findByName/"+this.keyword,
+                  type: "post",
+                  success: function (res) {
+                    console.log(res.data)
+                    app.items = res.data
+                    app.pagesum = Math.ceil(app.items.length / 5);
+                    app.pageindex = 1;
+                    for(var i = 0 ; i <app.items.length; i ++){
+                      app.items[i].createTime1 = app.items[i].createTime.toString().split("T")[0];
+                    }
+                  },
+                  error: function (xhr, status, error) {
+                    $('#issue').modal('show');
+                  }
+                });
+              }
             },
             // 删除
             del: function (index) {
@@ -639,8 +674,9 @@
                         }else{
                             $('#editModal').modal('hide');
                             $('#editSuccessModal').modal('show');
+                          Vue.set(app.items, app.editIndex, app.edititems);
                         }
-                      Vue.set(app.items, app.editIndex, app.edititems);
+
                     },
                     error: function (xhr, status, error) {
                         $('#editModal').modal('hide');

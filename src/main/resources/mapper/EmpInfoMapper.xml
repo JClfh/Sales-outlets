@@ -177,13 +177,30 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectByTelAndName" resultMap="BaseResultMap" >
+  <select id="selectByTelAndNameAndId" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List"/>
     from emp_info
-    where  emp_tel = #{emp_tel,jdbcType=VARCHAR} and emp_name = #{emp_name,jdbcType=VARCHAR}
-    and is_del = 0 limit 1
+    where  emp_tel = #{emp_tel,jdbcType=VARCHAR} and emp_name = #{emp_name,jdbcType=VARCHAR} and id != #{id,jdbcType=INTEGER}
+     limit 1
   </select>
+
+  <select id="selectByTel" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List"/>
+    from emp_info
+    where  emp_tel = #{emp_tel,jdbcType=VARCHAR}  limit 1
+  </select>
+
+
+
+  <select id="selectByTelAndId" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List"/>
+    from emp_info
+    where  emp_tel = #{emp_tel,jdbcType=VARCHAR}  and id != #{id,jdbcType=INTEGER} limit 1
+  </select>
+
 
   <select id="selectByEmpId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select

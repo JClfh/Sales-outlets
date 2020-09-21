@@ -46,6 +46,8 @@ public enum ServiceResultEnum {
 
     SAME_EMPINFO_EXIST("该职员已经存在"),
 
+    SAME_USERINFO_EXIST("该客户已经存在"),
+
     SAME_GOODSINFO_EXIST("该商品已经存在"),
 
     UPLOAD_ERROR("上传文件失败"),

@@ -26,7 +26,8 @@ public class EmpInfoServiceImpl implements EmpInfoService {
 
     @Override
     public String saveEmpInfo(EmpInfo empInfo) {
-        EmpInfo temp = empInfoMapper.selectByTelAndName(empInfo.getEmpTel(), empInfo.getEmpName());
+        EmpInfo temp = empInfoMapper.selectByTel(empInfo.getEmpTel());
+
         if (temp != null) {
             return ServiceResultEnum.SAME_EMPINFO_EXIST.getResult();
 //            return "该职员已经存在";
@@ -54,9 +55,11 @@ public class EmpInfoServiceImpl implements EmpInfoService {
         if (temp == null) {
             return ServiceResultEnum.DATA_NOT_EXIST.getResult();
         }
-        EmpInfo temp2 = empInfoMapper.selectByTelAndName(empInfo.getEmpTel(), empInfo.getEmpName());
-        if (temp2 != null && !temp2.getEmpId().equals(empInfo.getEmpId())) {
-            //同名且不同id 不能继续修改
+       // EmpInfo temp2 = empInfoMapper.selectByTelAndNameAndId(empInfo.getEmpTel(), empInfo.getEmpName(),empInfo.getId());
+       // System.out.println(empInfo.getEmpTel()+"---"+empInfo.getId());
+        EmpInfo temp3 = empInfoMapper.selectByTelAndId(empInfo.getEmpTel(),empInfo.getId());
+        if (temp3 != null) {
+            //同一个电话且不同id 不能继续修改
             return ServiceResultEnum.SAME_EMPINFO_EXIST.getResult();
         }
         empInfo.setUpdateTime(new Date());

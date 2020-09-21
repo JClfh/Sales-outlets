@@ -361,9 +361,10 @@
                   }else{
                     $('#primaryModal').modal('hide');
                     $('#success').modal('show');
+                    window.location.href ="/admin/admin_manage_members.html";
                   }
 
-                  window.location.href ="/admin/admin_manage_members.html";
+
                 },
                 error: function (xhr, status, error) {
                   $('#primaryModal').modal('hide');

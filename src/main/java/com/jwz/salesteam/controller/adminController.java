@@ -5,6 +5,7 @@ import com.jwz.salesteam.entity.EmpInfo;
 import com.jwz.salesteam.entity.GoodsInfo;
 import com.jwz.salesteam.service.EmpInfoService;
 import com.jwz.salesteam.service.GoodsInfoService;
+import com.jwz.salesteam.service.UserInfoService;
 import com.jwz.salesteam.util.NumberUtil;
 import com.jwz.salesteam.util.Result;
 import com.jwz.salesteam.util.ResultGenerator;
@@ -39,6 +40,8 @@ public class adminController {
     @Autowired
     private GoodsInfoService goodsInfoService;
 
+    @Autowired
+    private UserInfoService userInfoService;
     /**
      * 添加职员信息
      * @param empInfo
@@ -223,5 +226,15 @@ public class adminController {
     }
 
 
+    /**
+     * 查看所有客户
+     * @return
+     */
+    @RequestMapping(value = "/user/list", method = RequestMethod.GET)
+    @ResponseBody
+    @ApiOperation(value="查看商品列表")
+    public Result getUserList() {
+        return ResultGenerator.genSuccessResult(userInfoService.getUserInfoList());
+    }
 
 }

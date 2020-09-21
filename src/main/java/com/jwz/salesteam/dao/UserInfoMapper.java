@@ -2,6 +2,8 @@ package com.jwz.salesteam.dao;
 
 import com.jwz.salesteam.entity.UserInfo;
 
+import java.util.List;
+
 public interface UserInfoMapper {
 
     int deleteByPrimaryKey(Integer id);
@@ -15,4 +17,10 @@ public interface UserInfoMapper {
     int updateByPrimaryKeySelective(UserInfo record);
 
     int updateByPrimaryKey(UserInfo record);
+
+    List<UserInfo> findUserInfoList();
+
+    List<UserInfo> findByUserName(String user_name);
+
+    UserInfo selectByTelAndId(String user_tel, Integer id);
 }

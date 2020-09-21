@@ -562,6 +562,9 @@
                     app.items = res.data
                     app.pagesum = Math.ceil(app.items.length / 5);
                     app.pageindex = 1
+                    for(var i = 0 ; i <app.items.length; i ++){
+                      app.items[i].createTime1 = app.items[i].createTime.toString().split("T")[0];
+                    }
                   },
                   error: function (xhr, status, error) {
                     $('#issue').modal('show');
@@ -576,6 +579,9 @@
                     app.items = res.data
                     app.pagesum = Math.ceil(app.items.length / 5);
                     app.pageindex = 1
+                    for(var i = 0 ; i <app.items.length; i ++){
+                      app.items[i].createTime1 = app.items[i].createTime.toString().split("T")[0];
+                    }
                   },
                   error: function (xhr, status, error) {
                     $('#issue').modal('show');
@@ -653,11 +659,13 @@
                   }else{
                     $('#editModal').modal('hide');
                     $('#editSuccessModal').modal('show');
-
+                    app.edititems.empSex = parseInt(app.edititems.empSex);
+                    app.edititems.empType = parseInt(app.edititems.empType);
+                    app.edititems.isDel = parseInt(app.edititems.isDel);
+                    Vue.set(app.items, app.editIndex, app.edititems);
+                    // console.log(app.edititems)
                   }
-                  app.edititems.empSex = parseInt(app.edititems.empSex);
-                  Vue.set(app.items, app.editIndex, app.edititems);
-                  console.log(app.edititems)
+
                 },
                 error: function (xhr, status, error) {
                   $('#editModal').modal('hide');
