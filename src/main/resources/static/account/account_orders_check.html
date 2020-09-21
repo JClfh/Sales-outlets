@@ -8,7 +8,7 @@
   <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
   <meta name="author" content="Łukasz Holeczek">
   <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
-  <title>管理用户</title>
+  <title>财务管理</title>
   <!-- Icons-->
   <link href="../vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
   <link href="../vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
@@ -28,6 +28,7 @@
 </style>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
+  <div id="itemsTemplate">
   <header class="app-header navbar">
     <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
       <span class="navbar-toggler-icon"></span>
@@ -36,11 +37,13 @@
     <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="btn-group" role="group" aria-label="Button group">
-      <span class="btn"> 欢迎回来，尊敬的管理员！</span>
-      <a class="btn" href="/api/emp/logout">
-        <i class="fa fa-share" aria-hidden="true"></i>退出</a>
+    <div  style="aligen:left">
+      <a href="">欢迎您，尊敬的***</a>
     </div>
+    <div style="align:left">
+      <button class="btn btn-block btn-ghost-secondary" type="button" data-toggle="modal"
+      v-on:click="edit2()">
+      <i class="fa fa-edit "></i>个人信息修改</button>&nbsp;</div>
   
   
   </header>
@@ -55,44 +58,20 @@
 
           <li class="nav-item nav-dropdown ">
             <a class="nav-link nav-dropdown-toggle" href="#">
-              <i class="nav-icon icon-puzzle"></i> 职员管理</a>
+              <i class="nav-icon icon-puzzle"></i> 财务管理</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./admin_add_member">
-                  <i class="nav-icon icon-puzzle"></i>添加人员</a>
+                <a class="nav-link" href="./account_orders_check">
+                  <i class="nav-icon icon-puzzle"></i>审核订单</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_members">
-                  <i class="nav-icon icon-puzzle"></i>管理人员</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_user">
-                  <i class="nav-icon icon-puzzle"></i>管理客户</a>
+                <a class="nav-link" href="./account_orders_count">
+                  <i class="nav-icon icon-puzzle"></i>查看业绩</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
-          <li class="nav-item nav-dropdown">
-            <a class="nav-link nav-dropdown-toggle" href="#">
-              <i class="nav-icon icon-cursor"></i> 商品管理</a>
-            <ul class="nav-dropdown-items">
-
-              <li class="nav-item">
-                <a class="nav-link" href="./admin_add_goods">
-                  <i class="nav-icon icon-cursor"></i> 发布商品</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_goods">
-                  <i class="nav-icon icon-cursor"></i> 编辑商品</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./admin_show_goods">
-                  <i class="nav-icon icon-cursor"></i> 商品展示</a>
-              </li>
-            </ul>
-          </li>
-          <br>
-
+      
+  
         </ul>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
           <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
@@ -106,14 +85,13 @@
     <main class="main">
       <!-- Breadcrumb-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item">你的位置：职员管理->管理人员</li>
+        <li class="breadcrumb-item">你的位置：财务管理->审核订单</li>
 
         <!-- Breadcrumb Menu-->
         <li class="breadcrumb-menu d-md-down-none">
 
         </li>
       </ol>
-      <div id="itemsTemplate">
         <div align="center">
           <div class="center-in-center" style="width:95%;">
             <div class="card">
@@ -131,39 +109,36 @@
                 <table class="table table-responsive-sm table-bordered">
                   <thead>
                     <tr align="center">
-                      <th width="125p">客户姓名</th>
-                      <th width="125p">客户性别</th>
-                      <th width="125p">客户联系电话</th>
-                      <th width="125p">vip等级</th>
-                      <th width="125p">客户地址</th>
-                      <th width="125p">初次接待销售员ID</th>
-                      <th width="125p">上一次接待销售员ID</th>
-                      <th width="125p">创建日期</th>
+                      <th width="125p">序号</th>
+                      <th width="125p">订单编号</th>
+                      <th width="125p">商品名称</th>
+                      <th width="125p">商品数量</th>
+                      <th width="125p">创建时间</th>
+                      <th width="125p">供货商</th>
+                      <th width="125p">状态</th>
                       <th width="125p">操作</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
 
-                      <td align="center">{{item.userName}}</td>
-                      <td align="center">
-                        <span class="" v-if="item.userSex  === 0">男</span>
-                        <span class="" v-if="item.userSex  === 1">女</span>
-                      </td>
-                       <td align="center">{{item.userTel}}</td>
-                       <td align="center">{{item.userVip}}</td>
-                      <td align="center">{{item.userAddress}}</td>
-                      <td align="center">{{item.firstSalemanName}}</td>s
-                      <td align="center">{{item.lastSalemanName}}</td>
+                      <td align="center">{{item.id}}</td>
+                      <td align="center">{{item.orderId}}</td>
+                      <td align="center">{{item.goodsName}}</td>
+                      <td align="center">{{item.goodsNum}}</td>
                       <td align="center">{{item.createTime}}</td>
-                      <td align="center"> <button class="btn btn-primary" type="button" data-toggle="modal"
-                          v-on:click="edit(index)" data-target="#editModal">
-                          <i class="fa fa-edit "></i>编辑</button>&nbsp;
-
-                        <button class="btn btn-danger" type="button" data-toggle="modal" v-on:click="del(index)"><i
-                            class="fa fa-close "></i>删除</button>&nbsp;
+                      <td align="center">
+                        <span class="" v-if="item.supplieName  === '0'">广州供货商</span>
+                        <span class="" v-if="item.supplieName  === '1'">深圳供货商</span>
+                      </td>
+                      <td align="center"> 
+                        <p class="badge badge-success"  style="font-size:17px" v-if="item.isDel === '0'">通过</p>
+                        <p class="badge badge-danger"  style="font-size:17px" v-if="item.isDel === '1'">不通过</p>
+                      </td>
                       
-
+                      <td align="center"> <button class="btn btn-primary" type="button" data-toggle="modal"
+                          v-on:click="edit(index)">
+                          编辑
                       </td>
                     </tr>
                   </tbody>
@@ -176,7 +151,7 @@
                   <li class="page-item">
                     <a class="page-link" href="javascript:void(0);" onclick="app.last()">上一页</a>
                   </li>
-                  <li class="page-item" v-for="pageitem in pagesum" v-bind:class="{ 'active': pageitem == pageindex}">
+                  <li class="page-item" v-for="pageitem in pagesum">
                     <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
                   </li>
 
@@ -209,149 +184,9 @@
             </div>
           </div>
         </div>
-        <!-- /删除-->
-        <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+
+        <div class="modal fade" id="editSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           style="display: none;" aria-hidden="true">
-          <div class="modal-dialog modal-danger" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">删除</h4>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>是否执行删除操作</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">否</button>
-                <button class="btn btn-danger" type="button" v-on:click="delCheck()">确定</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- /成功-->
-        <div class="modal fade" id="delSuccessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          style="display: none;" aria-hidden="true">
-          <div class="modal-dialog modal-success" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">提示</h4>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>删除成功！</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
-              </div>
-            </div>
-            <!-- /.modal-content-->
-          </div>
-        </div>
-        <!-- 失败-->
-        <div class="modal fade show" id="failDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          style="display: none;" aria-hidden="true">
-          <div class="modal-dialog modal-danger" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">通知</h4>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>删除失败</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
-
-              </div>
-            </div>
-            <!-- /.modal-content-->
-          </div>
-          <!-- /.modal-dialog-->
-        </div>
-        <!-- 编辑 -->
-        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          aria-hidden="true" style="display: none;" aria-hidden="true">
-
-          <div class="modal-dialog modal-primary" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-
-                <h4 class="modal-title">编辑</h4>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div class="card-body">
-                <form class="needs-validation" novalidate>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">编号</label>
-                    <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input"
-                        v-model="edititems.id" pattern="^[0-9]+$" disabled="disabled" required>
-
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">创建时间</label>
-                    <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="时间"
-                        v-model="edititems.createTime" required disabled="disabled">
-
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">姓名</label>
-                    <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="姓名"
-                        v-model="edititems.userName" 
-                        pattern="^[\u4e00-\u9fa5]{2,4}$|^[A-Za-z\s]{2,40}$" required>
-
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="select1">性别</label>
-                    <div class="col-md-9">
-                      <select class="form-control" id="select1" name="select1" v-model="edititems.userSex">
-                        <option value=0>男</option>
-                        <option value=1>女</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">联系电话</label>
-                    <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="联系电话"
-                        v-model="edititems.userTel" pattern="^[0-9]+$" required>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">地址</label>
-                    <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="地址"
-                        v-model="edititems.userAddress" required>
-
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-info" type="button" v-on:click="save()">保存</button>
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <!-- 编辑成功 -->
-        <div class="modal fade" id="editSuccessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-             style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-success" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -371,13 +206,14 @@
           </div>
         </div>
 
-        <!-- 编辑失败-->
+
+        <!-- /警告-->
         <div class="modal fade show" id="editFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-             style="display: none;" aria-hidden="true">
+          style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-danger" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title">通知</h4>
+                <h4 class="modal-title">警告！！！！！</h4>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
@@ -394,31 +230,146 @@
           </div>
           <!-- /.modal-dialog-->
         </div>
+        <!-- 编辑 -->
+        <div class="modal fade" id="primaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true" style="display: none;" aria-hidden="true">
 
-
-        <div class="modal fade" id="issue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-             style="display: none;" aria-hidden="true">
-          <div class="modal-dialog modal-danger" role="document">
+          <div class="modal-dialog modal-primary" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title">提示</h4>
+
+                <h4 class="modal-title">编辑</h4>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
-              <div class="modal-body">
-                <p>出现未知错误</p>
+              <div class="card-body">
+                <form class="needs-validation" novalidate>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="text-input">订单编号</label>
+                    <div class="col-md-9">
+                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="会员编号"
+                        v-model="edititems.id" pattern="^[0-9]+$" disabled="disabled" required>
+
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="text-input">创建时间</label>
+                    <div class="col-md-9">
+                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="登录口令"
+                        v-model="edititems.createTime" required disabled="disabled">
+
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="text-input">商品名称</label>
+                    <div class="col-md-9">
+                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品名称"
+                        v-model="edititems.goodsName" 
+                        pattern="^[\u4e00-\u9fa5]{2,4}$|^[A-Za-z\s]{2,40}$" required>
+
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="text-input">商品数量</label>
+                    <div class="col-md-9">
+                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品数量"
+                        v-model="edititems.goodsNum" pattern="^[0-9]+$" required>
+
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="select1">供货商</label>
+                    <div class="col-md-9">
+                      <select class="form-control" id="select1" name="select1" v-model="edititems.supplieName">
+                        <option value="0">广州供货商</option>
+                        <option value="1">深圳供货商</option>
+                      </select>
+                    </div>
+                  </div>
+                
+
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label">状态</label>
+                    <div class="col-md-9 col-form-label">
+                      <div class="form-check form-check-inline mr-1">
+                        <input class="form-check-input" id="inline-radio1" type="radio" value="0" name="inline-radios"
+                          v-model="edititems.isDel">
+                        <label class="form-check-label" for="inline-radio1">通过</label>
+                      </div>
+                      <div class="form-check form-check-inline mr-1">
+                        <input class="form-check-input" id="inline-radio2" type="radio" value="1" name="inline-radios"
+                          v-model="edititems.isDel">
+                        <label class="form-check-label" for="inline-radio2">不通过</label>
+                      </div>
+                  
+                    </div>
+                  </div>
+                 
+                </form>
               </div>
               <div class="modal-footer">
-                <button class="btn btn-danger" type="button" data-dismiss="modal">确定</button>
+                <button class="btn btn-info" type="button" v-on:click="save()">保存</button>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
               </div>
             </div>
-            <!-- /.modal-content-->
           </div>
         </div>
-      </div>
+
+ <!-- 个人信息修改 -->
+ <div class="modal fade" id="primaryModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+ aria-hidden="true" style="display: none;" aria-hidden="true">
+
+ <div class="modal-dialog modal-primary" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+
+       <h4 class="modal-title">个人信息</h4>
+       <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">×</span>
+       </button>
+     </div>
+     <div class="card-body">
+       <form class="needs-validation" novalidate>
+         <div class="form-group row">
+           <label class="col-md-3 col-form-label" for="text-input">职工ID</label>
+           <div class="col-md-9">
+             <input class="form-control" id="text-input" type="text" name="text-input" placeholder="职工ID"
+               v-model="edititems.empId" pattern="^[0-9]+$" disabled="disabled" required>
+
+           </div>
+         </div>
+         <div class="form-group row">
+           <label class="col-md-3 col-form-label" for="text-input">职工名称</label>
+           <div class="col-md-9">
+             <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品名称"
+               v-model="edititems.empName" 
+               pattern="^[\u4e00-\u9fa5]{2,4}$|^[A-Za-z\s]{2,40}$" required>
+
+           </div>
+         </div>
+         <div class="form-group row">
+           <label class="col-md-3 col-form-label" for="text-input">职工密码</label>
+           <div class="col-md-9">
+             <input class="form-control" id="text-input" type="text" name="text-input" placeholder="密码"
+               v-model="edititems.empPwd" pattern="^[0-9]+$" required>
+
+           </div>
+         </div>
+
+        
+       </form>
+     </div>
+     <div class="modal-footer">
+       <button class="btn btn-info" type="button" v-on:click="save2()">保存</button>
+       <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+     </div>
+   </div>
+ </div>
+</div>
+
     </main>
-  </div>
+  </div></div>
 
   <script src="../vendors/jquery/js/jquery.min.js"></script>
   <script src="../vendors/popper.js/js/popper.min.js"></script>
@@ -430,35 +381,6 @@
   <script src="../vendors/mock.js/js/mock.min.js"></script>
   <script src="../vendors/vue.js/js/vue.min.js"></script>
   <script>
-    function formatDate(time) {
-      var d = new Date(time);
-      var time=d.getFullYear() + '年'
-      if (d.getMonth() < 10)
-        time += "0";
-
-      time += d.getMonth()+1 + "月";
-
-      if (d.getDate() < 10)
-        time += "0";
-
-      time += d.getDate() + "日 ";
-      if (d.getHours() < 10)
-        time += "0";
-
-      time += d.getHours() + ":";
-      if (d.getMinutes() < 10)
-        time += '0';
-      time += d.getMinutes() + ":";
-
-      if (d.getSeconds() < 10)
-        time += '0';
-      time += d.getSeconds();
-
-      return time
-    }
-
-  </script>
-  <script>
     var p, d, j;
     var app;
     var items;
@@ -466,28 +388,25 @@
       Mock.mock("http://127.0.0.1:5500/users", {
         "data|20-20": [{
           id: "@increment()",//编号
-          userName: "@cname()",//名字
-          "userSex|1": ["0", "1"],//性别
-          userTel: "@increment()",//联系电话
-          userVip: "@increment()",//vip
-          "userAddress|1": ["@cname", "@name"],//地址
-          firstSaleman: "@cname()",//初次接待销售员ID
-          lastSaleman: "@cname()",//上一次接待销售员ID 
+          orderId:"@increment()",//订单编号
+          goodsName:"@cname()",//商品名字
+          "supplieName|1":["0","1"],//供货商
+          goodsNum: "@increment()",//商品数量 
+          "isDel|1": ["0", "1"],//状态
           createTime:"@datetime()",//创建时间
-          updateTime: "@datetime()",//记录修改日期
-           "isDel|1": ["0", "1"]//删除
+          empId:"@increment()",//职工id
+          empName:"@cname()",//职工姓名
+          empPwd:"@increment()"//职工密码
+
         }],
         suceess: true,  
         code: 200,
         msg: "Success"
       });
-      $.getJSON("/admin/user/list", function (response) {
+      $.getJSON("/financial/purchase/list", function (response) {
         items = response.data;
-        console.log(items)
+        console.log(response.data)
         page = Math.ceil(items.length / 5);
-        for(var i = 0 ; i <items.length; i ++){
-          items[i].createTime = items[i].createTime.toString().split("T")[0];
-        }
         var pageitem = [];
         for (var i = 0; i < page; i++) {
           pageitem[i] = i + 1;
@@ -522,59 +441,33 @@
             cha: function () {
               alert("查询")
             },
-            // 删除
-            del: function (index) {
-              $('#delModal').modal('show');
-              d = index;
-            },
-            delCheck: function () {
-              $.ajax({
-                url: "/admin/user/del/"+this.items[d].id,
-                type: "post",
-                success: function (data) {
-                  if(data.resultCode === 500){
-                    $('#delModal').modal('hide');
-                    $('#delFailModal').modal('show');
-                  }else{
-                    $('#delModal').modal('hide');
-                    $('#delSuccessModal').modal('show');
-                    app.items.splice(d, 1);
-                  }
 
-                },
-                error: function (xhr, status, error) {
-                  $('#delModal').modal('hide');
-                  $('#issue').modal('show');
-                }
-              });
-
-
-            },
             // 编辑
             edit: function (index) {
               var forms = document.getElementsByClassName('needs-validation')[0];
               forms.classList.remove('was-validated');
               this.editIndex = index;
               this.edititems = JSON.parse(JSON.stringify(this.items[index]));
-              $('#editModal').modal('show');
+              $('#primaryModal').modal('show');
+            },
+            edit2: function () {
+              var forms = document.getElementsByClassName('needs-validation')[1];
+              forms.classList.remove('was-validated');
+         
+              $('#primaryModal1').modal('show');
             },
             save: function () {
               var data = {
                 "id": this.edititems.id,//主键标识
-                "userName": this.edititems.userName,//名字
-                "userSex": this.edititems.userSex,//性别
-                "userTel": this.edititems.userTel,//联系电话
-                "userVip": this.edititems.userVip,//vip
-                "userAddress": this.edititems.userAddress,//地址
-                "firstSaleman": this.edititems.firstSaleman,//初次接待销售员ID
-                "lastSaleman": this.edititems.lastSaleman,//上一次接待销售员ID 
-                "createTime": this.edititems.createTime,//记录创建日期
-                "updateTime": new Date(),//记录修改日期
-                "isLock": 0,//是否锁住
-                "isDel":  this.edititems.isDel////删除
+                "orderId": this.edititems.orderId,
+                "goodsName": this.edititems.goodsName,
+                "supplieName": this.edititems.supplieName,
+                "isDel":  this.edititems.isDel,
+                "goodsNum": this.edititems.goodsName,
+                "createTime": this.edititems.goodsName
               }
               $.ajax({
-                url: "/admin/user/update",
+                url: "/purchase/check",
                 type: "post",
                 //将/jsON转化为字符串传递
                 dataType: 'json',
@@ -582,32 +475,45 @@
                 data: JSON.stringify(data),
 
                 //成功后的方法
-                success: function (data) {
-                  console.log(data)
-                  if(data.resultCode === 500){
-                    $('#editModal').modal('hide');
-                    $('#editFailModal').modal('show');
-                  }else{
-                    $('#editModal').modal('hide');
-                    $('#editSuccessModal').modal('show');
-                    app.edititems.userSex = parseInt(app.edititems.userSex);
-                    app.edititems.empType = parseInt(app.edititems.empType);
-                    app.edititems.isDel = parseInt(app.edititems.isDel);
-                    Vue.set(app.items, app.editIndex, app.edititems);
-                    // console.log(app.edititems)
-                  }
-
+                success: function () {
+                  $('#primaryModal').modal('hide');
+                  $('#editSuccess').modal('show');
+                  window.location.href = "/account/account_orders_check";
                 },
                 error: function (xhr, status, error) {
-                  $('#editModal').modal('hide');
-                  $('#issue').modal('show');
-
+                  $('#primaryModal').modal('hide');
+                  $('#editFailModal').modal('show');
                 }
               });
-
-
-
             },
+            save2: function () {
+              var data = {
+                "epmId": this.edititems.epmId,
+                "epmName": this.edititems.epmName,
+                "empPwd": this.edititems.empPwd
+              }
+              $.ajax({
+                url: "/api/personalAccouunt",
+                type: "post",
+                //将/jsON转化为字符串传递
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(data),
+
+                //成功后的方法
+                success: function () {
+                  $('#primaryModal1').modal('hide');
+                  $('#editSuccess').modal('show');
+                  window.location.href = "/account/account_orders_check";
+                },
+                error: function (xhr, status, error) {
+                  $('#primaryModal1').modal('hide');
+                  $('#editFailModal').modal('show');
+                }
+              });
+            },
+
+
             //页数
             switch: function (x) {
               $('.pagination li').removeClass('active');

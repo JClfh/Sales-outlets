@@ -1,13 +1,18 @@
 package com.jwz.salesteam.service.impl;
 
 import com.jwz.salesteam.common.ServiceResultEnum;
+import com.jwz.salesteam.controller.common.UserInfoVO;
+import com.jwz.salesteam.dao.EmpInfoMapper;
 import com.jwz.salesteam.dao.UserInfoMapper;
 import com.jwz.salesteam.entity.UserInfo;
 import com.jwz.salesteam.service.UserInfoService;
+import com.jwz.salesteam.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,6 +28,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Autowired
     private UserInfoMapper userInfoMapper;
+
+    @Autowired
+    private EmpInfoMapper empInfoMapper;
 
     @Override
     public String updateUserInfo(UserInfo userInfo) {
@@ -55,8 +63,17 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public List<UserInfo> getUserInfoList() {
-        return userInfoMapper.findUserInfoList();
+    public List<UserInfoVO> getUserInfoList() {
+
+        List<UserInfoVO> userInfoVOList =  new ArrayList<>();
+        userInfoVOList =  BeanUtil.copyList(userInfoMapper.findUserInfoList(), UserInfoVO.class);
+        for(UserInfoVO userInfoVO:userInfoVOList){
+            String firstEmpName = empInfoMapper.selectByPrimaryKey(userInfoVO.getFirstSaleman()).getEmpName();
+            String lastEmpName = empInfoMapper.selectByPrimaryKey(userInfoVO.getLastSaleman()).getEmpName();
+            userInfoVO.setFirstSalemanName(firstEmpName);
+            userInfoVO.setLastSalemanName(lastEmpName);
+        }
+        return userInfoVOList;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.jwz.salesteam.service;
 
+import com.jwz.salesteam.controller.common.UserInfoVO;
 import com.jwz.salesteam.entity.UserInfo;
 
 import java.util.List;
@@ -18,7 +19,8 @@ public interface UserInfoService {
 
     int delUserInfo(Integer id);
 
-    List<UserInfo> getUserInfoList();
+    List<UserInfoVO> getUserInfoList();
 
     List<UserInfo> findByUserName(String user_name);
+
 }

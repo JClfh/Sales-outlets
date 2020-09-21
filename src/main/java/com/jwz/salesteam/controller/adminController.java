@@ -3,6 +3,7 @@ package com.jwz.salesteam.controller;
 import com.jwz.salesteam.common.ServiceResultEnum;
 import com.jwz.salesteam.entity.EmpInfo;
 import com.jwz.salesteam.entity.GoodsInfo;
+import com.jwz.salesteam.entity.UserInfo;
 import com.jwz.salesteam.service.EmpInfoService;
 import com.jwz.salesteam.service.GoodsInfoService;
 import com.jwz.salesteam.service.UserInfoService;
@@ -203,7 +204,7 @@ public class adminController {
     }
 
     /**
-     * 查看所有商品
+     * 查看所有商品(管理员端）
      * @return
      */
     @RequestMapping(value = "/goods/list", method = RequestMethod.GET)
@@ -232,9 +233,51 @@ public class adminController {
      */
     @RequestMapping(value = "/user/list", method = RequestMethod.GET)
     @ResponseBody
-    @ApiOperation(value="查看商品列表")
+    @ApiOperation(value="查看所有客户")
     public Result getUserList() {
         return ResultGenerator.genSuccessResult(userInfoService.getUserInfoList());
+    }
+
+    /**
+     * 修改客户信息
+     * @param userInfo
+     * @return
+     */
+    @RequestMapping(value = "/user/update", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value="修改客户信息")
+    public Result updateUserInfo(@RequestBody UserInfo userInfo) {
+        if (StringUtils.isEmpty(userInfo.getUserName())
+                || StringUtils.isEmpty(userInfo.getUserTel())
+                || Objects.isNull(userInfo.getUserSex())
+                || Objects.isNull(userInfo.getUserVip())) {
+            return ResultGenerator.genFailResult("参数异常！");
+        }
+
+        String result = userInfoService.updateUserInfo(userInfo);
+        if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult(result);
+        }
+    }
+
+    /**
+     *
+     * 删除客户信息
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/user/del/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value="删除客户信息")
+    public Result deleteUserInfo(@PathVariable("id") Integer id) {
+
+        if (userInfoService.delUserInfo(id)>0) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult("删除失败");
+        }
     }
 
 }

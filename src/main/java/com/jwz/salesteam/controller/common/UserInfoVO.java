@@ -1,9 +1,16 @@
-package com.jwz.salesteam.entity;
+package com.jwz.salesteam.controller.common;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserInfo {
-
+/**
+ * @author ：Jiang Weizan
+ * @date ：Created in 2020/9/21 10:49
+ * @description：
+ * @modified By：
+ * @version:
+ */
+public class UserInfoVO  implements Serializable {
     private Integer id;
 
     private String userName;
@@ -19,6 +26,10 @@ public class UserInfo {
     private Integer firstSaleman;
 
     private Integer lastSaleman;
+
+    private String firstSalemanName;
+
+    private String lastSalemanName;
 
     private Date createTime;
 
@@ -112,5 +123,40 @@ public class UserInfo {
 
     public void setIsDel(Integer isDel) {
         this.isDel = isDel;
+    }
+
+    public String getFirstSalemanName() {
+        return firstSalemanName;
+    }
+
+    public void setFirstSalemanName(String firstSalemanName) {
+        this.firstSalemanName = firstSalemanName;
+    }
+
+    public String getLastSalemanName() {
+        return lastSalemanName;
+    }
+
+    public void setLastSalemanName(String lastSalemanName) {
+        this.lastSalemanName = lastSalemanName;
+    }
+
+    public UserInfoVO(Integer id, String userName, Integer userSex, String userTel, Integer userVip, String userAddress, Integer firstSaleman, Integer lastSaleman, String firstSalemanName, String lastSalemanName, Date createTime, Date updateTime, Integer isDel) {
+        this.id = id;
+        this.userName = userName;
+        this.userSex = userSex;
+        this.userTel = userTel;
+        this.userVip = userVip;
+        this.userAddress = userAddress;
+        this.firstSaleman = firstSaleman;
+        this.lastSaleman = lastSaleman;
+        this.firstSalemanName = firstSalemanName;
+        this.lastSalemanName = lastSalemanName;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.isDel = isDel;
+    }
+
+    public UserInfoVO() {
     }
 }

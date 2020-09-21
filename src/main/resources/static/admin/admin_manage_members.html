@@ -58,15 +58,15 @@
               <i class="nav-icon icon-puzzle"></i> 职员管理</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./admin_add_member.html">
+                <a class="nav-link" href="./admin_add_member">
                   <i class="nav-icon icon-puzzle"></i>添加人员</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_members.html">
+                <a class="nav-link" href="./admin_manage_members">
                   <i class="nav-icon icon-puzzle"></i>管理人员</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_user.html">
+                <a class="nav-link" href="./admin_manage_user">
                   <i class="nav-icon icon-puzzle"></i>管理客户</a>
               </li>
             </ul>
@@ -78,15 +78,15 @@
             <ul class="nav-dropdown-items">
 
               <li class="nav-item">
-                <a class="nav-link" href="./admin_add_goods.html">
+                <a class="nav-link" href="./admin_add_goods">
                   <i class="nav-icon icon-cursor"></i> 发布商品</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_goods.html">
+                <a class="nav-link" href="./admin_manage_goods">
                   <i class="nav-icon icon-cursor"></i> 编辑商品</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_show_goods.html">
+                <a class="nav-link" href="./admin_show_goods">
                   <i class="nav-icon icon-cursor"></i> 商品展示</a>
               </li>
             </ul>
@@ -601,14 +601,14 @@
                 url: "/admin/emp/del/"+this.items[d].id,
                 type: "post",
                 success: function (data) {
-                  if(data.resultCode === 500){
-                    $('#delModal').modal('hide');
-                    $('#delFailModal').modal('show');
-                  }else{
-                    $('#delModal').modal('hide');
-                    $('#delSuccessModal').modal('show');
-                    app.items.splice(d, 1);
-                  }
+                    if(data.resultCode === 500){
+                      $('#delModal').modal('hide');
+                      $('#delFailModal').modal('show');
+                    }else{
+                      $('#delModal').modal('hide');
+                      $('#delSuccessModal').modal('show');
+                      app.items.splice(d, 1);
+                    }
 
               },
               error: function (xhr, status, error) {
