@@ -192,15 +192,12 @@
     where  emp_tel = #{emp_tel,jdbcType=VARCHAR}  limit 1
   </select>
 
-
-
   <select id="selectByTelAndId" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List"/>
     from emp_info
     where  emp_tel = #{emp_tel,jdbcType=VARCHAR}  and id != #{id,jdbcType=INTEGER} limit 1
   </select>
-
 
   <select id="selectByEmpId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
@@ -225,4 +222,17 @@
   </select>
 
 
+  <select id="selectByLoginNameAndPwdAndType" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from emp_info
+    where  emp_id = #{emp_id,jdbcType=VARCHAR} and emp_pwd = #{emp_pwd,jdbcType=VARCHAR}
+    and emp_type = #{emp_type,jdbcType=INTEGER}
+  </select>
+
+  <update id="updateEmpPwdByPrimaryKey" >
+    update emp_info
+    set emp_pwd = #{emp_pwd,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

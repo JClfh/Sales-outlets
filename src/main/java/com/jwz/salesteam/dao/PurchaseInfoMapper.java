@@ -2,6 +2,8 @@ package com.jwz.salesteam.dao;
 
 import com.jwz.salesteam.entity.PurchaseInfo;
 
+import java.util.List;
+
 public interface PurchaseInfoMapper {
 
     int deleteByPrimaryKey(Integer id);
@@ -15,4 +17,8 @@ public interface PurchaseInfoMapper {
     int updateByPrimaryKeySelective(PurchaseInfo record);
 
     int updateByPrimaryKey(PurchaseInfo record);
+
+    List<PurchaseInfo> selectByEmpId(String emp_id);
+
+    List<PurchaseInfo> selectByAccountEmpId(String accountEmpId);
 }

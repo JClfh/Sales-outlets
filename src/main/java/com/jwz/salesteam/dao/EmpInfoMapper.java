@@ -30,4 +30,8 @@ public interface EmpInfoMapper {
     EmpInfo selectByTel(String empTel);
 
     EmpInfo selectByTelAndId(String emp_tel, Integer id);
+
+    EmpInfo selectByLoginNameAndPwdAndType(String emp_id, String emp_pwd, Integer emp_type);
+
+    int updateEmpPwdByPrimaryKey(String emp_pwd, Integer id);
 }

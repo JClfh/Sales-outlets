@@ -1,0 +1,373 @@
+<html lang="en">
+
+<head>
+  <base href="./">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+  <meta name="author" content="Łukasz Holeczek">
+  <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+  <title>财务管理</title>
+  <!-- Icons-->
+  <link href="../vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+  <link href="../vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+  <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+</head>
+
+<style>
+  .div1 {
+    background: rgb(38, 202, 231);
+    color: rgb(252, 247, 247);
+  }
+</style>
+
+<body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
+  <header class="app-header navbar">
+    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div  style="aligen:center">
+      <a href="">欢迎您，尊敬的***</a>
+    </div>
+  
+  </header>
+  <div class="app-body">
+
+    <div class="sidebar">
+      <nav class="sidebar-nav ps ps--active-y">
+        <ul class="nav">
+            <br>
+            <br>
+  
+            <li class="nav-item nav-dropdown ">
+              <a class="nav-link nav-dropdown-toggle" href="#">
+                <i class="nav-icon icon-puzzle"></i> 财务管理</a>
+              <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                  <a class="nav-link" href="./account_orders_check.html">
+                    <i class="nav-icon icon-puzzle"></i>审核订单</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./account_orders_count.html">
+                    <i class="nav-icon icon-puzzle"></i>查看业绩</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./account_orders_history.html">
+                    <i class="nav-icon icon-puzzle"></i>历史采购订单</a>
+                </li>
+             
+              </ul>
+            </li>
+          </ul>
+        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+          <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+        </div>
+        <div class="ps__rail-y" style="top: 0px; height: 445px; right: 0px;">
+          <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 297px;"></div>
+        </div>
+      </nav>
+      <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+    </div>
+    <main class="main">
+      <div id="itemsTemplate">
+      <!-- Breadcrumb-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">你的位置：财务管理->历史采购订单</li>
+
+        <!-- Breadcrumb Menu-->
+        <li class="breadcrumb-menu d-md-down-none">
+
+        </li>
+      </ol>
+        <div align="center">
+          <div class="center-in-center" style="width:95%;">
+            <div class="card">
+              <div class="card-header">
+                <div align="left">  <div align="left">
+                  <i class=" font-xl  cui-people"></i>
+                  搜索<input type="text" name="text-input" >
+                  <button class="btn btn-success" type="button"  v-on:click="cha()" data-toggle="modal">
+                    <i class="fa fa-search" aria-hidden="true"></i></button>
+
+                </div>
+                </div>
+              </div>
+              <div class="card-body collapse show" id="collapseExample">
+                <table class="table table-responsive-sm table-bordered">
+                  <thead>
+                    <tr align="center">
+                      <th width="125p">序号</th>
+                      <th width="125p">订单编号</th>
+                      <th width="125p">商品名称</th>
+                      <th width="125p">商品数量</th>
+                      <th width="125p">供货商</th>
+                      <th width="125p">状态</th>
+                      <th width="125p">处理时间</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
+
+                      <td align="center">{{item.id}}</td>
+                      <td align="center">{{item.orderId}}</td>
+                      <td align="center">{{item.goodsName}}</td>
+                      <td align="center">{{item.goodsNum}}</td>
+                      <td align="center">
+                        <span class="" v-if="item.supplieName  === '0'">广州供货商</span>
+                        <span class="" v-if="item.supplieName  === '1'">深圳供货商</span>
+                      </td>
+                      <td align="center"> 
+                        <p class="badge badge-success"  style="font-size:17px" v-if="item.isDel === '0'">通过</p>
+                        <p class="badge badge-danger"  style="font-size:17px" v-if="item.isDel === '1'">不通过</p>
+                      </td>
+                      <td align="center">{{item.createTime}}</td>
+                     
+                    </tr>
+                  </tbody>
+                </table>
+                <ul class="pagination" id="pagelist">
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);" onclick="app.first()">首页</a>
+                  </li>
+
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);" onclick="app.last()">上一页</a>
+                  </li>
+                  <li class="page-item" v-for="pageitem in pagesum">
+                    <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
+                  </li>
+
+                  <li class="page-item" v-for="pageitem in pageitem" v-if="pageindex>=4 && pageindex<=pagesum-3"
+                    v-show="pageitem>pageindex-3 && pageitem<pageindex+3 && pageindex>=4 && pageindex<=pagesum-3">
+                    <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
+                  </li>
+
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);" onclick="app.Next()">下一页</a>
+                  </li>
+
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);" onclick="app.lastone()">末页</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" style="color:cornflowerblue">{{pageindex}}/{{pagesum}}</a>
+                  </li>
+                  <li>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                  </li>
+                  <li class="page-item">
+                    <input class="form-control" id="page_1" size="16" type="text" style="width:60px">
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" style="color:cornflowerblue" v-on:click="jume();">转</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../vendors/jquery/js/jquery.min.js"></script>
+  <script src="../vendors/popper.js/js/popper.min.js"></script>
+  <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../vendors/pace-progress/js/pace.min.js"></script>
+  <script src="../vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+  <script src="../vendors/@coreui/coreui/js/coreui.min.js"></script>
+  <script src="../vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
+  <script src="../vendors/mock.js/js/mock.min.js"></script>
+  <script src="../vendors/vue.js/js/vue.min.js"></script>
+  <script>
+    var p, d, j;
+    var app;
+    var items;
+    $(function () {
+      Mock.mock("http://127.0.0.1:5500/users", {
+        "data|20-20": [{
+          id: "@increment()",//编号
+          orderId:"@increment()",//订单编号
+          goodsName:"@cname()",//商品名字
+          "supplieName|1":["0","1"],//供货商
+          goodsNum: "@increment()",//商品数量 
+          "isDel|1": ["0", "1"],//状态
+          createTime:"@datetime()",//创建时间
+
+        }],
+        suceess: true,  
+        code: 200,
+        msg: "Success"
+      });
+      $.getJSON("/financial/purchase/check", function (response) {
+        items = response.data;
+        console.log(response.data)
+        page = Math.ceil(items.length / 5);
+        var pageitem = [];
+        for (var i = 0; i < page; i++) {
+          pageitem[i] = i + 1;
+        }
+        app = new Vue({
+          el: '#itemsTemplate',
+          data: {
+            items: items,
+            checkall: false,
+            pagesum: page,//总页码
+            pageindex: 1,//当前页码
+            pagesize: 5, //页面数据个数
+            pageitem: pageitem,
+            editIndex: -1,
+            edititems: { name: null },
+
+          },
+          computed: {
+            pageItems: function () {
+              var startIndex = (this.pageindex - 1) * this.pagesize;
+              var editIndex = startIndex + this.pagesize - 1;
+              return this.items.filter(function (value, index) {
+                return (
+                  index >= startIndex &&
+                  index <= editIndex
+                );
+              });
+            }
+          },
+          methods: {
+            //查询
+            cha: function () {
+              alert("查询")
+            },
+
+            //页数
+            switch: function (x) {
+              $('.pagination li').removeClass('active');
+              x.parentNode.className = "page-item active";
+              this.pageindex = parseInt(x.innerHTML);
+            },
+            //首页
+            first: function () {
+              if (this.pageindex != 1) {
+                this.pageindex = 1;
+              }
+              this.$nextTick(function () {
+                $('.pagination li').removeClass('active');
+                var pidx = String(this.pageindex);
+                var li = document.getElementsByClassName("page-item");
+                for (var i = 0; i < li.length; i++) {
+                  if (li[i].childNodes[0].innerHTML === pidx) {
+                    li[i].className = "page-item active";
+                    break;
+                  }
+                }
+
+              })
+            },
+            //末页
+            lastone: function () {
+              if (this.pageindex != this.pagesum) {
+                this.pageindex = this.pagesum;
+              }
+              this.$nextTick(function () {
+                $('.pagination li').removeClass('active');
+                var pidx = String(this.pageindex);
+                var li = document.getElementsByClassName("page-item");
+                for (var i = 0; i < li.length; i++) {
+                  if (li[i].childNodes[0].innerHTML === pidx) {
+                    li[i].className = "page-item active";
+                    break;
+                  }
+                }
+              })
+            },
+            //上一页
+            last: function () {
+              if (this.pageindex != 1) {
+                this.pageindex--;
+              }
+              this.$nextTick(function () {
+                $('.pagination li').removeClass('active');
+                var pidx = String(this.pageindex);
+                var li = document.getElementsByClassName("page-item");
+                for (var i = 0; i < li.length; i++) {
+                  if (li[i].childNodes[0].innerHTML === pidx) {
+                    li[i].className = "page-item active";
+                    break;
+                  }
+                }
+              })
+
+            },
+            //下一页
+            Next: function () {
+              if (this.pageindex != app.pagesum) {
+                this.pageindex++;
+
+              }
+
+              this.$nextTick(function () {
+                $('.pagination li').removeClass('active');
+                var pidx = String(this.pageindex);
+                var li = document.getElementsByClassName("page-item");
+                for (var i = 0; i < li.length; i++) {
+                  if (li[i].childNodes[0].innerHTML === pidx) {
+                    li[i].className = "page-item active";
+                    break;
+                  }
+                }
+
+              })
+
+            },
+            //跳转页数
+            jume: function () {
+              var page = document.getElementById('page_1').value;
+              reg = /^\d+$/
+              if (page.length == 0) {
+                alert("请输入跳转页码");
+                return;
+              } else if (page < 1 || page > app.pagesum) {
+                alert("您输入的页码超过页数范围了！");
+                return;
+              } else if (reg.test(page) != true) {
+                alert("请输入数字！");
+                return;
+              }
+              this.pageindex = parseInt(page);
+              page = "";
+              this.$nextTick(function () {
+                $('.pagination li').removeClass('active');
+                var pidx = String(this.pageindex);
+                var li = document.getElementsByClassName("page-item");
+                for (var i = 0; i < li.length; i++) {
+                  if (li[i].childNodes[0].innerHTML === pidx) {
+                    li[i].className = "page-item active";
+                    break;
+
+                  }
+
+                }
+              })
+            }
+
+
+          }
+
+        });
+        return;
+      });
+    });
+
+
+
+  </script>
+</body>
+
+</html>

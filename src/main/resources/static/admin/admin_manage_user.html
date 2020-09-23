@@ -120,7 +120,7 @@
               <div class="card-header">
                 <div align="left">  <div align="left">
                   <i class=" font-xl  cui-people"></i>
-                  搜索<input type="text" name="text-input" >
+                  搜索<input type="text" name="text-input" v-model="keyword">
                   <button class="btn btn-success" type="button"  v-on:click="cha()" data-toggle="modal">
                     <i class="fa fa-search" aria-hidden="true"></i></button>
 
@@ -131,15 +131,15 @@
                 <table class="table table-responsive-sm table-bordered">
                   <thead>
                     <tr align="center">
-                      <th width="125p">客户姓名</th>
-                      <th width="125p">客户性别</th>
-                      <th width="125p">客户联系电话</th>
-                      <th width="125p">vip等级</th>
-                      <th width="125p">客户地址</th>
-                      <th width="125p">初次接待销售员ID</th>
-                      <th width="125p">上一次接待销售员ID</th>
-                      <th width="125p">创建日期</th>
-                      <th width="125p">操作</th>
+                      <th class="text-center" scope="col">客户姓名</th>
+                      <th class="text-center" scope="col">客户性别</th>
+                      <th class="text-center" scope="col">客户联系电话</th>
+                      <th class="text-center" scope="col">vip等级</th>
+                      <th class="text-center" scope="col">客户地址</th>
+                      <th class="text-center" scope="col">初次接待销售员</th>
+                      <th class="text-center" scope="col">上一次接待销售员</th>
+                      <th class="text-center" scope="col">创建日期</th>
+                      <th class="text-center" scope="col">操作</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -155,7 +155,7 @@
                       <td align="center">{{item.userAddress}}</td>
                       <td align="center">{{item.firstSalemanName}}</td>s
                       <td align="center">{{item.lastSalemanName}}</td>
-                      <td align="center">{{item.createTime}}</td>
+                      <td align="center">{{item.createTime1}}</td>
                       <td align="center"> <button class="btn btn-primary" type="button" data-toggle="modal"
                           v-on:click="edit(index)" data-target="#editModal">
                           <i class="fa fa-edit "></i>编辑</button>&nbsp;
@@ -301,7 +301,7 @@
                     <label class="col-md-3 col-form-label" for="text-input">创建时间</label>
                     <div class="col-md-9">
                       <input class="form-control" id="text-input" type="text" name="text-input" placeholder="时间"
-                        v-model="edititems.createTime" required disabled="disabled">
+                        v-model="edititems.createTime1" required disabled="disabled">
 
                     </div>
                   </div>
@@ -486,7 +486,7 @@
         console.log(items)
         page = Math.ceil(items.length / 5);
         for(var i = 0 ; i <items.length; i ++){
-          items[i].createTime = items[i].createTime.toString().split("T")[0];
+          items[i].createTime1 = items[i].createTime.toString().split("T")[0];
         }
         var pageitem = [];
         for (var i = 0; i < page; i++) {
@@ -503,6 +503,7 @@
             pageitem: pageitem,
             editIndex: -1,
             edititems: { name: null },
+            keyword:""
 
           },
           computed: {
@@ -520,7 +521,41 @@
           methods: {
             //查询
             cha: function () {
-              alert("查询")
+              if(this.keyword === ""){
+                $.ajax({
+                  url: "/admin/user/list",
+                  type: "get",
+                  success: function (res) {
+                    console.log(res.data)
+                    app.items = res.data
+                    app.pagesum = Math.ceil(app.items.length / 5);
+                    app.pageindex = 1
+                    for(var i = 0 ; i <app.items.length; i ++){
+                      app.items[i].createTime1 = app.items[i].createTime.toString().split("T")[0];
+                    }
+                  },
+                  error: function (xhr, status, error) {
+                    $('#issue').modal('show');
+                  }
+                });
+              }else{
+                $.ajax({
+                  url: "/admin/user/findByName/"+this.keyword,
+                  type: "post",
+                  success: function (res) {
+                    console.log(res.data)
+                    app.items = res.data
+                    app.pagesum = Math.ceil(app.items.length / 5);
+                    app.pageindex = 1
+                    for(var i = 0 ; i <app.items.length; i ++){
+                      app.items[i].createTime1 = app.items[i].createTime.toString().split("T")[0];
+                    }
+                  },
+                  error: function (xhr, status, error) {
+                    $('#issue').modal('show');
+                  }
+                });
+              }
             },
             // 删除
             del: function (index) {

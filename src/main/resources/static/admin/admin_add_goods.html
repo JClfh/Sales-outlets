@@ -182,23 +182,26 @@
                               </td>
                             </tr>
                             <tr>
-                              <td>商品信息描述</td>
+                              <td>商品信息简介</td>
                               <td>
                                 <div class="col-md-9">
                                   <input class="form-control" id="text-input" type="text" name="text-input"
-                                    v-model="addALL.goodsDetailContent" placeholder="商品信息描述"
+                                    v-model="addALL.goodsIntro" placeholder="商品信息简介"
                                    required>
                                   <div class="invalid-feedback">
-                                    商品信息描述不能为空！
+                                    商品信息简介不能为空！
                                   </div>
                                 </div>
                               </td>
                             </tr>
                             <tr>
-                              <td>商品信息简介</td>
+                              <td>商品信息描述</td>
                               <td>
                                 <div class="col-md-9">
-                                    <textarea id="description" class="form-control" rows="3" name="description" placeholder="商品信息简介"  v-model="addALL.goodsIntro"></textarea>
+                                    <textarea id="description" class="form-control" rows="3" name="description" placeholder="商品信息描述"  v-model="addALL.goodsDetailContent" required></textarea>
+                                    <div class="invalid-feedback">
+                                      商品信息描述不能为空！
+                                  </div>
                                 </div>
                               </td>
                             </tr>

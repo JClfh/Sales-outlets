@@ -1,7 +1,9 @@
 package com.jwz.salesteam.service;
 
+import com.jwz.salesteam.controller.common.EmpInfoVO;
 import com.jwz.salesteam.entity.EmpInfo;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -28,4 +30,11 @@ public interface EmpInfoService {
     EmpInfo selectByEmpId(String emp_id);
 
     List<EmpInfo> findByEmpName(String emp_name);
+
+    String login(String emp_id, String emp_pwd, Integer emp_type, HttpSession httpSession);
+
+    String updateEmpPwdById(String old_emp_pwd, String new_emp_pwd, Integer id);
+
+
+    EmpInfoVO getPersonSaleman(EmpInfo empInfo);
 }

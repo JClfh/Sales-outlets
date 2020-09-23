@@ -8,41 +8,11 @@ public enum ServiceResultEnum {
 
     DATA_NOT_EXIST("未查询到记录！"),
 
-    SAME_CATEGORY_EXIST("有同级同名的分类！"),
+    EMP_ID_NULL("登录职工ID为空"),
 
-    SAME_LOGIN_NAME_EXIST("用户名已存在！"),
+    EMP_PWD_NULL("登录密码为空"),
 
-    LOGIN_NAME_NULL("请输入登录名！"),
-
-    LOGIN_PASSWORD_NULL("请输入密码！"),
-
-    LOGIN_VERIFY_CODE_NULL("请输入验证码！"),
-
-    LOGIN_VERIFY_CODE_ERROR("验证码错误！"),
-
-    GOODS_NOT_EXIST("商品不存在！"),
-
-    SHOPPING_CART_ITEM_LIMIT_NUMBER_ERROR("超出单个商品的最大购买数量！"),
-
-    LOGIN_ERROR("登录失败！"),
-
-    LOGIN_USER_LOCKED("用户已被禁止登录！"),
-
-    ORDER_NOT_EXIST_ERROR("订单不存在！"),
-
-    NULL_ADDRESS_ERROR("地址不能为空！"),
-
-    ORDER_PRICE_ERROR("订单价格异常！"),
-
-    ORDER_GENERATE_ERROR("生成订单异常！"),
-
-    SHOPPING_ITEM_ERROR("购物车数据异常！"),
-
-    SHOPPING_ITEM_COUNT_ERROR("库存不足！"),
-
-    ORDER_STATUS_ERROR("订单状态异常！"),
-
-    OPERATE_ERROR("操作失败！"),
+    EMP_TYPE_NULL("职工类型未选"),
 
     SAME_EMPINFO_EXIST("该职员已经存在"),
 
@@ -50,12 +20,17 @@ public enum ServiceResultEnum {
 
     SAME_GOODSINFO_EXIST("该商品已经存在"),
 
+    LOGIN_EMP_LOCKED("职工登录错误"),
+
+    LOGIN_ERROR("登录失败"),
+
+    OLD_EMP_PWD_ERROR("原密码输入错误"),
+
     UPLOAD_ERROR("上传文件失败"),
 
     UPLOAD_SUCCESS("上传文件成功"),
 
     DB_ERROR("database error");
-
 
 
     private String result;

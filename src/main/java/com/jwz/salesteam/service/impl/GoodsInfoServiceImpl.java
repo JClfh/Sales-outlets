@@ -92,4 +92,14 @@ public class GoodsInfoServiceImpl implements GoodsInfoService {
     public List<GoodsInfo> findByGoodsName(String goods_name) {
         return goodsInfoMapper.findByGoodsName(goods_name);
     }
+
+    @Override
+    public List<GoodsInfo> getGoodsInfoList2() {
+        return goodsInfoMapper.getGoodsInfoList();
+    }
+
+    @Override
+    public GoodsInfo getGoodsInfo(Integer id) {
+        return goodsInfoMapper.getGoodsInfo(id);
+    }
 }

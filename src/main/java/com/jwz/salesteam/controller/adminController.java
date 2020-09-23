@@ -280,4 +280,15 @@ public class adminController {
         }
     }
 
+    /**
+     * 查看客户（搜索）
+     * @return
+     */
+    @RequestMapping(value = "/user/findByName/{user_name}", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value="查看客户（搜索）")
+    public Result userInfoFindByName(@PathVariable("user_name") String user_name) {
+        return ResultGenerator.genSuccessResult(userInfoService.findByUserName(user_name));
+    }
+
 }

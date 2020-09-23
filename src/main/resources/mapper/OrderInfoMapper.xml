@@ -150,4 +150,36 @@
       is_del = #{isDel,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updateOrdersState" parameterType="com.jwz.salesteam.entity.OrderInfo" >
+   update order_info
+    set  status = #{status,jdbcType=INTEGER}
+
+     where order_id = #{order_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateFinishTime" parameterType="com.jwz.salesteam.entity.OrderInfo" >
+   update order_info
+    set  finish_time = #{finishTime,jdbcType=DATE}
+
+     where order_id = #{order_id,jdbcType=VARCHAR}
+  </update>
+  <select id="findOrdersInfoList" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from order_info
+    order by is_del asc
+  </select>
+  <select id="findOrdersInfoList2" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from order_info
+    where emp_id = #{emp_id,jdbcType=VARCHAR}
+  </select>
+  <select id="countByEmpId"  resultType="java.util.HashMap">
+        select left(create_time,7) as 'month' ,count(*) as 'empCount'
+        from order_info
+        where DATE_FORMAT(create_time,'%Y-%m')>
+        DATE_FORMAT(date_sub(curdate(), interval 12 month),'%Y-%m') and emp_id = #{emp_id,jdbcType=VARCHAR}
+        group by month desc;
+  </select>
+
 </mapper>

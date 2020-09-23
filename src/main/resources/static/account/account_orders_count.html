@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
   <base href="./">
   <meta charset="utf-8">
@@ -28,188 +29,201 @@
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
   <div id="itemsTemplate">
-  <header class="app-header navbar">
-    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div  style="aligen:left">
-      <a href="">欢迎您，尊敬的***</a>
-    </div>
-    <div style="align:left">
-      <button class="btn btn-block btn-ghost-secondary" type="button" data-toggle="modal"
-      v-on:click="edit()">
-      <i class="fa fa-edit "></i>个人信息修改</button>&nbsp;</div>
-  
-  </header>
-  <div class="app-body">
-    <div class="sidebar">
-      <nav class="sidebar-nav ps ps--active-y">
-        <ul class="nav">
-          <br>
-          <br>
+    <header class="app-header navbar">
+      <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-          <li class="nav-item nav-dropdown ">
-            <a class="nav-link nav-dropdown-toggle" href="#">
-              <i class="nav-icon icon-puzzle"></i> 财务管理</a>
-            <ul class="nav-dropdown-items">
-              <li class="nav-item">
-                <a class="nav-link" href="./account_orders_check">
-                  <i class="nav-icon icon-puzzle"></i>审核订单</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./account_orders_count">
-                  <i class="nav-icon icon-puzzle"></i>查看业绩</a>
-              </li>
-           
-            </ul>
+      <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div style="aligen:left">
+        <a href="">欢迎您，尊敬的***</a>
+      </div>
+      <div style="align:left">
+        <button class="btn btn-block btn-ghost-secondary" type="button" data-toggle="modal" v-on:click="edit()">
+          <i class="fa fa-edit "></i>个人信息修改</button>&nbsp;</div>
+
+    </header>
+    <div class="app-body">
+      <div class="sidebar">
+        <nav class="sidebar-nav ps ps--active-y">
+          <ul class="nav">
+            <br>
+            <br>
+
+            <li class="nav-item nav-dropdown ">
+              <a class="nav-link nav-dropdown-toggle" href="#">
+                <i class="nav-icon icon-puzzle"></i> 财务管理</a>
+              <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                  <a class="nav-link" href="./account_orders_check.html">
+                    <i class="nav-icon icon-puzzle"></i>审核订单</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./account_orders_count.html">
+                    <i class="nav-icon icon-puzzle"></i>查看业绩</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./account_orders_history.html">
+                    <i class="nav-icon icon-puzzle"></i>历史采购订单</a>
+                </li>
+
+              </ul>
+            </li>
+          </ul>
+          <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+            <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+          </div>
+          <div class="ps__rail-y" style="top: 0px; height: 445px; right: 0px;">
+            <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 297px;"></div>
+          </div>
+        </nav>
+        <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+      </div>
+      <main class="main">
+        <!-- Breadcrumb-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">你的位置：财务管理->查看业绩</li>
+
+          <!-- Breadcrumb Menu-->
+          <li class="breadcrumb-menu d-md-down-none">
+
           </li>
-    
-  
-        </ul>
-        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-          <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
-        </div>
-        <div class="ps__rail-y" style="top: 0px; height: 445px; right: 0px;">
-          <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 297px;"></div>
-        </div>
-      </nav>
-      <button class="sidebar-minimizer brand-minimizer" type="button"></button>
-    </div>
-    <main class="main">
-      <!-- Breadcrumb-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">你的位置：财务管理->查看业绩</li>
-
-        <!-- Breadcrumb Menu-->
-        <li class="breadcrumb-menu d-md-down-none">
-
-        </li>
-      </ol>
+        </ol>
 
         <div align="center">
           <div class="center-in-center" style="width:95%;">
-            <div class="card">
-              <div class="card-header">
-                <div align="left">  <div align="left">
-                  <i class=" font-xl  cui-people"></i>
-                  搜索<input type="text" name="text-input"  value="" >
-                  <button class="btn btn-success" type="button"  v-on:click="cha()" data-toggle="modal">
-                    <i class="fa fa-search" aria-hidden="true"></i></button>
-
-                </div>
+            <div class="row">
+              <div class="col">
+                <div class="card">
+                  <div id="main" style="width: 600px;height:400px;"></div>
                 </div>
               </div>
-              <div class="card-body collapse show" id="collapseExample">
-                <table class="table table-responsive-sm table-bordered">
-                  <thead>
-                    <tr align="center">
-                      <th width="125p">序号</th>
-                      <th width="125p">职工ID</th>
-                      <th width="125p">职工姓名</th>
-                      <th width="125p">业绩</th>
-                      
-                     
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
-                      <td align="center">{{item.id}}</td>
-                      <td align="center">{{item.empId}}</td>
-                      <td align="center">{{item.empName}}</td>
-                      <td align="center">{{item.empResults}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <ul class="pagination" id="pagelist">
-                  <li class="page-item">
-                    <a class="page-link" href="javascript:void(0);" onclick="app.first()">首页</a>
-                  </li>
+              <div class="col">
+                <div class="card">
+                  <div class="card-header">
+                    <div align="left">
+                      <div align="left">
+                        <i class=" font-xl  cui-people"></i>
+                        搜索<input type="text" name="text-input" value="">
+                        <button class="btn btn-success" type="button" v-on:click="cha()" data-toggle="modal">
+                          <i class="fa fa-search" aria-hidden="true"></i></button>
 
-                  <li class="page-item">
-                    <a class="page-link" href="javascript:void(0);" onclick="app.last()">上一页</a>
-                  </li>
-                  <li class="page-item" v-for="pageitem in pagesum">
-                    <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
-                  </li>
-
-                  <li class="page-item" v-for="pageitem in pageitem" v-if="pageindex>=4 && pageindex<=pagesum-3"
-                    v-show="pageitem>pageindex-3 && pageitem<pageindex+3 && pageindex>=4 && pageindex<=pagesum-3">
-                    <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
-                  </li>
-
-                  <li class="page-item">
-                    <a class="page-link" href="javascript:void(0);" onclick="app.Next()">下一页</a>
-                  </li>
-
-                  <li class="page-item">
-                    <a class="page-link" href="javascript:void(0);" onclick="app.lastone()">末页</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" style="color:cornflowerblue">{{pageindex}}/{{pagesum}}</a>
-                  </li>
-                  <li>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                  </li>
-                  <li class="page-item">
-                    <input class="form-control" id="page_1" size="16" type="text" style="width:60px">
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" style="color:cornflowerblue" v-on:click="jume();">转</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal fade" id="editSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-success" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">提示</h4>
-              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>编辑成功！</p>
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
-            </div>
-          </div>
-          <!-- /.modal-content-->
-        </div>
-      </div>
-                <!-- /警告-->
-                <div class="modal fade show" id="editFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                style="display: none;" aria-hidden="true">
-                <div class="modal-dialog modal-danger" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title">警告！！！！！</h4>
-                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <p>编辑失败</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
-      
+                      </div>
                     </div>
                   </div>
-                  <!-- /.modal-content-->
+                  <div class="card-body collapse show" id="collapseExample">
+                    <table class="table table-responsive-sm table-bordered">
+                      <thead>
+                        <tr align="center">
+                          <th width="125p">序号</th>
+                          <th width="125p">职工ID</th>
+                          <th width="125p">职工姓名</th>
+                          <th width="125p">业绩</th>
+
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
+                          <td align="center">{{item.id}}</td>
+                          <td align="center">{{item.empId}}</td>
+                          <td align="center">{{item.empName}}</td>
+                          <td align="center">{{item.empResults}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <ul class="pagination" id="pagelist">
+                      <li class="page-item">
+                        <a class="page-link" href="javascript:void(0);" onclick="app.first()">首页</a>
+                      </li>
+
+                      <li class="page-item">
+                        <a class="page-link" href="javascript:void(0);" onclick="app.last()">上一页</a>
+                      </li>
+                      <li class="page-item" v-for="pageitem in pagesum">
+                        <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
+                      </li>
+
+                      <li class="page-item" v-for="pageitem in pageitem" v-if="pageindex>=4 && pageindex<=pagesum-3"
+                        v-show="pageitem>pageindex-3 && pageitem<pageindex+3 && pageindex>=4 && pageindex<=pagesum-3">
+                        <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
+                      </li>
+
+                      <li class="page-item">
+                        <a class="page-link" href="javascript:void(0);" onclick="app.Next()">下一页</a>
+                      </li>
+
+                      <li class="page-item">
+                        <a class="page-link" href="javascript:void(0);" onclick="app.lastone()">末页</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" style="color:cornflowerblue">{{pageindex}}/{{pagesum}}</a>
+                      </li>
+                      <li>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                      </li>
+                      <li class="page-item">
+                        <input class="form-control" id="page_1" size="16" type="text" style="width:60px">
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" style="color:cornflowerblue" v-on:click="jume();">转</a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-                <!-- /.modal-dialog-->
               </div>
-            <!-- 个人信息修改 -->
-        <div class="modal fade" id="primaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="editSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-success" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>编辑成功！</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
+        <!-- /警告-->
+        <div class="modal fade show" id="editFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">警告！！！！！</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>编辑失败</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
+
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+          <!-- /.modal-dialog-->
+        </div>
+
+        <!-- 个人信息修改 -->
+        <div class="modal fade" id="primaryModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           aria-hidden="true" style="display: none;" aria-hidden="true">
 
           <div class="modal-dialog modal-primary" role="document">
@@ -235,33 +249,41 @@
                     <label class="col-md-3 col-form-label" for="text-input">职工名称</label>
                     <div class="col-md-9">
                       <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品名称"
-                        v-model="edititems.empName" 
-                        pattern="^[\u4e00-\u9fa5]{2,4}$|^[A-Za-z\s]{2,40}$" required>
+                        v-model="edititems.empName" pattern="^[\u4e00-\u9fa5]{2,4}$|^[A-Za-z\s]{2,40}$" required>
 
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-md-3 col-form-label" for="text-input">职工密码</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="密码"
-                        v-model="edititems.eempPwd" pattern="^[0-9]+$" required>
+                      <input class="form-control" type="password" id="pwd" placeholder="密码" v-model="edititems.empPwd"
+                        onkeyup="validate()" required>
 
                     </div>
-                </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="text-input">再次输入密码</label>
+                    <div class="col-md-9">
+                      <input class="form-control" type="password" id="pwd1" placeholder="请再次输入密码" onkeyup="validate()"
+                        required>
 
-                
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-info" type="button" v-on:click="save()">保存</button>
-              <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                    </div>
+                  </div>
+
+
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-info" type="button" v-on:click="save()">保存</button>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      
-    </main>
-  </div></div>
+
+      </main>
+    </div>
+  </div>
 
   <script src="../vendors/jquery/js/jquery.min.js"></script>
   <script src="../vendors/popper.js/js/popper.min.js"></script>
@@ -273,6 +295,23 @@
   <script src="../vendors/mock.js/js/mock.min.js"></script>
   <script src="../vendors/vue.js/js/vue.min.js"></script>
   <script>
+    function validate() {
+      var pwd = $("#pwd").val();
+      var pwd1 = $("#pwd1").val();
+
+      if (pwd != pwd1) {
+        $("#danger").html("两次密码不相同");
+        $("#danger").css("color", "red")
+        $("button").attr("disabled", "disabled");
+      } else {
+        $("#danger").html("");
+        $("button").removeAttr("disabled");
+      }
+
+    }
+  </script>
+
+  <script>
     var p, d, j;
     var app;
     var items;
@@ -280,18 +319,49 @@
       Mock.mock("http://127.0.0.1:5500/users", {
         "data|20-20": [{
           id: "@increment()",//编号
-          empId:"@increment()",//职工id
-          empName:"@cname()",//职工姓名
+          empId: "@increment()",//职工id
+          empName: "@cname()",//职工姓名
           empResults: "@increment()",//业绩 
-          eempPwd:"@increment()"//职工密码
+          eempPwd: "@increment()"//职工密码
 
         }],
-        suceess: true,  
+        suceess: true,
         code: 200,
         msg: "Success"
       });
       $.getJSON("/account/empResults/list", function (response) {
         items = response.data;
+        // 在线图表
+        for (var i = 0; i < items.length; i++) {
+          dataList[i] = items[i].empName;
+          dataLi[i] = items[i].empResults;
+
+        }
+        console.log(dataList)
+        console.log(dataLi)
+
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+          title: {
+            text: '第一个 ECharts 实例'
+          },
+          tooltip: {},
+          legend: {
+            data: ['销量']
+          },
+          xAxis: {
+            data: dataList
+          },
+          yAxis: {},
+          series: [{
+            name: '销量',
+            type: 'bar',
+            data: dataLi
+          }]
+        };
+          //
         console.log(response.data)
         page = Math.ceil(items.length / 5);
         var pageitem = [];
@@ -334,7 +404,7 @@
             edit: function () {
               var forms = document.getElementsByClassName('needs-validation')[0];
               forms.classList.remove('was-validated');
-       
+
               $('#primaryModal').modal('show');
             },
             save: function () {
@@ -475,15 +545,12 @@
               })
             }
 
-
           }
 
         });
         return;
       });
     });
-
-
 
   </script>
 </body>

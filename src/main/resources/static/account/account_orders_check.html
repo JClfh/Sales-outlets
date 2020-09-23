@@ -61,17 +61,20 @@
               <i class="nav-icon icon-puzzle"></i> 财务管理</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./account_orders_check">
+                <a class="nav-link" href="./account_orders_check.html">
                   <i class="nav-icon icon-puzzle"></i>审核订单</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./account_orders_count">
+                <a class="nav-link" href="./account_orders_count.html">
                   <i class="nav-icon icon-puzzle"></i>查看业绩</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./account_orders_history.html">
+                  <i class="nav-icon icon-puzzle"></i>历史采购订单</a>
+              </li>
+           
             </ul>
           </li>
-      
-  
         </ul>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
           <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
@@ -351,11 +354,19 @@
          <div class="form-group row">
            <label class="col-md-3 col-form-label" for="text-input">职工密码</label>
            <div class="col-md-9">
-             <input class="form-control" id="text-input" type="text" name="text-input" placeholder="密码"
-               v-model="edititems.empPwd" pattern="^[0-9]+$" required>
+            <input class="form-control" type="password" id="pwd" placeholder="密码" v-model="edititems.empPwd"
+            onkeyup="validate()" required>
 
            </div>
          </div>
+         <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="text-input">再次输入密码</label>
+          <div class="col-md-9">
+            <input class="form-control" type="password" id="pwd1" placeholder="请再次输入密码" onkeyup="validate()"
+            required>
+
+          </div>
+        </div>
 
         
        </form>
@@ -380,6 +391,23 @@
   <script src="../vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
   <script src="../vendors/mock.js/js/mock.min.js"></script>
   <script src="../vendors/vue.js/js/vue.min.js"></script>
+  <script>
+
+    function validate() {
+      var pwd = $("#pwd").val();
+      var pwd1 = $("#pwd1").val();
+
+      if (pwd != pwd1) {
+        $("#danger").html("两次密码不相同");
+        $("#danger").css("color", "red")
+        $("button").attr("disabled", "disabled");
+      } else {
+        $("#danger").html("");
+        $("button").removeAttr("disabled");
+      }
+
+    }
+  </script>
   <script>
     var p, d, j;
     var app;

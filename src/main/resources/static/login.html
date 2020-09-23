@@ -34,7 +34,7 @@
   <body class="app flex-row align-items-center">
       
     <div class="container">
-        <form class="needs-validation" action="/form" method="post" novalidate>
+        <form class="needs-validation" action="/api/login" method="post" novalidate>
       <div class="row justify-content-center" id="bk">
         <div class="col-md-6">
           <div class="card mx-4">
@@ -47,7 +47,7 @@
                     <i class="icon-user"></i>
                   </span>
                 </div>
-                <input type="text" id="id" name="username" class="form-control" placeholder="用户名"  required>
+                <input type="text" id="emp_id" name="emp_id" class="form-control" placeholder="用户名"  required>
                 <!-- <input class="form-control" type="text" placeholder="用户名" pattern="^[\u4e00-\u9fa5]{2,4}$|^[A-Za-z\s]{2,40}$" required> -->
                 <div class="invalid-feedback">
                     用户名不能为空并只能输入中文或英文组成！
@@ -60,31 +60,75 @@
                     <i class="icon-lock"></i>
                   </span>
                 </div>
-                <input type="password" id="pwd" name="password" class="form-control" placeholder="密码"  required>
+                <input type="password" id="emp_pwd" name="emp_pwd" class="form-control" placeholder="密码"  required>
               </div>
               <div class="form-group row">
                 <div class="col-md-9 col-form-label">
                   <div class="form-check form-check-inline mr-1">
-                    <input class="form-check-input" id="salesman" type="radio" value="option1" name="salesman">
-                    <label class="form-check-label" for="salesman">销售员</label>
+                    <input class="form-check-input" id="inline-radio1" type="radio" value=0 name="emp_type">
+                    <label class="form-check-label" for="inline-radio1">销售人员</label>
                   </div>
                   <div class="form-check form-check-inline mr-1">
-                    <input class="form-check-input" id="merchandiser" type="radio" value="option2" name="merchandiser">
-                    <label class="form-check-label" for="merchandiser">跟单员</label>
+                    <input class="form-check-input" id="inline-radio2" type="radio" value=1 name="emp_type">
+                    <label class="form-check-label" for="inline-radio2">跟单人员</label>
                   </div>
                   <div class="form-check form-check-inline mr-1">
-                    <input class="form-check-input" id="finance" type="radio" value="option3" name="finance">
-                    <label class="form-check-label" for="finance">财务</label>
+                    <input class="form-check-input" id="inline-radio3" type="radio" value=2 name="emp_type">
+                    <label class="form-check-label" for="inline-radio3">财务人员</label>
                   </div>
                 </div>
               </div>
-              <button class="btn btn-block btn-success"type="submit" >登录</button>
+
+              <button class="btn btn-block btn-success"type="button" onclick="login()">登录</button>
             </div>
           
           </div>
         </div>
       </div>
       </form>
+      <div class="modal fade show" id="FailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+           style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-danger" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">通知</h4>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>登录失败</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
+
+            </div>
+          </div>
+          <!-- /.modal-content-->
+        </div>
+        <!-- /.modal-dialog-->
+      </div>
+
+      <div class="modal fade" id="issue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+           style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-danger" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">提示</h4>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>出现未知错误</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-danger" type="button" data-dismiss="modal">确定</button>
+            </div>
+          </div>
+          <!-- /.modal-content-->
+        </div>
+      </div>
     </div>
     <!-- CoreUI and necessary plugins-->
     <script src="vendors/jquery/js/jquery.min.js"></script>
@@ -95,12 +139,35 @@
     <script src="vendors/@coreui/coreui/js/coreui.min.js"></script>
 
     <script>
-        function zhu() {
-          alert("wewe");
+        function login() {
+
           var forms = document.getElementsByClassName('needs-validation')[0];
               //forms.classList.remove('was-validated');
               if (forms.checkValidity() === true) {
-                alert(1111);
+                var params = $(".needs-validation").serialize();
+                console.log(params)
+                $.ajax({
+                  type: 'POST',//方法类型
+                  url: "/api/emp/login",
+                  data: params,
+                  success: function (result) {
+                    if (result.resultCode == 200) {
+                      if(result.data === 0){
+                        window.location.href = '/index';
+                      }else if(result.data === 1){
+                        window.location.href = '/merchandiser/merchandiser_orders_list';
+                      }else if(result.data === 2){
+                        window.location.href = '/account/account_orders_check';
+                      }
+                    } else {
+                      $('#FailModal').modal('show');
+                    }
+                    ;
+                  },
+                  error: function () {
+                    $('#issue').modal('show');
+                  }
+                });
               }
               forms.classList.add('was-validated');
           }

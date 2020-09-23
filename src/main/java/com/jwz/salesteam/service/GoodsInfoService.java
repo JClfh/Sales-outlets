@@ -9,7 +9,7 @@ import java.util.List;
  * @author ：Jiang Weizan
  * @date ：Created in 2020/9/18 15:32
  * @description：
- * @modified By：
+ * @modified By：Liang Jiangle
  * @version:
  */
 public interface GoodsInfoService {
@@ -26,4 +26,8 @@ public interface GoodsInfoService {
     String updateGoodsInfo(GoodsInfo goodsInfo);
 
     List<GoodsInfo> findByGoodsName(String goods_name);
+
+    List<GoodsInfo> getGoodsInfoList2();
+
+    GoodsInfo getGoodsInfo(Integer id);
 }

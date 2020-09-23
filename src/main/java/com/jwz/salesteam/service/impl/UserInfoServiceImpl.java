@@ -4,9 +4,12 @@ import com.jwz.salesteam.common.ServiceResultEnum;
 import com.jwz.salesteam.controller.common.UserInfoVO;
 import com.jwz.salesteam.dao.EmpInfoMapper;
 import com.jwz.salesteam.dao.UserInfoMapper;
+import com.jwz.salesteam.entity.EmpInfo;
 import com.jwz.salesteam.entity.UserInfo;
 import com.jwz.salesteam.service.UserInfoService;
 import com.jwz.salesteam.util.BeanUtil;
+import com.jwz.salesteam.util.NumberUtil;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,8 +68,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public List<UserInfoVO> getUserInfoList() {
 
-        List<UserInfoVO> userInfoVOList =  new ArrayList<>();
-        userInfoVOList =  BeanUtil.copyList(userInfoMapper.findUserInfoList(), UserInfoVO.class);
+        List<UserInfoVO> userInfoVOList =  BeanUtil.copyList(userInfoMapper.findUserInfoList(), UserInfoVO.class);
         for(UserInfoVO userInfoVO:userInfoVOList){
             String firstEmpName = empInfoMapper.selectByPrimaryKey(userInfoVO.getFirstSaleman()).getEmpName();
             String lastEmpName = empInfoMapper.selectByPrimaryKey(userInfoVO.getLastSaleman()).getEmpName();
@@ -77,7 +79,38 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public List<UserInfo> findByUserName(String user_name) {
-        return userInfoMapper.findByUserName(user_name);
+    public List<UserInfoVO> findByUserName(String user_name) {
+        List<UserInfoVO> userInfoVOList =  BeanUtil.copyList(userInfoMapper.findByUserName(user_name), UserInfoVO.class);
+        for(UserInfoVO userInfoVO:userInfoVOList){
+            String firstEmpName = empInfoMapper.selectByPrimaryKey(userInfoVO.getFirstSaleman()).getEmpName();
+            String lastEmpName = empInfoMapper.selectByPrimaryKey(userInfoVO.getLastSaleman()).getEmpName();
+            userInfoVO.setFirstSalemanName(firstEmpName);
+            userInfoVO.setLastSalemanName(lastEmpName);
+        }
+        return userInfoVOList;
     }
+
+    @Override
+    public UserInfo findByUserTel(String user_tel) {
+        return userInfoMapper.selectByTel(user_tel);
+    }
+
+    @Override
+    public String saveUserInfo(UserInfo userInfo) {
+        UserInfo temp = userInfoMapper.selectByTel(userInfo.getUserTel());
+
+        if (temp != null) {
+            return ServiceResultEnum.SAME_USERINFO_EXIST.getResult();
+//            return "该职员已经存在";
+        }
+
+        if (userInfoMapper.insert(userInfo) > 0) {
+            return ServiceResultEnum.SUCCESS.getResult();
+//            return "添加成功";
+        }
+        return ServiceResultEnum.DB_ERROR.getResult();
+//        return "出现未知错误";
+    }
+
+
 }

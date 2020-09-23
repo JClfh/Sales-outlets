@@ -103,4 +103,12 @@
       goods_price = #{goodsPrice,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByGoodsIdAndOrderId" resultType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from goods_list
+    where goods_id = #{goods_id,jdbcType=VARCHAR} and order_id = #{order_id,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

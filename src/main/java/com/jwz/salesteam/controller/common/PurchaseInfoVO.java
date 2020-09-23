@@ -1,8 +1,8 @@
-package com.jwz.salesteam.entity;
+package com.jwz.salesteam.controller.common;
 
 import java.util.Date;
 
-public class PurchaseInfo {
+public class PurchaseInfoVO {
     private Integer id;
 
     private String purchaseId;
@@ -13,9 +13,13 @@ public class PurchaseInfo {
 
     private Integer goodsPrice;
 
+    private Integer goodsNum;
+
     private String orderId;
 
     private String goodsId;
+
+    private String goodsName;
 
     private String empId;
 
@@ -69,6 +73,14 @@ public class PurchaseInfo {
         this.goodsPrice = goodsPrice;
     }
 
+    public Integer getGoodsNum() {
+        return goodsNum;
+    }
+
+    public void setGoodsNum(Integer goodsNum) {
+        this.goodsNum = goodsNum;
+    }
+
     public String getOrderId() {
         return orderId;
     }
@@ -83,6 +95,14 @@ public class PurchaseInfo {
 
     public void setGoodsId(String goodsId) {
         this.goodsId = goodsId;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 
     public String getEmpId() {

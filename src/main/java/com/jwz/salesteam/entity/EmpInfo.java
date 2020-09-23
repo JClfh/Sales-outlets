@@ -122,4 +122,22 @@ public class EmpInfo {
     public void setIsDel(Integer isDel) {
         this.isDel = isDel;
     }
+
+    @Override
+    public String toString() {
+        return "EmpInfo{" +
+                "id=" + id +
+                ", empId='" + empId + '\'' +
+                ", empPwd='" + empPwd + '\'' +
+                ", empName='" + empName + '\'' +
+                ", empSex=" + empSex +
+                ", empTel='" + empTel + '\'' +
+                ", empAddress='" + empAddress + '\'' +
+                ", empType=" + empType +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", isLock=" + isLock +
+                ", isDel=" + isDel +
+                '}';
+    }
 }

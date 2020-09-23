@@ -3,18 +3,21 @@
 <mapper namespace="com.jwz.salesteam.dao.PurchaseInfoMapper" >
   <resultMap id="BaseResultMap" type="com.jwz.salesteam.entity.PurchaseInfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="purchase_id" property="purchaseId" jdbcType="VARCHAR" />
     <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
     <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
     <result column="goods_price" property="goodsPrice" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="VARCHAR" />
     <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
     <result column="emp_id" property="empId" jdbcType="VARCHAR" />
+    <result column="account_emp_id" property="accountEmpId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="DATE" />
     <result column="finish_time" property="finishTime" jdbcType="DATE" />
     <result column="is_del" property="isDel" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, supplier_id, supplier_name, goods_price, order_id, goods_id, emp_id, create_time, 
+    id, purchase_id, supplier_id, supplier_name, goods_price, order_id, goods_id, emp_id, account_emp_id, status,create_time,
     finish_time, is_del
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -28,13 +31,13 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.jwz.salesteam.entity.PurchaseInfo" >
-    insert into purchase_info (id, supplier_id, supplier_name, 
+    insert into purchase_info (id, purchase_id,supplier_id, supplier_name,
       goods_price, order_id, goods_id, 
-      emp_id, create_time, finish_time, 
-      is_del)
-    values (#{id,jdbcType=INTEGER}, #{supplierId,jdbcType=INTEGER}, #{supplierName,jdbcType=VARCHAR}, 
+      emp_id, account_emp_id,status,
+      create_time, finish_time, is_del)
+    values (#{id,jdbcType=INTEGER}, #{purchaseId,jdbcType=INTEGER}, #{supplierId,jdbcType=INTEGER}, #{supplierName,jdbcType=VARCHAR},
       #{goodsPrice,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, #{goodsId,jdbcType=VARCHAR}, 
-      #{empId,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{finishTime,jdbcType=DATE}, 
+      #{empId,jdbcType=VARCHAR}, #{accountEmpId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=DATE}, #{finishTime,jdbcType=DATE},
       #{isDel,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jwz.salesteam.entity.PurchaseInfo" >
@@ -42,6 +45,9 @@
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="purchaseId != null" >
+        purchase_id,
       </if>
       <if test="supplierId != null" >
         supplier_id,
@@ -61,6 +67,12 @@
       <if test="empId != null" >
         emp_id,
       </if>
+      <if test="accountEmpId != null" >
+        account_emp_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
       <if test="createTime != null" >
         create_time,
       </if>
@@ -74,6 +86,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
+      </if>
+      <if test="purchaseId != null" >
+        #{purchaseId,jdbcType=INTEGER},
       </if>
       <if test="supplierId != null" >
         #{supplierId,jdbcType=INTEGER},
@@ -93,6 +108,12 @@
       <if test="empId != null" >
         #{empId,jdbcType=VARCHAR},
       </if>
+      <if test="accountEmpId != null" >
+        #{accountEmpId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=DATE},
       </if>
@@ -107,6 +128,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.jwz.salesteam.entity.PurchaseInfo" >
     update purchase_info
     <set >
+      <if test="purchaseId != null" >
+        purchase_id = #{purchaseId,jdbcType=INTEGER},
+      </if>
       <if test="supplierId != null" >
         supplier_id = #{supplierId,jdbcType=INTEGER},
       </if>
@@ -125,6 +149,12 @@
       <if test="empId != null" >
         emp_id = #{empId,jdbcType=VARCHAR},
       </if>
+      <if test="accountEmpId != null" >
+        account_emp_id = #{accountEmpId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        emp_id = #{status,jdbcType=INTEGER},
+      </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=DATE},
       </if>
@@ -139,15 +169,31 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jwz.salesteam.entity.PurchaseInfo" >
     update purchase_info
-    set supplier_id = #{supplierId,jdbcType=INTEGER},
+    set purchase_id =  #{purchaseId,jdbcType=INTEGER},
+      supplier_id = #{supplierId,jdbcType=INTEGER},
       supplier_name = #{supplierName,jdbcType=VARCHAR},
       goods_price = #{goodsPrice,jdbcType=INTEGER},
       order_id = #{orderId,jdbcType=VARCHAR},
       goods_id = #{goodsId,jdbcType=VARCHAR},
       emp_id = #{empId,jdbcType=VARCHAR},
+      account_emp_id = #{accountEmpId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=DATE},
       finish_time = #{finishTime,jdbcType=DATE},
       is_del = #{isDel,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByEmpId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from purchase_info
+    where emp_id = #{emp_id,jdbcType=VARCHAR} and status > 1
+  </select>
+
+  <select id="selectByAccountEmpId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from purchase_info
+    where account_emp_id = #{accountEmpId,jdbcType=VARCHAR} and status >0
+  </select>
 </mapper>

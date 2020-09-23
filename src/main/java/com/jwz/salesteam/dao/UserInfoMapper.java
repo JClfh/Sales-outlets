@@ -23,4 +23,6 @@ public interface UserInfoMapper {
     List<UserInfo> findByUserName(String user_name);
 
     UserInfo selectByTelAndId(String user_tel, Integer id);
+
+    UserInfo selectByTel(String user_tel);
 }

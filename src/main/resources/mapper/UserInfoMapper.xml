@@ -77,34 +77,34 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="user_name != null">
+      <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="user_sex != null">
+      <if test="userSex != null">
         #{userSex,jdbcType=INTEGER},
       </if>
-      <if test="user_tel != null">
+      <if test="userTel != null">
         #{userTel,jdbcType=VARCHAR},
       </if>
-      <if test="user_vip != null">
+      <if test="userVip != null">
         #{userVip,jdbcType=INTEGER},
       </if>
-      <if test="user_address != null">
+      <if test="userAddress != null">
         #{userAddress,jdbcType=VARCHAR},
       </if>
-      <if test="first_saleman != null">
+      <if test="firstSaleman != null">
         #{firstSaleman,jdbcType=INTEGER},
       </if>
-      <if test="last_saleman != null">
+      <if test="lastSaleman != null">
         #{lastSaleman,jdbcType=INTEGER},
       </if>
-      <if test="create_time != null">
+      <if test="createTime != null">
         #{createTime,jdbcType=DATE},
       </if>
-      <if test="update_time != null">
+      <if test="updateTime != null">
         #{updateTime,jdbcType=DATE},
       </if>
-      <if test="is_del != null">
+      <if test="isDel != null">
         #{isDel,jdbcType=INTEGER},
       </if>
     </trim>
@@ -175,5 +175,13 @@
     <include refid="Base_Column_List"/>
     from user_info
     where  user_tel = #{user_tel,jdbcType=VARCHAR}  and id != #{id,jdbcType=INTEGER} limit 1
+  </select>
+
+
+  <select id="selectByTel" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List"/>
+    from user_info
+    where  user_tel = #{user_tel,jdbcType=VARCHAR}
   </select>
 </mapper>

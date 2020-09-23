@@ -8,6 +8,7 @@
  */
 package com.jwz.salesteam.interceptor;
 
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,19 +16,23 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * @author ：Jiang Weizan
+ * @date ：Created in 2020/9/17 16:14
+ * @description：管理员登录拦截
+ * @modified By：
+ * @version: 1.0
+ */
 
 @Component
-public class AdminLoginInterceptor implements HandlerInterceptor {
+public class SalemanLoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        String uri = request.getRequestURI();
-        if (uri.startsWith("/admin") && null == request.getSession().getAttribute("loginUser")) {
-            request.getSession().setAttribute("errorMsg", "请登陆");
-            response.sendRedirect(request.getContextPath() + "/admin/login");
+        if (null == request.getSession().getAttribute("销售员")) {
+            response.sendRedirect(request.getContextPath() + "/login");
             return false;
         } else {
-            request.getSession().removeAttribute("errorMsg");
             return true;
         }
     }

@@ -2,6 +2,7 @@ package com.jwz.salesteam.service;
 
 import com.jwz.salesteam.controller.common.UserInfoVO;
 import com.jwz.salesteam.entity.UserInfo;
+import org.apache.catalina.User;
 
 import java.util.List;
 
@@ -21,6 +22,11 @@ public interface UserInfoService {
 
     List<UserInfoVO> getUserInfoList();
 
-    List<UserInfo> findByUserName(String user_name);
+    List<UserInfoVO> findByUserName(String user_name);
+
+    UserInfo findByUserTel(String user_tel);
+
+    String saveUserInfo(UserInfo userInfo);
+
 
 }

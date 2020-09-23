@@ -16,4 +16,6 @@ public interface GoodsListMapper {
     int updateByPrimaryKeySelective(GoodsList record);
 
     int updateByPrimaryKey(GoodsList record);
+
+    Integer selectByGoodsIdAndOrderId(String goods_id, String order_id);
 }
