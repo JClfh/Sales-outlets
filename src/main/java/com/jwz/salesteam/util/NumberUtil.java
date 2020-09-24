@@ -53,6 +53,18 @@ public class NumberUtil {
     }
 
     /**
+     * 生成采购单流水号
+     *
+     * @return
+     */
+    public static String genPurchaseNo() {
+        StringBuffer buffer = new StringBuffer(String.valueOf(System.currentTimeMillis()));
+        int num = genRandomNum(5);
+        buffer.append(num);
+        return buffer.toString();
+    }
+
+    /**
      * 生成职员id
      *
      */

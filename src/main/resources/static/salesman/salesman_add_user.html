@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <base href="./">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+  <meta name="author" content="Łukasz Holeczek">
+  <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+  <title>添加客户</title>
+  <!-- Icons-->
+  <link href="../vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+  <link href="../vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+  <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+</head>
+<script type="text/css">
+
+            </script>
+<style>
+  .div1 {
+    background: rgb(38, 202, 231);
+    color: rgb(252, 247, 247);
+  }
+</style>
+
+<body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
+  <header class="app-header navbar">
+    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="btn-group" role="group" aria-label="Button group">
+      <p class="btn"> 你好，无敌的 销售员！</p>
+      <a class="btn" href="/logout">
+        <i class="fa fa-share" aria-hidden="true"></i> &nbsp;退出</a>
+    </div>
+
+
+  </header>
+  <div class="app-body">
+    <div class="sidebar">
+      <nav class="sidebar-nav ps ps--active-y">
+        <ul class="nav">
+          <br>
+          <br>
+
+          <li class="nav-item nav-dropdown ">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-puzzle"></i> 客户信息</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_add_user.html">
+                  <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加客户</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_manage_user.html">
+                  <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;查看客户</a>
+              </li>
+            </ul>
+          </li>
+          <br><br><br>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-star"></i>商城</a>
+            <ul class="nav-dropdown-items">
+
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_show_goods.html">
+                  <i class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp;商品展示</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_manage_order.html">
+                  <i class="icon-speech"></i>&nbsp;订单管理</a>
+              </li>
+            </ul>
+          </li>
+          <br><br><br>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-cursor"></i>个人中心</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_security.html">
+                  <i class="icons cui-shield"></i> &nbsp;账号安全</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_personal_information.html">
+                  <i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp;个人信息</a>
+              </li>
+
+            </ul>
+          </li>
+
+        </ul>
+        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+          <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+        </div>
+        <div class="ps__rail-y" style="top: 0px; height: 445px; right: 0px;">
+          <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 297px;"></div>
+        </div>
+      </nav>
+      <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+    </div>
+    <main class="main">
+      <!-- Breadcrumb-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">你的位置：客户信息->添加客户</li>
+      </ol>
+
+      <div align="center" id="itemsTemplate">
+        <div class="col-sm-12 col-md-10" align="center">
+
+          <div class="card border-primary" align="center">
+
+            <div class="card-body">
+              <div class="card" id="listTable">
+
+                <div class="card-header" align="center">
+                  <h2><i class="fa fa-user-plus" aria-hidden="true"></i>添加客户</h2>
+                </div>
+                <div class="card-body" align="center">
+
+                  <form class="needs-validation" novalidate>
+
+                    <div class="form-group row">
+
+                      <div class="card-body collapse show" id="collapseExample">
+                        <table class="table table-responsive-sm table-bordered">
+
+                          <tbody id="trlist" align="center">
+                            <tr>
+                              <td>姓名</td>
+                              <td>
+                                <div class="col-md-9">
+                                  <input class="form-control" id="text-input" type="text" name="text-input"
+                                    v-model="addALL.userName" placeholder="姓名"
+                                    pattern="^[\u4e00-\u9fa5]{2,4}$|^[A-Za-z\s]{2,50}$" required>
+                                  <div class="invalid-feedback">
+                                    姓名不能为空并只能输入2-4中文或英文！
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>性别</td>
+                              <td>
+                                <div class="col-md-9">
+                                  <select class="form-control" id="select1" name="select1" v-model="addALL.userSex">
+                                    <option value=""></option>
+                                    <option value="0">男</option>
+                                    <option value="1">女</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>联系电话</td>
+                              <td>
+                                <div class="col-md-9">
+                                  <input class="form-control" id="text-input" type="text" name="text-input"
+                                    v-model="addALL.userTel" placeholder="电话" pattern="^[1]([3-9])[0-9]{9}$" required>
+                                  <div class="invalid-feedback">
+                                    电话不能为空并只能输入数字！
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>联系地址</td>
+                              <td>
+                                <div class="col-md-9">
+                                  <input class="form-control" id="text-input" type="text" name="text-input"
+                                    v-model="addALL.userAddress" placeholder="地址">
+                            
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </form>
+                  <button class="btn btn-primary" type="button" v-on:click="addB()">
+                    <i class="fa fa-check" aria-hidden="true"></i>提交</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- 保存 -->
+        <div class="modal fade" id="primaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-primary" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">保存</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>是否保存</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">否</button>
+                <button class="btn btn-danger" type="button" data-toggle="modal" v-on:click="addA()">确定</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /成功-->
+        <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-success" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>提交成功！</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
+        <div class="modal fade" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>已存在该用户</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">确定</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../vendors/jquery/js/jquery.min.js"></script>
+  <script src="../vendors/popper.js/js/popper.min.js"></script>
+  <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../vendors/pace-progress/js/pace.min.js"></script>
+  <script src="../vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+  <script src="../vendors/@coreui/coreui/js/coreui.min.js"></script>
+  <script src="../vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
+  <script src="../vendors/mock.js/js/mock.min.js"></script>
+  <script src="../vendors/vue.js/js/vue.min.js"></script>
+  <script>
+    var p, d, j;
+    var app;
+    var item;
+    var checkValidity;
+    $(function () {
+
+      app = new Vue({
+        el: '#itemsTemplate',
+        data: {
+          addALL: {
+            id: 0,//主键标识
+            userName: "",
+            userSex: "",
+            userTel: "",
+            userVip: "",
+            userAddress: "",
+            firstSaleman: "",
+            lastSaleman: "",
+            createTime: getTime(),//记录创建日期
+            updateTime: getTime(),//记录修改日期
+            is_del: 0//是否离职
+          },
+        },
+        methods: {
+          // 新增
+          addA: function () {
+
+            var forms = document.getElementsByClassName('needs-validation')[0];
+            forms.classList.add('was-validated');
+            var data = {
+              "id": 0,//主键标识
+              "userName": this.addALL.userName,
+              "userSex": this.addALL.userSex,
+              "userTel": this.addALL.userTel,
+              "userVip": this.addALL.userVip,
+              "userAddress": this.addALL.userAddress,
+              "firstSaleman": this.addALL.firstSaleman,
+              "lastSaleman": this.addALL.lastSaleman,
+              "createTime": new Date(),//记录创建日期
+              "updateTime": new Date(),//记录修改日期
+              "isDel": 0//是否离职
+            }
+            if (forms.checkValidity() === true) {
+              $.ajax({
+                url: "/api/user/register",
+                type: "post",
+                //将/jsON转化为字符串传递
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(data),
+
+                //成功后的方法
+                success: function () {
+                  $('#success').modal('show');
+                  // window.location.href = "/admin/admin_manage_members.html";
+                },
+                error: function (xhr, status, error) {
+      
+                  $('#danger').modal('show');
+                }
+              });
+              // $.post("/admin/emp/save",
+              //   {
+              //     id: 0,//主键标识
+              //     empId: 0,
+              //     empPwd: 0,
+              //     empName: this.addALL.empName,
+              //     empSex: this.addALL.empSex,
+              //     empType: this.addALL.empType,//职位
+              //     empTel: this.addALL.empTel,//电话
+              //     empAddress: this.addALL.empAddress,//地址
+              //     create_time: new Date(),//记录创建日期
+              //     updateTime: new Date(),//记录修改日期
+              //     isLock: 0,//是否锁住
+              //     isDel: 0//是否离职
+              //
+              //   }, function (data) {
+              //     if (data === true) {
+              //       $('#primaryModal').modal('hide');
+              //       $('#success').modal('show');
+              //     } else {
+              //       $('#primaryModal').modal('hide');
+              //       $('#danger').modal('show');
+              //     }
+              //   });
+
+            }
+            $('#primaryModal').modal('hide');
+            forms.classList.add('was-validated');
+          },
+          addB: function () {
+            var forms = document.getElementsByClassName('needs-validation')[0];
+            forms.classList.add('was-validated');
+            if (forms.checkValidity() === true) {
+              $('#primaryModal').modal('show');
+            }
+          }
+
+        }
+
+      });
+      return;
+
+    });
+
+
+
+  </script>
+</body>
+
+</html>

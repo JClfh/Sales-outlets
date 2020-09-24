@@ -10,7 +10,7 @@ package com.jwz.salesteam.controller.common;
 public class OrderConutVO {
     private String empId;
 
-    private String emdName;
+    private String empName;
 
     private Integer empResults;
 
@@ -22,12 +22,12 @@ public class OrderConutVO {
         this.empId = empId;
     }
 
-    public String getEmdName() {
-        return emdName;
+    public String getEmpName() {
+        return empName;
     }
 
-    public void setEmdName(String emdName) {
-        this.emdName = emdName;
+    public void setEmpName(String empName) {
+        this.empName = empName;
     }
 
     public Integer getEmpResults() {

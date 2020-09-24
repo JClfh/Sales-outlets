@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <base href="./">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+  <meta name="author" content="Łukasz Holeczek">
+  <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+  <title>账号安全</title>
+  <!-- Icons-->
+  <link href="../vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+  <link href="../vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+  <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+</head>
+<script type="text/css">
+
+            </script>
+<style>
+  .div1 {
+    background: rgb(38, 202, 231);
+    color: rgb(252, 247, 247);
+  }
+</style>
+
+<body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
+<header class="app-header navbar">
+  <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="btn-group" role="group" aria-label="Button group">
+    <span class="btn"> 你好，辛苦了老跟单员！找供货商找找找</span>
+    <a class="btn" href="/api/emp/logout">
+      <i class="fa fa-share" aria-hidden="true"></i>退出</a>
+  </div>
+
+
+</header>
+  <div class="app-body">
+    <div class="sidebar">
+      <nav class="sidebar-nav ps ps--active-y">
+        <ul class="nav">
+          <br>
+          <li class="nav-item nav-dropdown ">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-puzzle"></i> 跟单员</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" href="./merchandiser_orders_list.html">
+                  <i class="nav-icon icon-puzzle"></i>订单管理</a>
+              </li>
+            </ul>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" href="./merchandiser_orders_history.html">
+                  <i class="nav-icon icon-puzzle"></i>历史订单</a>
+              </li>
+            </ul>
+          </li>
+          <br><br>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-cursor"></i>个人中心</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" href="./merchandiser_security.html">
+                  <i class="icons cui-shield"></i> &nbsp;账号安全</a>
+              </li>
+            </ul>
+          </li>
+
+
+        </ul>
+        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+          <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+        </div>
+        <div class="ps__rail-y" style="top: 0px; height: 445px; right: 0px;">
+          <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 297px;"></div>
+        </div>
+      </nav>
+      <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+    </div>
+    <main class="main">
+      <!-- Breadcrumb-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">你的位置：个人中心->账号安全</li>
+      </ol>
+
+      <div align="center" id="itemsTemplate">
+        <div class="col-sm-12 col-md-10" align="center">
+
+          <div class="card border-primary" align="center">
+
+            <div class="card-body">
+              <div class="card" id="listTable">
+
+                <div class="card-header" align="center">
+                  <h2><i class="icons cui-shield"></i>账号安全</h2>
+                </div>
+                <div class="card-body" align="center">
+
+                  <form class="needs-validation" novalidate>
+
+                    <div class="form-group row">
+
+                      <div class="card-body collapse show" id="collapseExample">
+                        <table class="table table-responsive-sm table-bordered">
+
+                          <tbody id="trlist" align="center">
+                          <tr>
+                            <td>登录ID</td>
+                            <td>
+                              <div class="col-md-9">
+                                <input class="form-control" id="empId" type="text" name="empId"
+                                       v-model="items.empId" disabled="disabled" required>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>原密码</td>
+                            <td>
+                              <div class="col-md-9">
+                                <input class="form-control" id="empPwd" type="text" name="empPwd"
+                                       v-model="edititems.empPwd" placeholder="原密码" required>
+                                <div class="invalid-feedback">
+                                  原密码不能为空！
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>新密码</td>
+                            <td>
+                              <div class="col-md-9">
+                                <input class="form-control" id="pwd1" type="password" name="text-input" placeholder="新密码"
+                                       pattern="^.{6,20}$" required>
+                                <div class="invalid-feedback">
+                                  密码个数6-20位！
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>再次确认密码</td>
+                            <td>
+                              <div class="col-md-9">
+                                <input class="form-control" id="pwd2" type="password" name="text-input"
+                                       v-model="edititems.empnewPwd" placeholder="再次确认密码" required>
+                                <div class="invalid-feedback" >
+                                  不能为空！
+                                </div>
+                                <span id="aa" style="color:#ff6700" ></span>
+                              </div>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                  </form>
+                  <button class="btn btn-primary" type="button" v-on:click="edit()">
+                    <i class="fa fa-check" aria-hidden="true"></i>提交</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- 是否修改密码 -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-primary" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">修改</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>是否修改</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">否</button>
+                <button class="btn btn-danger" type="button" data-toggle="modal" v-on:click="save()">确定</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /成功-->
+        <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-success" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>修改成功！</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
+        <!-- 密码不正确 -->
+        <div class="modal fade" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>原密码不正确</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">确定</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
+        <!-- 修改密码失败 -->
+        <div class="modal fade" id="danger2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>修改失败</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">确定</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
+        <!-- 未知错误 -->
+        <div class="modal fade" id="issue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>未知错误</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">确定</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../vendors/jquery/js/jquery.min.js"></script>
+  <script src="../vendors/popper.js/js/popper.min.js"></script>
+  <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../vendors/pace-progress/js/pace.min.js"></script>
+  <script src="../vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+  <script src="../vendors/@coreui/coreui/js/coreui.min.js"></script>
+  <script src="../vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
+  <script src="../vendors/mock.js/js/mock.min.js"></script>
+  <script src="../vendors/vue.js/js/vue.min.js"></script>
+<script>
+  var p, d, j;
+  var app;
+  var item;
+  var checkValidity;
+  $(function () {
+    Mock.mock("http://127.0.0.1:5500/users", {
+      "data|1-1": [{
+        empId: "@increment()",//编号
+        empPwd: "@increment()",//商品编号
+
+      }],
+      suceess: true,
+      code: 200,
+      msg: "Success"
+    });
+    $.getJSON("/api/emp/person", function (response) {
+      items = response.data;
+      app = new Vue({
+        el: '#itemsTemplate',
+        data: {
+
+          items: items,
+          edititems: {
+            empPwd: null,
+            empnewPwd: null
+          },
+        },
+        methods: {
+          // 修改密码
+          edit: function () {
+            var forms = document.getElementsByClassName('needs-validation')[0];
+            forms.classList.add('was-validated');
+            var pwd1 = document.getElementById("pwd1").value;
+            var pwd2 = document.getElementById("pwd2").value;
+            if (pwd1 === pwd2) {
+              if (forms.checkValidity() === true) {
+                $('#editModal').modal('show');
+              }
+            }else{
+              document.getElementById('aa').innerHTML = "密码不一致！"
+
+            }
+
+          },
+          save: function () {
+            var data = {
+              "old_emp_pwd": this.edititems.empPwd,
+              "new_emp_pwd": this.edititems.empnewPwd,
+              "id":items.id
+            }
+            $.ajax({
+              url: "/api/emp/updatePerson",
+              type: "post",
+              //将/jsON转化为字符串传递
+              dataType: 'json',
+              data: data,
+              //成功后的方法
+              success: function (res) {
+//                       判断弹框
+                console.log(res)
+                if(res.resultCode === 500){
+                  if(res.message === "原密码输入错误"){
+                    $('#editModal').modal('hide');
+                    $('#danger').modal('show')
+                  }else{
+                    $('#editModal').modal('hide');
+                    $('#danger2').modal('show');
+                  }
+                }else{
+
+                  $('#editModal').modal('hide');
+                  $('#success').modal('show');
+                }
+
+                var forms = document.getElementsByClassName('needs-validation')[0];
+                forms.classList.remove('was-validated');
+              },
+              error: function (xhr, status, error) {
+                $('#editModal').modal('hide');
+                $('#issue').modal('show');
+              }
+            });
+
+          }
+
+        }
+
+      });
+      return;
+    });
+  });
+
+
+
+</script>
+</body>
+
+</html>

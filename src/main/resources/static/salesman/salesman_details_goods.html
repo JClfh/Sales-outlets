@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <base href="./">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+  <meta name="author" content="Łukasz Holeczek">
+  <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+  <title>商品详情</title>
+  <!-- Icons-->
+  <link href="../vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+  <link href="../vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+  <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/product.css">
+  <link rel="stylesheet" href="../css/productlist.css">
+</head>
+<script type="text/css">
+
+            </script>
+<style>
+  .div1 {
+    background: rgb(38, 202, 231);
+    color: rgb(252, 247, 247);
+  }
+
+  .btn1 {
+    font-size: 12px;
+  }
+</style>
+
+<body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
+  <header class="app-header navbar">
+    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="btn-group" role="group" aria-label="Button group">
+      <p class="btn"> 你好，无敌的 销售员！</p>
+      <a class="btn" href="/logout">
+        <i class="fa fa-share" aria-hidden="true"></i> &nbsp;退出</a>
+    </div>
+
+
+  </header>
+  <div class="app-body">
+
+
+    <div class="sidebar">
+      <nav class="sidebar-nav ps ps--active-y">
+        <ul class="nav">
+          <br>
+          <br>
+
+          <li class="nav-item nav-dropdown ">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-puzzle"></i> 客户信息</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_add_user.html">
+                  <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加客户</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_manage_user.html">
+                  <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;查看客户</a>
+              </li>
+            </ul>
+          </li>
+          <br><br><br>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-star"></i>商城</a>
+            <ul class="nav-dropdown-items">
+
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_show_goods.html">
+                  <i class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp;商品展示</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_manage_order.html">
+                  <i class="icon-speech"></i>&nbsp;订单管理</a>
+              </li>
+            </ul>
+          </li>
+          <br><br><br>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-cursor"></i>个人中心</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_security.html">
+                  <i class="icons cui-shield"></i> &nbsp;账号安全</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_personal_information.html">
+                  <i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp;个人信息</a>
+              </li>
+
+            </ul>
+          </li>
+
+        </ul>
+        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+          <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+        </div>
+        <div class="ps__rail-y" style="top: 0px; height: 445px; right: 0px;">
+          <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 297px;"></div>
+        </div>
+      </nav>
+      <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+    </div>
+    <main class="main">
+      <!-- Breadcrumb-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">你的位置：商品管理->商品展示</li>
+        <li class="breadcrumb-menu d-md-down-none">
+          <div class="btn-group" role="group" aria-label="Button group">
+            <a class="btn" href="#">
+              <i class="icon-speech"></i>
+            </a>
+            <a class="btn" href="#">
+              概述 | </a>
+            <a class="btn" href="#">
+              详情 |</a>
+            <a class="btn" href="#">
+              用户评价 |</a>
+          </div>
+        </li>
+      </ol>
+      <div class="container-fluid" id="itemsTemplate">
+        <div class="card">
+          <div class="row">
+            <div class="col-sm-9">
+              <div v-for="(item, index) in items" class="row" style="padding: 100px;">
+                <div class="col-xs-8 col-sm-6">
+                  <div class="">
+                    <img src="D:\idea_ws\Sales\CoreUI\images\手机.jpg" class="img-responsive" id="preview" width="300"
+                      height="300">
+                  </div>
+                </div>
+                <div class="col-xs-4 col-sm-6">
+                  <div class="">
+                    <div class="form-group row">
+                      <h3>小米手机 {{item.goodsName}}</h3>
+                    </div>
+                    <!-- <div class="form-group row">
+                      <p style="color:#b0b0b0;">描述{{item. goodsDetailContent}}</p>
+                    </div> -->
+                    <div class="form-group row">
+                      <p style="color:#b0b0b0;">简介{{item. goodsIntro}}</p>
+                    </div>
+                    <div class="form-group row">
+                      <span style="color:#ff6700;">价格&yen;{{item.goodsSellingPrice}} </span>&nbsp;<del
+                        style="color:#b0b0b0;">8888元</del>
+                    </div>
+                    <div class="row" style="padding: 70px;">
+                      <div class="col-xs-4 col-sm-6">
+                        <button class="btn btn-outline-danger btn-lg btn-block btn1" type="button" data-toggle="modal"
+                          v-on:click="addshow()">
+
+                          加入购物车</button>
+                      </div>
+                      <div class="col-xs-4 col-sm-6">
+                        <button class="btn btn-secondary btn-lg btn-block btn1" type="button" v-on:click="show()">查看购物车</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /成功-->
+        <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-success" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>加入购物车成功！</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
+
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../vendors/jquery/js/jquery.min.js"></script>
+  <script src="../vendors/popper.js/js/popper.min.js"></script>
+  <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../vendors/pace-progress/js/pace.min.js"></script>
+  <script src="../vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+  <script src="../vendors/@coreui/coreui/js/coreui.min.js"></script>
+  <script src="../vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
+  <script src="../vendors/mock.js/js/mock.min.js"></script>
+  <script src="../vendors/vue.js/js/vue.min.js"></script>
+  <script>
+    var p, d, j;
+    var app;
+    var items;
+    $(function () {
+      Mock.mock("http://127.0.0.1:5500/users", {
+        "data|1-1": [{
+          id: "@increment()",//编号
+          goodsId: "@increment()",//商品编号
+          "goodsName|1": ["@cname", "@name"],//商品姓名
+          goodsSellingPrice: "@increment()",//商品零售价
+          goodsCostPrice: "@increment()",//商品成本价
+          goodsCoverImg: "@cname()",//商品图片
+          goodsDetailContent: "@cname()",//商品信息描述 
+          goodsIntro: "@cname()",//商品信息简介
+          createTime: "@datetime()",//创建时间
+
+        }],
+        suceess: true,
+        code: 200,
+        msg: "Success"
+      });
+      $.getJSON("http://127.0.0.1:5500/users", function (response) {
+        items = response.data;
+        console.log(response.data)
+        page = Math.ceil(items.length / 5);
+        var pageitem = [];
+        for (var i = 0; i < page; i++) {
+          pageitem[i] = i + 1;
+        }
+        app = new Vue({
+          el: '#itemsTemplate',
+          data: {
+            items: items,
+            checkall: false,
+            pagesum: page,//总页码
+            pageindex: 1,//当前页码
+            pagesize: 5, //页面数据个数
+            pageitem: pageitem,
+            editIndex: -1,
+            edititems: { name: null },
+
+          },
+          computed: {
+            pageItems: function () {
+              var startIndex = (this.pageindex - 1) * this.pagesize;
+              var editIndex = startIndex + this.pagesize - 1;
+              return this.items.filter(function (value, index) {
+                return (
+                  index >= startIndex &&
+                  index <= editIndex
+                );
+              });
+            }
+          },
+          methods: {
+            //加入购物车
+            addshow: function () {
+              alert("加入成功");
+              $('#success').modal('show');
+              window.location.href="./salesman_shop_cart.html";
+            },
+      //查看购物车
+            show: function () {
+              alert("查看购物车");
+              window.location.href="./salesman_shop_cart.html";
+
+              $.ajax({
+                url: "/admin/emp/update",
+                type: "post",
+                //将/jsON转化为字符串传递
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(data),
+
+                //成功后的方法
+                success: function () {
+                  $('#editModal').modal('hide');
+                  $('#success').modal('show');
+                  window.location.href = "/admin/admin_manage_members.html";
+                },
+                error: function (xhr, status, error) {
+                  $('#editModal').modal('hide');
+                  $('#editFailModal').modal('show');
+                }
+              });
+
+            },
+          }
+
+        });
+        return;
+      });
+    });
+
+
+
+  </script>
+</body>
+
+</html>

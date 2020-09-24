@@ -235,4 +235,11 @@
     set emp_pwd = #{emp_pwd,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByEmpName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from emp_info
+    where  emp_name = #{search,jdbcType=VARCHAR}
+  </select>
 </mapper>

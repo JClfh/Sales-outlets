@@ -114,4 +114,11 @@
       is_del = #{isDel,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findSupplierInfoList" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from supplier_info
+    where is_del = 0
+  </select>
 </mapper>

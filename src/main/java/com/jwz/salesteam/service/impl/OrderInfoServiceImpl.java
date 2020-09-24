@@ -3,10 +3,15 @@ package com.jwz.salesteam.service.impl;
 import com.jwz.salesteam.common.ServiceResultEnum;
 import com.jwz.salesteam.controller.common.EmpInfoVO;
 import com.jwz.salesteam.controller.common.OrderConutVO;
+import com.jwz.salesteam.controller.common.UserInfoVO;
+import com.jwz.salesteam.dao.EmpInfoMapper;
 import com.jwz.salesteam.dao.OrderInfoMapper;
+import com.jwz.salesteam.entity.EmpInfo;
 import com.jwz.salesteam.entity.OrderInfo;
+import com.jwz.salesteam.service.EmpInfoService;
 import com.jwz.salesteam.service.OrderInfoService;
 import com.jwz.salesteam.service.OrderListService;
+import com.jwz.salesteam.util.BeanUtil;
 import com.jwz.salesteam.util.NumberUtil;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +28,10 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     @Autowired
     private OrderInfoMapper orderInfoMapper;
 
+
+
     @Autowired
-    private OrderListService orderListService;
+    private EmpInfoMapper empInfoMapper;
     
     @Override
     public String saveOrderInfo(OrderInfo orderInfo) {
@@ -64,7 +71,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 
     @Override
     public  Map<String,Long> getPersonSaleNum(String emp_id) {
-        List<Map<String,Object>> list = orderInfoMapper.countByEmpId(emp_id);
+        List<Map<String,Object>> list = orderInfoMapper.personalCountByEmpId(emp_id);
         Map<String,Long> res = new HashMap<>();
         for (Map<String,Object> stringStringMap : list) {
             System.out.println(stringStringMap.toString());
@@ -87,7 +94,12 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 
     @Override
     public List<OrderConutVO> getAllCount() {
-        return null;
+        List<OrderConutVO> empInfoList = BeanUtil.copyList(empInfoMapper.findEmpInfoList(), OrderConutVO.class);
+        for(OrderConutVO orderConutVO:empInfoList){
+            Integer empResults = orderInfoMapper.countByEmpId(orderConutVO.getEmpId());
+            orderConutVO.setEmpResults(empResults);
+        }
+        return empInfoList;
     }
 }
 

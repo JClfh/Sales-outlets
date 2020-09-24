@@ -37,4 +37,6 @@ public interface EmpInfoService {
 
 
     EmpInfoVO getPersonSaleman(EmpInfo empInfo);
+
+    EmpInfoVO searchByEmpdIdOrEmpName(String search);
 }

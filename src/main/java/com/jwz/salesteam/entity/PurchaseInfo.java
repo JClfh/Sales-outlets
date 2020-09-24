@@ -7,7 +7,7 @@ public class PurchaseInfo {
 
     private String purchaseId;
 
-    private Integer supplierId;
+    private String supplierId;
 
     private String supplierName;
 
@@ -45,11 +45,11 @@ public class PurchaseInfo {
         this.purchaseId = purchaseId;
     }
 
-    public Integer getSupplierId() {
+    public String getSupplierId() {
         return supplierId;
     }
 
-    public void setSupplierId(Integer supplierId) {
+    public void setSupplierId(String supplierId) {
         this.supplierId = supplierId;
     }
 

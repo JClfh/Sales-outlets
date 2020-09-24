@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <base href="./">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+  <meta name="author" content="Łukasz Holeczek">
+  <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+  <title>购物车</title>
+  <!-- Icons-->
+  <link href="../vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+  <link href="../vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+  <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/product.css">
+  <link rel="stylesheet" href="../css/prolist.css">
+</head>
+<script type="text/css">
+
+            </script>
+<style>
+  .div1 {
+    background: rgb(38, 202, 231);
+    color: rgb(252, 247, 247);
+  }
+</style>
+
+<body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
+  <header class="app-header navbar">
+    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="btn-group" role="group" aria-label="Button group">
+      <p class="btn"> 你好，无敌的销售员！</p>
+      <a class="btn" href="/logout">
+        <i class="fa fa-share" aria-hidden="true"></i> &nbsp;退出</a>
+    </div>
+
+
+  </header>
+  <div class="app-body">
+
+
+    <div class="sidebar">
+      <nav class="sidebar-nav ps ps--active-y">
+        <ul class="nav">
+          <br>
+          <br>
+
+          <li class="nav-item nav-dropdown ">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-puzzle"></i> 客户信息</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_add_user.html">
+                  <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加客户</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_manage_user.html">
+                  <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;查看客户</a>
+              </li>
+            </ul>
+          </li>
+          <br><br><br>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-star"></i>商城</a>
+            <ul class="nav-dropdown-items">
+
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_show_goods.html">
+                  <i class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp;商品展示</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_manage_order.html">
+                  <i class="icon-speech"></i>&nbsp;订单管理</a>
+              </li>
+            </ul>
+          </li>
+          <br><br><br>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-cursor"></i>个人中心</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_security.html">
+                  <i class="icons cui-shield"></i> &nbsp;账号安全</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./salesman_personal_information.html">
+                  <i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp;个人信息</a>
+              </li>
+
+            </ul>
+          </li>
+
+        </ul>
+        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+          <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+        </div>
+        <div class="ps__rail-y" style="top: 0px; height: 445px; right: 0px;">
+          <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 297px;"></div>
+        </div>
+      </nav>
+      <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+    </div>
+    <main class="main">
+      <!-- Breadcrumb-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">你的位置：商城->商品展示->购物车</li>
+
+        <!-- Breadcrumb Menu-->
+        <li class="breadcrumb-menu d-md-down-none">
+
+        </li>
+      </ol>
+      <div id="itemsTemplate">
+        <div align="center">
+          <div class="center-in-center" style="width:95%;">
+            <div class="card" style="padding: 50px;">
+
+              <div id="collapseExample" v-if="items.length>0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th class="text-center" scope="col">商品图片</th>
+                      <th class="text-center" scope="col">商品名字</th>
+                      <th class="text-center" scope="col">单价</th>
+                      <th class="text-center" scope="col">数量</th>
+                      <th class="text-center" scope="col">折扣</th>
+                      <th class="text-center" scope="col">小计</th>
+                      <th class="text-center" scope="col">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="protop" v-for="(item, index) in items"
+                      v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
+                      <td class="text-center proitem"><img v:src="{{item.goodsCoverImg}}" width="100" id="proImg">
+                      </td>
+                      <td class="text-center proitem">{{item.goodsName}}</td>
+                      <td class="text-center proitem">{{item.goodsSellingPrice}} 元</td>
+                      <td class="text-center proitem">
+                        <input class="number" type="number" v-model="item.goodsNum" style="text-align: center" step="1"
+                          min="1" max="20" value=1 oninput="javascript:this.value=this.value.replace(/[^\d]/g,'')"
+                          onchange="numberChange(this)">
+                      </td>
+                      {{All}}
+                      <!-- 小计 -->
+                      <td class="text-center proitem" style="color:#ff6700"><del>{{item.goodstakeInPrice}}元</del></td>
+                      <td class="text-center proitem" style="color:#ff6700">{{item.onetakeIn}}元</td>
+                      <td class="text-center proitem">
+                        <button type="button" class="btn btn-square btn-light" aria-label="Close"
+                          v-on:click="del(index)"><span aria-hidden="true">×</span></button>
+
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+
+                <div class="row">
+                  <div class="col-md-3"><a href="./salesman_show_goods.html">继续购物</a> |共{{items.length}} 件商品
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <label class="col-md-5 col-form-label" for="select1">vip等级</label>
+                    <select class=" col-md-3 " id="select1" name="select1" v-model="userVipCount">
+                      <option value=1>0</option>
+                      <option value=0.9>1</option>
+                      <option value=0.8>2</option>
+                      <option value=0.7>3</option>
+                      <option value=0.6>4</option>
+                      <option value=0.5>5</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 col-md-offset-1"><span class="btn btn-square btn-lg bg-white"
+                      style="color:#ff6700"><b>合计：{{allPrice}}元 | 折扣后：{{takeInPrice}}元 </b></span>
+
+
+                  </div>
+                  <div class="col-md-2 col-md-offset-4">
+                    <button class="btn btn-square  btn-danger btn-lg"
+                      v-on:click="settle()">&nbsp;&nbsp;去结算&nbsp;&nbsp;</button>
+                  </div>
+
+                </div>
+
+
+              </div>
+              <div v-if="items.length==0">空空如也,快去购物吧骚年</div>
+
+            </div>
+          </div>
+        </div>
+        <!-- /删除-->
+        <div class="modal fade" id="dangerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">删除</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>是否执行删除操作</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">否</button>
+                <button class="btn btn-danger" type="button" v-on:click="delCheck()">确定</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /成功-->
+        <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-success" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>删除成功！</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
+        <!-- 结算成功！ -->
+        <div class="modal fade" id="editSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-success" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>结算成功！</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
+        <!-- /警告-->
+        <div class="modal fade show" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">警告！！！！！</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>操作失败</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
+
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+          <!-- /.modal-dialog-->
+        </div>
+        <!-- 结算页面 -->
+        <div class="modal fade" id="primaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true" style="display: none;" aria-hidden="true">
+
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">结算中</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="text-input">联系电话</label>
+                  <div class=" col-md-9 input-group">
+                    <input class="form-control" id="text-input" size="16" type="text" placeholder="联系电话"
+                      v-model="edititems.userTel" pattern="^[0-9]+$" required>
+                    <span class="input-group-append">
+                      <button class="btn btn-secondary" type="button" v-on:click="GO()">Go!</button>
+                    </span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="text-input">姓名</label>
+                  <div class="col-md-9">
+                    <input class="form-control" id="text-input" type="text" name="text-input" placeholder="姓名"
+                      v-model="edititems.userName" required>
+
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="text-input">地址</label>
+                  <div class="col-md-9">
+                    <input class="form-control" id="text-input" type="text" name="text-input" placeholder="地址"
+                      v-model="edititems.userAddress" required>
+
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="select1">配送方式</label>
+                  <div class="col-md-9">
+                    <select class=" form-control " id="select1" name="select1" v-model="edititems.modeOfDistibution">
+                      <option value=0>到店自取</option>
+                      <option value=1>快递到家</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-info" type="button" v-on:click="save()">保存</button>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../vendors/jquery/js/jquery.min.js"></script>
+  <script src="../vendors/popper.js/js/popper.min.js"></script>
+  <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../vendors/pace-progress/js/pace.min.js"></script>
+  <script src="../vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+  <script src="../vendors/@coreui/coreui/js/coreui.min.js"></script>
+  <script src="../vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
+  <script src="../vendors/mock.js/js/mock.min.js"></script>
+  <script src="../vendors/vue.js/js/vue.min.js"></script>
+  <script>
+    function numberChange(obj) {
+      var number = obj.value;
+      if (number > 20) {
+        obj.value = 20
+        swal({ title: "失败", text: "数量超过限制值", type: "warning" });
+
+      } else if (number <= 0) {
+        obj.value = 1
+      }
+    }
+  </script>
+  <script>
+    var p, d, j;
+    var app;
+    var items;
+    $(function () {
+      Mock.mock("http://127.0.0.1:5500/users", {
+        "data|1-1": [{
+          id: "@increment()",//编号
+          goodsId: "@increment()",//商品编号
+          "goodsName|1": ["@cname", "@name"],//商品姓名
+          goodsSellingPrice: 1000,//商品零售价
+          goodsNum: 1,
+          goodsCoverImg: "@cname()",//商品图片
+        }],
+        suceess: true,
+        code: 200,
+        msg: "Success"
+      });
+      $.getJSON("http://127.0.0.1:5500/users", function (response) {
+        items = response.data;
+
+        console.log(response.data)
+        page = Math.ceil(items.length / 5);
+        var pageitem = [];
+        for (var i = 0; i < page; i++) {
+          pageitem[i] = i + 1;
+        }
+        app = new Vue({
+          el: '#itemsTemplate',
+          data: {
+            items: items,
+            checkall: false,
+            pagesum: page,//总页码
+            pageindex: 1,//当前页码
+            pagesize: 5, //页面数据个数
+            pageitem: pageitem,
+            editIndex: -1,
+            edititems: { name: null },
+            allPrice: 0,
+            userVipCount: 1,
+            takeInPrice: ""//实际价格
+          },
+          computed: {
+            pageItems: function () {
+              var startIndex = (this.pageindex - 1) * this.pagesize;
+              var editIndex = startIndex + this.pagesize - 1;
+              return this.items.filter(function (value, index) {
+                return (
+                  index >= startIndex &&
+                  index <= editIndex
+                );
+              });
+            },
+            // 小计
+            All: function () {
+              this.allPrice = 0;
+              for (var i = 0; i < this.items.length; i++) {
+                this.items[i].all = this.items[i].goodsNum * this.items[i].goodsSellingPrice
+                this.items[i].goodstakeInPrice = this.items[i].all - this.items[i].all * this.userVipCount
+                this.items[i].onetakeIn = this.items[i].all -  this.items[i].goodstakeInPrice
+                this.allPrice += this.items[i].all
+              }
+              this.takeInPrice = this.userVipCount * this.allPrice
+            }
+          },
+          methods: {
+
+            // 删除
+            del: function (index) {
+              $('#dangerModal').modal('show');
+              d = index;
+              // alert(d)
+            },
+            delCheck: function () {
+
+              alert(this.items[d].id)
+              $.post("/admin//user/del",
+                {
+                  id: this.items[d].id
+                }
+                , function (data) {
+                  if (data === true) {
+
+                    $('#dangerModal').modal('hide');
+                    $('#success').modal('show');
+                    app.items.splice(d, 1);
+                  } else {
+                    alert("失败");
+                  }
+                });
+              $('#dangerModal').modal('hide');
+            },
+            // 结算中
+            settle: function (index) {
+              $('#primaryModal').modal('show');
+
+            },
+            // 电话查询
+            GO: function (index) {
+              alert("电话查询");
+              $.ajax({
+                url: "/api/findByTel" + this.edititems.userTel,
+                type: "post",
+                success: function (res) {
+                  app.edititems = res.data
+                },
+                error: function (xhr, status, error) {
+                  $('#danger').modal('show');
+                }
+              });
+
+            },
+            // 结算保存
+            save: function () {
+              var data = {
+
+                "empId": this.empId,//销售员信息
+                "userTel": this.edititems.userTel,//客户信息
+                "userName": this.edititems.userName,
+                "userAddress": this.edititems.userAddress,
+                "userVip": this.edititems.userVipCount,//VIP
+                "modeOfDistibution": this.edititems.modeOfDistibution,//快递地址
+                "createTime": new Date(),//记录创建日期
+                "updateTime": new Date(),//记录修改日期
+
+              }
+              $.ajax({
+                url: "/orders/generateOrder",
+                type: "post",
+                //将/jsON转化为字符串传递
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function () {
+                  $('#primaryModal').modal('hide');
+                  $('#editSuccess').modal('show');
+                },
+                error: function (xhr, status, error) {
+                  $('#danger').modal('show');
+                }
+              });
+
+            },
+
+            // 编辑
+            // edit: function (index) {
+            //   var forms = document.getElementsByClassName('needs-validation')[0];
+            //   forms.classList.remove('was-validated');
+            //   this.editIndex = index;
+            //   this.edititems = JSON.parse(JSON.stringify(this.items[index]));
+            //   $('#primaryModal').modal('show');
+            // },
+            save: function () {
+              // var com_id;
+              // $.get("/small_admin/com_id", function (data) {
+              //   com_id = data;
+              //   // alert(data)
+              // });
+              setTimeout(function () {
+                $.post("/admin/user/update",
+                  {
+                    id: app.edititems.id,//编号
+                    goodsId: goods_id,//商品编号
+                    goodsName: app.edititems.goodsName,//商品姓名
+                    goodsSellingPrice: app.edititems.goodsSellingPrice,//商品零售价
+                    // goods_cost_price: app.edititems.goods_cost_price,//商品成本价
+                    goodsCoverImg: app.edititems.goodsCoverImg,//商品图片
+
+                  }, function (data) {
+                    if (data === true) {
+                      $('#primaryModal').modal('hide');
+                      $('#editSuccess').modal('show');
+                      app.items[app.editIndex].position = app.edititems.position
+                    } else {
+                      $('#danger').modal('show');
+                    }
+
+                  });
+
+              }, 500);
+
+            },
+          }
+
+        });
+        return;
+      });
+    });
+  </script>
+</body>
+
+</html>

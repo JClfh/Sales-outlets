@@ -154,5 +154,24 @@ public class EmpInfoServiceImpl implements EmpInfoService {
         return empInfoVO;
     }
 
+    @Override
+    public EmpInfoVO searchByEmpdIdOrEmpName(String search) {
+        Map<String,Long> empCountList;
+        EmpInfo empInfo = empInfoMapper.selectByEmpName(search);
+
+        if(empInfo == null){
+            //用id查
+            empInfo = empInfoMapper.selectByEmpId(search);
+            empCountList = orderInfoService.getPersonSaleNum(search);
+        }else{
+            //用name查询
+            empCountList = orderInfoService.getPersonSaleNum(empInfo.getEmpId());
+        }
+        EmpInfoVO empInfoVO = new EmpInfoVO();
+        BeanUtil.copyProperties(empInfo,empInfoVO);
+        empInfoVO.setEmpCountList(empCountList);
+        return empInfoVO;
+    }
+
 
 }

@@ -7,11 +7,13 @@ public class PurchaseInfoVO {
 
     private String purchaseId;
 
-    private Integer supplierId;
+    private String supplierId;
 
     private String supplierName;
 
     private Integer goodsPrice;
+
+    private Integer goodsCostPrice;
 
     private Integer goodsNum;
 
@@ -33,6 +35,8 @@ public class PurchaseInfoVO {
 
     private Integer isDel;
 
+
+
     public Integer getId() {
         return id;
     }
@@ -49,11 +53,11 @@ public class PurchaseInfoVO {
         this.purchaseId = purchaseId;
     }
 
-    public Integer getSupplierId() {
+    public String getSupplierId() {
         return supplierId;
     }
 
-    public void setSupplierId(Integer supplierId) {
+    public void setSupplierId(String supplierId) {
         this.supplierId = supplierId;
     }
 
@@ -151,5 +155,13 @@ public class PurchaseInfoVO {
 
     public void setIsDel(Integer isDel) {
         this.isDel = isDel;
+    }
+
+    public Integer getGoodsCostPrice() {
+        return goodsCostPrice;
+    }
+
+    public void setGoodsCostPrice(Integer goodsCostPrice) {
+        this.goodsCostPrice = goodsCostPrice;
     }
 }

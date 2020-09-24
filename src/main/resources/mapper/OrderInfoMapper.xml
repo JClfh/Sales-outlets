@@ -174,7 +174,7 @@
     from order_info
     where emp_id = #{emp_id,jdbcType=VARCHAR}
   </select>
-  <select id="countByEmpId"  resultType="java.util.HashMap">
+  <select id="personalCountByEmpId"  resultType="java.util.HashMap">
         select left(create_time,7) as 'month' ,count(*) as 'empCount'
         from order_info
         where DATE_FORMAT(create_time,'%Y-%m')>
@@ -182,4 +182,28 @@
         group by month desc;
   </select>
 
+
+  <select id="countByEmpId"  resultType="java.lang.Integer">
+       select COUNT(*)
+       from order_info
+       where emp_id = #{emp_id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findOrdersIdList"   resultType="String">
+       select order_id
+       from order_info
+       where status <![CDATA[ < ]]> 4  and is_del = 0
+  </select>
+
+  <select id="findFinishOrdersIdList"   resultType="String">
+       select order_id
+       from order_info
+       where status >= 3
+  </select>
+
+  <select id="findOrderStatusByOrderId"   resultType="java.lang.Integer">
+       select status
+       from order_info
+       where order_id = #{order_id,jdbcType=VARCHAR}
+  </select>
 </mapper>

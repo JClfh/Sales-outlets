@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.jwz.salesteam.entity.PurchaseInfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="purchase_id" property="purchaseId" jdbcType="VARCHAR" />
-    <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+    <result column="supplier_id" property="supplierId" jdbcType="VARCHAR" />
     <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
     <result column="goods_price" property="goodsPrice" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="VARCHAR" />
@@ -35,7 +35,7 @@
       goods_price, order_id, goods_id, 
       emp_id, account_emp_id,status,
       create_time, finish_time, is_del)
-    values (#{id,jdbcType=INTEGER}, #{purchaseId,jdbcType=INTEGER}, #{supplierId,jdbcType=INTEGER}, #{supplierName,jdbcType=VARCHAR},
+    values (#{id,jdbcType=INTEGER}, #{purchaseId,jdbcType=VARCHAR}, #{supplierId,jdbcType=VARCHAR}, #{supplierName,jdbcType=VARCHAR},
       #{goodsPrice,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, #{goodsId,jdbcType=VARCHAR}, 
       #{empId,jdbcType=VARCHAR}, #{accountEmpId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=DATE}, #{finishTime,jdbcType=DATE},
       #{isDel,jdbcType=INTEGER})
@@ -88,10 +88,10 @@
         #{id,jdbcType=INTEGER},
       </if>
       <if test="purchaseId != null" >
-        #{purchaseId,jdbcType=INTEGER},
+        #{purchaseId,jdbcType=VARCHAR},
       </if>
       <if test="supplierId != null" >
-        #{supplierId,jdbcType=INTEGER},
+        #{supplierId,jdbcType=VARCHAR},
       </if>
       <if test="supplierName != null" >
         #{supplierName,jdbcType=VARCHAR},
@@ -129,10 +129,10 @@
     update purchase_info
     <set >
       <if test="purchaseId != null" >
-        purchase_id = #{purchaseId,jdbcType=INTEGER},
+        purchase_id = #{purchaseId,jdbcType=VARCHAR},
       </if>
       <if test="supplierId != null" >
-        supplier_id = #{supplierId,jdbcType=INTEGER},
+        supplier_id = #{supplierId,jdbcType=VARCHAR},
       </if>
       <if test="supplierName != null" >
         supplier_name = #{supplierName,jdbcType=VARCHAR},
@@ -169,8 +169,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jwz.salesteam.entity.PurchaseInfo" >
     update purchase_info
-    set purchase_id =  #{purchaseId,jdbcType=INTEGER},
-      supplier_id = #{supplierId,jdbcType=INTEGER},
+    set purchase_id =  #{purchaseId,jdbcType=VARCHAR},
+      supplier_id = #{supplierId,jdbcType=VARCHAR},
       supplier_name = #{supplierName,jdbcType=VARCHAR},
       goods_price = #{goodsPrice,jdbcType=INTEGER},
       order_id = #{orderId,jdbcType=VARCHAR},
@@ -187,13 +187,55 @@
     select
     <include refid="Base_Column_List" />
     from purchase_info
-    where emp_id = #{emp_id,jdbcType=VARCHAR} and status > 1
+    where emp_id = #{emp_id,jdbcType=VARCHAR} and status = 5 and is_del = 1
   </select>
 
   <select id="selectByAccountEmpId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
     from purchase_info
-    where account_emp_id = #{accountEmpId,jdbcType=VARCHAR} and status >0
+    where account_emp_id = #{accountEmpId,jdbcType=VARCHAR} and status > 0
   </select>
+
+  <select id="findPurchaseInfoList" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from purchase_info
+    where is_del = 0 and status <![CDATA[ <= ]]>  1
+  </select>
+
+  <update id="updatePurchaseState" parameterType="com.jwz.salesteam.entity.PurchaseInfo" >
+   update purchase_info
+    set  status = #{status,jdbcType=INTEGER}
+     where purchase_id = #{purchase_id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateFinishTime" parameterType="com.jwz.salesteam.entity.PurchaseInfo" >
+   update purchase_info
+    set finish_time = #{finishTime,jdbcType=DATE} ,is_del = 1
+    where purchase_id = #{purchase_id,jdbcType=VARCHAR}
+  </update>
+
+
+
+  <select id="findPurchaseInfoByOrderId" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from purchase_info
+    where order_id = #{orderId,jdbcType=VARCHAR}
+    and is_del =  #{is_del,jdbcType=VARCHAR}
+     <if test="status != null" >
+    and status = #{status,jdbcType=INTEGER}
+    </if>
+
+  </select>
+
+  <select id="selectByPurchaseId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from purchase_info
+    where purchase_id = #{purchase_id,jdbcType=VARCHAR}
+    and is_del = 0
+  </select>
+
 </mapper>

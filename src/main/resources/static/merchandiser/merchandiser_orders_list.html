@@ -1,5 +1,5 @@
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
   <base href="./">
   <meta charset="utf-8">
@@ -8,7 +8,7 @@
   <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
   <meta name="author" content="Łukasz Holeczek">
   <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
-  <title>系统跟单</title>
+  <title>CoreUI Free Bootstrap Admin Template</title>
   <!-- Icons-->
   <link href="../vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
   <link href="../vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
@@ -16,304 +16,272 @@
   <link href="../vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
   <link href="../css/style.css" rel="stylesheet">
   <link href="../vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+
+  <style>
+    .div1 {
+      background: rgb(38, 202, 231);
+      color: rgb(252, 247, 247);
+    }
+  </style>
 </head>
-<script type="text/css">
 
-            </script>
-<style>
-  .div1 {
-    background: rgb(38, 202, 231);
-    color: rgb(252, 247, 247);
-  }
-</style>
+<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+<header class="app-header navbar">
+  <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-<body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
-  <div id="itemsTemplate">
-  <header class="app-header navbar">
-    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div  style="aligen:left">
-      <a href="">欢迎您，尊敬的***</a>
-    </div>
-    <div style="align:left">
-      <button class="btn btn-block btn-ghost-secondary" type="button" data-toggle="modal" v-on:click="edit2()">
-      <i class="fa fa-edit "></i>个人信息修改</button>&nbsp;</div>
-  
-  
-  </header>
-  <div class="app-body">
+  <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="btn-group" role="group" aria-label="Button group">
+    <span class="btn"> 你好，辛苦了老跟单员！找供货商找找找</span>
+    <a class="btn" href="/api/emp/logout">
+      <i class="fa fa-share" aria-hidden="true"></i>退出</a>
+  </div>
 
-    <div class="sidebar">
-      <nav class="sidebar-nav ps ps--active-y">
-        <ul class="nav">
-          <br>
-          <br>
-          <li class="nav-item nav-dropdown ">
-            <a class="nav-link nav-dropdown-toggle" href="#">
-              <i class="nav-icon icon-puzzle"></i> 跟单员</a>
-            <ul class="nav-dropdown-items">
-              <li class="nav-item">
-                <a class="nav-link" href="./merchandiser_orders_list.html">
-                  <i class="nav-icon icon-puzzle"></i>订单管理</a>
-              </li>
-            </ul>
-            <ul class="nav-dropdown-items">
-              <li class="nav-item">
-                <a class="nav-link" href="./merchandiser_orders_history.html">
-                  <i class="nav-icon icon-puzzle"></i>历史订单</a>
-              </li>
-            </ul>
-          </li>
-      
-  
-        </ul>
-        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-          <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
-        </div>
-        <div class="ps__rail-y" style="top: 0px; height: 445px; right: 0px;">
-          <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 297px;"></div>
-        </div>
-      </nav>
-      <button class="sidebar-minimizer brand-minimizer" type="button"></button>
-    </div>
-    <main class="main">
-      <!-- Breadcrumb-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">你的位置：跟单员->订单管理</li>
 
-        <!-- Breadcrumb Menu-->
-        <li class="breadcrumb-menu d-md-down-none">
-
+</header>
+<div class="app-body">
+  <div class="sidebar">
+    <nav class="sidebar-nav ps ps--active-y">
+      <ul class="nav">
+        <br>
+        <li class="nav-item nav-dropdown ">
+          <a class="nav-link nav-dropdown-toggle" href="#">
+            <i class="nav-icon icon-puzzle"></i> 跟单员</a>
+          <ul class="nav-dropdown-items">
+            <li class="nav-item">
+              <a class="nav-link" href="./merchandiser_orders_list.html">
+                <i class="nav-icon icon-puzzle"></i>订单管理</a>
+            </li>
+          </ul>
+          <ul class="nav-dropdown-items">
+            <li class="nav-item">
+              <a class="nav-link" href="./merchandiser_orders_history.html">
+                <i class="nav-icon icon-puzzle"></i>历史订单</a>
+            </li>
+          </ul>
         </li>
-      </ol>
+        <br><br>
+        <li class="nav-item nav-dropdown">
+          <a class="nav-link nav-dropdown-toggle" href="#">
+            <i class="nav-icon icon-cursor"></i>个人中心</a>
+          <ul class="nav-dropdown-items">
+            <li class="nav-item">
+              <a class="nav-link" href="./merchandiser_security.html">
+                <i class="icons cui-shield"></i> &nbsp;账号安全</a>
+            </li>
+          </ul>
+        </li>
 
-        <div align="center">
-          <div class="center-in-center" style="width:95%;">
-            <div class="card">
-              <div class="card-header">
-                <div align="left">  <div align="left">
-                  <i class=" font-xl  cui-people"></i>
-                  搜索<input type="text" name="text-input" >
-                  <button class="btn btn-success" type="button"  v-on:click="cha()" data-toggle="modal">
-                    <i class="fa fa-search" aria-hidden="true"></i></button>
 
-                </div>
-                </div>
+      </ul>
+      <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+        <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+      </div>
+      <div class="ps__rail-y" style="top: 0px; height: 445px; right: 0px;">
+        <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 297px;"></div>
+      </div>
+    </nav>
+    <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+  </div>
+  <main class="main">
+    <!-- Breadcrumb-->
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">你的位置：跟单员->订单管理</li>
+
+      <!-- Breadcrumb Menu-->
+      <li class="breadcrumb-menu d-md-down-none">
+
+      </li>
+    </ol>
+    <div id = "itemsTemplate">
+      <div align="center">
+        <div class="center-in-center" style="width:95%;">
+          <div class="card">
+            <div class="card-header">
+              <div align="left">  <div align="left">
+                <i class=" font-xl  cui-people"></i>
+                搜索<input type="text" name="text-input" >
+                <button class="btn btn-success" type="button"  v-on:click="cha()" data-toggle="modal">
+                  <i class="fa fa-search" aria-hidden="true"></i></button>
+
               </div>
-              <div class="card-body collapse show" id="collapseExample">
-                <table class="table table-responsive-sm table-bordered">
-                  <thead>
-                    <tr align="center">
-                      <th width="125p">序号</th>
-                      <th width="125p">订单编号</th>
-                      <th width="125p">商品名称</th>
-                      <th width="125p">商品数量</th>
-                      <th width="125p">创建时间</th>
-                      <th width="125p">供货商</th>
-                      <th width="125p">状态</th>
-                      <th width="125p">操作</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
+              </div>
+            </div>
+            <div class="card-body collapse show" id="collapseExample">
+              <table class="table table-responsive-sm table-bordered">
+                <thead>
+                <tr align="center">
+                  <th width="125p">序号</th>
+                  <th width="125p">订单编号</th>
+                  <th width="125p">商品名称</th>
+                  <th width="125p">商品数量</th>
+                  <th width="125p">商品价格</th>
+                  <th width="125p">创建时间</th>
+                  <th width="125p">状态</th>
+                  <th width="125p">操作</th>
+                </tr>
+                </thead>
+                <tbody v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
+                <tr >
+                  <td :rowspan="item.purchaseInfoVO.length" align="center" style=" vertical-align:middle">{{index + 1}}</td>
+                  <td :rowspan="item.purchaseInfoVO.length" align="center" style=" vertical-align:middle">{{item.orderId}}</td>
+                  <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[0].goodsName}}</td>
+                  <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[0].goodsNum}}</td>
+                  <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[0].goodsPrice}}</td>
+                  <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[0].createTime1}}</td>
+                  <td align="center" style=" vertical-align:middle">
+                    <span class="badge badge-secondary"  style="font-size:17px" v-if="item.purchaseInfoVO[0].status === 0">未审批</span>
+                    <span class="badge badge-danger"  style="font-size:17px" v-if="item.purchaseInfoVO[0].status === 1">审批不通过</span>
+                    <span class="badge badge-warning"  style="font-size:17px" v-if="item.purchaseInfoVO[0].status === 2">正在审批中</span>
+                    <span class="badge badge-info"  style="font-size:17px" v-if="item.purchaseInfoVO[0].status === 3">审批完成</span>
+                    <span class="badge badge-primary"  style="font-size:17px" v-if="item.purchaseInfoVO[0].status === 4">已发货</span>
+                    <span class="badge badge-success"  style="font-size:17px" v-if="item.purchaseInfoVO[0].status === 5">已收货</span>
+                  </td>
+                  <td align="center" style=" vertical-align:middle">
+                    <button class="btn btn-primary" type="button" data-toggle="modal" v-if="item.purchaseInfoVO[0].status <= 1"
+                            v-on:click="edit(index,0)"><i class="fa fa-edit "></i>选择供货商</button>
 
-                      <td align="center">{{item.id}}</td>
-                      <td align="center">{{item.orderId}}</td>
-                      <td align="center">{{item.goodsName}}</td>
-                      <td align="center">{{item.goodsNum}}</td>
-                      <td align="center">{{item.createTime}}</td>
-                      <td align="center">
-                        <span class="" v-if="item.supplierName  === '0'">广州供货商</span>
-                        <span class="" v-if="item.supplierName  === '1'">深圳供货商</span>
-                      </td>
-                      <td align="center"> 
-                        <p class="badge badge-success"  style="font-size:17px" v-if="item.isDel === '0'">通过</p>
-                        <p class="badge badge-danger"  style="font-size:17px" v-if="item.isDel === '1'">不通过</p>
-                      </td>
-                      
+                    <button class="btn btn-primary" type="button" data-toggle="modal" v-if="item.purchaseInfoVO[0].status === 2"
+                            disabled>
+                      <i class="fa fa-check "></i>已发货</button>
 
-                      <td align="center"> <button class="btn btn-primary" type="button" data-toggle="modal"
-                          v-on:click="edit(index)">
-                          <i class="fa fa-edit "></i>编辑</button>&nbsp;
-                      
+                    <button class="btn btn-primary" type="button" data-toggle="modal" v-if="item.purchaseInfoVO[0].status === 3"
+                            v-on:click="sendGoods(index,0)">
+                    <i class="fa fa-check "></i>已发货</button>
 
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <ul class="pagination" id="pagelist">
-                  <li class="page-item">
-                    <a class="page-link" href="javascript:void(0);" onclick="app.first()">首页</a>
-                  </li>
+                    <button class="btn btn-primary" type="button" data-toggle="modal" v-if="item.purchaseInfoVO[0].status === 4"
+                            v-on:click="getGoods(index,0)">
+                      <i class="fa fa-hand-pointer-o "></i>已收货</button>&nbsp;
+                  </td>
+                </tr>
+                <tr v-for="son in item.purchaseInfoVO.length-1" >
+                  <!-- 遍历第一行数据 -->
+                  <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[son].goodsName}}</td>
+                  <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[son].goodsNum}}</td>
+                  <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[son].goodsPrice}}</td>
+                  <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[son].createTime1}}</td>
+                  <td align="center" style=" vertical-align:middle">
+                    <span class="badge badge-secondary"  style="font-size:17px" v-if="item.purchaseInfoVO[son].status === 0">未审批</span>
+                    <span class="badge badge-danger"  style="font-size:17px" v-if="item.purchaseInfoVO[son].status === 1">审批不通过</span>
+                    <span class="badge badge-warning"  style="font-size:17px" v-if="item.purchaseInfoVO[son].status === 2">正在审批中</span>
+                    <span class="badge badge-info"  style="font-size:17px" v-if="item.purchaseInfoVO[son].status === 3">审批完成</span>
+                    <span class="badge badge-primary"  style="font-size:17px" v-if="item.purchaseInfoVO[son].status === 4">已发货</span>
+                    <span class="badge badge-success"  style="font-size:17px" v-if="item.purchaseInfoVO[son].status === 5">已收货</span>
+                  </td>
+                  <td align="center" style=" vertical-align:middle">
+                    <button class="btn btn-primary" type="button" data-toggle="modal" v-if="item.purchaseInfoVO[son].status <= 1"
+                            v-on:click="edit(index,son)"><i class="fa fa-edit "></i>选择供货商</button>
+                    <button class="btn btn-primary" type="button" data-toggle="modal" v-if="item.purchaseInfoVO[son].status === 2"
+                            disabled>
+                      <i class="fa fa-check "></i>已发货</button>
+                    <button class="btn btn-primary" type="button" data-toggle="modal" v-if="item.purchaseInfoVO[son].status === 3"
+                            v-on:click="sendGoods(index,son)">
+                      <i class="fa fa-check "></i>已发货</button>
+                    <button class="btn btn-primary" type="button" data-toggle="modal" v-if="item.purchaseInfoVO[son].status === 4"
+                            v-on:click="getGoods(index,son)">
+                      <i class="fa fa-hand-pointer-o "></i>已收货</button>&nbsp;
+                  </td>
+                </tr>
 
-                  <li class="page-item">
-                    <a class="page-link" href="javascript:void(0);" onclick="app.last()">上一页</a>
-                  </li>
-                  <li class="page-item" v-for="pageitem in pagesum">
-                    <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
-                  </li>
+                </tbody>
+              </table>
+              <ul class="pagination" id="pagelist">
+                <li class="page-item">
+                  <a class="page-link" href="javascript:void(0);" onclick="app.first()">首页</a>
+                </li>
 
-                  <li class="page-item" v-for="pageitem in pageitem" v-if="pageindex>=4 && pageindex<=pagesum-3"
+                <li class="page-item">
+                  <a class="page-link" href="javascript:void(0);" onclick="app.last()">上一页</a>
+                </li>
+                <li class="page-item" v-for="pageitem in pagesum" v-bind:class="{ 'active': pageitem == pageindex}">
+                  <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
+                </li>
+
+                <li class="page-item" v-for="pageitem in pageitem" v-if="pageindex>=4 && pageindex<=pagesum-3"
                     v-show="pageitem>pageindex-3 && pageitem<pageindex+3 && pageindex>=4 && pageindex<=pagesum-3">
-                    <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
-                  </li>
+                  <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
+                </li>
 
-                  <li class="page-item">
-                    <a class="page-link" href="javascript:void(0);" onclick="app.Next()">下一页</a>
-                  </li>
+                <li class="page-item">
+                  <a class="page-link" href="javascript:void(0);" onclick="app.Next()">下一页</a>
+                </li>
 
-                  <li class="page-item">
-                    <a class="page-link" href="javascript:void(0);" onclick="app.lastone()">末页</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" style="color:cornflowerblue">{{pageindex}}/{{pagesum}}</a>
-                  </li>
-                  <li>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                  </li>
-                  <li class="page-item">
-                    <input class="form-control" id="page_1" size="16" type="text" style="width:60px">
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" style="color:cornflowerblue" v-on:click="jume();">转</a>
-                  </li>
-                </ul>
-              </div>
+                <li class="page-item">
+                  <a class="page-link" href="javascript:void(0);" onclick="app.lastone()">末页</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" style="color:cornflowerblue">{{pageindex}}/{{pagesum}}</a>
+                </li>
+                <li>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                </li>
+                <li class="page-item">
+                  <input class="form-control" id="page_1" size="16" type="text" style="width:60px">
+                </li>
+                <li class="page-item">
+                  <a class="page-link" style="color:cornflowerblue" v-on:click="jume();">转</a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="modal fade" id="editSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          style="display: none;" aria-hidden="true">
-          <div class="modal-dialog modal-success" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">提示</h4>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>编辑成功！</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
-              </div>
+      <div class="modal fade" id="editSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+           style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-success" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">提示</h4>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
             </div>
-            <!-- /.modal-content-->
-          </div>
-        </div>
-
-
-        <!-- /警告-->
-        <div class="modal fade show" id="editFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          style="display: none;" aria-hidden="true">
-          <div class="modal-dialog modal-danger" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">警告！！！！！</h4>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>编辑失败</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
-
-              </div>
+            <div class="modal-body">
+              <p>编辑成功！</p>
             </div>
-            <!-- /.modal-content-->
-          </div>
-          <!-- /.modal-dialog-->
-        </div>
-        <!-- 编辑 -->
-        <div class="modal fade" id="primaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          aria-hidden="true" style="display: none;" aria-hidden="true">
-
-          <div class="modal-dialog modal-primary" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-
-                <h4 class="modal-title">编辑</h4>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div class="card-body">
-                <form class="needs-validation" novalidate>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">订单编号</label>
-                    <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="会员编号"
-                        v-model="edititems.id" pattern="^[0-9]+$" disabled="disabled" required>
-
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">创建时间</label>
-                    <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="登录口令"
-                        v-model="edititems.createTime" required disabled="disabled">
-
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">商品名称</label>
-                    <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品名称"
-                        v-model="edititems.goodsName" 
-                        pattern="^[\u4e00-\u9fa5]{2,4}$|^[A-Za-z\s]{2,40}$" required>
-
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">商品数量</label>
-                    <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品数量"
-                        v-model="edititems.goodsNum" pattern="^[0-9]+$" required>
-
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="select1">供货商</label>
-                    <div class="col-md-9">
-                      <select class="form-control" id="select1" name="select1" v-model="edititems.supplierName">
-                        <option value="0">广州供货商</option>
-                        <option value="1">深圳供货商</option>
-                      </select>
-                    </div>
-                  </div>
-                 
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-info" type="button" v-on:click="save()">保存</button>
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
-
-              </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
             </div>
-
           </div>
+          <!-- /.modal-content-->
         </div>
+      </div>
+      <!-- /警告-->
+      <div class="modal fade show" id="editFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+           style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-danger" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">警告！！！！！</h4>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>编辑失败</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
 
-
-
- <!-- 个人信息修改 -->
-        <div class="modal fade" id="primaryModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true" style="display: none;" aria-hidden="true">
+            </div>
+          </div>
+          <!-- /.modal-content-->
+        </div>
+        <!-- /.modal-dialog-->
+      </div>
+      <!-- 编辑 -->
+      <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+           aria-hidden="true" style="display: none;" aria-hidden="true">
 
         <div class="modal-dialog modal-primary" role="document">
           <div class="modal-content">
             <div class="modal-header">
 
-              <h4 class="modal-title">个人信息</h4>
+              <h4 class="modal-title">编辑</h4>
               <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>
@@ -321,336 +289,536 @@
             <div class="card-body">
               <form class="needs-validation" novalidate>
                 <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="text-input">职工ID</label>
+                  <label class="col-md-3 col-form-label" for="orderId">订单编号</label>
                   <div class="col-md-9">
-                    <input class="form-control" id="text-input" type="text" name="text-input" placeholder="职工ID"
-                      v-model="edititems.empId" pattern="^[0-9]+$" disabled="disabled" required>
+                    <input class="form-control" id="orderId" type="text" name="orderId" placeholder="订单编号"
+                           v-model="edititems.orderId" pattern="^[0-9]+$" disabled="disabled" required>
 
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="text-input">职工名称</label>
+                  <label class="col-md-3 col-form-label" for="createTime">创建时间</label>
                   <div class="col-md-9">
-                    <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品名称"
-                      v-model="edititems.empName" 
-                      pattern="^[\u4e00-\u9fa5]{2,4}$|^[A-Za-z\s]{2,40}$" required>
+                    <input class="form-control" id="createTime" type="text" name="createTime" placeholder="创建时间"
+                           v-model="edititems.createTime1" required disabled="disabled">
 
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="text-input">职工密码</label>
+                  <label class="col-md-3 col-form-label" for="supplierId">供货商</label>
                   <div class="col-md-9">
-                    <input class="form-control" type="password" id="pwd" placeholder="密码" v-model="edititems.empPwd"
-                    onkeyup="validate()" required>
 
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="text-input">再次输入密码</label>
-                  <div class="col-md-9">
-                    <input class="form-control" type="password" id="pwd1" placeholder="请再次输入密码" onkeyup="validate()"
-                    required>
+                    <select name="supplierId" id="supplierId"  class="form-control" v-model="supplierId" required>
+                      <option :value="supplier.supplierId" v-for="supplier in supplierItems">{{supplier.supplierName}}
+                      </option>
 
+                    </select>
                   </div>
                 </div>
 
-                
               </form>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-info" type="button" v-on:click="save2()">保存</button>
+              <button class="btn btn-info" type="button" v-on:click="save()">保存</button>
               <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 是否发货 -->
+      <div class="modal fade" id="sendGoodsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+           style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-primary" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">警告</h4>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>是否发货！确认后不可修改</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">否</button>
+              <button class="btn btn-danger" type="button" data-toggle="modal" v-on:click="checkSendGoods()">确定</button>
             </div>
           </div>
         </div>
+      </div>
+      <!-- 成功-->
+      <div class="modal fade" id="sendGoodsSuccessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+           style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-success" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">提示</h4>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>发货成功！</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
+            </div>
+          </div>
+          <!-- /.modal-content-->
         </div>
+      </div>
+      <!-- 失败-->
+      <div class="modal fade show" id="sendGoodsFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+           style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-danger" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">警告</h4>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>发货失败！</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
 
+            </div>
+          </div>
+          <!-- /.modal-content-->
+        </div>
+        <!-- /.modal-dialog-->
+      </div>
 
-      
-    </main>
-  </div></div>
+      <!-- 是否收货 -->
+      <div class="modal fade" id="getGoodsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+           style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-primary" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">警告</h4>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>是否确认收货！确认后不可修改</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">否</button>
+              <button class="btn btn-danger" type="button" data-toggle="modal" v-on:click="checkGetGoods()">确定</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="getGoodsSuccessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+           style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-success" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">提示</h4>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>收货成功！</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
+            </div>
+          </div>
+          <!-- /.modal-content-->
+        </div>
+      </div>
+      <!-- 失败-->
+      <div class="modal fade show" id="getGoodsFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+           style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-danger" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">警告</h4>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>收货失败！</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
 
-  <script src="../vendors/jquery/js/jquery.min.js"></script>
-  <script src="../vendors/popper.js/js/popper.min.js"></script>
-  <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
-  <script src="../vendors/pace-progress/js/pace.min.js"></script>
-  <script src="../vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
-  <script src="../vendors/@coreui/coreui/js/coreui.min.js"></script>
-  <script src="../vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
-  <script src="../vendors/mock.js/js/mock.min.js"></script>
-  <script src="../vendors/vue.js/js/vue.min.js"></script>
+            </div>
+          </div>
+          <!-- /.modal-content-->
+        </div>
+        <!-- /.modal-dialog-->
+      </div>
+      <div class="modal fade" id="issue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+           style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-danger" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">提示</h4>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>出现未知错误</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-danger" type="button" data-dismiss="modal">确定</button>
+            </div>
+          </div>
+          <!-- /.modal-content-->
+        </div>
+      </div>
+    </div>
+  </main>
 
-  <script>
-    function validate() {
-      var pwd = $("#pwd").val();
-      var pwd1 = $("#pwd1").val();
+</div>
 
-      if (pwd != pwd1) {
-        $("#danger").html("两次密码不相同");
-        $("#danger").css("color", "red")
-        $("button").attr("disabled", "disabled");
-      } else {
-        $("#danger").html("");
-        $("button").removeAttr("disabled");
-      }
+<!-- CoreUI and necessary plugins-->
+<script src="../vendors/jquery/js/jquery.min.js"></script>
+<script src="../vendors/popper.js/js/popper.min.js"></script>
+<script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="../vendors/pace-progress/js/pace.min.js"></script>
+<script src="../vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+<script src="../vendors/@coreui/coreui/js/coreui.min.js"></script>
+<script src="../vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
+<script src="../vendors/mock.js/js/mock.min.js"></script>
+<script src="../vendors/vue.js/js/vue.min.js"></script>
 
-    }
-  </script>
+<script>
+  var p, d, j;
+  var app;
+  var items;
+  var supplierItems;
+  $(function () {
+    Mock.mock("http://127.0.0.1:5500/users", {
+      "data|20-20": [{
+        id: "@increment()",//编号
+        orderId:"@increment()",//订单编号
+        goodsName:"@cname()",//商品名字
+        "supplierName|1":["0","1"],//供货商
+        goodsNum: "@increment()",//商品数量
+        "isDel|1": ["0", "1"],//状态
+        createTime:"@datetime()",//创建时间
+        emp_id:"@increment()",//职工id
+        emp_name:"@cname()",//职工姓名
+        emp_pwd:"@increment()"//职工密码
 
-  <script>
-    var p, d, j;
-    var app;
-    var items;
-    $(function () {
-      Mock.mock("http://127.0.0.1:5500/users", {
-        "data|20-20": [{
-          id: "@increment()",//编号
-          orderId:"@increment()",//订单编号
-          goodsName:"@cname()",//商品名字
-          "supplierName|1":["0","1"],//供货商
-          goodsNum: "@increment()",//商品数量 
-          "isDel|1": ["0", "1"],//状态
-          createTime:"@datetime()",//创建时间
-          emp_id:"@increment()",//职工id
-          emp_name:"@cname()",//职工姓名
-          emp_pwd:"@increment()"//职工密码
-
-        }],
-        suceess: true,  
-        code: 200,
-        msg: "Success"
-      });
-      $.getJSON("/merchandiser/orders/list", function (response) {
-        items = response.data;
-        console.log(response.data)
-        page = Math.ceil(items.length / 5);
-        var pageitem = [];
-        for (var i = 0; i < page; i++) {
-          pageitem[i] = i + 1;
-        }
-        app = new Vue({
-          el: '#itemsTemplate',
-          data: {
-            items: items,
-            checkall: false,
-            pagesum: page,//总页码
-            pageindex: 1,//当前页码
-            pagesize: 5, //页面数据个数
-            pageitem: pageitem,
-            editIndex: -1,
-            edititems: { name: null },
-
-          },
-          computed: {
-            pageItems: function () {
-              var startIndex = (this.pageindex - 1) * this.pagesize;
-              var editIndex = startIndex + this.pagesize - 1;
-              return this.items.filter(function (value, index) {
-                return (
-                  index >= startIndex &&
-                  index <= editIndex
-                );
-              });
-            }
-          },
-          methods: {
-            //查询
-            cha: function () {
-              alert("查询")
-            },
-
-            // 编辑
-            edit: function (index) {
-              var forms = document.getElementsByClassName('needs-validation')[0];
-              forms.classList.remove('was-validated');
-              this.editIndex = index;
-              this.edititems = JSON.parse(JSON.stringify(this.items[index]));
-              $('#primaryModal').modal('show');
-            },
-            edit2: function () {
-              var forms = document.getElementsByClassName('needs-validation')[1];
-              forms.classList.remove('was-validated');
-         
-              $('#primaryModal1').modal('show');
-            },
-            save: function () {
-              var data = {
-                "id": this.edititems.id,//主键标识
-                "orderId": this.edititems.orderId,
-                "goodsName": this.edititems.goodsName,
-                "supplierName": this.edititems.supplierName,
-                "isDel":  this.edititems.isDel,
-                "goodsNum": this.edititems.goodsNum,
-                "createTime": this.edititems.createTime
-              }
-              $.ajax({
-                url: "/purchase/generatePurchase",
-                type: "post",
-                //将/jsON转化为字符串传递
-                dataType: 'json',
-                contentType: "application/json",
-                data: JSON.stringify(data),
-
-                //成功后的方法
-                success: function () {
-                  $('#primaryModal').modal('hide');
-                  $('#editSuccess').modal('show');
-                  window.location.href = "/merchandiser/merchandiser_orders_list";
-                },
-                error: function (xhr, status, error) {
-                  $('#primaryModal').modal('hide');
-                  $('#editFailModal').modal('show');
-                }
-              });
-            },
-            save2: function () {
-              var data = {
-                "epmId": this.edititems.epmId,
-                "epmName": this.edititems.epmName,
-                "empPwd": this.edititems.empPwd
-              }
-              $.ajax({
-                url: "/api/personalMerchandiser",
-                type: "post",
-                //将/jsON转化为字符串传递
-                dataType: 'json',
-                contentType: "application/json",
-                data: JSON.stringify(data),
-
-                //成功后的方法
-                success: function () {
-                  $('#primaryModal1').modal('hide');
-                  $('#editSuccess').modal('show');
-                  window.location.href = "/merchandiser/merchandiser_orders_list";
-                },
-                error: function (xhr, status, error) {
-                  $('#primaryModal1').modal('hide');
-                  $('#editFailModal').modal('show');
-                }
-              });
-            },
-            //页数
-            switch: function (x) {
-              $('.pagination li').removeClass('active');
-              x.parentNode.className = "page-item active";
-              this.pageindex = parseInt(x.innerHTML);
-            },
-            //首页
-            first: function () {
-              if (this.pageindex != 1) {
-                this.pageindex = 1;
-              }
-              this.$nextTick(function () {
-                $('.pagination li').removeClass('active');
-                var pidx = String(this.pageindex);
-                var li = document.getElementsByClassName("page-item");
-                for (var i = 0; i < li.length; i++) {
-                  if (li[i].childNodes[0].innerHTML === pidx) {
-                    li[i].className = "page-item active";
-                    break;
-                  }
-                }
-
-              })
-            },
-            //末页
-            lastone: function () {
-              if (this.pageindex != this.pagesum) {
-                this.pageindex = this.pagesum;
-              }
-              this.$nextTick(function () {
-                $('.pagination li').removeClass('active');
-                var pidx = String(this.pageindex);
-                var li = document.getElementsByClassName("page-item");
-                for (var i = 0; i < li.length; i++) {
-                  if (li[i].childNodes[0].innerHTML === pidx) {
-                    li[i].className = "page-item active";
-                    break;
-                  }
-                }
-              })
-            },
-            //上一页
-            last: function () {
-              if (this.pageindex != 1) {
-                this.pageindex--;
-              }
-              this.$nextTick(function () {
-                $('.pagination li').removeClass('active');
-                var pidx = String(this.pageindex);
-                var li = document.getElementsByClassName("page-item");
-                for (var i = 0; i < li.length; i++) {
-                  if (li[i].childNodes[0].innerHTML === pidx) {
-                    li[i].className = "page-item active";
-                    break;
-                  }
-                }
-              })
-
-            },
-            //下一页
-            Next: function () {
-              if (this.pageindex != app.pagesum) {
-                this.pageindex++;
-
-              }
-
-              this.$nextTick(function () {
-                $('.pagination li').removeClass('active');
-                var pidx = String(this.pageindex);
-                var li = document.getElementsByClassName("page-item");
-                for (var i = 0; i < li.length; i++) {
-                  if (li[i].childNodes[0].innerHTML === pidx) {
-                    li[i].className = "page-item active";
-                    break;
-                  }
-                }
-
-              })
-
-            },
-            //跳转页数
-            jume: function () {
-              var page = document.getElementById('page_1').value;
-              reg = /^\d+$/
-              if (page.length == 0) {
-                alert("请输入跳转页码");
-                return;
-              } else if (page < 1 || page > app.pagesum) {
-                alert("您输入的页码超过页数范围了！");
-                return;
-              } else if (reg.test(page) != true) {
-                alert("请输入数字！");
-                return;
-              }
-              this.pageindex = parseInt(page);
-              page = "";
-              this.$nextTick(function () {
-                $('.pagination li').removeClass('active');
-                var pidx = String(this.pageindex);
-                var li = document.getElementsByClassName("page-item");
-                for (var i = 0; i < li.length; i++) {
-                  if (li[i].childNodes[0].innerHTML === pidx) {
-                    li[i].className = "page-item active";
-                    break;
-
-                  }
-
-                }
-              })
-            }
-
-
-          }
-
-        });
-        return;
-      });
+      }],
+      suceess: true,
+      code: 200,
+      msg: "Success"
     });
 
+    $.getJSON("/supplier/list", function (response) {
+      supplierItems = response.data
+    })
+    $.getJSON("/purchase/list", function (response) {
+      items = response.data;
+      console.log(response.data)
+      page = Math.ceil(items.length / 5);
+      var pageitem = [];
+      for(var i = 0 ; i <items.length; i ++){
+        for(var j = 0 ; j < items[i].purchaseInfoVO.length;j ++ ){
+          items[i].purchaseInfoVO[j].createTime1 = items[i].purchaseInfoVO[j].createTime.toString().split("T")[0];
+        }
+
+      }
+      for (var i = 0; i < page; i++) {
+        pageitem[i] = i + 1;
+      }
+      app = new Vue({
+        el: '#itemsTemplate',
+        data: {
+          items: items,
+          checkall: false,
+          pagesum: page,//总页码
+          pageindex: 1,//当前页码
+          pagesize: 5, //页面数据个数
+          pageitem: pageitem,
+          editIndex: -1,
+          edititems: { name: null },
+          supplierItems: supplierItems,
+          supplierId : "",
+          son:""
+        },
+        computed: {
+          pageItems: function () {
+            var startIndex = (this.pageindex - 1) * this.pagesize;
+            var editIndex = startIndex + this.pagesize - 1;
+            return this.items.filter(function (value, index) {
+              return (
+                      index >= startIndex &&
+                      index <= editIndex
+              );
+            });
+          }
+        },
+        methods: {
+          //查询
+          cha: function () {
+            alert("查询")
+          },
+
+          // 编辑
+          edit: function (index,son) {
+            var forms = document.getElementsByClassName('needs-validation')[0];
+            forms.classList.remove('was-validated');
+            this.editIndex = index;
+            this.son = son
+            this.edititems = JSON.parse(JSON.stringify(this.items[index].purchaseInfoVO[son]));
+            console.log( this.edititems)
+            $('#editModal').modal('show');
+          },
+          save: function () {
+            var forms = document.getElementsByClassName('needs-validation')[0];
+            forms.classList.add('was-validated');
+            if (forms.checkValidity() === true) {
+            var supplierName = "";
+            for(var i = 0 ; i < this.supplierItems.length;i++){
+              if(this.supplierItems[i].supplierId === this.supplierId){
+                supplierName = this.supplierItems[i].supplierName
+              }
+            }
+            var data = {
+              "id": this.edititems.id,//主键标识
+              "purchaseId": this.edititems.purchaseId,
+              "supplierId": this.supplierId,
+              "supplierName": supplierName,
+              "goodsPrice": this.edititems.goodsPrice,
+              "orderId": this.edititems.orderId,
+              "goodsId": this.edititems.goodsId,
+              "empId": this.edititems.empId,
+              "accountEmpId": this.edititems.accountEmpId,
+              "isDel":  this.edititems.isDel,
+              "goodsNum": this.edititems.goodsNum,
+              "createTime": new Date(),
+              "finishTime": null,
+              "status": 2,
+              "isDel":  this.edititems.isDel
+            }
+            $.ajax({
+              url: "/purchase/updatePurchase",
+              type: "post",
+              //将/jsON转化为字符串传递
+              dataType: 'json',
+              contentType: "application/json",
+              data: JSON.stringify(data),
+
+              //成功后的方法
+              success: function () {
+                $('#editModal').modal('hide');
+                $('#editSuccess').modal('show');
+                app.edititems.status = 2;
+                Vue.set(app.items[app.editIndex].purchaseInfoVO, app.son, app.edititems);
+              },
+              error: function (xhr, status, error) {
+                $('#editModal').modal('hide');
+                $('#editFailModal').modal('show');
+              }
+            });
+            }
+
+          },
+
+          sendGoods: function (index,son) {
+            this.editIndex = index;
+            this.edititems = JSON.parse(JSON.stringify(this.items[index].purchaseInfoVO[son]));
+            this.son = son;
+            // this.son = this.items[index].purchaseInfoVO[son].purchaseId;
+            $('#sendGoodsModal').modal('show');
+          },
+          checkSendGoods: function () {
+            $.ajax({
+              url: "/purchase/updatePurchaseStatus",
+              type: "post",
+              //将/jsON转化为字符串传递
+              dataType: 'json',
+              data:{ "purchase_id": app.items[app.editIndex].purchaseInfoVO[app.son].purchaseId,"status":4},
+
+              //成功后的方法
+              success: function (res) {
+                if(res.resultCode === 500){
+                  $('#sendGoodsModal').modal('hide');
+                  $('#sendGoodsSuccessModal').modal('show');
+                }else{
+                  $('#sendGoodsModal').modal('hide');
+                  $('#sendGoodsSuccessModal').modal('show');
+                  app.edititems.status = 4;
+                  Vue.set(app.items[app.editIndex].purchaseInfoVO, app.son, app.edititems);
+                }
+
+              },
+              error: function (xhr, status, error) {
+                $('#sendGoodsModal').modal('hide');
+                $('#issue').modal('show');
+              }
+            });
+          },
+          getGoods: function(index,son){
+            this.editIndex = index;
+            this.edititems = JSON.parse(JSON.stringify(this.items[index].purchaseInfoVO[son]));
+            // this.son = this.items[index].purchaseInfoVO[son].purchaseId;
+            this.son = son
+            $('#getGoodsModal').modal('show');
+          },
+          checkGetGoods: function(){
+            $.ajax({
+              url: "/purchase/updatePurchaseStatus",
+              type: "post",
+              //将/jsON转化为字符串传递
+              dataType: 'json',
+              data:{ "purchase_id": app.items[app.editIndex].purchaseInfoVO[app.son].purchaseId,"status":5},
+
+              //成功后的方法
+              success: function (res) {
+                if(res.resultCode === 500){
+                  $('#getGoodsModal').modal('hide');
+                  $('#getGoodsFailModal').modal('show');
+                }else{
+                  $('#getGoodsModal').modal('hide');
+                  $('#getGoodsSuccessModal').modal('show');
+                  app.edititems.status = 5;
+                  window.location.reload();
+                }
+
+              },
+              error: function (xhr, status, error) {
+                $('#getGoodsModal').modal('hide');
+                $('#issue').modal('show');
+              }
+            });
+          },
+          //页数
+          switch: function (x) {
+            $('.pagination li').removeClass('active');
+            x.parentNode.className = "page-item active";
+            this.pageindex = parseInt(x.innerHTML);
+          },
+          //首页
+          first: function () {
+            if (this.pageindex != 1) {
+              this.pageindex = 1;
+            }
+            this.$nextTick(function () {
+              $('.pagination li').removeClass('active');
+              var pidx = String(this.pageindex);
+              var li = document.getElementsByClassName("page-item");
+              for (var i = 0; i < li.length; i++) {
+                if (li[i].childNodes[0].innerHTML === pidx) {
+                  li[i].className = "page-item active";
+                  break;
+                }
+              }
+
+            })
+          },
+          //末页
+          lastone: function () {
+            if (this.pageindex != this.pagesum) {
+              this.pageindex = this.pagesum;
+            }
+            this.$nextTick(function () {
+              $('.pagination li').removeClass('active');
+              var pidx = String(this.pageindex);
+              var li = document.getElementsByClassName("page-item");
+              for (var i = 0; i < li.length; i++) {
+                if (li[i].childNodes[0].innerHTML === pidx) {
+                  li[i].className = "page-item active";
+                  break;
+                }
+              }
+            })
+          },
+          //上一页
+          last: function () {
+            if (this.pageindex != 1) {
+              this.pageindex--;
+            }
+            this.$nextTick(function () {
+              $('.pagination li').removeClass('active');
+              var pidx = String(this.pageindex);
+              var li = document.getElementsByClassName("page-item");
+              for (var i = 0; i < li.length; i++) {
+                if (li[i].childNodes[0].innerHTML === pidx) {
+                  li[i].className = "page-item active";
+                  break;
+                }
+              }
+            })
+
+          },
+          //下一页
+          Next: function () {
+            if (this.pageindex != app.pagesum) {
+              this.pageindex++;
+
+            }
+
+            this.$nextTick(function () {
+              $('.pagination li').removeClass('active');
+              var pidx = String(this.pageindex);
+              var li = document.getElementsByClassName("page-item");
+              for (var i = 0; i < li.length; i++) {
+                if (li[i].childNodes[0].innerHTML === pidx) {
+                  li[i].className = "page-item active";
+                  break;
+                }
+              }
+
+            })
+
+          },
+          //跳转页数
+          jume: function () {
+            var page = document.getElementById('page_1').value;
+            reg = /^\d+$/
+            if (page.length == 0) {
+              alert("请输入跳转页码");
+              return;
+            } else if (page < 1 || page > app.pagesum) {
+              alert("您输入的页码超过页数范围了！");
+              return;
+            } else if (reg.test(page) != true) {
+              alert("请输入数字！");
+              return;
+            }
+            this.pageindex = parseInt(page);
+            page = "";
+            this.$nextTick(function () {
+              $('.pagination li').removeClass('active');
+              var pidx = String(this.pageindex);
+              var li = document.getElementsByClassName("page-item");
+              for (var i = 0; i < li.length; i++) {
+                if (li[i].childNodes[0].innerHTML === pidx) {
+                  li[i].className = "page-item active";
+                  break;
+
+                }
+
+              }
+            })
+          }
 
 
-  </script>
+        }
+
+      });
+      return;
+    });
+  });
+
+
+
+</script>
 </body>
-
 </html>

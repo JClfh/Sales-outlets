@@ -15,6 +15,7 @@ import com.jwz.salesteam.util.Result;
 import com.jwz.salesteam.util.ResultGenerator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -155,6 +156,11 @@ public class apiController {
         }
     }
 
+    /**
+     * 查看个人信息
+     * @param httpSession
+     * @return
+     */
     @GetMapping("/emp/person")
     @ResponseBody
     @ApiOperation(value="查看个人信息")
@@ -175,17 +181,24 @@ public class apiController {
         return ResultGenerator.genFailResult("Session为空，未知异常");
     }
 
-    @GetMapping("/emp/updatePerson")
+
+    /**
+     * 修改个人信息
+     * @param old_emp_pwd
+     * @param new_emp_pwd
+     * @param id
+     * @return
+     */
+    @RequestMapping(value ="/emp/updatePerson", method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation(value="修改个人信息")
-    public Result updatePersonInfo(String old_emp_pwd,String new_emp_pwd,Integer id){
+    public Result updatePersonInfo(@Param("old_emp_pwd") String old_emp_pwd, @Param("new_emp_pwd")String new_emp_pwd, @Param("id")Integer id){
         if (StringUtils.isEmpty(old_emp_pwd)
                 || StringUtils.isEmpty(new_emp_pwd)
                 || Objects.isNull(id)) {
             return ResultGenerator.genFailResult("参数异常！");
         }
-        //empInfo.setCreateTime(new Date());
-        // empInfo.setUpdateTime(new Date());
+
         String result = empInfoService.updateEmpPwdById(old_emp_pwd,new_emp_pwd,id);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
             return ResultGenerator.genSuccessResult();
@@ -226,6 +239,17 @@ public class apiController {
         EmpInfo temp = (EmpInfo)httpSession.getAttribute("跟单员");
 
         return  ResultGenerator.genSuccessResult(purchaseInfoService.getPersonMerchandiser(temp.getEmpId()));
+    }
+    /**
+     * 查询个人业绩
+     * @param search
+     * @return
+     */
+    @GetMapping("/searchResults/{search}")
+    @ResponseBody
+    @ApiOperation(value="查询个人业绩")
+    public Result searchResults(@PathVariable("search") String search){
+        return  ResultGenerator.genSuccessResult(empInfoService.searchByEmpdIdOrEmpName(search));
     }
 
     /**

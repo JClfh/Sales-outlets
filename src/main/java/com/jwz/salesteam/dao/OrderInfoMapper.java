@@ -31,5 +31,13 @@ public interface OrderInfoMapper {
     List<OrderInfo> findOrdersInfoList2(String emp_id);
 
 
-    List<Map<String,Object>> countByEmpId(String emp_id);
+    List<Map<String,Object>> personalCountByEmpId(String emp_id);
+
+    Integer countByEmpId(String emp_id);
+
+    List<String> findOrdersIdList();
+
+    List<String> findFinishOrdersIdList();
+
+    Integer findOrderStatusByOrderId(String order_id);
 }

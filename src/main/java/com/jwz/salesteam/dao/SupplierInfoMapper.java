@@ -2,6 +2,8 @@ package com.jwz.salesteam.dao;
 
 import com.jwz.salesteam.entity.SupplierInfo;
 
+import java.util.List;
+
 public interface SupplierInfoMapper {
 
     int deleteByPrimaryKey(Integer id);
@@ -15,4 +17,6 @@ public interface SupplierInfoMapper {
     int updateByPrimaryKeySelective(SupplierInfo record);
 
     int updateByPrimaryKey(SupplierInfo record);
+
+    List<SupplierInfo> findSupplierInfoList();
 }

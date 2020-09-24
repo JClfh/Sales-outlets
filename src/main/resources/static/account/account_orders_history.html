@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -34,8 +35,10 @@
     <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div  style="aligen:center">
-      <a href="">欢迎您，尊敬的***</a>
+    <div class="btn-group" role="group" aria-label="Button group">
+      <span class="btn"> 你好，无敌的财务人员！管钱管钱管钱</span>
+      <a class="btn" href="/api/emp/logout">
+        <i class="fa fa-share" aria-hidden="true"></i>退出</a>
     </div>
   
   </header>
@@ -44,29 +47,38 @@
     <div class="sidebar">
       <nav class="sidebar-nav ps ps--active-y">
         <ul class="nav">
-            <br>
-            <br>
-  
-            <li class="nav-item nav-dropdown ">
-              <a class="nav-link nav-dropdown-toggle" href="#">
-                <i class="nav-icon icon-puzzle"></i> 财务管理</a>
+          <br>
+          <li class="nav-item nav-dropdown ">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-puzzle"></i> 财务管理</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" href="./account_orders_check.html">
+                  <i class="nav-icon icon-puzzle"></i>审核订单</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./account_orders_count.html">
+                  <i class="nav-icon icon-puzzle"></i>查看业绩</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./account_orders_history.html">
+                  <i class="nav-icon icon-puzzle"></i>历史采购订单</a>
+              </li>
+
+            </ul>
+          </li>
+          <br><br>
+          <li class="nav-item nav-dropdown ">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-puzzle"></i> 个人中心</a>
               <ul class="nav-dropdown-items">
                 <li class="nav-item">
-                  <a class="nav-link" href="./account_orders_check.html">
-                    <i class="nav-icon icon-puzzle"></i>审核订单</a>
+                  <a class="nav-link" href="./account_security.html">
+                    <i class="nav-icon icon-puzzle"></i>账号安全</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./account_orders_count.html">
-                    <i class="nav-icon icon-puzzle"></i>查看业绩</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./account_orders_history.html">
-                    <i class="nav-icon icon-puzzle"></i>历史采购订单</a>
-                </li>
-             
-              </ul>
-            </li>
-          </ul>
+              </ul> 
+            </li> 
+        </ul>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
           <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
         </div>
@@ -108,29 +120,46 @@
                       <th width="125p">订单编号</th>
                       <th width="125p">商品名称</th>
                       <th width="125p">商品数量</th>
+                      <th width="125p">利润</th>
                       <th width="125p">供货商</th>
                       <th width="125p">状态</th>
                       <th width="125p">处理时间</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
-
-                      <td align="center">{{item.id}}</td>
-                      <td align="center">{{item.orderId}}</td>
-                      <td align="center">{{item.goodsName}}</td>
-                      <td align="center">{{item.goodsNum}}</td>
-                      <td align="center">
-                        <span class="" v-if="item.supplieName  === '0'">广州供货商</span>
-                        <span class="" v-if="item.supplieName  === '1'">深圳供货商</span>
+                  <tbody v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
+                    <tr >
+                      <td :rowspan="item.purchaseInfoVO.length" align="center" style=" vertical-align:middle">{{index + 1}}</td>
+                      <td :rowspan="item.purchaseInfoVO.length" align="center" style=" vertical-align:middle">{{item.orderId}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[0].goodsName}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[0].goodsNum}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[0].supplierName}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[0].goodsCostPrice}} - {{item.purchaseInfoVO[0].goodsPrice}}</td>
+                      <td align="center" style=" vertical-align:middle">
+                        <span class="badge badge-danger"  style="font-size:17px" v-if="item.purchaseInfoVO[0].status === 1">未通过</span>
+                        <span class="badge badge-warning"  style="font-size:17px" v-if="item.purchaseInfoVO[0].status === 2">审批中</span>
+                        <span class="badge badge-info"  style="font-size:17px" v-if="item.purchaseInfoVO[0].status === 3">审批完成</span>
+                        <span class="badge badge-primary"  style="font-size:17px" v-if="item.purchaseInfoVO[0].status === 4">已发货</span>
+                        <span class="badge badge-success"  style="font-size:17px" v-if="item.purchaseInfoVO[0].status === 5">已收货</span>
                       </td>
-                      <td align="center"> 
-                        <p class="badge badge-success"  style="font-size:17px" v-if="item.isDel === '0'">通过</p>
-                        <p class="badge badge-danger"  style="font-size:17px" v-if="item.isDel === '1'">不通过</p>
-                      </td>
-                      <td align="center">{{item.createTime}}</td>
-                     
+                      <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[0].createTime1}}</td>
                     </tr>
+                    <tr v-for="son in item.purchaseInfoVO.length-1" >
+                      <!-- 遍历第一行数据 -->
+                      <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[son].goodsName}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[son].goodsNum}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[son].supplierName}}</td>
+
+                      <td align="center" style=" vertical-align:middle">
+                        <span class="badge badge-danger"  style="font-size:17px" v-if="item.purchaseInfoVO[0].status === 1">未通过</span>
+                        <span class="badge badge-warning"  style="font-size:17px" v-if="item.purchaseInfoVO[0].status === 2">审批中</span>
+                        <span class="badge badge-info"  style="font-size:17px" v-if="item.purchaseInfoVO[0].status === 3">审批完成</span>
+                        <span class="badge badge-primary"  style="font-size:17px" v-if="item.purchaseInfoVO[0].status === 4">已发货</span>
+                        <span class="badge badge-success"  style="font-size:17px" v-if="item.purchaseInfoVO[0].status === 5">已收货</span>
+                      </td>
+                      <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[son].createTime1}}</td>
+
+                    </tr>
+
                   </tbody>
                 </table>
                 <ul class="pagination" id="pagelist">
@@ -141,7 +170,7 @@
                   <li class="page-item">
                     <a class="page-link" href="javascript:void(0);" onclick="app.last()">上一页</a>
                   </li>
-                  <li class="page-item" v-for="pageitem in pagesum">
+                  <li class="page-item" v-for="pageitem in pagesum" v-bind:class="{ 'active': pageitem == pageindex}">
                     <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
                   </li>
 
@@ -207,13 +236,15 @@
         code: 200,
         msg: "Success"
       });
-      $.getJSON("/financial/purchase/check", function (response) {
+      $.getJSON("/api/emp/personAccount", function (response) {
         items = response.data;
         console.log(response.data)
         page = Math.ceil(items.length / 5);
         var pageitem = [];
         for (var i = 0; i < page; i++) {
-          pageitem[i] = i + 1;
+          for(var j = 0 ; j < items[i].purchaseInfoVO.length;j ++ ){
+            items[i].purchaseInfoVO[j].createTime1 = items[i].purchaseInfoVO[j].createTime.toString().split("T")[0];
+          }
         }
         app = new Vue({
           el: '#itemsTemplate',

@@ -34,4 +34,6 @@ public interface EmpInfoMapper {
     EmpInfo selectByLoginNameAndPwdAndType(String emp_id, String emp_pwd, Integer emp_type);
 
     int updateEmpPwdByPrimaryKey(String emp_pwd, Integer id);
+
+    EmpInfo selectByEmpName(String search);
 }

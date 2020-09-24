@@ -1,5 +1,6 @@
-<html lang="en">
 
+<!DOCTYPE html>
+<html>
 <head>
   <base href="./">
   <meta charset="utf-8">
@@ -17,542 +18,541 @@
   <link href="../css/style.css" rel="stylesheet">
   <link href="../vendors/pace-progress/css/pace.min.css" rel="stylesheet">
 </head>
-<script type="text/css">
-
-            </script>
-<style>
-  .div1 {
-    background: rgb(38, 202, 231);
-    color: rgb(252, 247, 247);
-  }
-</style>
-
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
-  <div id="itemsTemplate">
-    <header class="app-header navbar">
-      <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<div id="">
+  <header class="app-header navbar">
+    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div style="aligen:left">
-        <a href="">欢迎您，尊敬的***</a>
-      </div>
-      <div style="align:left">
-        <button class="btn btn-block btn-ghost-secondary" type="button" data-toggle="modal" v-on:click="edit()">
-          <i class="fa fa-edit "></i>个人信息修改</button>&nbsp;</div>
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="btn-group" role="group" aria-label="Button group">
+      <span class="btn"> 你好，无敌的财务人员！管钱管钱管钱</span>
+      <a class="btn" href="/api/emp/logout">
+        <i class="fa fa-share" aria-hidden="true"></i>退出</a>
+    </div>
 
-    </header>
-    <div class="app-body">
-      <div class="sidebar">
-        <nav class="sidebar-nav ps ps--active-y">
-          <ul class="nav">
-            <br>
-            <br>
 
-            <li class="nav-item nav-dropdown ">
-              <a class="nav-link nav-dropdown-toggle" href="#">
-                <i class="nav-icon icon-puzzle"></i> 财务管理</a>
+  </header>
+  <div class="app-body">
+    <div class="sidebar">
+      <nav class="sidebar-nav ps ps--active-y">
+        <ul class="nav">
+          <br>
+          <li class="nav-item nav-dropdown ">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-puzzle"></i> 财务管理</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" href="./account_orders_check.html">
+                  <i class="nav-icon icon-puzzle"></i>审核订单</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./account_orders_count.html">
+                  <i class="nav-icon icon-puzzle"></i>查看业绩</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./account_orders_history.html">
+                  <i class="nav-icon icon-puzzle"></i>历史采购订单</a>
+              </li>
+
+            </ul>
+          </li>
+          <br><br>
+          <li class="nav-item nav-dropdown ">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-puzzle"></i> 个人中心</a>
               <ul class="nav-dropdown-items">
                 <li class="nav-item">
-                  <a class="nav-link" href="./account_orders_check.html">
-                    <i class="nav-icon icon-puzzle"></i>审核订单</a>
+                  <a class="nav-link" href="./account_security.html">
+                    <i class="nav-icon icon-puzzle"></i>账号安全</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./account_orders_count.html">
-                    <i class="nav-icon icon-puzzle"></i>查看业绩</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./account_orders_history.html">
-                    <i class="nav-icon icon-puzzle"></i>历史采购订单</a>
-                </li>
+              </ul> 
+            </li> 
+        </ul>
+        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+          <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+        </div>
+        <div class="ps__rail-y" style="top: 0px; height: 445px; right: 0px;">
+          <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 297px;"></div>
+        </div>
+      </nav>
+      <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+    </div>
+    <main class="main">
+      <!-- Breadcrumb-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">你的位置：财务管理->查看业绩</li>
+        <!-- Breadcrumb Menu-->
+        <li class="breadcrumb-menu d-md-down-none">
+        </li>
+      </ol>
 
-              </ul>
-            </li>
-          </ul>
-          <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-            <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
-          </div>
-          <div class="ps__rail-y" style="top: 0px; height: 445px; right: 0px;">
-            <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 297px;"></div>
-          </div>
-        </nav>
-        <button class="sidebar-minimizer brand-minimizer" type="button"></button>
-      </div>
-      <main class="main">
-        <!-- Breadcrumb-->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">你的位置：财务管理->查看业绩</li>
-
-          <!-- Breadcrumb Menu-->
-          <li class="breadcrumb-menu d-md-down-none">
-
-          </li>
-        </ol>
-
-        <div align="center">
-          <div class="center-in-center" style="width:95%;">
-            <div class="row">
-              <div class="col">
-                <div class="card">
-                  <div id="main" style="width: 600px;height:400px;"></div>
-                </div>
-              </div>
-              <div class="col">
+      <div align="center">
+        <div class="center-in-center" style="width:95%;">
+          <div class="row">
+            <div class="col">
+              <div class="card">
                 <div class="card">
                   <div class="card-header">
-                    <div align="left">
-                      <div align="left">
-                        <i class=" font-xl  cui-people"></i>
-                        搜索<input type="text" name="text-input" value="">
-                        <button class="btn btn-success" type="button" v-on:click="cha()" data-toggle="modal">
-                          <i class="fa fa-search" aria-hidden="true"></i></button>
-
-                      </div>
-                    </div>
+                    <div align="left"> <i aria-hidden="true" class="fa fa-bar-chart"></i>数据可视化</div>
                   </div>
-                  <div class="card-body collapse show" id="collapseExample">
-                    <table class="table table-responsive-sm table-bordered">
-                      <thead>
-                        <tr align="center">
-                          <th width="125p">序号</th>
-                          <th width="125p">职工ID</th>
-                          <th width="125p">职工姓名</th>
-                          <th width="125p">业绩</th>
-
-
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
-                          <td align="center">{{item.id}}</td>
-                          <td align="center">{{item.empId}}</td>
-                          <td align="center">{{item.empName}}</td>
-                          <td align="center">{{item.empResults}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <ul class="pagination" id="pagelist">
-                      <li class="page-item">
-                        <a class="page-link" href="javascript:void(0);" onclick="app.first()">首页</a>
-                      </li>
-
-                      <li class="page-item">
-                        <a class="page-link" href="javascript:void(0);" onclick="app.last()">上一页</a>
-                      </li>
-                      <li class="page-item" v-for="pageitem in pagesum">
-                        <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
-                      </li>
-
-                      <li class="page-item" v-for="pageitem in pageitem" v-if="pageindex>=4 && pageindex<=pagesum-3"
-                        v-show="pageitem>pageindex-3 && pageitem<pageindex+3 && pageindex>=4 && pageindex<=pagesum-3">
-                        <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
-                      </li>
-
-                      <li class="page-item">
-                        <a class="page-link" href="javascript:void(0);" onclick="app.Next()">下一页</a>
-                      </li>
-
-                      <li class="page-item">
-                        <a class="page-link" href="javascript:void(0);" onclick="app.lastone()">末页</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" style="color:cornflowerblue">{{pageindex}}/{{pagesum}}</a>
-                      </li>
-                      <li>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                      </li>
-                      <li class="page-item">
-                        <input class="form-control" id="page_1" size="16" type="text" style="width:60px">
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" style="color:cornflowerblue" v-on:click="jume();">转</a>
-                      </li>
-                    </ul>
+                  <div class="card-body">
+                    <div id="main" style="width: 600px;height:400px;"></div>
                   </div>
+
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+            <div class="col" id="itemsTemplate">
+              <div class="card">
+                <div class="card-header">
+                  <div align="left">
+                    <div align="left">
+                      <i class=" font-xl  cui-people"></i>
+                      搜索<input type="text" name="text-input" value="" v-model="keyword">
+                      <button class="btn btn-success" type="button" v-on:click="cha()" data-toggle="modal">
+                        <i class="fa fa-search" aria-hidden="true"></i></button>
 
-        <div class="modal fade" id="editSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          style="display: none;" aria-hidden="true">
-          <div class="modal-dialog modal-success" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">提示</h4>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>编辑成功！</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body collapse show" id="collapseExample">
+                  <table class="table table-responsive-sm table-bordered">
+                    <thead>
+                    <tr align="center">
+                      <th width="125p">序号</th>
+                      <th width="125p">职工ID</th>
+                      <th width="125p">职工姓名</th>
+                      <th width="125p">业绩</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
+                      <td align="center">{{index}}</td>
+                      <td align="center">{{item.empId}}</td>
+                      <td align="center">{{item.empName}}</td>
+                      <td align="center">{{item.empResults}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  <ul class="pagination" id="pagelist">
+                    <li class="page-item">
+                      <a class="page-link" href="javascript:void(0);" onclick="app.first()">首页</a>
+                    </li>
+
+                    <li class="page-item">
+                      <a class="page-link" href="javascript:void(0);" onclick="app.last()">上一页</a>
+                    </li>
+                    <li class="page-item" v-for="pageitem in pagesum" v-bind:class="{ 'active': pageitem == pageindex}">
+                      <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
+                    </li>
+
+                    <li class="page-item" v-for="pageitem in pageitem" v-if="pageindex>=4 && pageindex<=pagesum-3"
+                        v-show="pageitem>pageindex-3 && pageitem<pageindex+3 && pageindex>=4 && pageindex<=pagesum-3">
+                      <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
+                    </li>
+
+                    <li class="page-item">
+                      <a class="page-link" href="javascript:void(0);" onclick="app.Next()">下一页</a>
+                    </li>
+
+                    <li class="page-item">
+                      <a class="page-link" href="javascript:void(0);" onclick="app.lastone()">末页</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" style="color:cornflowerblue">{{pageindex}}/{{pagesum}}</a>
+                    </li>
+                    <li>
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                    </li>
+                    <li class="page-item">
+                      <input class="form-control" id="page_1" size="16" type="text" style="width:60px">
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" style="color:cornflowerblue" v-on:click="jume();">转</a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-            <!-- /.modal-content-->
-          </div>
-        </div>
-        <!-- /警告-->
-        <div class="modal fade show" id="editFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          style="display: none;" aria-hidden="true">
-          <div class="modal-dialog modal-danger" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">警告！！！！！</h4>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>编辑失败</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
-
-              </div>
-            </div>
-            <!-- /.modal-content-->
-          </div>
-          <!-- /.modal-dialog-->
-        </div>
-
-        <!-- 个人信息修改 -->
-        <div class="modal fade" id="primaryModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          aria-hidden="true" style="display: none;" aria-hidden="true">
-
-          <div class="modal-dialog modal-primary" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-
-                <h4 class="modal-title">个人信息</h4>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div class="card-body">
-                <form class="needs-validation" novalidate>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">职工ID</label>
-                    <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="职工ID"
-                        v-model="edititems.empId" pattern="^[0-9]+$" disabled="disabled" required>
-
-                    </div>
+            <div class="modal fade" id="issue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 style="display: none;" aria-hidden="true">
+              <div class="modal-dialog modal-danger" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">提示</h4>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
                   </div>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">职工名称</label>
-                    <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品名称"
-                        v-model="edititems.empName" pattern="^[\u4e00-\u9fa5]{2,4}$|^[A-Za-z\s]{2,40}$" required>
-
-                    </div>
+                  <div class="modal-body">
+                    <p>出现未知错误</p>
                   </div>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">职工密码</label>
-                    <div class="col-md-9">
-                      <input class="form-control" type="password" id="pwd" placeholder="密码" v-model="edititems.empPwd"
-                        onkeyup="validate()" required>
-
-                    </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-danger" type="button" data-dismiss="modal">确定</button>
                   </div>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">再次输入密码</label>
-                    <div class="col-md-9">
-                      <input class="form-control" type="password" id="pwd1" placeholder="请再次输入密码" onkeyup="validate()"
-                        required>
-
-                    </div>
-                  </div>
-
-
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-info" type="button" v-on:click="save()">保存</button>
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                </div>
+                <!-- /.modal-content-->
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-      </main>
-    </div>
+
+
+    </main>
   </div>
+</div>
 
-  <script src="../vendors/jquery/js/jquery.min.js"></script>
-  <script src="../vendors/popper.js/js/popper.min.js"></script>
-  <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
-  <script src="../vendors/pace-progress/js/pace.min.js"></script>
-  <script src="../vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
-  <script src="../vendors/@coreui/coreui/js/coreui.min.js"></script>
-  <script src="../vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
-  <script src="../vendors/mock.js/js/mock.min.js"></script>
-  <script src="../vendors/vue.js/js/vue.min.js"></script>
-  <script>
-    function validate() {
-      var pwd = $("#pwd").val();
-      var pwd1 = $("#pwd1").val();
+<script src="../vendors/jquery/js/jquery.min.js"></script>
+<script src="../vendors/popper.js/js/popper.min.js"></script>
+<script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="../vendors/pace-progress/js/pace.min.js"></script>
+<script src="../vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+<script src="../vendors/@coreui/coreui/js/coreui.min.js"></script>
+<script src="../vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
+<script src="../vendors/mock.js/js/mock.min.js"></script>
+<script src="../vendors/vue.js/js/vue.min.js"></script>
+<script src="../vendors/echarts/dist/echarts.min.js"></script>
 
-      if (pwd != pwd1) {
-        $("#danger").html("两次密码不相同");
-        $("#danger").css("color", "red")
-        $("button").attr("disabled", "disabled");
-      } else {
-        $("#danger").html("");
-        $("button").removeAttr("disabled");
+<script>
+  var p, d, j;
+  var app;
+  var items;
+  var dataList=[]//新建一个数组
+  var dataLi=[]//新建一个数组
+  $(function () {
+    Mock.mock("http://127.0.0.1:5500/users", {
+      "data|20-20": [{
+        id: "@increment()",//编号
+        empId: "@increment()",//职工id
+        empName: "@cname()",//职工姓名
+        empResults: "@increment()",//业绩
+        eempPwd: "@increment()"//职工密码
+
+      }],
+      suceess: true,
+      code: 200,
+      msg: "Success"
+    });
+    $.getJSON("/api/count", function (response) {
+      items = response.data;
+      // 在线图表
+      for (var i = 0; i < items.length; i++) {
+        dataList[i] = items[i].empName;
+        dataLi[i] = items[i].empResults;
+
       }
+      var myChart = echarts.init(document.getElementById('main'));
 
-    }
-  </script>
+      // 指定图表的配置项和数据
 
-  <script>
-    var p, d, j;
-    var app;
-    var items;
-    $(function () {
-      Mock.mock("http://127.0.0.1:5500/users", {
-        "data|20-20": [{
-          id: "@increment()",//编号
-          empId: "@increment()",//职工id
-          empName: "@cname()",//职工姓名
-          empResults: "@increment()",//业绩 
-          eempPwd: "@increment()"//职工密码
-
-        }],
-        suceess: true,
-        code: 200,
-        msg: "Success"
-      });
-      $.getJSON("/account/empResults/list", function (response) {
-        items = response.data;
-        // 在线图表
-        for (var i = 0; i < items.length; i++) {
-          dataList[i] = items[i].empName;
-          dataLi[i] = items[i].empResults;
-
-        }
-        console.log(dataList)
-        console.log(dataLi)
-
-        var myChart = echarts.init(document.getElementById('main'));
-
-        // 指定图表的配置项和数据
-        var option = {
-          title: {
-            text: '第一个 ECharts 实例'
-          },
-          tooltip: {},
-          legend: {
-            data: ['销量']
-          },
-          xAxis: {
+      var  option = {
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          data:['业绩']
+        },
+        xAxis: [
+          {
+            type: 'category',
             data: dataList
-          },
-          yAxis: {},
-          series: [{
-            name: '销量',
-            type: 'bar',
-            data: dataLi
-          }]
-        };
-          //
-        console.log(response.data)
-        page = Math.ceil(items.length / 5);
-        var pageitem = [];
-        for (var i = 0; i < page; i++) {
-          pageitem[i] = i + 1;
-        }
-        app = new Vue({
-          el: '#itemsTemplate',
-          data: {
-            items: items,
-            checkall: false,
-            pagesum: page,//总页码
-            pageindex: 1,//当前页码
-            pagesize: 5, //页面数据个数
-            pageitem: pageitem,
-            editIndex: -1,
-            edititems: { name: null },
-
-          },
-          computed: {
-            pageItems: function () {
-              var startIndex = (this.pageindex - 1) * this.pagesize;
-              var editIndex = startIndex + this.pagesize - 1;
-              return this.items.filter(function (value, index) {
-                return (
-                  index >= startIndex &&
-                  index <= editIndex
-                );
-              });
-            }
-          },
-          methods: {
-            //查询
-            cha: function () {
-              alert("查询")
-            },
-
-
-            // 个人信息编辑
-            edit: function () {
-              var forms = document.getElementsByClassName('needs-validation')[0];
-              forms.classList.remove('was-validated');
-
-              $('#primaryModal').modal('show');
-            },
-            save: function () {
-              var data = {
-                "epmId": this.edititems.epmId,
-                "epmName": this.edititems.epmName,
-                "empPwd": this.edititems.empPwd
-              }
-              $.ajax({
-                url: "/api/personalMerchandiser",
-                type: "post",
-                //将/jsON转化为字符串传递
-                dataType: 'json',
-                contentType: "application/json",
-                data: JSON.stringify(data),
-
-                //成功后的方法
-                success: function () {
-                  $('#primaryModal').modal('hide');
-                  $('#editSuccess').modal('show');
-                  window.location.href = "/merchandiser/merchandiser_orders_list";
-                },
-                error: function (xhr, status, error) {
-                  $('#primaryModal').modal('hide');
-                  $('#editFailModal').modal('show');
-                }
-              });
-            },
-
-            //页数
-            switch: function (x) {
-              $('.pagination li').removeClass('active');
-              x.parentNode.className = "page-item active";
-              this.pageindex = parseInt(x.innerHTML);
-            },
-            //首页
-            first: function () {
-              if (this.pageindex != 1) {
-                this.pageindex = 1;
-              }
-              this.$nextTick(function () {
-                $('.pagination li').removeClass('active');
-                var pidx = String(this.pageindex);
-                var li = document.getElementsByClassName("page-item");
-                for (var i = 0; i < li.length; i++) {
-                  if (li[i].childNodes[0].innerHTML === pidx) {
-                    li[i].className = "page-item active";
-                    break;
-                  }
-                }
-
-              })
-            },
-            //末页
-            lastone: function () {
-              if (this.pageindex != this.pagesum) {
-                this.pageindex = this.pagesum;
-              }
-              this.$nextTick(function () {
-                $('.pagination li').removeClass('active');
-                var pidx = String(this.pageindex);
-                var li = document.getElementsByClassName("page-item");
-                for (var i = 0; i < li.length; i++) {
-                  if (li[i].childNodes[0].innerHTML === pidx) {
-                    li[i].className = "page-item active";
-                    break;
-                  }
-                }
-              })
-            },
-            //上一页
-            last: function () {
-              if (this.pageindex != 1) {
-                this.pageindex--;
-              }
-              this.$nextTick(function () {
-                $('.pagination li').removeClass('active');
-                var pidx = String(this.pageindex);
-                var li = document.getElementsByClassName("page-item");
-                for (var i = 0; i < li.length; i++) {
-                  if (li[i].childNodes[0].innerHTML === pidx) {
-                    li[i].className = "page-item active";
-                    break;
-                  }
-                }
-              })
-
-            },
-            //下一页
-            Next: function () {
-              if (this.pageindex != app.pagesum) {
-                this.pageindex++;
-
-              }
-
-              this.$nextTick(function () {
-                $('.pagination li').removeClass('active');
-                var pidx = String(this.pageindex);
-                var li = document.getElementsByClassName("page-item");
-                for (var i = 0; i < li.length; i++) {
-                  if (li[i].childNodes[0].innerHTML === pidx) {
-                    li[i].className = "page-item active";
-                    break;
-                  }
-                }
-
-              })
-
-            },
-            //跳转页数
-            jume: function () {
-              var page = document.getElementById('page_1').value;
-              reg = /^\d+$/
-              if (page.length == 0) {
-                alert("请输入跳转页码");
-                return;
-              } else if (page < 1 || page > app.pagesum) {
-                alert("您输入的页码超过页数范围了！");
-                return;
-              } else if (reg.test(page) != true) {
-                alert("请输入数字！");
-                return;
-              }
-              this.pageindex = parseInt(page);
-              page = "";
-              this.$nextTick(function () {
-                $('.pagination li').removeClass('active');
-                var pidx = String(this.pageindex);
-                var li = document.getElementsByClassName("page-item");
-                for (var i = 0; i < li.length; i++) {
-                  if (li[i].childNodes[0].innerHTML === pidx) {
-                    li[i].className = "page-item active";
-                    break;
-
-                  }
-
-                }
-              })
-            }
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value',
+            name: '业绩统计',
 
           }
+        ],
+        series: [
 
-        });
-        return;
+          {
+            name:'业绩',
+            type:'bar',
+            itemStyle : {  /*设置折线颜色*/
+              normal : {
+                color:'#3299CC'
+              }
+            },
+            data: dataLi
+          },
+          {
+            name:'折线',
+            type:'line',
+            data: dataLi
+          }
+        ]
+      };
+      myChart.setOption(option);
+      page = Math.ceil(items.length / 5);
+      var pageitem = [];
+      for (var i = 0; i < page; i++) {
+        pageitem[i] = i + 1;
+      }
+      app = new Vue({
+        el: '#itemsTemplate',
+        data: {
+          items: items,
+          checkall: false,
+          pagesum: page,//总页码
+          pageindex: 1,//当前页码
+          pagesize: 5, //页面数据个数
+          pageitem: pageitem,
+          editIndex: -1,
+          edititems: { name: null },
+          keyword: ""
+
+        },
+        computed: {
+          pageItems: function () {
+            var startIndex = (this.pageindex - 1) * this.pagesize;
+            var editIndex = startIndex + this.pagesize - 1;
+            return this.items.filter(function (value, index) {
+              return (
+                      index >= startIndex &&
+                      index <= editIndex
+              );
+            });
+          }
+        },
+        methods: {
+          cha: function () {
+
+            if(this.keyword === ""){
+              for (var i = 0; i < items.length; i++) {
+                dataList[i] = items[i].empName;
+                dataLi[i] = items[i].empResults;
+
+              }
+              var myChart = echarts.init(document.getElementById('main'));
+
+              // 指定图表的配置项和数据
+              var  option = {
+                tooltip: {
+                  trigger: 'axis'
+                },
+                legend: {
+                  data:['业绩']
+                },
+                xAxis: [
+                  {
+                    type: 'category',
+                    data: dataList
+                  }
+                ],
+                yAxis: [
+                  {
+                    type: 'value',
+                    name: '业绩统计',
+
+                  }
+                ],
+                series: [
+
+                  {
+                    name:'业绩',
+                    type:'bar',
+                    itemStyle : {  /*设置折线颜色*/
+                      normal : {
+                        color:'#3299CC'
+                      }
+                    },
+                    data: dataLi
+                  },
+                  {
+                    name:'折线',
+                    type:'line',
+                    data: dataLi
+                  }
+                ]
+              };
+              //
+              myChart.setOption(option);
+            }else{
+              $.ajax({
+                url: "/api/searchResults/"+this.keyword,
+                type: "get",
+                success: function (res) {
+                  var dataList = [];
+                  var dataLi = [];
+                  console.log(res)
+                  for(let key  in res.data.empCountList){
+                    dataList.push(key)
+                    dataLi.push(res.data.empCountList[key])
+                    console.log(key + '---' + res.data.empCountList[key])
+                  }
+                  var myChart = echarts.init(document.getElementById('main'));
+
+                  // 指定图表的配置项和数据
+                  var  option = {
+                    tooltip: {
+                      trigger: 'axis'
+                    },
+                    legend: {
+                      data:['业绩']
+                    },
+                    xAxis: [
+                      {
+                        type: 'category',
+                        data: dataList
+                      }
+                    ],
+                    yAxis: [
+                      {
+                        type: 'value',
+                        name: '业绩统计',
+
+                      }
+                    ],
+                    series: [
+
+                      {
+                        name:'业绩',
+                        type:'bar',
+                        itemStyle : {  /*设置折线颜色*/
+                          normal : {
+                            color:'#3299CC'
+                          }
+                        },
+                        data: dataLi
+                      },
+                      {
+                        name:'折线',
+                        type:'line',
+                        data: dataLi
+                      }
+                    ]
+                  };
+                  //
+                  myChart.setOption(option);
+                },
+                error: function (xhr, status, error) {
+                  $('#issue').modal('show');
+                }
+              });
+            }
+          },
+          //页数
+          switch: function (x) {
+            $('.pagination li').removeClass('active');
+            x.parentNode.className = "page-item active";
+            this.pageindex = parseInt(x.innerHTML);
+          },
+          //首页
+          first: function () {
+            if (this.pageindex != 1) {
+              this.pageindex = 1;
+            }
+            this.$nextTick(function () {
+              $('.pagination li').removeClass('active');
+              var pidx = String(this.pageindex);
+              var li = document.getElementsByClassName("page-item");
+              for (var i = 0; i < li.length; i++) {
+                if (li[i].childNodes[0].innerHTML === pidx) {
+                  li[i].className = "page-item active";
+                  break;
+                }
+              }
+
+            })
+          },
+          //末页
+          lastone: function () {
+            if (this.pageindex != this.pagesum) {
+              this.pageindex = this.pagesum;
+            }
+            this.$nextTick(function () {
+              $('.pagination li').removeClass('active');
+              var pidx = String(this.pageindex);
+              var li = document.getElementsByClassName("page-item");
+              for (var i = 0; i < li.length; i++) {
+                if (li[i].childNodes[0].innerHTML === pidx) {
+                  li[i].className = "page-item active";
+                  break;
+                }
+              }
+            })
+          },
+          //上一页
+          last: function () {
+            if (this.pageindex != 1) {
+              this.pageindex--;
+            }
+            this.$nextTick(function () {
+              $('.pagination li').removeClass('active');
+              var pidx = String(this.pageindex);
+              var li = document.getElementsByClassName("page-item");
+              for (var i = 0; i < li.length; i++) {
+                if (li[i].childNodes[0].innerHTML === pidx) {
+                  li[i].className = "page-item active";
+                  break;
+                }
+              }
+            })
+
+          },
+          //下一页
+          Next: function () {
+            if (this.pageindex != app.pagesum) {
+              this.pageindex++;
+            }
+
+            this.$nextTick(function () {
+              $('.pagination li').removeClass('active');
+              var pidx = String(this.pageindex);
+              var li = document.getElementsByClassName("page-item");
+              for (var i = 0; i < li.length; i++) {
+                if (li[i].childNodes[0].innerHTML === pidx) {
+                  li[i].className = "page-item active";
+                  break;
+                }
+              }
+
+            })
+
+          },
+          //跳转页数
+          jume: function () {
+            var page = document.getElementById('page_1').value;
+            reg = /^\d+$/
+            if (page.length == 0) {
+              alert("请输入跳转页码");
+              return;
+            } else if (page < 1 || page > app.pagesum) {
+              alert("您输入的页码超过页数范围了！");
+              return;
+            } else if (reg.test(page) != true) {
+              alert("请输入数字！");
+              return;
+            }
+            this.pageindex = parseInt(page);
+            page = "";
+            this.$nextTick(function () {
+              $('.pagination li').removeClass('active');
+              var pidx = String(this.pageindex);
+              var li = document.getElementsByClassName("page-item");
+              for (var i = 0; i < li.length; i++) {
+                if (li[i].childNodes[0].innerHTML === pidx) {
+                  li[i].className = "page-item active";
+                  break;
+
+                }
+
+              }
+            })
+          }
+        }
       });
     });
+  });
 
-  </script>
+</script>
 </body>
-
 </html>
