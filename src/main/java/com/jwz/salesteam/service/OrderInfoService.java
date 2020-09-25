@@ -19,7 +19,7 @@ public interface OrderInfoService {
 
     Map<String,Long> getPersonSaleNum(String emp_id);
 
-    List<OrderConutVO> getAllCount();
+
 
 
 }

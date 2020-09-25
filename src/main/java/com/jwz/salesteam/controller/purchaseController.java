@@ -69,8 +69,9 @@ public class purchaseController {
 
     @RequestMapping(value = "/updatePurchaseStatus", method = RequestMethod.POST)
     @ResponseBody
-    public Result updatePurchaseState(@Param("purchase_id") String purchase_id, @Param("status") int status) {
-        String result = purchaseInfoService.updatePurchaseState(purchase_id,status);
+    public Result updatePurchaseState(@Param("purchase_id") String purchase_id, @Param("status") int status,HttpSession httpSession) {
+
+        String result = purchaseInfoService.updatePurchaseState(purchase_id,status,httpSession);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
             return ResultGenerator.genSuccessResult();
         } else {

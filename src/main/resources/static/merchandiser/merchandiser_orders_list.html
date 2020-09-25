@@ -114,14 +114,14 @@
               <table class="table table-responsive-sm table-bordered">
                 <thead>
                 <tr align="center">
-                  <th width="125p">序号</th>
-                  <th width="125p">订单编号</th>
-                  <th width="125p">商品名称</th>
-                  <th width="125p">商品数量</th>
-                  <th width="125p">商品价格</th>
-                  <th width="125p">创建时间</th>
-                  <th width="125p">状态</th>
-                  <th width="125p">操作</th>
+                  <th class="text-center" scope="col">序号</th>
+                  <th class="text-center" scope="col">订单编号</th>
+                  <th class="text-center" scope="col">商品名称</th>
+                  <th class="text-center" scope="col">商品数量</th>
+                  <th class="text-center" scope="col">商品价格</th>
+                  <th class="text-center" scope="col">创建时间</th>
+                  <th class="text-center" scope="col">状态</th>
+                  <th class="text-center" scope="col">操作</th>
                 </tr>
                 </thead>
                 <tbody v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
@@ -643,7 +643,7 @@
               type: "post",
               //将/jsON转化为字符串传递
               dataType: 'json',
-              data:{ "purchase_id": app.items[app.editIndex].purchaseInfoVO[app.son].purchaseId,"status":4},
+              data:{ "purchase_id": app.edititems.purchaseId,"status":4},
 
               //成功后的方法
               success: function (res) {

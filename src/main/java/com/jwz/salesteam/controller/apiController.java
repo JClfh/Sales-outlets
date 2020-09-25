@@ -139,6 +139,9 @@ public class apiController {
     @ApiOperation(value="添加客户信息")
     public Result userRegister(@RequestBody UserInfo userInfo,HttpSession httpSession) {
         EmpInfo empInfo = (EmpInfo)httpSession.getAttribute("销售员");
+        if(empInfo == null){
+            return ResultGenerator.genFailResult("参数异常！");
+        }
         userInfo.setFirstSaleman(empInfo.getId());
         if (StringUtils.isEmpty(userInfo.getUserName())
                 || StringUtils.isEmpty(userInfo.getUserTel())
@@ -240,17 +243,7 @@ public class apiController {
 
         return  ResultGenerator.genSuccessResult(purchaseInfoService.getPersonMerchandiser(temp.getEmpId()));
     }
-    /**
-     * 查询个人业绩
-     * @param search
-     * @return
-     */
-    @GetMapping("/searchResults/{search}")
-    @ResponseBody
-    @ApiOperation(value="查询个人业绩")
-    public Result searchResults(@PathVariable("search") String search){
-        return  ResultGenerator.genSuccessResult(empInfoService.searchByEmpdIdOrEmpName(search));
-    }
+
 
     /**
      * 查看个人审核采购记录
@@ -259,7 +252,7 @@ public class apiController {
      */
     @GetMapping("/emp/personAccount")
     @ResponseBody
-    @ApiOperation(value="查看个人采购记录")
+    @ApiOperation(value="查看个人审核采购记录")
     public Result personAccount(HttpSession httpSession){
         if(httpSession.getAttribute("财务人员") == null){
             return ResultGenerator.genFailResult("未登录");
@@ -269,16 +262,8 @@ public class apiController {
         return  ResultGenerator.genSuccessResult(purchaseInfoService.getPersonAccount(temp.getEmpId()));
     }
 
-    /**
-     *
-     *
-     */
-    @GetMapping("/count")
-    @ResponseBody
-    @ApiOperation(value="查看个人采购记录")
-    public Result personAccount(){
-        return  ResultGenerator.genSuccessResult(orderInfoService.getAllCount());
-    }
+
+
 
     /**
      *购物车处理

@@ -8,6 +8,7 @@ import com.jwz.salesteam.dao.GoodsInfoMapper;
 import com.jwz.salesteam.dao.GoodsListMapper;
 import com.jwz.salesteam.dao.OrderInfoMapper;
 import com.jwz.salesteam.dao.PurchaseInfoMapper;
+import com.jwz.salesteam.entity.EmpInfo;
 import com.jwz.salesteam.entity.OrderInfo;
 import com.jwz.salesteam.entity.PurchaseInfo;
 import com.jwz.salesteam.service.GoodListService;
@@ -17,6 +18,7 @@ import com.jwz.salesteam.util.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 /**
@@ -121,19 +123,25 @@ public class PurchaseInfoServiceImpl implements PurchaseInfoService {
     }
 
     @Override
-    public String updatePurchaseState(String purchase_id, int status) {
+    public String updatePurchaseState(String purchase_id, int status, HttpSession httpSession) {
+        if(httpSession.getAttribute("财务人员") != null){
+            EmpInfo empInfo = (EmpInfo)httpSession.getAttribute("财务人员");
+            purchaseInfoMapper.updateAccountEmpId(purchase_id,empInfo.getEmpId());
+
+        }
         PurchaseInfo temp = purchaseInfoMapper.selectByPurchaseId(purchase_id);
         if (temp == null) {
             return ServiceResultEnum.DATA_NOT_EXIST.getResult();
         }
         Integer orderStatus = orderInfoMapper.findOrderStatusByOrderId(temp.getOrderId());
-        if((orderStatus <= status) &&status == 3){ // 审批完成---采购中
+
+        if((orderStatus < status) &&status == 3){ // 审批完成---采购中
             orderInfoMapper.updateOrdersState(temp.getOrderId(),2);
         }
-        if((orderStatus <= status) && status == 4){ // 已发货--配送中
+        if((orderStatus < status) && status == 4){ // 已发货--配送中
             orderInfoMapper.updateOrdersState(temp.getOrderId(),3);
         }
-        if ((orderStatus <= status) && status == 5){ //已收货---已到货
+        if ((orderStatus < status) && status == 5){ //已收货---已到货
             purchaseInfoMapper.updateFinishTime(purchase_id,new Date());
             List<PurchaseInfo> purchaseInfoList = purchaseInfoMapper.findPurchaseInfoByOrderId(temp.getOrderId(),0,null);
             if(purchaseInfoList.size() == 0){
@@ -168,7 +176,9 @@ public class PurchaseInfoServiceImpl implements PurchaseInfoService {
         for(String orderId : ordersIdList){
             OrderListVO orderListVO = new OrderListVO();
             orderListVO.setOrderId(orderId);
-            List<PurchaseInfoVO> purchaseInfoList = BeanUtil.copyList(purchaseInfoMapper.findPurchaseInfoByOrderId(orderId,0,2), PurchaseInfoVO.class);
+            List<PurchaseInfo> tempList = purchaseInfoMapper.findPurchaseInfoByOrderId(orderId,0,2);
+            if(tempList.size()>0){
+            List<PurchaseInfoVO> purchaseInfoList = BeanUtil.copyList(tempList, PurchaseInfoVO.class);
             for(PurchaseInfoVO purchaseInfoVO:purchaseInfoList){
                 String goodsName = goodsInfoMapper.selectByGoodsName(purchaseInfoVO.getGoodsId()).getGoodsName();
                 Integer goodsNum = goodsListMapper.selectByGoodsIdAndOrderId(purchaseInfoVO.getGoodsId(),purchaseInfoVO.getOrderId());
@@ -179,6 +189,7 @@ public class PurchaseInfoServiceImpl implements PurchaseInfoService {
             }
             orderListVO.setPurchaseInfoVO(purchaseInfoList);
             orderListVOList.add(orderListVO);
+            }
         }
         return orderListVOList;
     }

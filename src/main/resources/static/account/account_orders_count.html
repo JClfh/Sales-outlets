@@ -54,6 +54,10 @@
                   <i class="nav-icon icon-puzzle"></i>查看业绩</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="./account_orders_ profit.html">
+                  <i class="nav-icon icon-puzzle"></i>查看利润</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="./account_orders_history.html">
                   <i class="nav-icon icon-puzzle"></i>历史采购订单</a>
               </li>
@@ -64,13 +68,13 @@
           <li class="nav-item nav-dropdown ">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-puzzle"></i> 个人中心</a>
-              <ul class="nav-dropdown-items">
-                <li class="nav-item">
-                  <a class="nav-link" href="./account_security.html">
-                    <i class="nav-icon icon-puzzle"></i>账号安全</a>
-                </li>
-              </ul> 
-            </li> 
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" href="./account_security.html">
+                  <i class="nav-icon icon-puzzle"></i>账号安全</a>
+              </li>
+            </ul>
+          </li>
         </ul>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
           <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
@@ -239,7 +243,7 @@
       code: 200,
       msg: "Success"
     });
-    $.getJSON("/api/count", function (response) {
+    $.getJSON("/account/exploit", function (response) {
       items = response.data;
       // 在线图表
       for (var i = 0; i < items.length; i++) {
@@ -377,7 +381,7 @@
               myChart.setOption(option);
             }else{
               $.ajax({
-                url: "/api/searchResults/"+this.keyword,
+                url: "/account/searchResults/"+this.keyword,
                 type: "get",
                 success: function (res) {
                   var dataList = [];

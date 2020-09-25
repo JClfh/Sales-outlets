@@ -33,4 +33,6 @@ public interface PurchaseInfoMapper {
     List<PurchaseInfo> findPurchaseInfoByOrderId(String orderId, Integer is_del,Integer status);
 
     PurchaseInfo selectByPurchaseId(String purchase_id);
+
+    int updateAccountEmpId(String purchase_id,String account_emp_id);
 }

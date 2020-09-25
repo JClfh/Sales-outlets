@@ -4,6 +4,7 @@ import com.jwz.salesteam.controller.common.OrderListVO;
 import com.jwz.salesteam.controller.common.PurchaseInfoVO;
 import com.jwz.salesteam.entity.PurchaseInfo;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ public interface PurchaseInfoService {
 
     List<OrderListVO>  getPurchaseInfoList();
 
-    String updatePurchaseState(String purchase_id,int status);
+    String updatePurchaseState(String purchase_id, int status, HttpSession httpSession);
 
     String updatePurchaseInfo(PurchaseInfo purchaseInfo);
 

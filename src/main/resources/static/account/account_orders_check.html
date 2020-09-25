@@ -29,7 +29,6 @@
 </style>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
-  <div id="itemsTemplate">
   <header class="app-header navbar">
     <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
       <span class="navbar-toggler-icon"></span>
@@ -66,6 +65,10 @@
                   <i class="nav-icon icon-puzzle"></i>查看业绩</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="./account_orders_ profit.html">
+                  <i class="nav-icon icon-puzzle"></i>查看利润</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="./account_orders_history.html">
                   <i class="nav-icon icon-puzzle"></i>历史采购订单</a>
               </li>
@@ -76,13 +79,13 @@
           <li class="nav-item nav-dropdown ">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-puzzle"></i> 个人中心</a>
-              <ul class="nav-dropdown-items">
-                <li class="nav-item">
-                  <a class="nav-link" href="./account_security.html">
-                    <i class="nav-icon icon-puzzle"></i>账号安全</a>
-                </li>
-              </ul> 
-            </li> 
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" href="./account_security.html">
+                  <i class="nav-icon icon-puzzle"></i>账号安全</a>
+              </li>
+            </ul>
+          </li>
         </ul>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
           <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
@@ -103,7 +106,7 @@
 
         </li>
       </ol>
-        <div align="center">
+      <div align="center" id = "itemsTemplate">
           <div class="center-in-center" style="width:95%;">
             <div class="card">
               <div class="card-header">
@@ -120,15 +123,15 @@
                 <table class="table table-responsive-sm table-bordered">
                   <thead>
                     <tr align="center">
-                      <th width="125p">序号</th>
-                      <th width="125p">订单编号</th>
-                      <th width="125p">商品名称</th>
-                      <th width="125p">商品数量</th>
-                      <th width="125p">供货商</th>
-                      <th width="125p">利润</th>
-                      <th width="125p">创建时间</th>
+                      <th class="text-center" scope="col">序号</th>
+                      <th class="text-center" scope="col">订单编号</th>
+                      <th class="text-center" scope="col">商品名称</th>
+                      <th class="text-center" scope="col">商品数量</th>
+                      <th class="text-center" scope="col">供货商</th>
+                      <th class="text-center" scope="col">利润</th>
+                      <th class="text-center" scope="col">创建时间</th>
 
-                      <th width="125p">操作</th>
+                      <th class="text-center" scope="col">操作（是否通过审批）</th>
                     </tr>
                   </thead>
                   <tbody v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
@@ -142,8 +145,11 @@
                       <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[0].goodsCostPrice-item.purchaseInfoVO[0].goodsPrice}}</td>
                       <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[0].createTime1}}</td>
                       <td align="center" style=" vertical-align:middle"> <button class="btn btn-primary" type="button" data-toggle="modal"
-                          v-on:click="edit(index,0)">
-                          <i class="fa fa-edit "></i>编辑</button>&nbsp;
+                          v-on:click="edit(index,0,3)">
+                          <i class="fa fa-edit "></i>通过</button>
+                        <button class="btn btn-danger" type="button" data-toggle="modal"
+                                v-on:click="edit2(index,0,1)">
+                          <i class="fa fa-close "></i>不通过</button>
                       </td>
                     </tr>
                     <tr v-for="son in item.purchaseInfoVO.length-1" >
@@ -155,8 +161,11 @@
                       <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[son].goodsCostPrice}} - {{item.purchaseInfoVO[son].goodsPrice}}</td>
                       <td align="center" style=" vertical-align:middle">{{item.purchaseInfoVO[son].createTime1}}</td>
                       <td align="center" style=" vertical-align:middle"> <button class="btn btn-primary" type="button" data-toggle="modal"
-                                                                                 v-on:click="edit(index,son)">
-                        <i class="fa fa-edit "></i>编辑</button>&nbsp;
+                                                                                 v-on:click="edit(index,son,3)">
+                        <i class="fa fa-edit "></i>通过</button>
+                        <button class="btn btn-danger" type="button" data-toggle="modal"
+                                                                            v-on:click="edit2(index,son,1)">
+                        <i class="fa fa-close "></i>不通过</button>
                       </td>
                     </tr>
 
@@ -202,10 +211,8 @@
               </div>
             </div>
           </div>
-        </div>
-
         <div class="modal fade" id="editSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          style="display: none;" aria-hidden="true">
+             style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-success" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -215,7 +222,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                <p>编辑成功！</p>
+                <p>操作成功！</p>
               </div>
               <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">返回</button>
@@ -224,11 +231,9 @@
             <!-- /.modal-content-->
           </div>
         </div>
-
-
         <!-- /警告-->
         <div class="modal fade show" id="editFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          style="display: none;" aria-hidden="true">
+             style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-danger" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -238,7 +243,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                <p>编辑失败</p>
+                <p>操作失败</p>
               </div>
               <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
@@ -250,14 +255,14 @@
           <!-- /.modal-dialog-->
         </div>
         <!-- 编辑 -->
-        <div class="modal fade" id="primaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          aria-hidden="true" style="display: none;" aria-hidden="true">
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true" style="display: none;" aria-hidden="true">
 
           <div class="modal-dialog modal-primary" role="document">
             <div class="modal-content">
               <div class="modal-header">
 
-                <h4 class="modal-title">编辑</h4>
+                <h4 class="modal-title">确认审批通过？</h4>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
@@ -267,16 +272,16 @@
                   <div class="form-group row">
                     <label class="col-md-3 col-form-label" for="orderId">订单编号</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="orderId" type="text" name="orderId" placeholder="会员编号"
-                        v-model="edititems.orderId" pattern="^[0-9]+$" disabled="disabled" required>
+                      <input class="form-control" id="orderId" type="text" name="orderId" placeholder="订单编号"
+                             v-model="edititems.orderId" pattern="^[0-9]+$" disabled="disabled" required>
 
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-md-3 col-form-label" for="createTime">创建时间</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="createTime" type="text" name="createTime" placeholder="登录口令"
-                        v-model="edititems.createTime1" required disabled="disabled">
+                      <input class="form-control" id="createTime" type="text" name="createTime" placeholder="创建时间"
+                             v-model="edititems.createTime1" required disabled="disabled">
 
                     </div>
                   </div>
@@ -284,8 +289,7 @@
                     <label class="col-md-3 col-form-label" for="goodsName">商品名称</label>
                     <div class="col-md-9">
                       <input class="form-control" id="goodsName" type="text" name="goodsName" placeholder="商品名称"
-                        v-model="edititems.goodsName" 
-                        pattern="^[\u4e00-\u9fa5]{2,4}$|^[A-Za-z\s]{2,40}$" required>
+                             v-model="edititems.goodsName" disabled required>
 
                     </div>
                   </div>
@@ -293,50 +297,54 @@
                     <label class="col-md-3 col-form-label" for="goodsNum">商品数量</label>
                     <div class="col-md-9">
                       <input class="form-control" id="goodsNum" type="text" name="goodsNum" placeholder="商品数量"
-                        v-model="edititems.goodsNum" pattern="^[0-9]+$" required>
+                             v-model="edititems.goodsNum" disabled required>
 
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-md-3 col-form-label" for="supplierName">供货商</label>
                     <div class="col-md-9">
-                      <select class="form-control" id="supplierName" name="supplierName" v-model="edititems.supplieName">
-                        <option value="0">广州供货商</option>
-                        <option value="1">深圳供货商</option>
+                      <input class="form-control" id="supplierName" type="text" name="supplierName" placeholder="供货商"
+                             v-model="edititems.supplierName" disabled required>
                       </select>
                     </div>
                   </div>
-                
 
-                  <div class="form-group row">
-                    <label class="col-md-3 col-form-label">状态</label>
-                    <div class="col-md-9 col-form-label">
-                      <div class="form-check form-check-inline mr-1">
-                        <input class="form-check-input" id="isDel" type="radio" value="0" name="isDel"
-                          v-model="edititems.isDel">
-                        <label class="form-check-label" for="isDel">通过</label>
-                      </div>
-                      <div class="form-check form-check-inline mr-1">
-                        <input class="form-check-input" id="isDel2" type="radio" value="1" name="isDel"
-                          v-model="edititems.isDel">
-                        <label class="form-check-label" for="isDel2">不通过</label>
-                      </div>
-                  
-                    </div>
-                  </div>
-                 
                 </form>
               </div>
               <div class="modal-footer">
-                <button class="btn btn-info" type="button" v-on:click="save()">保存</button>
+                <button class="btn btn-danger" type="button" v-on:click="save()">保存</button>
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
               </div>
             </div>
           </div>
         </div>
 
+        <div class="modal fade" id="editModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">确认审批不通过？</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>是否执行不通过操作！</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">否</button>
+                <button class="btn btn-danger" type="button" v-on:click="save()">确定</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </main>
-  </div></div>
+  </div>
 
   <script src="../vendors/jquery/js/jquery.min.js"></script>
   <script src="../vendors/popper.js/js/popper.min.js"></script>
@@ -392,6 +400,7 @@
             pageitem: pageitem,
             editIndex: -1,
             edititems: { name: null },
+            status:0
 
           },
           computed: {
@@ -413,40 +422,39 @@
             },
 
             // 编辑
-            edit: function (index) {
+            edit: function (index,son,status) {
               var forms = document.getElementsByClassName('needs-validation')[0];
               forms.classList.remove('was-validated');
               this.editIndex = index;
-              this.edititems = JSON.parse(JSON.stringify(this.items[index]));
-              $('#primaryModal').modal('show');
+              this.edititems = JSON.parse(JSON.stringify(this.items[index].purchaseInfoVO[son]));
+              this.status = status;
+              $('#editModal').modal('show');
             },
 
+            edit2: function (index,son,status) {
+              var forms = document.getElementsByClassName('needs-validation')[0];
+              forms.classList.remove('was-validated');
+              this.editIndex = index;
+              this.edititems = JSON.parse(JSON.stringify(this.items[index].purchaseInfoVO[son]));
+              this.status = status;
+              $('#editModal2').modal('show');
+            },
             save: function () {
-              var data = {
-                "id": this.edititems.id,//主键标识
-                "orderId": this.edititems.orderId,
-                "goodsName": this.edititems.goodsName,
-                "supplieName": this.edititems.supplieName,
-                "isDel":  this.edititems.isDel,
-                "goodsNum": this.edititems.goodsName,
-                "createTime": this.edititems.goodsName
-              }
+              var data = { "purchase_id": this.edititems.purchaseId,"status":this.status}
               $.ajax({
-                url: "/purchase/check",
+                url: "/purchase/updatePurchaseStatus",
                 type: "post",
                 //将/jsON转化为字符串传递
                 dataType: 'json',
-                contentType: "application/json",
-                data: JSON.stringify(data),
-
+                data: data,
                 //成功后的方法
                 success: function () {
-                  $('#primaryModal').modal('hide');
+                  $('#editModal').modal('hide');
                   $('#editSuccess').modal('show');
-                  window.location.href = "/account/account_orders_check";
+                  window.location.reload();
                 },
                 error: function (xhr, status, error) {
-                  $('#primaryModal').modal('hide');
+                  $('#editModal').modal('hide');
                   $('#editFailModal').modal('show');
                 }
               });

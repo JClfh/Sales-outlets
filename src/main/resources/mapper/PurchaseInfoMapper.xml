@@ -238,4 +238,9 @@
     and is_del = 0
   </select>
 
+  <update id="updateAccountEmpId" parameterType="com.jwz.salesteam.entity.PurchaseInfo" >
+   update purchase_info
+    set account_emp_id = #{account_emp_id,jdbcType=VARCHAR}
+    where purchase_id = #{purchase_id,jdbcType=VARCHAR}
+  </update>
 </mapper>

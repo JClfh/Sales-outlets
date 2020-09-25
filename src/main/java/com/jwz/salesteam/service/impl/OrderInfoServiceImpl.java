@@ -92,15 +92,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         return res;
     }
 
-    @Override
-    public List<OrderConutVO> getAllCount() {
-        List<OrderConutVO> empInfoList = BeanUtil.copyList(empInfoMapper.findEmpInfoList(), OrderConutVO.class);
-        for(OrderConutVO orderConutVO:empInfoList){
-            Integer empResults = orderInfoMapper.countByEmpId(orderConutVO.getEmpId());
-            orderConutVO.setEmpResults(empResults);
-        }
-        return empInfoList;
-    }
+
 }
 
 
