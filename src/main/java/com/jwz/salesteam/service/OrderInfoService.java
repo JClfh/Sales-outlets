@@ -1,18 +1,16 @@
 package com.jwz.salesteam.service;
 
-import com.jwz.salesteam.controller.common.EmpInfoVO;
-import com.jwz.salesteam.controller.common.OrderConutVO;
-import com.jwz.salesteam.controller.common.OrderDetailInfoVO;
-import com.jwz.salesteam.controller.common.UserOrderInfoVO;
+import com.jwz.salesteam.controller.common.*;
 import com.jwz.salesteam.entity.OrderInfo;
 import com.jwz.salesteam.util.Result;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
 public interface OrderInfoService {
 
-    String saveOrderInfo(OrderInfo orderInfo);
+    String saveOrderInfo(ShoppingCartItemVO shoppingCartItemVO, HttpSession httpSession);
 
     String updateOrdersState(String order_id, int status);
 

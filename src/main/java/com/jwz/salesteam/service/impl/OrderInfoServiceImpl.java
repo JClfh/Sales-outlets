@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+import javax.swing.text.html.HTML;
 import java.util.*;
 
 @Service
@@ -37,13 +39,48 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     @Autowired
     private PurchaseInfoMapper purchaseInfoMapper;
     @Override
-    public String saveOrderInfo(OrderInfo orderInfo) {
+    public String saveOrderInfo(ShoppingCartItemVO shoppingCartItemVO, HttpSession httpSession) {
+        EmpInfo empInfo = (EmpInfo)httpSession.getAttribute("销售员");
+        if(empInfo == null){
+            return "未登录";
+        }
+        UserInfo userInfo = shoppingCartItemVO.getUserInfo();
+        String userId = "";
+        //更新用户信息
+        if(userInfo.getId() == null){
+            userInfo.setFirstSaleman(empInfo.getId());
+            userInfo.setLastSaleman(empInfo.getId());
+            userInfoMapper.insert(userInfo);
+            userId = String.valueOf(userInfoMapper.selectByTel(userInfo.getUserTel()).getId());
+        }else{
+            userInfo.setLastSaleman(empInfo.getId());
+            userInfo.setUpdateTime(new Date());
+            userInfoMapper.updateByPrimaryKeySelective(userInfo);
+            userId = String.valueOf(userInfoMapper.selectByTel(userInfo.getUserTel()).getId());
+        }
 
+        //更新订单信息
+        OrderInfo orderInfo = shoppingCartItemVO.getOrderInfo();
         String order_id =  NumberUtil.genOrderNo();
         orderInfo.setOrderId(order_id);
-
+        orderInfo.setEmpId(empInfo.getEmpId());
+        orderInfo.setUserId(userId);
         if (orderInfoMapper.insertSelective(orderInfo) > 0) {
-            //创建商品列表
+            //创建商品列表和采购单
+            for(GoodsInfoVO goodsInfoVO:shoppingCartItemVO.getGoodsInfoVOList()){
+                GoodsList goodsList = new GoodsList();
+                BeanUtil.copyProperties(goodsInfoVO,goodsList);
+                goodsList.setSupplierId("0");
+                goodsList.setOrderId(order_id);
+                goodsList.setId(null);
+                goodsListMapper.insertSelective(goodsList);
+                Integer goodsPrice = goodsInfoMapper.selectByGoodsId(goodsList.getGoodsId()).getGoodsCostPrice();
+                //采购单
+                PurchaseInfo purchaseInfo = new PurchaseInfo("-1","-1","-1",goodsPrice,order_id,goodsList.getGoodsId(),
+                        "-1","-1",0,new Date(),null,0 );
+                purchaseInfoMapper.insertSelective(purchaseInfo);
+            }
+            httpSession.removeAttribute("shopping-cart");
             return ServiceResultEnum.SUCCESS.getResult();
 
         }

@@ -60,4 +60,16 @@ public class GoodsList {
     public void setGoodsPrice(Integer goodsPrice) {
         this.goodsPrice = goodsPrice;
     }
+
+    @Override
+    public String toString() {
+        return "GoodsList{" +
+                "id=" + id +
+                ", orderId='" + orderId + '\'' +
+                ", goodsId='" + goodsId + '\'' +
+                ", goodsNum=" + goodsNum +
+                ", supplierId='" + supplierId + '\'' +
+                ", goodsPrice=" + goodsPrice +
+                '}';
+    }
 }

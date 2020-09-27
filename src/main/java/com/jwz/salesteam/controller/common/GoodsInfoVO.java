@@ -151,4 +151,24 @@ public class GoodsInfoVO {
     public void setGoodsNum(Integer goodsNum) {
         this.goodsNum = goodsNum;
     }
+
+    @Override
+    public String toString() {
+        return "GoodsInfoVO{" +
+                "id=" + id +
+                ", goodsId='" + goodsId + '\'' +
+                ", goodsName='" + goodsName + '\'' +
+                ", goodsSellingPrice=" + goodsSellingPrice +
+                ", goodsCostPrice=" + goodsCostPrice +
+                ", goodsPrice=" + goodsPrice +
+                ", goodsCoverImg='" + goodsCoverImg + '\'' +
+                ", goodsDetailContent='" + goodsDetailContent + '\'' +
+                ", goodsIntro='" + goodsIntro + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", isDel=" + isDel +
+                ", status=" + status +
+                ", goodsNum=" + goodsNum +
+                '}';
+    }
 }

@@ -1,8 +1,11 @@
 package com.jwz.salesteam.controller;
 
 import com.jwz.salesteam.common.ServiceResultEnum;
+import com.jwz.salesteam.controller.common.GoodsInfoVO;
+import com.jwz.salesteam.controller.common.ShoppingCartItemVO;
 import com.jwz.salesteam.entity.EmpInfo;
 import com.jwz.salesteam.entity.OrderInfo;
+import com.jwz.salesteam.entity.UserInfo;
 import com.jwz.salesteam.service.EmpInfoService;
 import com.jwz.salesteam.service.GoodsInfoService;
 import com.jwz.salesteam.service.OrderInfoService;
@@ -15,6 +18,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -26,17 +30,16 @@ public class orderController {
 
     /**
      * 添加订单信息
-     * @param orderInfo
+     * @param shoppingCartItemVO
      * @return
      */
     @RequestMapping(value = "/generateOrder", method = RequestMethod.POST)
     @ResponseBody
-    public Result saveOrderInfo(@RequestBody OrderInfo orderInfo) {
-        if (StringUtils.isEmpty(orderInfo.getTakeInPrice()) || Objects.isNull(orderInfo.getModeOfDistibution())) {
+    public Result saveOrderInfo(@RequestBody ShoppingCartItemVO shoppingCartItemVO,HttpSession httpSession) {
+       if (StringUtils.isEmpty(shoppingCartItemVO.getOrderInfo().getTakeInPrice()) || Objects.isNull(shoppingCartItemVO.getOrderInfo().getModeOfDistibution())) {
             return ResultGenerator.genFailResult("参数异常！");
         }
-
-        String result = orderInfoService.saveOrderInfo(orderInfo);
+        String result = orderInfoService.saveOrderInfo(shoppingCartItemVO,httpSession);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
             return ResultGenerator.genSuccessResult();
         } else {

@@ -124,13 +124,13 @@ public class apiController {
     }
 
     /**
-     * 查看客户（搜索）
+     * 查看客户（搜索）精准，下单时获取客户信息
      * @param user_tel
      * @return
      */
     @RequestMapping(value = "/user/findByTel/{user_tel}", method = RequestMethod.POST)
     @ResponseBody
-    @ApiOperation(value="查看客户（搜索）")
+    @ApiOperation(value="查看客户（搜索）精准")
     public Result userInfoFindByTel(@PathVariable("user_tel") String user_tel) {
         return ResultGenerator.genSuccessResult(userInfoService.findByUserTel(user_tel));
     }

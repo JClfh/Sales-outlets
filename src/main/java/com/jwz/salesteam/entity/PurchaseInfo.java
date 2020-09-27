@@ -132,4 +132,23 @@ public class PurchaseInfo {
     public void setIsDel(Integer isDel) {
         this.isDel = isDel;
     }
+
+    public PurchaseInfo(){
+
+    }
+    public PurchaseInfo(String purchaseId, String supplierId, String supplierName, Integer goodsPrice, String orderId, String goodsId, String empId, String accountEmpId, Integer status, Date createTime, Date finishTime, Integer isDel) {
+
+        this.purchaseId = purchaseId;
+        this.supplierId = supplierId;
+        this.supplierName = supplierName;
+        this.goodsPrice = goodsPrice;
+        this.orderId = orderId;
+        this.goodsId = goodsId;
+        this.empId = empId;
+        this.accountEmpId = accountEmpId;
+        this.status = status;
+        this.createTime = createTime;
+        this.finishTime = finishTime;
+        this.isDel = isDel;
+    }
 }

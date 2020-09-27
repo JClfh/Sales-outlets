@@ -154,7 +154,7 @@
                       {{All}}
                       <!-- 小计 -->
                       <td class="text-center proitem" align="center" style="color:#ff6700;vertical-align:middle"><del>{{item.goodstakeInPrice}}元</del></td>
-                      <td class="text-center proitem"  align="center"style="color:#ff6700;vertical-align:middle">{{item.onetakeIn}}元</td>
+                      <td class="text-center proitem"  align="center"style="color:#ff6700;vertical-align:middle">{{item.goodsPrice}}元</td>
                       <td class="text-center proitem" align="center" style=" vertical-align:middle">
                         <button type="button" class="btn btn-square btn-light" aria-label="Close"
                           v-on:click="del(index)"><span aria-hidden="true">×</span></button>
@@ -201,7 +201,7 @@
           </div>
         </div>
         <!-- /删除-->
-        <div class="modal fade" id="dangerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-danger" role="document">
             <div class="modal-content">
@@ -222,7 +222,7 @@
           </div>
         </div>
         <!-- /成功-->
-        <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal fade" id="delSuccessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-success" role="document">
             <div class="modal-content">
@@ -264,7 +264,7 @@
           </div>
         </div>
         <!-- /警告-->
-        <div class="modal fade show" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal fade show" id="FailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-danger" role="document">
             <div class="modal-content">
@@ -308,6 +308,7 @@
                       <button class="btn btn-secondary" type="button" v-on:click="GO()">Go!</button>
                     </span>
                   </div>
+
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label" for="userName">姓名</label>
@@ -328,7 +329,7 @@
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label" for="select1">配送方式</label>
                   <div class="col-md-9">
-                    <select class=" form-control " id="select1" name="select1" v-model="edititems.modeOfDistibution">
+                    <select class=" form-control " id="select1" name="select1" v-model="modeOfDistibution">
                       <option value=0>到店自取</option>
                       <option value=1>快递到家</option>
                     </select>
@@ -344,7 +345,49 @@
 
           </div>
         </div>
+        <div class="modal fade" id="issue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>出现未知错误</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">确定</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
 
+        <div class="modal fade show" id="noFindUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">警告！！！！！</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>没有找到该客户，请进行录入操作</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
+
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+          <!-- /.modal-dialog-->
+        </div>
       </div>
     </main>
   </div>
@@ -395,10 +438,12 @@
             pagesize: 5, //页面数据个数
             pageitem: pageitem,
             editIndex: -1,
-            edititems: { name: null },
+            edititems: {id:null,userId: -1, userSex:0,createTime:0,userVip:0,createTime:new Date(),updateTime:new Date(),isDel:0},
             allPrice: 0,
+            modeOfDistibution:0,
             userVipCount: 1,
-            takeInPrice: ""//实际价格
+            takeInPrice: 0//实际价格
+
           },
           computed: {
             pageItems: function () {
@@ -414,13 +459,14 @@
             // 小计
             All: function () {
               this.allPrice = 0;
+              this.takeInPrice = 0;
               for (var i = 0; i < this.items.length; i++) {
                 this.items[i].all = this.items[i].goodsNum * this.items[i].goodsSellingPrice
                 this.items[i].goodstakeInPrice = this.items[i].all - this.items[i].all * this.userVipCount
-                this.items[i].onetakeIn = this.items[i].all -  this.items[i].goodstakeInPrice
+                this.items[i].goodsPrice = Math.round(this.items[i].all -  this.items[i].goodstakeInPrice)
                 this.allPrice += this.items[i].all
+                this.takeInPrice +=  this.items[i].goodsPrice
               }
-              this.takeInPrice = this.userVipCount * this.allPrice
             }
           },
           methods: {
@@ -444,51 +490,52 @@
             },
             // 删除
             del: function (index) {
-              // $('#dangerModal').modal('show');
-              // d = index;
+              $('#delModal').modal('show');
+              d = index;
               // alert(d)
-              $.ajax({
-                url: "/api/shoppingCartItem/delItem/"+this.items[index].goodsId,
-                type:"get",
-                dataType: 'json',
-                success: function () {
-                },
-                error: function (xhr, status, error) {
-                }
-              });
+
             },
             delCheck: function () {
-
-              alert(this.items[d].id)
-              $.post("/admin//user/del",
-                {
-                  id: this.items[d].id
-                }
-                , function (data) {
-                  if (data === true) {
-
-                    $('#dangerModal').modal('hide');
-                    $('#success').modal('show');
+              $.ajax({
+                url: "/api/shoppingCartItem/delItem/"+this.items[d].goodsId,
+                type:"get",
+                dataType: 'json',
+                success: function (res) {
+                  if(res.resultCode === 500){
+                    $('#delModal').modal('hide');
+                    $('#FailModal').modal('show');
+                  }else{
+                    $('#delModal').modal('hide');
+                    $('#delSuccessModal').modal('show');
                     app.items.splice(d, 1);
-                  } else {
-                    alert("失败");
+                    app.pagesum = Math.ceil(app.items.length / 5);
                   }
-                });
-              $('#dangerModal').modal('hide');
+                },
+                error: function (xhr, status, error) {
+                  $('#delModal').modal('hide');
+                  $('#issue').modal('show');
+                }
+              });
+
             },
             // 结算中
-            settle: function (index) {
+            settle: function () {
               $('#primaryModal').modal('show');
 
             },
             // 电话查询
-            GO: function (index) {
-              alert("电话查询");
+            GO: function () {
+              // alert("电话查询");
               $.ajax({
-                url: "/api/findByTel" + this.edititems.userTel,
+                url: "/api/user/findByTel/" + this.edititems.userTel,
                 type: "post",
                 success: function (res) {
-                  app.edititems = res.data
+                  if(res.data === null){
+
+                    $('#noFindUserModal').modal('show');
+                  }else{
+                    app.edititems = res.data
+                  }
                 },
                 error: function (xhr, status, error) {
                   $('#danger').modal('show');
@@ -498,17 +545,41 @@
             },
             // 结算保存
             save: function () {
+              //处理vip值信息
+              // console.log(this.userVipCount,this.userVipCount === 0.9,this.userVipCount.equals("0.9"))
+              if(this.userVipCount === 0){
+                this.edititems.userVip = 0
+              }else if(this.userVipCount === "0.9"){
+                this.edititems.userVip = 1
+              }else if(this.userVipCount === "0.8"){
+                this.edititems.userVip = 2
+              }else if(this.userVipCount === "0.7"){
+                this.edititems.userVip = 3
+              }else if(this.userVipCount === "0.6"){
+                this.edititems.userVip = 4
+              }else if(this.userVipCount === "0.5"){
+                this.edititems.userVip = 5
+              }
+              //修改对象信息
+              // this.edititems.userVip = this.userVipCount;
+              //传用户对象、商品对象和订单对象 edititems,this.items,
+
               var data = {
-
-                "empId": this.empId,//销售员信息
-                "userTel": this.edititems.userTel,//客户信息
-                "userName": this.edititems.userName,
-                "userAddress": this.edititems.userAddress,
-                "userVip": this.edititems.userVipCount,//VIP
-                "modeOfDistibution": this.edititems.modeOfDistibution,//快递地址
+                "id":0,
+                "orderId":"",
+                "empId": "",//销售员信息
+                "userId": this.edititems.userId,//客户信息
+                "takeInPrice": this.takeInPrice,
+                "modeOfDistibution": this.modeOfDistibution,//快递地址
+                "status":0,
                 "createTime": new Date(),//记录创建日期
-                "updateTime": new Date(),//记录修改日期
-
+                "finishTime": null,//记录修改日期
+                "isDel":0
+              }
+              var datadata = {
+                "userInfo":this.edititems,
+                "goodsInfoVOList":this.items,
+                "orderInfo":data
               }
               $.ajax({
                 url: "/orders/generateOrder",
@@ -516,7 +587,7 @@
                 //将/jsON转化为字符串传递
                 dataType: 'json',
                 contentType: "application/json",
-                data: JSON.stringify(data),
+                data: JSON.stringify(datadata),
                 success: function () {
                   $('#primaryModal').modal('hide');
                   $('#editSuccess').modal('show');
@@ -536,36 +607,6 @@
             //   this.edititems = JSON.parse(JSON.stringify(this.items[index]));
             //   $('#primaryModal').modal('show');
             // },
-            save: function () {
-              // var com_id;
-              // $.get("/small_admin/com_id", function (data) {
-              //   com_id = data;
-              //   // alert(data)
-              // });
-              setTimeout(function () {
-                $.post("/admin/user/update",
-                  {
-                    id: app.edititems.id,//编号
-                    goodsId: goods_id,//商品编号
-                    goodsName: app.edititems.goodsName,//商品姓名
-                    goodsSellingPrice: app.edititems.goodsSellingPrice,//商品零售价
-                    // goods_cost_price: app.edititems.goods_cost_price,//商品成本价
-                    goodsCoverImg: app.edititems.goodsCoverImg,//商品图片
-
-                  }, function (data) {
-                    if (data === true) {
-                      $('#primaryModal').modal('hide');
-                      $('#editSuccess').modal('show');
-                      app.items[app.editIndex].position = app.edititems.position
-                    } else {
-                      $('#danger').modal('show');
-                    }
-
-                  });
-
-              }, 500);
-
-            },
           }
 
         });

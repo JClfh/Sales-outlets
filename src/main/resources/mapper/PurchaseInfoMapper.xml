@@ -223,7 +223,7 @@
     <include refid="Base_Column_List"/>
     from purchase_info
     where order_id = #{orderId,jdbcType=VARCHAR}
-    and is_del =  #{is_del,jdbcType=VARCHAR}
+    and is_del =  #{is_del,jdbcType=INTEGER}
      <if test="status != null" >
     and status = #{status,jdbcType=INTEGER}
     </if>

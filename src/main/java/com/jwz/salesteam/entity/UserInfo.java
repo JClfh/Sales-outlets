@@ -113,4 +113,21 @@ public class UserInfo {
     public void setIsDel(Integer isDel) {
         this.isDel = isDel;
     }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", userSex=" + userSex +
+                ", userTel='" + userTel + '\'' +
+                ", userVip=" + userVip +
+                ", userAddress='" + userAddress + '\'' +
+                ", firstSaleman=" + firstSaleman +
+                ", lastSaleman=" + lastSaleman +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", isDel=" + isDel +
+                '}';
+    }
 }

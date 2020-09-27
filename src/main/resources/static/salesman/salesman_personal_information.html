@@ -196,13 +196,17 @@
       });
       $.getJSON("/api/emp/personSaleman", function (response) {
         items = response.data;
+        // console.log(items.empCountList[0])
         var empCountAll = 0;
         var datamonth=[];
-         var dataempCount=[];
-        for(var i = 0; i < items.length; i++){
-          empCountAll+=items[i].empCount;
-          datamonth[i]=items[i].month;
-          dataempCount[i]=items[i].empCount;
+        var dataempCount=[];
+        var i = 0 ;
+        for(var key in items.empCountList){
+          empCountAll+=items.empCountList[key];
+          datamonth[i]=key;
+          dataempCount[i]=items.empCountList[key];
+          i = i + 1 ;
+
         }
         var myChart = echarts.init(document.getElementById('main'));
  

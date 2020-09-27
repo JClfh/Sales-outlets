@@ -164,4 +164,7 @@ public class PurchaseInfoVO {
     public void setGoodsCostPrice(Integer goodsCostPrice) {
         this.goodsCostPrice = goodsCostPrice;
     }
+
+    public PurchaseInfoVO() {
+    }
 }

@@ -102,4 +102,20 @@ public class OrderInfo {
     public void setIsDel(Integer isDel) {
         this.isDel = isDel;
     }
+
+    @Override
+    public String toString() {
+        return "OrderInfo{" +
+                "id=" + id +
+                ", orderId='" + orderId + '\'' +
+                ", empId='" + empId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", takeInPrice=" + takeInPrice +
+                ", modeOfDistibution=" + modeOfDistibution +
+                ", status=" + status +
+                ", createTime=" + createTime +
+                ", finishTime=" + finishTime +
+                ", isDel=" + isDel +
+                '}';
+    }
 }

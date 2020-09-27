@@ -590,15 +590,21 @@
               $.ajax({
                 url: "/api/user/del/"+this.items[d].id,
                 type: "post",
-                success: function () {
-                $('#dangerModal').modal('hide');
-                $('#success').modal('show');
-                app.items.splice(d, 1);
-                app.pagesum = Math.ceil(app.items.length / 5);
+                success: function (res) {
+                  if(res.resultCode === 500){
+                    $('#failDelModal').modal('show');
+                    $('#editFailModal').modal('show');
+                  }else{
+                    $('#dangerModal').modal('hide');
+                    $('#success').modal('show');
+                    app.items.splice(d, 1);
+                    app.pagesum = Math.ceil(app.items.length / 5);
+                  }
+
               },
               error: function (xhr, status, error) {
                 $('#dangerModal').modal('hide');
-                $('#failDelModal').modal('show');
+                $('#issue').modal('show');
               }
               });
 
