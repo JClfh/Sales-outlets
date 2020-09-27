@@ -17,15 +17,7 @@
   <link href="../css/style.css" rel="stylesheet">
   <link href="../vendors/pace-progress/css/pace.min.css" rel="stylesheet">
 </head>
-<script type="text/css">
 
-            </script>
-<style>
-  .div1 {
-    background: rgb(38, 202, 231);
-    color: rgb(252, 247, 247);
-  }
-</style>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
   <header class="app-header navbar">
@@ -38,7 +30,7 @@
     </button>
     <div class="btn-group" role="group" aria-label="Button group">
       <span class="btn"> 欢迎回来，尊敬的管理员！</span>
-      <a class="btn" href="/api/emp/logout">
+      <a class="btn" href="/admin/logout">
         <i class="fa fa-share" aria-hidden="true"></i>退出</a>
     </div>
   
@@ -51,48 +43,58 @@
       <nav class="sidebar-nav ps ps--active-y">
         <ul class="nav">
           <br>
-          <br>
-
           <li class="nav-item nav-dropdown ">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-puzzle"></i> 职员管理</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./admin_add_member">
+                <a class="nav-link" href="/admin/admin_add_member">
                   <i class="nav-icon icon-puzzle"></i>添加人员</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_members">
+                <a class="nav-link" href="/admin/admin_manage_members">
                   <i class="nav-icon icon-puzzle"></i>管理人员</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_user">
+                <a class="nav-link" href="/admin/admin_manage_user">
                   <i class="nav-icon icon-puzzle"></i>管理客户</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-cursor"></i> 商品管理</a>
             <ul class="nav-dropdown-items">
 
               <li class="nav-item">
-                <a class="nav-link" href="./admin_add_goods">
+                <a class="nav-link" href="/admin/admin_add_goods">
                   <i class="nav-icon icon-cursor"></i> 发布商品</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_goods">
+                <a class="nav-link" href="/admin/admin_manage_goods">
                   <i class="nav-icon icon-cursor"></i> 编辑商品</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_show_goods">
+                <a class="nav-link" href="/admin/admin_show_goods">
                   <i class="nav-icon icon-cursor"></i> 商品展示</a>
               </li>
             </ul>
           </li>
-          <br>
+          <br><br>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-layers"></i>供应商管理</a>
+            <ul class="nav-dropdown-items">
 
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/admin_addeidt_provider">
+                  <i class="nav-icon icon-layers"></i>管理供应商</a>
+              </li>
+
+            </ul>
+          </li>
+          <br>
         </ul>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
           <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
@@ -145,25 +147,22 @@
                   <tbody>
                     <tr v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
 
-                      <td align="center">{{item.userName}}</td>
-                      <td align="center">
+                      <td align="center" style=" vertical-align:middle">{{item.userName}}</td>
+                      <td align="center" style=" vertical-align:middle">
                         <span class="" v-if="item.userSex  === 0">男</span>
                         <span class="" v-if="item.userSex  === 1">女</span>
                       </td>
-                       <td align="center">{{item.userTel}}</td>
-                       <td align="center">{{item.userVip}}</td>
-                      <td align="center">{{item.userAddress}}</td>
-                      <td align="center">{{item.firstSalemanName}}</td>s
-                      <td align="center">{{item.lastSalemanName}}</td>
-                      <td align="center">{{item.createTime1}}</td>
-                      <td align="center"> <button class="btn btn-primary" type="button" data-toggle="modal"
+                       <td align="center" style=" vertical-align:middle">{{item.userTel}}</td>
+                       <td align="center" style=" vertical-align:middle">{{item.userVip}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.userAddress}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.firstSalemanName}}</td>s
+                      <td align="center" style=" vertical-align:middle">{{item.lastSalemanName}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.createTime1}}</td>
+                      <td align="center" style=" vertical-align:middle"> <button class="btn btn-primary" type="button" data-toggle="modal"
                           v-on:click="edit(index)" data-target="#editModal">
                           <i class="fa fa-edit "></i>编辑</button>&nbsp;
-
                         <button class="btn btn-danger" type="button" data-toggle="modal" v-on:click="del(index)"><i
                             class="fa fa-close "></i>删除</button>&nbsp;
-                      
-
                       </td>
                     </tr>
                   </tbody>
@@ -290,25 +289,25 @@
               <div class="card-body">
                 <form class="needs-validation" novalidate>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">编号</label>
+                    <label class="col-md-3 col-form-label" for="id">编号</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input"
+                      <input class="form-control" id="id" type="text" name="id"
                         v-model="edititems.id" pattern="^[0-9]+$" disabled="disabled" required>
 
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">创建时间</label>
+                    <label class="col-md-3 col-form-label" for="createTime1">创建时间</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="时间"
+                      <input class="form-control" id="createTime1" type="text" name="createTime1" placeholder="时间"
                         v-model="edititems.createTime1" required disabled="disabled">
 
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">姓名</label>
+                    <label class="col-md-3 col-form-label" for="userName">姓名</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="姓名"
+                      <input class="form-control" id="userName" type="text" name="userName" placeholder="姓名"
                         v-model="edititems.userName" 
                         pattern="^[\u4e00-\u9fa5]{2,4}$|^[A-Za-z\s]{2,40}$" required>
 
@@ -324,16 +323,16 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">联系电话</label>
+                    <label class="col-md-3 col-form-label" for="userTel">联系电话</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="联系电话"
+                      <input class="form-control" id="userTel" type="text" name="userTel" placeholder="联系电话"
                         v-model="edititems.userTel" pattern="^[0-9]+$" required>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">地址</label>
+                    <label class="col-md-3 col-form-label" for="userAddress">地址</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="地址"
+                      <input class="form-control" id="userAddress" type="text" name="userAddress" placeholder="地址"
                         v-model="edititems.userAddress" required>
 
                     </div>

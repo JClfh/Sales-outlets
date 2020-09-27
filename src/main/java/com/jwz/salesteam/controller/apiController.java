@@ -2,7 +2,9 @@ package com.jwz.salesteam.controller;
 
 import com.jwz.salesteam.common.ServiceResultEnum;
 import com.jwz.salesteam.controller.common.EmpInfoVO;
+import com.jwz.salesteam.controller.common.GoodsInfoVO;
 import com.jwz.salesteam.controller.common.ShoppingCartList;
+import com.jwz.salesteam.dao.GoodsInfoMapper;
 import com.jwz.salesteam.entity.EmpInfo;
 import com.jwz.salesteam.entity.GoodsInfo;
 import com.jwz.salesteam.entity.UserInfo;
@@ -15,8 +17,10 @@ import com.jwz.salesteam.util.Result;
 import com.jwz.salesteam.util.ResultGenerator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +51,9 @@ public class apiController {
 
     @Autowired
     private PurchaseInfoService purchaseInfoService;
+
+    @Autowired
+    private GoodsInfoMapper goodsInfoMapper;
     /**
      * 登录
      * @param emp_id
@@ -128,6 +135,14 @@ public class apiController {
         return ResultGenerator.genSuccessResult(userInfoService.findByUserTel(user_tel));
     }
 
+
+    @RequestMapping(value = "/user/findByTelOrUserName/{search}", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value="查看客户（搜索）")
+    public Result userInfoFindByTelOrUserName(@PathVariable("search") String search) {
+        return ResultGenerator.genSuccessResult(userInfoService.findByUserTelOrUserName(search));
+    }
+
     /**
      * 添加客户信息
      * @param userInfo
@@ -143,6 +158,7 @@ public class apiController {
             return ResultGenerator.genFailResult("参数异常！");
         }
         userInfo.setFirstSaleman(empInfo.getId());
+        userInfo.setLastSaleman(empInfo.getId());
         if (StringUtils.isEmpty(userInfo.getUserName())
                 || StringUtils.isEmpty(userInfo.getUserTel())
                 || Objects.isNull(userInfo.getUserVip())) {
@@ -211,7 +227,7 @@ public class apiController {
     }
 
     /**
-     * 查看个人业绩信息
+     * 查看个人业绩信息（销售）
      * @param httpSession
      * @return
      */
@@ -228,7 +244,7 @@ public class apiController {
     }
 
     /**
-     * 查看个人采购记录
+     * 查看个人采购记录（跟单）
      * @param httpSession
      * @return
      */
@@ -246,7 +262,7 @@ public class apiController {
 
 
     /**
-     * 查看个人审核采购记录
+     * 查看个人审核采购记录（财务）
      * @param httpSession
      * @return
      */
@@ -271,9 +287,9 @@ public class apiController {
      * @param httpSession
      * @return
      */
-    @RequestMapping(value = "/shopping-cart",method = RequestMethod.POST)
+    @RequestMapping(value = "/shopping-cart/{goods_id}",method = RequestMethod.GET)
     @ResponseBody
-    public Result addShoppingCart(@RequestParam("goods_id") String goods_id,HttpSession httpSession){
+    public Result addShoppingCart(@PathVariable("goods_id") String goods_id,HttpSession httpSession){
         List<ShoppingCartList> list = (List<ShoppingCartList>) httpSession.getAttribute("shopping-cart");
         //遍历，如果goods——id一样就sum+1
         if(list==null){
@@ -298,4 +314,166 @@ public class apiController {
         httpSession.setAttribute("shopping-cart",list);
         return ResultGenerator.genSuccessResult();
     }
+
+
+    /**
+     * 查看购物车session
+     * @param httpSession
+     */
+    @GetMapping("/shop/getsession")
+    @ApiOperation(value="查看购物车session")
+    public void getShopSession(HttpSession httpSession){
+        List<ShoppingCartList> list = (List<ShoppingCartList>) httpSession.getAttribute("shopping-cart");
+        for(ShoppingCartList shoppingCartList:list){
+            System.out.println( shoppingCartList.toString());
+        }
+    }
+
+    /**
+     * 查看购物车
+     * @param httpSession
+     * @return
+     */
+    @RequestMapping(value = "/shoppingCartItem",method = RequestMethod.GET)
+    @ResponseBody
+    public Result shoppingCartItem(HttpSession httpSession){
+        List<ShoppingCartList> list = (List<ShoppingCartList>) httpSession.getAttribute("shopping-cart");
+        List<GoodsInfoVO> goodsInfoVOS = new ArrayList<>();
+        if(list !=null) {
+            for (ShoppingCartList shoppingCartList : list) {
+                System.out.println(shoppingCartList.toString());
+                GoodsInfoVO goodsInfoVO = new GoodsInfoVO();
+                BeanUtil.copyProperties(goodsInfoMapper.selectByGoodsId(shoppingCartList.getGoodsId()), goodsInfoVO);
+                goodsInfoVO.setGoodsNum(shoppingCartList.getGoodsNum());
+                goodsInfoVOS.add(goodsInfoVO);
+            }
+        }
+        return ResultGenerator.genSuccessResult(goodsInfoVOS);
+    }
+
+    /**
+     * 查看购物车数量
+     * @param httpSession
+     * @return
+     */
+    @GetMapping("/shoppingCartItemNum")
+    @ResponseBody
+    @ApiOperation(value="查看购物车数量")
+    public Result getShopCartItemNum(HttpSession httpSession){
+        List<ShoppingCartList> list = (List<ShoppingCartList>) httpSession.getAttribute("shopping-cart");
+        Integer goodsNum = 0;
+        if(list !=null) {
+            for (ShoppingCartList shoppingCartList : list) {
+                goodsNum += shoppingCartList.getGoodsNum();
+            }
+        }
+        return ResultGenerator.genSuccessResult(goodsNum);
+    }
+
+    /**
+     * 改变购物车数量
+     * @param goods_num
+     * @param goods_id
+     * @param httpSession
+     * @return
+     */
+    @RequestMapping(value = "/shoppingCartItem/changeNum",method = RequestMethod.GET)
+    @ResponseBody
+    public Result changeShoppingCartItemNum(@Param("goods_num")Integer goods_num, @Param("goods_id")String goods_id,HttpSession httpSession){
+        List<ShoppingCartList> list = (List<ShoppingCartList>) httpSession.getAttribute("shopping-cart");
+        //遍历，如果goods——id一样就sum+1
+            Iterator it = list.iterator();
+            ShoppingCartList shoppingCartList;
+            while(it.hasNext()){
+                shoppingCartList = (ShoppingCartList)it.next();
+                if(shoppingCartList.getGoodsId().equals(goods_id)){
+                    shoppingCartList.setGoodsNum(goods_num);
+                }
+        }
+        httpSession.setAttribute("shopping-cart",list);
+        return ResultGenerator.genSuccessResult();
+    }
+
+    @RequestMapping(value = "/shoppingCartItem/delItem/{goods_id}",method = RequestMethod.GET)
+    @ResponseBody
+    public Result delShoppingCartItemNum(@PathVariable("goods_id")String goods_id,HttpSession httpSession){
+        List<ShoppingCartList> list = (List<ShoppingCartList>) httpSession.getAttribute("shopping-cart");
+        //遍历，如果goods——id一样就sum+1
+
+        for(ShoppingCartList shoppingCartList:list){
+            if(shoppingCartList.getGoodsId().equals(goods_id)){
+                list.remove(shoppingCartList);
+                break;
+            }
+        }
+        httpSession.setAttribute("shopping-cart",list);
+        return ResultGenerator.genSuccessResult();
+    }
+    /**
+     *
+     * 查看个人客户记录
+     * @param httpSession
+     * @return
+     */
+    @GetMapping("/userSaleList")
+    @ResponseBody
+    @ApiOperation(value="查看个人客户记录")
+    public Result getUserSaleList(HttpSession httpSession){
+        EmpInfo temp = (EmpInfo)httpSession.getAttribute("销售员");
+
+        if(temp == null){
+            return ResultGenerator.genFailResult("未登录");
+        }
+        return  ResultGenerator.genSuccessResult(userInfoService.selectByFirstEmpId(temp.getId()));
+    }
+
+    /**
+     * 删除客户信息
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/user/del/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value="删除客户信息")
+    public Result deleteUserInfo(@PathVariable("id") Integer id) {
+
+        if (userInfoService.delUserInfo(id)>0) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult("删除失败");
+        }
+    }
+
+    /**
+     * 修改客户信息
+     * @param userInfo
+     * @return
+     */
+    @RequestMapping(value = "/user/update", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value="修改客户信息")
+    public Result updateUserInfo(@RequestBody UserInfo userInfo,HttpSession httpSession) {
+        EmpInfo empInfo = (EmpInfo)httpSession.getAttribute("销售员");
+        if(empInfo == null){
+            return ResultGenerator.genFailResult("参数异常！");
+        }
+        userInfo.setLastSaleman(empInfo.getId());
+        if (StringUtils.isEmpty(userInfo.getUserName())
+                || StringUtils.isEmpty(userInfo.getUserTel())
+                || Objects.isNull(userInfo.getUserSex())) {
+            return ResultGenerator.genFailResult("参数异常！");
+        }
+        String result = userInfoService.updateUserInfo(userInfo);
+        if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
+            return ResultGenerator.genSuccessResult(empInfo.getEmpName());
+        } else {
+            return ResultGenerator.genFailResult(result);
+        }
+    }
+
+//    @GetMapping("/salesman/salesman_details_order/{order_id}")
+//    public String detailOrders(@PathVariable("order_id") String order_id) {
+//        System.out.println("aaa");
+//        return  "/salesman/salesman_details_order.html";
+//    }
 }

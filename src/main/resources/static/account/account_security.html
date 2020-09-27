@@ -55,19 +55,19 @@
               <i class="nav-icon icon-puzzle"></i> 财务管理</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./account_orders_check.html">
+                <a class="nav-link" href="/account/account_orders_check">
                   <i class="nav-icon icon-puzzle"></i>审核订单</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./account_orders_count.html">
+                <a class="nav-link" href="/account/account_orders_count">
                   <i class="nav-icon icon-puzzle"></i>查看业绩</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./account_orders_ profit.html">
+                <a class="nav-link" href="/account/account_orders_ profit">
                   <i class="nav-icon icon-puzzle"></i>查看利润</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./account_orders_history.html">
+                <a class="nav-link" href="/account/account_orders_history">
                   <i class="nav-icon icon-puzzle"></i>历史采购订单</a>
               </li>
 
@@ -79,7 +79,7 @@
               <i class="nav-icon icon-puzzle"></i> 个人中心</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./account_security.html">
+                <a class="nav-link" href="/account/account_security">
                   <i class="nav-icon icon-puzzle"></i>账号安全</a>
               </li>
             </ul>
@@ -146,7 +146,7 @@
                               <td>新密码</td>
                               <td>
                                 <div class="col-md-9">
-                                  <input class="form-control" id="pwd1" type="password" name="text-input" placeholder="新密码"
+                                  <input class="form-control" id="pwd1" type="password" name="pwd1" placeholder="新密码"
                                     pattern="^.{6,20}$" required>
                                   <div class="invalid-feedback">
                                     密码个数6-20位！
@@ -158,7 +158,7 @@
                               <td>再次确认密码</td>
                               <td>
                                 <div class="col-md-9">
-                                  <input class="form-control" id="pwd2" type="password" name="text-input"
+                                  <input class="form-control" id="pwd2" type="password" name="pwd2"
                                     v-model="edititems.empnewPwd" placeholder="再次确认密码" required>
                                   <div class="invalid-feedback" >
                                     不能为空！

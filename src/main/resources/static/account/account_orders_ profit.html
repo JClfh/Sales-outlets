@@ -48,19 +48,19 @@
                 <i class="nav-icon icon-puzzle"></i> 财务管理</a>
               <ul class="nav-dropdown-items">
                 <li class="nav-item">
-                  <a class="nav-link" href="./account_orders_check.html">
+                  <a class="nav-link" href="/account/account_orders_check">
                     <i class="nav-icon icon-puzzle"></i>审核订单</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./account_orders_count.html">
+                  <a class="nav-link" href="/account/account_orders_count">
                     <i class="nav-icon icon-puzzle"></i>查看业绩</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./account_orders_ profit.html">
+                  <a class="nav-link" href="/account/account_orders_ profit">
                     <i class="nav-icon icon-puzzle"></i>查看利润</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./account_orders_history.html">
+                  <a class="nav-link" href="/account/account_orders_history">
                     <i class="nav-icon icon-puzzle"></i>历史采购订单</a>
                 </li>
 
@@ -72,7 +72,7 @@
                 <i class="nav-icon icon-puzzle"></i> 个人中心</a>
               <ul class="nav-dropdown-items">
                 <li class="nav-item">
-                  <a class="nav-link" href="./account_security.html">
+                  <a class="nav-link" href="/account/account_security">
                     <i class="nav-icon icon-puzzle"></i>账号安全</a>
                 </li>
               </ul>
@@ -133,34 +133,43 @@
   <script src="../vendors/mock.js/js/mock.min.js"></script>
   <script src="../vendors/vue.js/js/vue.min.js"></script>
   <script src="../vendors/echarts/dist/echarts.min.js"></script>
+  <script>
+    function formatDate(time) {
+      var d = new Date(time);
+      var time=d.getFullYear() + '年'
+      time += d.getMonth()+1 + "月";
+      return time
+    }
 
+  </script>
   <script>
     var p, d, j;
     var app;
     var items;
-    var dataList = []//新建一个数组
-    var dataLi = []//新建一个数组
+    var creatTimeList = []//新建一个数组
+    var takeInPriceList = []//新建一个数组
+    var earnMoneyeList = []//新建一个数组
+    var creatTimeList1 = []//新建一个数组
+    var takeInPriceList1 = []//新建一个数组
+    var earnMoneyeList1 = []//新建一个数组
     $(function () {
-      Mock.mock("http://127.0.0.1:5500/users", {
-        "data|20-20": [{
-          id: "@increment()",//编号
-          empId: "@increment()",//职工id
-          empName: "@cname()",//职工姓名
-          empResults: "@increment()",//业绩
-          eempPwd: "@increment()"//职工密码
 
-        }],
-        suceess: true,
-        code: 200,
-        msg: "Success"
-      });
-      $.getJSON("http://127.0.0.1:5500/users", function (response) {
+      $.getJSON("/account/earnMonthAccount", function (response) {
         items = response.data;
         // 在线图表
         for (var i = 0; i < items.length; i++) {
-          dataList[i] = items[i].empName;
-          dataLi[i] = items[i].empResults;
+          creatTimeList[i] = formatDate(items[i].createTime.toString().split("T")[0]);
+          takeInPriceList[i] = items[i].takeInPrice;
+          earnMoneyeList[i] = items[i].earnMoney;
+        }
+      })
+      $.getJSON("/account/earnAccount", function (response) {
+        items = response.data;
 
+        for (var i = 0; i < items.length; i++) {
+          creatTimeList1[i] = items[i].createTime.toString().split("T")[0];
+          takeInPriceList1[i] = items[i].takeInPrice;
+          earnMoneyeList1[i] = items[i].earnMoney;
         }
         var myChart = echarts.init(document.getElementById('main'));
 
@@ -185,7 +194,11 @@
           xAxis: [
             {
               type: 'category',
-              data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日', '周一', '周二', '周三', '周四']
+              axisLabel:{
+                interval:0,
+                rotate:45,
+                margin:2 },
+              data: creatTimeList1
             }
           ],
           yAxis: [
@@ -199,13 +212,13 @@
               name: '利润',
               type: 'bar',
               stack: '广告',
-              data: [120, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134]
+              data: takeInPriceList1
             },
             {
               name: '成本',
               type: 'bar',
               stack: '广告',
-              data: [220, 182, 191, 234, 290, 330, 310, 120, 132, 101, 134]
+              data: earnMoneyeList1
             }
           ]
         };
@@ -226,7 +239,7 @@
             }
           },
           legend: {
-            data: ['邮件营销', '联盟广告']
+            data: ['成本', '利润']
           },
           toolbox: {
             feature: {
@@ -243,7 +256,11 @@
             {
               type: 'category',
               boundaryGap: false,
-              data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+              axisLabel:{
+                interval:0,
+                rotate:90,
+                margin:3 },
+              data: creatTimeList
             }
           ],
           yAxis: [
@@ -253,18 +270,18 @@
           ],
           series: [
             {
-              name: '邮件营销',
+              name: '利润',
               type: 'line',
               stack: '总量',
               areaStyle: {},
-              data: [120, 132, 101, 134, 90, 230, 210]
+              data: takeInPriceList
             },
             {
-              name: '联盟广告',
+              name: '成本',
               type: 'line',
               stack: '总量',
               areaStyle: {},
-              data: [220, 182, 191, 234, 290, 330, 310]
+              data: earnMoneyeList
             }
           ]
         };

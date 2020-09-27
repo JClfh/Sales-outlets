@@ -39,7 +39,7 @@
     </button>
     <div class="btn-group" role="group" aria-label="Button group">
       <p class="btn">  你好，无敌的 销售员！</p>
-      <a class="btn" href="/logout">
+      <a class="btn" href="/api/emp/logout">
         <i class="fa fa-share" aria-hidden="true"></i> &nbsp;退出</a>
     </div>
   
@@ -52,49 +52,47 @@
       <nav class="sidebar-nav ps ps--active-y">
         <ul class="nav">
           <br>
-          <br>
-
           <li class="nav-item nav-dropdown ">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-puzzle"></i> 客户信息</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_add_user.html">
+                <a class="nav-link" href="/salesman/salesman_add_user">
                   <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加客户</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_manage_user.html">
+                <a class="nav-link" href="/salesman/salesman_manage_user">
                   <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;查看客户</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-star"></i>商城</a>
             <ul class="nav-dropdown-items">
 
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_show_goods.html">
+                <a class="nav-link" href="/salesman/salesman_show_goods">
                   <i class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp;商品展示</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_manage_order.html">
+                <a class="nav-link" href="/salesman/salesman_manage_order">
                   <i class="icon-speech"></i>&nbsp;订单管理</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-cursor"></i>个人中心</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_security.html">
+                <a class="nav-link" href="/salesman/salesman_security">
                   <i class="icons cui-shield"></i> &nbsp;账号安全</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_personal_information.html">
+                <a class="nav-link" href="/salesman/salesman_personal_information">
                   <i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp;个人信息</a>
               </li>
 
@@ -128,7 +126,7 @@
               <div class="card-header">
                 <div align="left">  <div align="left">
                   <i class=" font-xl  cui-people"></i>
-                  搜索<input type="text" name="text-input" >
+                  搜索<input type="text" name="text-input" v-model="keyword">
                   <button class="btn btn-success" type="button"  v-on:click="cha()" data-toggle="modal">
                     <i class="fa fa-search" aria-hidden="true"></i></button>
 
@@ -139,38 +137,37 @@
                 <table class="table table-responsive-sm table-bordered">
                   <thead>
                     <tr align="center">
-                      <th width="125p">姓名</th>
-                      <th width="125p">性别</th>
-                      <th width="125p">联系电话</th>
-                      <th width="125p">vip等级</th>
-                      <th width="125p">地址</th>
-                      
-                      <th width="125p">初次接待销售员ID</th>
-                      <th width="125p">上一次接待销售员ID</th>
-                      <th width="125p">创建日期</th>
-                      <th width="125p">操作</th>
+                      <th class="text-center" scope="col">姓名</th>
+                      <th class="text-center" scope="col">性别</th>
+                      <th class="text-center" scope="col">联系电话</th>
+                      <th class="text-center" scope="col">vip等级</th>
+                      <th class="text-center" scope="col">地址</th>
+                      <th class="text-center" scope="col">初次接待销售员</th>
+                      <th class="text-center" scope="col">上一次接待销售员</th>
+                      <th class="text-center" scope="col">创建日期</th>
+                      <th class="text-center" scope="col">操作</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
 
-                      <td align="center">{{item.userName}}</td>
-                      <td align="center">
+                      <td align="center" style=" vertical-align:middle">{{item.userName}}</td>
+                      <td align="center" style=" vertical-align:middle">
                         <span class="" v-if="item.userSex  === 0">男</span>
                         <span class="" v-if="item.userSex  === 1">女</span>
                       </td>
-                       <td align="center">{{item.userTel}}</td>
-                      <td align="center">{{item.userVip}}</td>
-                      <td align="center">{{item.userAddress}}</td>
-                      <td align="center">{{item.firstSaleman}}</td>
-                      <td align="center">{{item.lastSaleman}}</td>
-                      <td align="center">{{item.createTime1}}</td>
-                      <td align="center"> <button class="btn btn-primary" type="button" data-toggle="modal"
+                       <td align="center" style=" vertical-align:middle">{{item.userTel}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.userVip}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.userAddress}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.firstSalemanName}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.lastSalemanName}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.createTime1}}</td>
+                      <td align="center" style=" vertical-align:middle"> <button class="btn btn-primary" type="button" data-toggle="modal"
                           v-on:click="edit(index)">
-                          <i class="fa fa-edit "></i>编辑</button>&nbsp;
+                          <i class="fa fa-edit "></i>编辑</button>
 
                         <button class="btn btn-danger" type="button" data-toggle="modal" v-on:click="del(index)"><i
-                            class="fa fa-close "></i>删除</button>&nbsp;
+                            class="fa fa-close "></i>删除</button>
 
                       </td>
                     </tr>
@@ -424,6 +421,26 @@
           </div>
           <!-- /.modal-dialog-->
         </div>
+        <div class="modal fade" id="issue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             style="display: none;" aria-hidden="true">
+          <div class="modal-dialog modal-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">提示</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>出现未知错误</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">确定</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+        </div>
       </div>
     </main>
   </div>
@@ -488,7 +505,7 @@
         code: 200,
         msg: "Success"
       });
-      $.getJSON("http://127.0.0.1:5500/users", function (response) {
+      $.getJSON("/api/userSaleList", function (response) {
         items = response.data;
         console.log(items)
         page = Math.ceil(items.length / 5);
@@ -510,6 +527,7 @@
             pageitem: pageitem,
             editIndex: -1,
             edititems: { name: null },
+            keyword:""
 
           },
           computed: {
@@ -527,7 +545,41 @@
           methods: {
             //查询
             cha: function () {
-              alert("查询")
+              if(this.keyword === ""){
+                $.ajax({
+                  url: "/api/userSaleList",
+                  type: "get",
+                  success: function (res) {
+                    console.log(res.data)
+                    app.items = res.data
+                    app.pagesum = Math.ceil(app.items.length / 5);
+                    app.pageindex = 1
+                    for(var i = 0 ; i <app.items.length; i ++){
+                      app.items[i].createTime1 = app.items[i].createTime.toString().split("T")[0];
+                    }
+                  },
+                  error: function (xhr, status, error) {
+                    $('#issue').modal('show');
+                  }
+                });
+              }else{
+                $.ajax({
+                  url: "/api/user/findByTelOrUserName/"+this.keyword,
+                  type: "post",
+                  success: function (res) {
+                    console.log(res.data)
+                    app.items = res.data
+                    app.pagesum = Math.ceil(app.items.length / 5);
+                    app.pageindex = 1
+                    for(var i = 0 ; i <app.items.length; i ++){
+                      app.items[i].createTime1 = app.items[i].createTime.toString().split("T")[0];
+                    }
+                  },
+                  error: function (xhr, status, error) {
+                    $('#issue').modal('show');
+                  }
+                });
+              }
             },
             // 删除
             del: function (index) {
@@ -536,7 +588,7 @@
             },
             delCheck: function () {
               $.ajax({
-                url: "/admin/emp/del/"+this.items[d].id,
+                url: "/api/user/del/"+this.items[d].id,
                 type: "post",
                 success: function () {
                 $('#dangerModal').modal('hide');
@@ -575,7 +627,7 @@
               "isDel": 0//是否离职
               }
               $.ajax({
-                url: "/api/findByTel/{tel}",
+                url: "/api/user/update",
                 type: "post",
                 //将/jsON转化为字符串传递
                 dataType: 'json',
@@ -583,14 +635,25 @@
                 data: JSON.stringify(data),
 
                 //成功后的方法
-                success: function () {
-                  $('#editModal').modal('hide');
-                  $('#success').modal('show');
-                  window.location.href = "/a-salesman/salesman_manage_user.html";
+                success: function (data) {
+                  console.log(data)
+                  if(data.resultCode === 500){
+                    $('#editModal').modal('hide');
+                    $('#editFailModal').modal('show');
+                  }else{
+                    $('#editModal').modal('hide');
+                    $('#editSuccess').modal('show');
+                    app.edititems.lastSalemanName =  data.message;
+                    app.edititems.userSex = parseInt(app.edititems.userSex);
+                    app.edititems.userVip = parseInt(app.edititems.userVip);
+                    Vue.set(app.items, app.editIndex, app.edititems);
+                    //window.location.href ="/salesman/salesman_manage_user";
+                  }
                 },
+
                 error: function (xhr, status, error) {
                   $('#editModal').modal('hide');
-                  $('#editFailModal').modal('show');
+                  $('#issue').modal('show');
                 }
               });
 

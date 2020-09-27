@@ -243,4 +243,12 @@
     set account_emp_id = #{account_emp_id,jdbcType=VARCHAR}
     where purchase_id = #{purchase_id,jdbcType=VARCHAR}
   </update>
+
+
+  <select id="findByOrderIdAndGoodsId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from purchase_info
+    where  order_id = #{order_id,jdbcType=VARCHAR} and goods_id = #{goods_id,jdbcType=VARCHAR}
+  </select>
 </mapper>

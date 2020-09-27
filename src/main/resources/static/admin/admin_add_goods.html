@@ -38,7 +38,7 @@
     </button>
     <div class="btn-group" role="group" aria-label="Button group">
       <span class="btn"> 欢迎回来，尊敬的管理员！</span>
-      <a class="btn" href="/api/emp/logout">
+      <a class="btn" href="/admin/logout">
         <i class="fa fa-share" aria-hidden="true"></i>退出</a>
     </div>
 
@@ -49,48 +49,58 @@
       <nav class="sidebar-nav ps ps--active-y">
         <ul class="nav">
           <br>
-          <br>
-
           <li class="nav-item nav-dropdown ">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-puzzle"></i> 职员管理</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./admin_add_member">
+                <a class="nav-link" href="/admin/admin_add_member">
                   <i class="nav-icon icon-puzzle"></i>添加人员</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_members">
+                <a class="nav-link" href="/admin/admin_manage_members">
                   <i class="nav-icon icon-puzzle"></i>管理人员</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_user">
+                <a class="nav-link" href="/admin/admin_manage_user">
                   <i class="nav-icon icon-puzzle"></i>管理客户</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-cursor"></i> 商品管理</a>
             <ul class="nav-dropdown-items">
 
               <li class="nav-item">
-                <a class="nav-link" href="./admin_add_goods">
+                <a class="nav-link" href="/admin/admin_add_goods">
                   <i class="nav-icon icon-cursor"></i> 发布商品</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_goods">
+                <a class="nav-link" href="/admin/admin_manage_goods">
                   <i class="nav-icon icon-cursor"></i> 编辑商品</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_show_goods">
+                <a class="nav-link" href="/admin/admin_show_goods">
                   <i class="nav-icon icon-cursor"></i> 商品展示</a>
               </li>
             </ul>
           </li>
-          <br>
+          <br><br>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-layers"></i>供应商管理</a>
+            <ul class="nav-dropdown-items">
 
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/admin_addeidt_provider">
+                  <i class="nav-icon icon-layers"></i>管理供应商</a>
+              </li>
+
+            </ul>
+          </li>
+          <br>
         </ul>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
           <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
@@ -132,7 +142,7 @@
                               <td>商品名字</td>
                               <td>
                                 <div class="col-md-9">
-                                  <input class="form-control" id="text-input" type="text" name="text-input"
+                                  <input class="form-control" id="goodsName" type="text" name="goodsName"
                                     v-model="addALL.goodsName" placeholder="商品名字"
                                     required>
                                   <div class="invalid-feedback">
@@ -145,7 +155,7 @@
                               <td>商品零售价</td>
                               <td>
                                 <div class="col-md-9">
-                                  <input class="form-control" id="text-input" type="text" name="text-input"
+                                  <input class="form-control" id="goodsSellingPrice" type="text" name="goodsSellingPrice"
                                     v-model="addALL.goodsSellingPrice" placeholder="商品零售价"
                                     pattern="^[0-9]*$" required>
                                   <div class="invalid-feedback">
@@ -158,7 +168,7 @@
                               <td>商品成本价</td>
                               <td>
                                 <div class="col-md-9">
-                                  <input class="form-control" id="text-input" type="text" name="text-input"
+                                  <input class="form-control" id="goodsCostPrice" type="text" name="goodsCostPrice"
                                     v-model="addALL.goodsCostPrice" placeholder="商品成本价"
                                     pattern="^[0-9]*$" required>
                                   <div class="invalid-feedback">
@@ -185,7 +195,7 @@
                               <td>商品信息简介</td>
                               <td>
                                 <div class="col-md-9">
-                                  <input class="form-control" id="text-input" type="text" name="text-input"
+                                  <input class="form-control" id="goodsIntro" type="text" name="goodsIntro"
                                     v-model="addALL.goodsIntro" placeholder="商品信息简介"
                                    required>
                                   <div class="invalid-feedback">

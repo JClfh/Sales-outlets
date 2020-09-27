@@ -41,7 +41,7 @@
     </button>
     <div class="btn-group" role="group" aria-label="Button group">
       <p class="btn"> 你好，无敌的销售员！</p>
-      <a class="btn" href="/logout">
+      <a class="btn" href="/api/emp/logout">
         <i class="fa fa-share" aria-hidden="true"></i> &nbsp;退出</a>
     </div>
 
@@ -54,49 +54,47 @@
       <nav class="sidebar-nav ps ps--active-y">
         <ul class="nav">
           <br>
-          <br>
-
           <li class="nav-item nav-dropdown ">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-puzzle"></i> 客户信息</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_add_user.html">
+                <a class="nav-link" href="/salesman/salesman_add_user">
                   <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加客户</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_manage_user.html">
+                <a class="nav-link" href="/salesman/salesman_manage_user">
                   <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;查看客户</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-star"></i>商城</a>
             <ul class="nav-dropdown-items">
 
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_show_goods.html">
+                <a class="nav-link" href="/salesman/salesman_show_goods">
                   <i class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp;商品展示</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_manage_order.html">
+                <a class="nav-link" href="/salesman/salesman_manage_order">
                   <i class="icon-speech"></i>&nbsp;订单管理</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-cursor"></i>个人中心</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_security.html">
+                <a class="nav-link" href="/salesman/salesman_security">
                   <i class="icons cui-shield"></i> &nbsp;账号安全</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_personal_information.html">
+                <a class="nav-link" href="/salesman/salesman_personal_information">
                   <i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp;个人信息</a>
               </li>
 
@@ -112,7 +110,7 @@
         </div>
       </nav>
       <button class="sidebar-minimizer brand-minimizer" type="button"></button>
-    </div>
+    </div
     <main class="main">
       <!-- Breadcrumb-->
       <ol class="breadcrumb">
@@ -131,34 +129,35 @@
               <div class="card-header">订单信息</div>
               <div class="card-body" >
                 <div class="chart-wrapper">
+
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">地址:</label>
+                    <label class="col-md-3 col-form-label" >客户姓名:</label>
                     <div class="col-md-6">
-                      <p class="col-form-label">地址{{items.userAddress}}</p>
+                      <p class="col-form-label">{{items.userInfo.userName}}</p>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">客户姓名:</label>
+                    <label class="col-md-3 col-form-label" >联系电话:</label>
                     <div class="col-md-6">
-                      <p class="col-form-label">客户姓名{{items.userName}}</p>
+                      <p class="col-form-label">{{items.userInfo.userTel}}</p>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">联系电话:</label>
+                    <label class="col-md-3 col-form-label">地址:</label>
                     <div class="col-md-6">
-                      <p class="col-form-label">联系电话{{items.userTel}}</p>
+                      <p class="col-form-label">{{items.userInfo.userAddress}}</p>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">订单编号:</label>
+                    <label class="col-md-3 col-form-label" >订单编号:</label>
                     <div class="col-md-6">
-                      <p class="col-form-label">订单编号{{items.goodsName}}</p>
+                      <p class="col-form-label">{{items.orderId}}</p>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">销售员:</label>
+                    <label class="col-md-3 col-form-label">销售员:</label>
                     <div class="col-md-6">
-                      <p class="col-form-label">销售员{{items.empName}}</p>
+                      <p class="col-form-label">{{items.empName}}</p>
                     </div>
                   </div>
                 </div>
@@ -176,26 +175,28 @@
                       <th class="text-center" scope="col">商品名字</th>
                       <th class="text-center" scope="col">单价</th>
                       <th class="text-center" scope="col">数量</th>
+                      <th class="text-center" scope="col">折扣</th>
                       <th class="text-center" scope="col">小计</th>
-                      <th class="text-center" scope="col">交易成功</th>
+                      <th class="text-center" scope="col">状态</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="protop" v-for="(item, index) in items">
-                      <td class="text-center proitem"><img v:src="{{item.goodsCoverImg}}" width="100" id="proImg">
+                    <tr class="protop" v-for="(item, index) in items.goodsInfoVOList">
+                      <td class="text-center proitem"  style="font-size:17px"><img v-bind:src="item.goodsCoverImg" width="30" height="30" id="proImg">
                       </td>
-                      <td class="text-center proitem">{{item.goodsName}}</td>
-                      <td class="text-center proitem">{{item.goodsSellingPrice}} 元</td>
-                      <td class="text-center proitem">
+                      <td class="text-center proitem"  style="font-size:17px">{{item.goodsName}}</td>
+                      <td class="text-center proitem"  style="font-size:17px">{{item.goodsSellingPrice}} 元</td>
+                      <td class="text-center proitem"  style="font-size:17px">
                         {{item.goodsNum}}
                       </td>
-                      <td class="text-center proitem" style="color:#ff6700">{{item.onetakeIn}}元</td>
+                      <td class="text-center proitem"  style="font-size:17px"><del>{{item.goodsSellingPrice * item.goodsNum - item.goodsPrice}}</del>元</td>
+                      <td class="text-center proitem" style="color:#ff6700">{{item.goodsPrice}}元</td>
                       <td class="text-center proitem">
-                        <span class="" v-if="item.status  === 0">已下单</span>
-                        <span class="" v-if="item.status  === 1">审核中</span>
-                        <span class="" v-if="item.status  === 2">采购中</span>
-                        <span class="" v-if="item.status  === 3">配送中</span>
-                        <span class="" v-if="item.status  === 4">已完成</span>
+                        <span class="badge badge-secondary"  style="font-size:17px" v-if="item.status === 0">未审批</span>
+                        <span class="badge badge-warning"  style="font-size:17px" v-if="item.status === 1 || item.status === 2">正在审批中</span>
+                        <span class="badge badge-info"  style="font-size:17px" v-if="item.status === 3">审批完成</span>
+                        <span class="badge badge-primary"  style="font-size:17px" v-if="item.status === 4">已发货</span>
+                        <span class="badge badge-success"  style="font-size:17px" v-if="item.status === 5">已到货</span>
                       </td>
                     </tr>
 
@@ -224,7 +225,17 @@
   <script src="../vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
   <script src="../vendors/mock.js/js/mock.min.js"></script>
   <script src="../vendors/vue.js/js/vue.min.js"></script>
-
+  <script type="text/javascript">
+    function getParams(key) {
+      var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) {
+        return unescape(r[2]);
+      }
+      return null;
+    };
+    console.log("参数param1:"+getParams("order_id"));//输出aa
+  </script>
   <script>
     var p, d, j;
     var app;
@@ -250,7 +261,7 @@
         code: 200,
         msg: "Success"
       });
-      $.getJSON("http://127.0.0.1:5500/users", function (response) {
+      $.getJSON("/orders/findByOrderId/"+getParams("order_id"), function (response) {
         items = response.data;
 
         console.log(response.data)

@@ -19,4 +19,14 @@ public interface SupplierInfoMapper {
     int updateByPrimaryKey(SupplierInfo record);
 
     List<SupplierInfo> findSupplierInfoList();
+
+    List<SupplierInfo>  findSupplierInfoList2();
+
+    SupplierInfo selectByName(String supplier_name);
+
+    List<SupplierInfo> findBySupplierName(String supplier_name);
+
+    SupplierInfo selectByNameAndId(String supplier_name, Integer id);
+
+    int changelock(Integer id, Integer is_del);
 }

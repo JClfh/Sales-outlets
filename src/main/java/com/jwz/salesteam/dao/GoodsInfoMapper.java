@@ -29,8 +29,8 @@ public interface GoodsInfoMapper {
 
     List<GoodsInfo> getGoodsInfoList();
 
-    GoodsInfo getGoodsInfo(Integer id);
 
-    GoodsInfo selectByGoodsName(String goods_id);
+
+    GoodsInfo selectByGoodsId(String goods_id);
 
 }

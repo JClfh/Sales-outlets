@@ -154,7 +154,24 @@ public class EmpInfoServiceImpl implements EmpInfoService {
         return empInfoVO;
     }
 
+    @Override
+    public String Adminlogin(String emp_id, String emp_pwd, HttpSession httpSession) {
+        EmpInfo empInfo = empInfoMapper.selectByLoginNameAndPwd(emp_id, emp_pwd);
+        if (empInfo != null) {
+//            if (empInfo.getIsLock() == 1) {
+//                return ServiceResultEnum.LOGIN_EMP_LOCKED.getResult();
+//            }
+            httpSession.setAttribute("admin", empInfo);
+            return ServiceResultEnum.SUCCESS.getResult();
+        }
+        return ServiceResultEnum.LOGIN_ERROR.getResult();
+    }
 
-
-
+    @Override
+    public String changelock(Integer id, Integer is_lock) {
+        if (empInfoMapper.changelock(id,is_lock) > 0) {
+            return ServiceResultEnum.SUCCESS.getResult();
+        }
+        return ServiceResultEnum.DB_ERROR.getResult();
+    }
 }

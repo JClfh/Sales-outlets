@@ -1,8 +1,10 @@
 package com.jwz.salesteam.service;
 
+import com.jwz.salesteam.controller.common.EarnAccount;
 import com.jwz.salesteam.controller.common.EmpInfoVO;
 import com.jwz.salesteam.controller.common.OrderConutVO;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -16,4 +18,8 @@ public interface AccountService {
     List<OrderConutVO> getAllCount();
 
     EmpInfoVO searchByEmpdIdOrEmpName(String search);
+
+    List<EarnAccount> earnAccount() ;
+
+    List<EarnAccount> earnMonthAccount();
 }

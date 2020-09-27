@@ -27,6 +27,8 @@ spring:
       pool-prepared-statements: true
       max-open-prepared-statements: 50
       max-pool-prepared-statement-per-connection-size: 20
+  jackson:
+    time-zone: GMT+8
 
 #
 #spring:

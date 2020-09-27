@@ -210,6 +210,7 @@
     select
     <include refid="Base_Column_List"/>
     from emp_info
+    where emp_type != 4
     order by id desc
   </select>
 
@@ -242,4 +243,18 @@
     from emp_info
     where  emp_name = #{search,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByLoginNameAndPwd" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from emp_info
+    where  emp_id = #{emp_id,jdbcType=VARCHAR} and emp_pwd = #{emp_pwd,jdbcType=VARCHAR}
+  </select>
+
+  <update id="changelock" parameterType="com.jwz.salesteam.entity.EmpInfo" >
+   update emp_info
+    set  is_lock = #{is_lock,jdbcType=INTEGER}
+
+     where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

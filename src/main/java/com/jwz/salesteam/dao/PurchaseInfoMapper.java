@@ -35,4 +35,8 @@ public interface PurchaseInfoMapper {
     PurchaseInfo selectByPurchaseId(String purchase_id);
 
     int updateAccountEmpId(String purchase_id,String account_emp_id);
+
+
+
+    PurchaseInfo findByOrderIdAndGoodsId(String order_id, String goods_id);
 }

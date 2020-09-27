@@ -36,18 +36,18 @@ public class saleSteamWebMvcConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(adminLoginInterceptor)
-//                .addPathPatterns("/admin/**")
-//                .excludePathPatterns("/admin/login");
-//        registry.addInterceptor(salemanLoginInterceptor)
-//                .addPathPatterns("/saleman/**")
-//                .excludePathPatterns("/login");
-//        registry.addInterceptor(merchandiserLoginInterceptor)
-//                .addPathPatterns("/merchandiser/**")
-//                .excludePathPatterns("/login");
-//        registry.addInterceptor(accountLoginInterceptor)
-//                .addPathPatterns("/account/**")
-//                .excludePathPatterns("/login");
+        registry.addInterceptor(adminLoginInterceptor)
+                .addPathPatterns("/admin/**")
+                .excludePathPatterns("/admin/login");
+        registry.addInterceptor(salemanLoginInterceptor)
+                .addPathPatterns("/salesman/**")
+                .excludePathPatterns("/login");
+        registry.addInterceptor(merchandiserLoginInterceptor)
+                .addPathPatterns("/merchandiser/**")
+                .excludePathPatterns("/login");
+        registry.addInterceptor(accountLoginInterceptor)
+                .addPathPatterns("/account/**")
+                .excludePathPatterns("/login");
 
     }
 

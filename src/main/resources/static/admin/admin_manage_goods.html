@@ -19,15 +19,7 @@
   <link rel="stylesheet" href="../css/product.css">
   <link rel="stylesheet" href="../css/prolist.css">
 </head>
-<script type="text/css">
 
-            </script>
-<style>
-  .div1 {
-    background: rgb(38, 202, 231);
-    color: rgb(252, 247, 247);
-  }
-</style>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
   <header class="app-header navbar">
@@ -40,7 +32,7 @@
     </button>
     <div class="btn-group" role="group" aria-label="Button group">
       <span class="btn"> 欢迎回来，尊敬的管理员！</span>
-      <a class="btn" href="/api/emp/logout">
+      <a class="btn" href="/admin/logout">
         <i class="fa fa-share" aria-hidden="true"></i>退出</a>
     </div>
   
@@ -53,48 +45,58 @@
       <nav class="sidebar-nav ps ps--active-y">
         <ul class="nav">
           <br>
-          <br>
-
           <li class="nav-item nav-dropdown ">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-puzzle"></i> 职员管理</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./admin_add_member">
+                <a class="nav-link" href="/admin/admin_add_member">
                   <i class="nav-icon icon-puzzle"></i>添加人员</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_members">
+                <a class="nav-link" href="/admin/admin_manage_members">
                   <i class="nav-icon icon-puzzle"></i>管理人员</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_user">
+                <a class="nav-link" href="/admin/admin_manage_user">
                   <i class="nav-icon icon-puzzle"></i>管理客户</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-cursor"></i> 商品管理</a>
             <ul class="nav-dropdown-items">
 
               <li class="nav-item">
-                <a class="nav-link" href="./admin_add_goods">
+                <a class="nav-link" href="/admin/admin_add_goods">
                   <i class="nav-icon icon-cursor"></i> 发布商品</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_goods">
+                <a class="nav-link" href="/admin/admin_manage_goods">
                   <i class="nav-icon icon-cursor"></i> 编辑商品</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_show_goods">
+                <a class="nav-link" href="/admin/admin_show_goods">
                   <i class="nav-icon icon-cursor"></i> 商品展示</a>
               </li>
             </ul>
           </li>
-          <br>
+          <br><br>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-layers"></i>供应商管理</a>
+            <ul class="nav-dropdown-items">
 
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/admin_addeidt_provider">
+                  <i class="nav-icon icon-layers"></i>管理供应商</a>
+              </li>
+
+            </ul>
+          </li>
+          <br>
         </ul>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
           <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
@@ -295,48 +297,48 @@
               <div class="card-body">
                 <form class="needs-validation" novalidate>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">商品编号</label>
+                    <label class="col-md-3 col-form-label" for="id">商品编号</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品编号"
+                      <input class="form-control" id="id" type="text" name="id" placeholder="商品编号"
                         v-model="edititems.id" pattern="^[0-9]+$" disabled="disabled" required>
 
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">创建时间</label>
+                    <label class="col-md-3 col-form-label" for="createTime1">创建时间</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="创建时间"
+                      <input class="form-control" id="createTime1" type="text" name="createTime1" placeholder="创建时间"
                         v-model="edititems.createTime1" required disabled="disabled">
 
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">商品名字</label>
+                    <label class="col-md-3 col-form-label" for="goodsName">商品名字</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品名字"
+                      <input class="form-control" id="goodsName" type="text" name="goodsName" placeholder="商品名字"
                         v-model="edititems.goodsName" 
                         required>
 
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">商品零售价</label>
+                    <label class="col-md-3 col-form-label" for="goodsSellingPrice">商品零售价</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品零售价"
+                      <input class="form-control" id="goodsSellingPrice" type="text" name="goodsSellingPrice" placeholder="商品零售价"
                         v-model="edititems.goodsSellingPrice" pattern="^[0-9]+$" required>
 
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">商品成本价</label>
+                    <label class="col-md-3 col-form-label" for="goodsCostPrice">商品成本价</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品成本价"
+                      <input class="form-control" id="goodsCostPricet" type="text" name="goodsCostPrice" placeholder="商品成本价"
                         v-model="edititems.goodsCostPrice" required>
 
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">商品图片</label>
+                    <label class="col-md-3 col-form-label" for="goodsCoverImg">商品图片</label>
                     <div class="col-md-9">
                       <img src="null" class="normalFace" id="avarimgs1"
                       v-bind:src="edititems.goodsCoverImg"
@@ -347,15 +349,15 @@
                   </div>
                   </div>     
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">商品信息描述</label>
+                    <label class="col-md-3 col-form-label" for="goodsDetailContent">商品信息描述</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input" type="text" name="text-input" placeholder="商品信息描述"
+                      <input class="form-control" id="goodsDetailContent" type="text" name="goodsDetailContent" placeholder="商品信息描述"
                         v-model="edititems.goodsDetailContent" required>
 
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">商品信息简介</label>
+                    <label class="col-md-3 col-form-label" for="goodsIntro">商品信息简介</label>
                     <div class="col-md-9">
                       <textarea id="description" class="form-control" rows="3" name="description" placeholder="商品信息简介"  v-model="edititems.goodsIntro"></textarea>
                     </div>

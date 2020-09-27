@@ -19,15 +19,7 @@
   <link rel="stylesheet" href="../css/product.css">
   <link rel="stylesheet" href="../css/productlist.css">
 </head>
-<script type="text/css">
 
-            </script>
-<style>
-  .div1 {
-    background: rgb(38, 202, 231);
-    color: rgb(252, 247, 247);
-  }
-</style>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
   <header class="app-header navbar">
@@ -40,7 +32,7 @@
     </button>
     <div class="btn-group" role="group" aria-label="Button group">
       <span class="btn"> 欢迎回来，尊敬的管理员！</span>
-      <a class="btn" href="/api/emp/logout">
+      <a class="btn" href="/admin/logout">
         <i class="fa fa-share" aria-hidden="true"></i>退出</a>
     </div>
 
@@ -53,48 +45,58 @@
       <nav class="sidebar-nav ps ps--active-y">
         <ul class="nav">
           <br>
-          <br>
-
           <li class="nav-item nav-dropdown ">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-puzzle"></i> 职员管理</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./admin_add_member">
+                <a class="nav-link" href="/admin/admin_add_member">
                   <i class="nav-icon icon-puzzle"></i>添加人员</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_members">
+                <a class="nav-link" href="/admin/admin_manage_members">
                   <i class="nav-icon icon-puzzle"></i>管理人员</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_user">
+                <a class="nav-link" href="/admin/admin_manage_user">
                   <i class="nav-icon icon-puzzle"></i>管理客户</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-cursor"></i> 商品管理</a>
             <ul class="nav-dropdown-items">
 
               <li class="nav-item">
-                <a class="nav-link" href="./admin_add_goods">
+                <a class="nav-link" href="/admin/admin_add_goods">
                   <i class="nav-icon icon-cursor"></i> 发布商品</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_manage_goods">
+                <a class="nav-link" href="/admin/admin_manage_goods">
                   <i class="nav-icon icon-cursor"></i> 编辑商品</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./admin_show_goods">
+                <a class="nav-link" href="/admin/admin_show_goods">
                   <i class="nav-icon icon-cursor"></i> 商品展示</a>
               </li>
             </ul>
           </li>
-          <br>
+          <br><br>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon icon-layers"></i>供应商管理</a>
+            <ul class="nav-dropdown-items">
 
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/admin_addeidt_provider">
+                  <i class="nav-icon icon-layers"></i>管理供应商</a>
+              </li>
+
+            </ul>
+          </li>
+          <br>
         </ul>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
           <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>

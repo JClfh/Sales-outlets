@@ -79,4 +79,11 @@ public class NumberUtil {
         StringBuffer buffer = new StringBuffer(String.valueOf(System.currentTimeMillis()));
         return buffer.toString();
     }
+
+    public static String genSupplierId() {
+        StringBuffer buffer = new StringBuffer(String.valueOf(System.currentTimeMillis()));
+        int num = genRandomNum(6);
+        buffer.append(num);
+        return buffer.toString();
+    }
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -17,10 +17,10 @@
   <link href="../vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
   <link href="../css/style.css" rel="stylesheet">
   <link href="../vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+  <script src="../vendors/echarts/dist/echarts.min.js" ></script>
 </head>
-<script type="text/css">
+<script type="text/css"></script>
 
-            </script>
 <style>
   .div1 {
     background: rgb(38, 202, 231);
@@ -39,7 +39,7 @@
     </button>
     <div class="btn-group" role="group" aria-label="Button group">
       <p class="btn"> 你好，无敌的 销售员！</p>
-      <a class="btn" href="/logout">
+      <a class="btn" href="/api/emp/logout">
         <i class="fa fa-share" aria-hidden="true"></i> &nbsp;退出</a>
     </div>
 
@@ -50,17 +50,16 @@
       <nav class="sidebar-nav ps ps--active-y">
         <ul class="nav">
           <br>
-
           <li class="nav-item nav-dropdown ">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-puzzle"></i> 客户信息</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_add_user.html">
+                <a class="nav-link" href="/salesman/salesman_add_user">
                   <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加客户</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_manage_user.html">
+                <a class="nav-link" href="/salesman/salesman_manage_user">
                   <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;查看客户</a>
               </li>
             </ul>
@@ -72,11 +71,11 @@
             <ul class="nav-dropdown-items">
 
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_show_goods.html">
+                <a class="nav-link" href="/salesman/salesman_show_goods">
                   <i class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp;商品展示</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_manage_order.html">
+                <a class="nav-link" href="/salesman/salesman_manage_order">
                   <i class="icon-speech"></i>&nbsp;订单管理</a>
               </li>
             </ul>
@@ -87,11 +86,11 @@
               <i class="nav-icon icon-cursor"></i>个人中心</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_security.html">
+                <a class="nav-link" href="/salesman/salesman_security">
                   <i class="icons cui-shield"></i> &nbsp;账号安全</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_personal_information.html">
+                <a class="nav-link" href="/salesman/salesman_personal_information">
                   <i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp;个人信息</a>
               </li>
 
@@ -114,13 +113,13 @@
         <li class="breadcrumb-item">你的位置：个人中心->个人信息</li>
       </ol>
 
-      <div align="center" id="itemsTemplate">
+      <div align="center">
         <div class="col-sm-12 col-md-10" align="center">
 
           <div class="card border-primary" align="center">
 
             <div class="card-body">
-              <div class="card" id="listTable">
+              <div class="card" id="itemsTemplate">
 
                 <div class="card-header" align="center">
                   <h2><i class="fa fa-bar-chart" aria-hidden="true"></i>个人信息</h2>
@@ -134,14 +133,12 @@
                       <div class="card-body collapse show" id="collapseExample">
                         <table class="table table-responsive-sm table-bordered">
 
-                          <tbody id="trlist" align="center" v-for="(item, index) in items">
+                          <tbody id="trlist" align="center" >
                             <tr>
                               <td>姓名</td>
                               <td>
                                 <div class="col-md-9">
-                                  <input class="form-control" id="text-input" type="text" name="text-input"
-                                    v-model="item.empName" placeholder="姓名">
-                               
+                                    <p class="col-form-label">{{items.empName}}</p>
                                 </div>
                               </td>
                             </tr>
@@ -149,26 +146,28 @@
                               <td>完成订单数</td>
                               <td>
                                 <div class="col-md-9">
-                                  <input class="form-control" id="text-input" type="text" name="text-input"
-                                    v-model="item.empCount" placeholder="完成订单数" required>
-                               
+                                    <p class="col-form-label">{{empCountAll}}</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
+
+                      </div>
+
+                    </div>
+
+
                   </form>
                 </div>
               </div>
+              <div id="main" style="width: 500px;height:300px;"></div>
             </div>
           </div>
-
         </div>
-
       </div>
     </main>
   </div>
-
   <script src="../vendors/jquery/js/jquery.min.js"></script>
   <script src="../vendors/popper.js/js/popper.min.js"></script>
   <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
@@ -195,16 +194,70 @@
         code: 200,
         msg: "Success"
       });
-      $.getJSON("http://127.0.0.1:5500/users", function (response) {
+      $.getJSON("/api/emp/personSaleman", function (response) {
         items = response.data;
+        var empCountAll = 0;
+        var datamonth=[];
+         var dataempCount=[];
+        for(var i = 0; i < items.length; i++){
+          empCountAll+=items[i].empCount;
+          datamonth[i]=items[i].month;
+          dataempCount[i]=items[i].empCount;
+        }
+        var myChart = echarts.init(document.getElementById('main'));
+ 
+        // 指定图表的配置项和数据
+        var  option = {
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['业绩']
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: datamonth
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            name: '业绩统计',
+
+                        }
+                    ],
+                    series: [
+                         
+                        {
+                            name:'业绩',
+                            type:'bar',
+                            itemStyle : {  /*设置折线颜色*/
+                                normal : {
+                                    color:'#3299CC'
+                                }
+                            },
+                            data:dataempCount
+                        },
+                        {
+                            name:'折线',
+                            type:'line',
+                            data:dataempCount
+                        }
+                    ]
+            };
+ 
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
         app = new Vue({
           el: '#itemsTemplate',
           data: {
             items: items,
-       
+            empCountAll: empCountAll
+           
           },
           methods: {
-  
+
 
           }
 
@@ -216,6 +269,7 @@
 
 
   </script>
+
 </body>
 
 </html>

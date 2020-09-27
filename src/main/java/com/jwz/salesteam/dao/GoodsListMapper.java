@@ -2,6 +2,8 @@ package com.jwz.salesteam.dao;
 
 import com.jwz.salesteam.entity.GoodsList;
 
+import java.util.List;
+
 public interface GoodsListMapper {
 
 
@@ -18,4 +20,8 @@ public interface GoodsListMapper {
     int updateByPrimaryKey(GoodsList record);
 
     Integer selectByGoodsIdAndOrderId(String goods_id, String order_id);
+
+    Integer sumCountPriceByOrderId(String order_id);
+
+    List<GoodsList> selectByGoodsOrderId(String order_id);
 }

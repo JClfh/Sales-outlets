@@ -16,11 +16,13 @@ public enum ServiceResultEnum {
 
     SAME_EMPINFO_EXIST("该职员已经存在"),
 
+    SAME_SUPPLIERINFO_EXIST("该供应商已存在"),
+
     SAME_USERINFO_EXIST("该客户已经存在"),
 
     SAME_GOODSINFO_EXIST("该商品已经存在"),
 
-    LOGIN_EMP_LOCKED("职工登录错误"),
+    LOGIN_EMP_LOCKED("该用户被锁"),
 
     LOGIN_ERROR("登录失败"),
 

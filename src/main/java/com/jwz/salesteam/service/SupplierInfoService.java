@@ -13,4 +13,16 @@ import java.util.List;
  */
 public interface SupplierInfoService {
     List<SupplierInfo> getSupplierInfoList();
+
+    String saveSupplierInfo(SupplierInfo supplierInfo);
+
+    String updateSupplierInfo(SupplierInfo supplierInfo);
+
+    int delSupplierInfo(Integer id);
+
+    List<SupplierInfo> findBySupplierName(String supplier_name);
+
+    List<SupplierInfo> getSupplierInfoList2();
+
+    String changeSupplierlock(Integer id, Integer is_del);
 }

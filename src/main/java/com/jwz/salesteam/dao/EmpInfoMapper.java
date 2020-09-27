@@ -36,4 +36,9 @@ public interface EmpInfoMapper {
     int updateEmpPwdByPrimaryKey(String emp_pwd, Integer id);
 
     EmpInfo selectByEmpName(String search);
+
+    EmpInfo selectByLoginNameAndPwd(String emp_id, String emp_pwd);
+
+    int changelock(Integer id,Integer is_lock);
+
 }

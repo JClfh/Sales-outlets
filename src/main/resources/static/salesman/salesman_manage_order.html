@@ -39,68 +39,61 @@
     </button>
     <div class="btn-group" role="group" aria-label="Button group">
       <p class="btn"> 你好，无敌的 销售员！</p>
-      <a class="btn" href="/logout">
+      <a class="btn" href="/api/emp/logout">
         <i class="fa fa-share" aria-hidden="true"></i> &nbsp;退出</a>
     </div>
-
-
   </header>
+
   <div class="app-body">
-
-
     <div class="sidebar">
       <nav class="sidebar-nav ps ps--active-y">
         <ul class="nav">
           <br>
-          <br>
-
           <li class="nav-item nav-dropdown ">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-puzzle"></i> 客户信息</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_add_user.html">
+                <a class="nav-link" href="/salesman/salesman_add_user">
                   <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加客户</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_manage_user.html">
+                <a class="nav-link" href="/salesman/salesman_manage_user">
                   <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;查看客户</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-star"></i>商城</a>
             <ul class="nav-dropdown-items">
-
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_show_goods.html">
+                <a class="nav-link" href="/salesman/salesman_show_goods">
                   <i class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp;商品展示</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_manage_order.html">
+                <a class="nav-link" href="/salesman/salesman_manage_order">
                   <i class="icon-speech"></i>&nbsp;订单管理</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-cursor"></i>个人中心</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_security.html">
+                <a class="nav-link" href="/salesman/salesman_security">
                   <i class="icons cui-shield"></i> &nbsp;账号安全</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_personal_information.html">
+                <a class="nav-link" href="/salesman/salesman_personal_information">
                   <i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp;个人信息</a>
               </li>
 
             </ul>
           </li>
-
         </ul>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
           <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
@@ -121,6 +114,7 @@
 
         </li>
       </ol>
+
       <div id="itemsTemplate">
         <div align="center">
           <div class="center-in-center" style="width:95%;">
@@ -140,35 +134,37 @@
                 <table class="table table-responsive-sm table-bordered">
                   <thead>
                     <tr align="center">
-                      <th width="125p">订单编号</th>
-                      <th width="125p">商品名称</th>
-                      <th width="125p">商品总价</th>
-                      <th width="125p">实际收款</th>
-                      <th width="125p">下单时间</th>
-                      <th width="125p">状态</th>
-                      <th width="125p">操作</th>
+                      <th class="text-center" scope="col">订单编号</th>
+                      <th class="text-center" scope="col">商品名称</th>
+                      <th class="text-center" scope="col">商品总价</th>
+                      <th class="text-center" scope="col">实际收款</th>
+                      <th class="text-center" scope="col">下单时间</th>
+                      <th class="text-center" scope="col">状态</th>
+                      <th class="text-center" scope="col">操作</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
 
-                      <td align="center">{{item.orderId}}</td>
-                      <td align="center">{{item.goodsName}}</td>
-                      <td align="center">{{item.allPrice}}</td>
-                      <td align="center">{{item.takeInPrice}}</td>
-                      <td align="center">{{item.createTime}}</td>
-                      <td align="center">
-                        <span class="" v-if="item.status  === 0">已下单</span>
-                        <span class="" v-if="item.status  === 1">审核中</span>
-                        <span class="" v-if="item.status  === 2">采购中</span>
-                        <span class="" v-if="item.status  === 3">配送中</span>
-                        <span class="" v-if="item.status  === 4">已完成</span>
+                      <td align="center" style=" vertical-align:middle">{{item.orderId}}</td>
+                      <td align="center" style=" vertical-align:middle"><pre>{{item.goodsName}}</pre></td>
+                      <td align="center" style=" vertical-align:middle">{{item.goodsAllPrice}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.takeInPrice}}</td>
+                      <td align="center" style=" vertical-align:middle">{{item.createTime}}</td>
+                      <td align="center" style=" vertical-align:middle">
+                        <span class="badge badge-secondary" v-if="item.status  === 0">已下单</span>
+                        <span class="badge badge-danger" v-if="item.status  === 1">审核中</span>
+                        <span class="badge badge-warning" v-if="item.status  === 2">采购中</span>
+                        <span class="badge badge-info" v-if="item.status  === 3">配送中</span>
+                        <span class="badge badge-primary" v-if="item.status  === 4">已到货</span>
+                        <span class="badge badge-success" v-if="item.status  === 5">已完成</span>
+
                       </td>
-                      <td align="center"> <button class="btn btn-primary" type="button" data-toggle="modal"
+                      <td align="center" style=" vertical-align:middle"> <button class="btn btn-primary" type="button" data-toggle="modal"
                           v-on:click="Orderdetail(index)">
                           <i class="fa fa-file-text-o"></i>订单详情</button>&nbsp;
 
-                        <button class="btn btn-success" type="button" data-toggle="modal" v-on:click="FOrder()">
+                        <button class="btn btn-success" type="button" v-if="item.status  === 4" data-toggle="modal" v-on:click="FOrder(index)">
                           <i class="fa fa-check-square-o"></i>完成订单</button>&nbsp;
 
                       </td>
@@ -216,29 +212,29 @@
             </div>
           </div>
         </div>
-        <!-- /删除-->
-        <div class="modal fade" id="dangerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <!-- 完成订单-->
+        <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-danger" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title">删除</h4>
+                <h4 class="modal-title">完成订单</h4>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
               <div class="modal-body">
-                <p>是否执行删除操作</p>
+                <p>是否完成订单！完成后不可修改</p>
               </div>
               <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">否</button>
-                <button class="btn btn-danger" type="button" v-on:click="delCheck()">确定</button>
+                <button class="btn btn-danger" type="button" v-on:click="FinishOrder()">确定</button>
               </div>
             </div>
           </div>
         </div>
         <!-- /成功-->
-        <div class="modal fade" id="ordersuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal fade" id="finishSuccessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-success" role="document">
             <div class="modal-content">
@@ -260,7 +256,7 @@
         </div>
 
         <!-- 失败-->
-        <div class="modal fade show" id="editFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal fade show" id="finishFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           style="display: none;" aria-hidden="true">
           <div class="modal-dialog modal-danger" role="document">
             <div class="modal-content">
@@ -344,7 +340,7 @@
         code: 200,
         msg: "Success"
       });
-      $.getJSON("http://127.0.0.1:5500/users", function (response) {
+      $.getJSON("/orders/saleList", function (response) {
         items = response.data;
         console.log(items)
         page = Math.ceil(items.length / 5);
@@ -365,7 +361,8 @@
             pagesize: 5, //页面数据个数
             pageitem: pageitem,
             editIndex: -1,
-  
+            edititems:{
+              orderId:null}
 
           },
           computed: {
@@ -387,17 +384,42 @@
             },
             // 订单详情
             Orderdetail: function (index) {
-              alert("订单详情")
-              window.location.href="./salesman_details_order.html";
-              d = index;
-        
+
+              window.location.href="/salesman/salesman_details_order.html?order_id="+this.items[index].orderId;
             },
             //完成订单
-            FOrder: function () {
-              alert("完成订单")
-              $('#ordersuccess').modal('show');
+            FOrder: function (index) {
+              this.editIndex = index;
+              this.edititems = JSON.parse(JSON.stringify(this.items[index]));
+              $('#finishModal').modal('show');
             },
-      
+            FinishOrder: function () {
+              $.ajax({
+                url: "/orders/ordersState",
+                type: "post",
+                //将/jsON转化为字符串传递
+                dataType: 'json',
+                data:{ "order_id": app.edititems.orderId,"status":5},
+
+                //成功后的方法
+                success: function (res) {
+                  if(res.resultCode === 500){
+                    $('#finishModal').modal('hide');
+                    $('#finishFailModal').modal('show');
+                  }else{
+                    $('#finishModal').modal('hide');
+                    $('#finishSuccessModal').modal('show');
+                    app.edititems.status = 5;
+                    Vue.set(app.edititems, app.editIndex, app.edititems);
+                  }
+
+                },
+                error: function (xhr, status, error) {
+                  $('#finishModal').modal('hide');
+                  $('#issue').modal('show');
+                }
+              });
+            },
             //页数
             switch: function (x) {
               $('.pagination li').removeClass('active');

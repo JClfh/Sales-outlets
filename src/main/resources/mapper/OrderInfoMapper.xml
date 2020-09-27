@@ -173,13 +173,14 @@
     <include refid="Base_Column_List"/>
     from order_info
     where emp_id = #{emp_id,jdbcType=VARCHAR}
+    order by status asc,create_time asc
   </select>
   <select id="personalCountByEmpId"  resultType="java.util.HashMap">
         select left(create_time,7) as 'month' ,count(*) as 'empCount'
         from order_info
         where DATE_FORMAT(create_time,'%Y-%m')>
         DATE_FORMAT(date_sub(curdate(), interval 12 month),'%Y-%m') and emp_id = #{emp_id,jdbcType=VARCHAR}
-        group by month desc;
+        order by month desc;
   </select>
 
 
@@ -203,6 +204,29 @@
 
   <select id="findOrderStatusByOrderId"   resultType="java.lang.Integer">
        select status
+       from order_info
+       where order_id = #{order_id,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="findOrdersEarnList" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List"/>
+    from order_info
+    where DATE_SUB(CURDATE(), INTERVAL 7 DAY) <![CDATA[ <= ]]> create_time order by create_time asc;
+  </select>
+
+  <select id="findOrdersMonthEarnList" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List"/>
+    from order_info
+    where DATE_FORMAT(create_time,'%Y-%m')>
+    DATE_FORMAT(date_sub(curdate(), interval 12 month),'%Y-%m') order by create_time asc;
+  </select>
+
+  <select id="selectByOrderId"  resultMap="BaseResultMap" >
+       select
+       <include refid="Base_Column_List"/>
        from order_info
        where order_id = #{order_id,jdbcType=VARCHAR}
   </select>

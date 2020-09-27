@@ -120,5 +120,42 @@
     <include refid="Base_Column_List"/>
     from supplier_info
     where is_del = 0
+    order by id desc
+  </select>
+
+
+  <select id="findSupplierInfoList2" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from supplier_info
+    order by id desc
+  </select>
+
+  <select id="selectByName" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from supplier_info
+    where supplier_name = #{supplier_name,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findBySupplierName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from supplier_info
+    where  supplier_name LIKE CONCAT(CONCAT('%', #{supplier_name}), '%')
+    order by id desc
+  </select>
+
+  <update id="changelock" parameterType="com.jwz.salesteam.entity.SupplierInfo" >
+   update supplier_info
+    set  is_del= #{is_del,jdbcType=INTEGER}
+     where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByNameAndId" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List"/>
+    from supplier_info
+    where  supplier_name = #{supplier_name,jdbcType=VARCHAR}  and id != #{id,jdbcType=INTEGER} limit 1
   </select>
 </mapper>

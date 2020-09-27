@@ -1,5 +1,6 @@
 package com.jwz.salesteam.dao;
 
+import com.jwz.salesteam.controller.common.EarnAccount;
 import com.jwz.salesteam.entity.EmpInfo;
 import com.jwz.salesteam.entity.GoodsInfo;
 import com.jwz.salesteam.entity.OrderInfo;
@@ -24,7 +25,7 @@ public interface OrderInfoMapper {
 
     int updateOrdersState(String order_id, Integer status);
 
-    int updateFinishTime(String order_id, Date date);
+    int updateFinishTime(String order_id, Date finishTime);
 
     List<OrderInfo> findOrdersInfoList();
 
@@ -40,4 +41,10 @@ public interface OrderInfoMapper {
     List<String> findFinishOrdersIdList();
 
     Integer findOrderStatusByOrderId(String order_id);
+
+    List<OrderInfo> findOrdersEarnList();
+
+    List<OrderInfo> findOrdersMonthEarnList();
+
+    OrderInfo selectByOrderId(String order_id);
 }

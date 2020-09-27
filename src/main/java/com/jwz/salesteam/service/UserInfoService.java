@@ -28,5 +28,7 @@ public interface UserInfoService {
 
     String saveUserInfo(UserInfo userInfo);
 
+    List<UserInfoVO> selectByFirstEmpId(Integer empId);
 
+    List<UserInfoVO> findByUserTelOrUserName(String search);
 }

@@ -97,7 +97,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <p>登录失败</p>
+              <p id="msg">登录失败</p>
             </div>
             <div class="modal-footer">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">关闭</button>
@@ -153,13 +153,14 @@
                   success: function (result) {
                     if (result.resultCode == 200) {
                       if(result.data === 0){
-                        window.location.href = '/index';
+                        window.location.href = '/salesman/salesman_add_user';
                       }else if(result.data === 1){
                         window.location.href = '/merchandiser/merchandiser_orders_list';
                       }else if(result.data === 2){
                         window.location.href = '/account/account_orders_check';
                       }
                     } else {
+                      $("#msg").html("编辑失败,原因是："+result.message);
                       $('#FailModal').modal('show');
                     }
                     ;

@@ -55,13 +55,13 @@
               <i class="nav-icon icon-puzzle"></i> 跟单员</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./merchandiser_orders_list.html">
+                <a class="nav-link" href="/merchandiser/merchandiser_orders_list">
                   <i class="nav-icon icon-puzzle"></i>订单管理</a>
               </li>
             </ul>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./merchandiser_orders_history.html">
+                <a class="nav-link" href="/merchandiser/merchandiser_orders_history">
                   <i class="nav-icon icon-puzzle"></i>历史订单</a>
               </li>
             </ul>
@@ -72,7 +72,7 @@
               <i class="nav-icon icon-cursor"></i>个人中心</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./merchandiser_security.html">
+                <a class="nav-link" href="/merchandiser/merchandiser_security">
                   <i class="icons cui-shield"></i> &nbsp;账号安全</a>
               </li>
             </ul>
@@ -141,7 +141,7 @@
                             <td>新密码</td>
                             <td>
                               <div class="col-md-9">
-                                <input class="form-control" id="pwd1" type="password" name="text-input" placeholder="新密码"
+                                <input class="form-control" id="pwd1" type="password" name="pwd1" placeholder="新密码"
                                        pattern="^.{6,20}$" required>
                                 <div class="invalid-feedback">
                                   密码个数6-20位！
@@ -153,7 +153,7 @@
                             <td>再次确认密码</td>
                             <td>
                               <div class="col-md-9">
-                                <input class="form-control" id="pwd2" type="password" name="text-input"
+                                <input class="form-control" id="pwd2" type="password" name="pwd2"
                                        v-model="edititems.empnewPwd" placeholder="再次确认密码" required>
                                 <div class="invalid-feedback" >
                                   不能为空！

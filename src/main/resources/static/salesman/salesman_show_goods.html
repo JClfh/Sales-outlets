@@ -17,18 +17,75 @@
   <link href="../vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
   <link href="../css/style.css" rel="stylesheet">
   <link href="../vendors/pace-progress/css/pace.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../css/product.css">
-  <link rel="stylesheet" href="../css/productlist.css">
-</head>
-<script type="text/css">
 
-            </script>
-<style>
-  .div1 {
-    background: rgb(38, 202, 231);
-    color: rgb(252, 247, 247);
-  }
-</style>
+  <style>
+    /*悬浮*/
+    .sale:hover {
+
+      transform: scale(1.001, 1.001);
+      cursor: pointer;
+    }
+
+    .sale a {
+      color: black;
+      text-decoration: none;
+      /*去除下划线*/
+    }
+
+    .price {
+      color: red;
+      font-weight: bold;
+      font-size: 20px;
+      position: relative;
+      text-align: center;
+    }
+
+    h3 {
+      text-align: center;
+      position: relative;
+    }
+
+  </style>
+  <style type="text/css">
+    .col-xs-1-5,
+    .col-sm-1-5,
+    .col-md-1-5,
+    .col-lg-1-5 {
+      position: relative;
+      min-height: 1px;
+      padding-right: 10px;
+      padding-left: 10px;
+    }
+
+    .col-xs-1-5 {
+      width: 20%;
+      float: left;
+    }
+
+    @media (min-width: 768px) {
+      .col-sm-1-5 {
+        width: 20%;
+        float: left;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .col-md-1-5 {
+        width: 20%;
+        float: left;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .col-lg-1-5 {
+        width: 20%;
+        float: left;
+      }
+    }
+  </style>
+</head>
+
+
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
   <header class="app-header navbar">
@@ -41,62 +98,56 @@
     </button>
     <div class="btn-group" role="group" aria-label="Button group">
       <p class="btn"> 你好，无敌的 销售员！</p>
-      <a class="btn" href="/logout">
+      <a class="btn" href="/api/emp/logout">
         <i class="fa fa-share" aria-hidden="true"></i> &nbsp;退出</a>
     </div>
 
-
   </header>
   <div class="app-body">
-
-
     <div class="sidebar">
       <nav class="sidebar-nav ps ps--active-y">
         <ul class="nav">
           <br>
-          <br>
-
           <li class="nav-item nav-dropdown ">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-puzzle"></i> 客户信息</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_add_user.html">
+                <a class="nav-link" href="/salesman/salesman_add_user">
                   <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加客户</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_manage_user.html">
+                <a class="nav-link" href="/salesman/salesman_manage_user">
                   <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;查看客户</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-star"></i>商城</a>
             <ul class="nav-dropdown-items">
-
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_show_goods.html">
+                <a class="nav-link" href="/salesman/salesman_show_goods">
                   <i class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp;商品展示</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_manage_order.html">
+                <a class="nav-link" href="/salesman/salesman_manage_order">
                   <i class="icon-speech"></i>&nbsp;订单管理</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-cursor"></i>个人中心</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_security.html">
+                <a class="nav-link" href="/salesman/salesman_security">
                   <i class="icons cui-shield"></i> &nbsp;账号安全</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_personal_information.html">
+                <a class="nav-link" href="/salesman/salesman_personal_information">
                   <i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp;个人信息</a>
               </li>
 
@@ -113,87 +164,54 @@
       </nav>
       <button class="sidebar-minimizer brand-minimizer" type="button"></button>
     </div>
-    <!-- --------------------------------这里有没有问题----------------------------- -->
-    <main class="main" id="itemsTemplate">
-      <!-- --------------------------------这里有没有问题----------------------------- -->
+    <main class="main">
       <!-- Breadcrumb-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item">你的位置：商城->商品展示</li>
+        <li class="breadcrumb-item" style="margin-top: 8px;">你的位置：商城->商品展示</li>
         <li class="nav-item dropdown ml-auto ">
-          <div class="input-group">
-            <input class="form-control" size="20" type="text">
-            <span class="input-group-append">
-              <button class="btn btn-secondary" type="button" v-on:click="cha()" data-toggle="modal"> 
-                <i class="fa fa-search fa-3x"></i></button>
-            </span>
+          <div class="controls">
+            <div class="input-group">
+              <input class="form-control" id="appendedInputButton" size="16" type="text">
+              <span class="input-group-append">
+                <button class="btn btn-secondary" type="button"> <i class="fa fa-search"
+                    aria-hidden="true"></i></button>
+              </span>
+            </div>
           </div>
         </li>
         <ul class="nav navbar-nav ml-auto">
           <li class="nav-item dropdown">
             <a class="nav-link" href="./salesman_shop_cart.html">
-              <i class="fa fa-shopping-cart fa-3x" aria-hidden="true"></i>
-              <span class="badge badge-pill badge-danger">0</span>
+              <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+              <span class="badge badge-pill badge-danger" id="goodsNum">0</span>
             </a>
           </li>
 
         </ul>
 
       </ol>
-      <div>
+      <div id="itemsTemplate">
+        <div class="container-fluid">
+          <div class="animated fadeIn">
+            <div class="row" v-for="(item,index) in items" v-if="index % 4 == 0">
 
-        <div class="center-in-center" style="width:100%;">
-          <div class="">
-            <div class="current">
-              <div class="sale" v-for="(item, index) in items" v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
-                <a href="./salesman_details_goods.html">
-                  <img src="D:\idea_ws\Sales\CoreUI\images\手机.jpg">
-                  <h3>小米手机128G+8G运行内存{{item.goodsName}}</h3>
-                  <div class="introduce">晓龙8555555，无敌后置色相头{{item.goodsDetailContent}}</div><br>
-                  <div class="price">8555元{{item.goodsSellingPrice}}</div>
+              <div class="col-sm-6 col-lg-3" v-for="i in 4" v-if="items[i-1+index] != null">
+                <div class="sale">
+                  <div class="card" style="width: 19rem;">
+                    <a :href="'./salesman_details_goods.html?goodsId='+items[i-1+index].goodsId+''">
+                      <img  v-bind:src="items[i-1+index].goodsCoverImg" class="card-img-top" height="270" width="250">
+                      <div class="card-body">
+                        <h3 class="card-title">{{items[i-1+index].goodsName}}</h3>
+                        <p class="card-text" style="font-family:微软雅黑 ;color: rgb(165, 154, 154);">{{items[i-1+index].goodsIntro}}</p>
+                        <div class="price">{{items[i-1+index].goodsSellingPrice}}</div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
               </div>
-
-
             </div>
-            <!-- <ul class="pagination" id="pagelist">
-              <li class="page-item">
-                <a class="page-link" href="javascript:void(0);" onclick="app.first()">首页</a>
-              </li>
-
-              <li class="page-item">
-                <a class="page-link" href="javascript:void(0);" onclick="app.last()">上一页</a>
-              </li>
-              <li class="page-item" v-for="pageitem in pagesum">
-                <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
-              </li>
-
-              <li class="page-item" v-for="pageitem in pageitem" v-if="pageindex>=4 && pageindex<=pagesum-3"
-                v-show="pageitem>pageindex-3 && pageitem<pageindex+3 && pageindex>=4 && pageindex<=pagesum-3">
-                <a class="page-link" href="javascript:void(0);" onclick="app.switch(this)">{{pageitem}}</a>
-              </li>
-
-              <li class="page-item">
-                <a class="page-link" href="javascript:void(0);" onclick="app.Next()">下一页</a>
-              </li>
-
-              <li class="page-item">
-                <a class="page-link" href="javascript:void(0);" onclick="app.lastone()">末页</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" style="color:cornflowerblue">{{pageindex}}/{{pagesum}}</a>
-              </li>
-              <li>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-              </li>
-              <li class="page-item">
-                <input class="form-control" id="page_1" size="16" type="text" style="width:60px">
-              </li>
-              <li class="page-item">
-                <a class="page-link" style="color:cornflowerblue" v-on:click="jume();">转</a>
-              </li>
-            </ul> -->
           </div>
         </div>
-
       </div>
     </main>
   </div>
@@ -211,6 +229,7 @@
     var p, d, j;
     var app;
     var items;
+    var goodsNum;
     $(function () {
       Mock.mock("http://127.0.0.1:5500/users", {
         "data|20-20": [{
@@ -230,7 +249,13 @@
         code: 200,
         msg: "Success"
       });
-      $.getJSON("http://127.0.0.1:5500/users", function (response) {
+
+      $.getJSON("/api/shoppingCartItemNum", function (response) {
+        console.log(response.data)
+        goodsNum = response.data;
+        document.getElementById("goodsNum").innerHTML = goodsNum;
+      });
+      $.getJSON("/goods/list", function (response) {
         items = response.data;
         console.log(response.data)
         page = Math.ceil(items.length / 5);

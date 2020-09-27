@@ -29,5 +29,5 @@ public interface GoodsInfoService {
 
     List<GoodsInfo> getGoodsInfoList2();
 
-    GoodsInfo getGoodsInfo(Integer id);
+    GoodsInfo getGoodsInfo(String  goodsId);
 }

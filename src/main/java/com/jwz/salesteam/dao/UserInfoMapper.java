@@ -25,4 +25,8 @@ public interface UserInfoMapper {
     UserInfo selectByTelAndId(String user_tel, Integer id);
 
     UserInfo selectByTel(String user_tel);
+
+    List<UserInfo> selectByFirstEmpId(Integer emp_id);
+
+    List<UserInfo> findByUserTelOrUserName(String search);
 }

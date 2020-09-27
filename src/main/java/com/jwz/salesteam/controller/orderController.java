@@ -1,6 +1,7 @@
 package com.jwz.salesteam.controller;
 
 import com.jwz.salesteam.common.ServiceResultEnum;
+import com.jwz.salesteam.entity.EmpInfo;
 import com.jwz.salesteam.entity.OrderInfo;
 import com.jwz.salesteam.service.EmpInfoService;
 import com.jwz.salesteam.service.GoodsInfoService;
@@ -8,10 +9,12 @@ import com.jwz.salesteam.service.OrderInfoService;
 import com.jwz.salesteam.service.UserInfoService;
 import com.jwz.salesteam.util.Result;
 import com.jwz.salesteam.util.ResultGenerator;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
 @RestController
@@ -20,12 +23,12 @@ public class orderController {
 
     @Autowired
     private OrderInfoService orderInfoService;
+
     /**
      * 添加订单信息
      * @param orderInfo
      * @return
      */
-
     @RequestMapping(value = "/generateOrder", method = RequestMethod.POST)
     @ResponseBody
     public Result saveOrderInfo(@RequestBody OrderInfo orderInfo) {
@@ -50,7 +53,7 @@ public class orderController {
 
     @RequestMapping(value = "/ordersState", method = RequestMethod.POST)
     @ResponseBody
-    public Result updateOrdersState(@RequestParam("order_id") String order_id,@RequestParam("status") int status) {
+    public Result updateOrdersState(@Param("order_id") String order_id, @RequestParam("status") int status) {
         String result = orderInfoService.updateOrdersState(order_id,status);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
             return ResultGenerator.genSuccessResult();
@@ -71,13 +74,23 @@ public class orderController {
 
     /**
      * 销售员查看订单
-     * @param emp_id
+     * @param
      * @return
      */
-    @RequestMapping(value = "/findById/{emp_id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/saleList", method = RequestMethod.GET)
     @ResponseBody
-    public Result getGoodsInfo(@PathVariable("emp_id") String emp_id) {
-        return ResultGenerator.genSuccessResult(orderInfoService.getOrdersInfoList2(emp_id));
+    public Result getGoodsInfo(HttpSession httpSession) {
+        if(httpSession.getAttribute("销售员") == null){
+            return ResultGenerator.genFailResult("未登录");
+        }
+        EmpInfo temp = (EmpInfo)httpSession.getAttribute("销售员");
+        return ResultGenerator.genSuccessResult(orderInfoService.getOrdersInfoList2(temp.getEmpId()));
     }
 
+
+    @RequestMapping(value = "/findByOrderId/{order_id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Result findByOrderDetail(@PathVariable("order_id") String order_id) {
+        return  ResultGenerator.genSuccessResult(orderInfoService.findByOrderDetail(order_id));
+    }
 }

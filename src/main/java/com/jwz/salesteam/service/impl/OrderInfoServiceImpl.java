@@ -1,13 +1,9 @@
 package com.jwz.salesteam.service.impl;
 
 import com.jwz.salesteam.common.ServiceResultEnum;
-import com.jwz.salesteam.controller.common.EmpInfoVO;
-import com.jwz.salesteam.controller.common.OrderConutVO;
-import com.jwz.salesteam.controller.common.UserInfoVO;
-import com.jwz.salesteam.dao.EmpInfoMapper;
-import com.jwz.salesteam.dao.OrderInfoMapper;
-import com.jwz.salesteam.entity.EmpInfo;
-import com.jwz.salesteam.entity.OrderInfo;
+import com.jwz.salesteam.controller.common.*;
+import com.jwz.salesteam.dao.*;
+import com.jwz.salesteam.entity.*;
 import com.jwz.salesteam.service.EmpInfoService;
 import com.jwz.salesteam.service.OrderInfoService;
 import com.jwz.salesteam.service.OrderListService;
@@ -15,12 +11,10 @@ import com.jwz.salesteam.util.BeanUtil;
 import com.jwz.salesteam.util.NumberUtil;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class OrderInfoServiceImpl implements OrderInfoService {
@@ -28,11 +22,20 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     @Autowired
     private OrderInfoMapper orderInfoMapper;
 
+    @Autowired
+    private GoodsListMapper goodsListMapper;
 
+    @Autowired
+    private GoodsInfoMapper goodsInfoMapper;
 
     @Autowired
     private EmpInfoMapper empInfoMapper;
-    
+
+    @Autowired
+    private UserInfoMapper userInfoMapper;
+
+    @Autowired
+    private PurchaseInfoMapper purchaseInfoMapper;
     @Override
     public String saveOrderInfo(OrderInfo orderInfo) {
 
@@ -50,7 +53,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 
     @Override
     public String updateOrdersState(String order_id, int status) {
-        if (status == 4){
+        if (status == 5){
             orderInfoMapper.updateFinishTime(order_id,new Date());
         }
         if (orderInfoMapper.updateOrdersState(order_id,status) > 0) {
@@ -65,8 +68,22 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     }
 
     @Override
-    public List<OrderInfo> getOrdersInfoList2(String emp_id) {
-        return orderInfoMapper.findOrdersInfoList2(emp_id);
+    public List<UserOrderInfoVO> getOrdersInfoList2(String emp_id) {
+        List<UserOrderInfoVO> orderInfoVOS  = BeanUtil.copyList(orderInfoMapper.findOrdersInfoList2(emp_id),UserOrderInfoVO.class); //找到所有的订单id
+        for(UserOrderInfoVO orderInfoVO :orderInfoVOS){
+            //去商品列表查询商品id
+            List<GoodsList> goodsLists = goodsListMapper.selectByGoodsOrderId(orderInfoVO.getOrderId());
+            String goodsName ="";
+            Integer goodsCostPrice = 0;
+            for(GoodsList goodsList: goodsLists){
+                GoodsInfo goodsInfo = goodsInfoMapper.selectByGoodsId(goodsList.getGoodsId());
+                goodsName += "   "+goodsInfo.getGoodsName() +"  X  " + goodsList.getGoodsNum()+"\n";
+                goodsCostPrice += goodsInfo.getGoodsCostPrice();
+            }
+            orderInfoVO.setGoodsAllPrice(goodsCostPrice);
+            orderInfoVO.setGoodsName(goodsName);
+        }
+        return orderInfoVOS;
     }
 
     @Override
@@ -90,6 +107,37 @@ public class OrderInfoServiceImpl implements OrderInfoService {
             res.put(month,empCount);
         }
         return res;
+    }
+
+    @Override
+    public OrderDetailInfoVO findByOrderDetail(String order_id) {
+        //通过id查询goodlist
+        List<GoodsList> goodsLists = goodsListMapper.selectByGoodsOrderId(order_id);
+        List<GoodsInfoVO> goodsInfoVOS = new ArrayList<>();
+        Integer allPrice = 0;
+        for(GoodsList goodsList: goodsLists){
+
+            GoodsInfo goodsInfo = goodsInfoMapper.selectByGoodsId(goodsList.getGoodsId());
+            PurchaseInfo purchaseInfo = purchaseInfoMapper.findByOrderIdAndGoodsId(order_id,goodsList.getGoodsId());
+            allPrice += (goodsInfo.getGoodsSellingPrice() * goodsList.getGoodsNum());
+            GoodsInfoVO goodsInfoVO = new GoodsInfoVO();
+            BeanUtil.copyProperties(goodsInfo,goodsInfoVO);
+            goodsInfoVO.setGoodsNum(goodsList.getGoodsNum());
+            goodsInfoVO.setGoodsPrice(goodsList.getGoodsPrice());
+            goodsInfoVO.setStatus(purchaseInfo.getStatus());
+            goodsInfoVOS.add(goodsInfoVO);
+        }
+        OrderInfo orderInfo = orderInfoMapper.selectByOrderId(order_id);
+
+        OrderDetailInfoVO orderDetailInfoVO = new OrderDetailInfoVO();
+        orderDetailInfoVO.setGoodsInfoVOList(goodsInfoVOS);
+        orderDetailInfoVO.setOrderId(order_id);
+        orderDetailInfoVO.setAllPrice(allPrice);
+        orderDetailInfoVO.setTakeInPrice(orderInfo.getTakeInPrice());
+        orderDetailInfoVO.setEmpName(empInfoMapper.selectByEmpId(orderInfo.getEmpId()).getEmpName());
+        orderDetailInfoVO.setUserInfo(userInfoMapper.selectByPrimaryKey(Integer.valueOf(orderInfo.getUserId())));
+
+        return orderDetailInfoVO;
     }
 
 

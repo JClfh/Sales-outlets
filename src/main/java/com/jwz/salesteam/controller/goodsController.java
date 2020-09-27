@@ -34,10 +34,15 @@ public class goodsController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/info/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/info/{goodsId}", method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation(value="商品详情展示")
-    public Result getGoodsInfo(@PathVariable("id") Integer id) {
-        return ResultGenerator.genSuccessResult(goodsInfoService.getGoodsInfo(id));
+    public Result getGoodsInfo(@PathVariable("goodsId") String goodsId) {
+
+        if (goodsId != null) {
+            return ResultGenerator.genSuccessResult(goodsInfoService.getGoodsInfo(goodsId));
+        }
+        return ResultGenerator.genFailResult("空");
+
     }
 }

@@ -66,7 +66,6 @@ public class purchaseController {
      * @param purchase_id,status
      * @return
      */
-
     @RequestMapping(value = "/updatePurchaseStatus", method = RequestMethod.POST)
     @ResponseBody
     public Result updatePurchaseState(@Param("purchase_id") String purchase_id, @Param("status") int status,HttpSession httpSession) {

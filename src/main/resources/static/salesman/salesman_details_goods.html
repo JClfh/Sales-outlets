@@ -45,7 +45,7 @@
     </button>
     <div class="btn-group" role="group" aria-label="Button group">
       <p class="btn"> 你好，无敌的 销售员！</p>
-      <a class="btn" href="/logout">
+      <a class="btn" href="/api/emp/logout">
         <i class="fa fa-share" aria-hidden="true"></i> &nbsp;退出</a>
     </div>
 
@@ -58,49 +58,47 @@
       <nav class="sidebar-nav ps ps--active-y">
         <ul class="nav">
           <br>
-          <br>
-
           <li class="nav-item nav-dropdown ">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-puzzle"></i> 客户信息</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_add_user.html">
+                <a class="nav-link" href="/salesman/salesman_add_user">
                   <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加客户</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_manage_user.html">
+                <a class="nav-link" href="/salesman/salesman_manage_user">
                   <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;查看客户</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-star"></i>商城</a>
             <ul class="nav-dropdown-items">
 
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_show_goods.html">
+                <a class="nav-link" href="/salesman/salesman_show_goods">
                   <i class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp;商品展示</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_manage_order.html">
+                <a class="nav-link" href="/salesman/salesman_manage_order">
                   <i class="icon-speech"></i>&nbsp;订单管理</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-cursor"></i>个人中心</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_security.html">
+                <a class="nav-link" href="/salesman/salesman_security">
                   <i class="icons cui-shield"></i> &nbsp;账号安全</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_personal_information.html">
+                <a class="nav-link" href="/salesman/salesman_personal_information">
                   <i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp;个人信息</a>
               </li>
 
@@ -139,26 +137,26 @@
         <div class="card">
           <div class="row">
             <div class="col-sm-9">
-              <div v-for="(item, index) in items" class="row" style="padding: 100px;">
+              <div class="row" style="padding: 100px;">
                 <div class="col-xs-8 col-sm-6">
                   <div class="">
-                    <img src="D:\idea_ws\Sales\CoreUI\images\手机.jpg" class="img-responsive" id="preview" width="300"
+                    <img v-bind:src="items.goodsCoverImg" class="img-responsive" id="preview" width="300"
                       height="300">
                   </div>
                 </div>
                 <div class="col-xs-4 col-sm-6">
                   <div class="">
                     <div class="form-group row">
-                      <h3>小米手机 {{item.goodsName}}</h3>
-                    </div>
-                    <!-- <div class="form-group row">
-                      <p style="color:#b0b0b0;">描述{{item. goodsDetailContent}}</p>
-                    </div> -->
-                    <div class="form-group row">
-                      <p style="color:#b0b0b0;">简介{{item. goodsIntro}}</p>
+                      <h3>{{items.goodsName}}</h3>
                     </div>
                     <div class="form-group row">
-                      <span style="color:#ff6700;">价格&yen;{{item.goodsSellingPrice}} </span>&nbsp;<del
+                      <p style="color:#b0b0b0;">{{items.goodsIntro}}</p>
+                    </div>
+                    <div class="form-group row">
+                      <p style="color:#b0b0b0;">{{items.goodsDetailContent}}</p>
+                    </div>
+                    <div class="form-group row">
+                      <span style="color:#ff6700;">零售价 ：&yen; {{items.goodsSellingPrice}}元 </span>&nbsp;&nbsp;&nbsp<del
                         style="color:#b0b0b0;">8888元</del>
                     </div>
                     <div class="row" style="padding: 70px;">
@@ -214,29 +212,24 @@
   <script src="../vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
   <script src="../vendors/mock.js/js/mock.min.js"></script>
   <script src="../vendors/vue.js/js/vue.min.js"></script>
+  <script type="text/javascript">
+    function getParams(key) {
+      var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) {
+        return unescape(r[2]);
+      }
+      return null;
+    };
+    console.log("参数param1:"+getParams("goodsId"));//输出aa
+  </script>
   <script>
     var p, d, j;
     var app;
     var items;
     $(function () {
-      Mock.mock("http://127.0.0.1:5500/users", {
-        "data|1-1": [{
-          id: "@increment()",//编号
-          goodsId: "@increment()",//商品编号
-          "goodsName|1": ["@cname", "@name"],//商品姓名
-          goodsSellingPrice: "@increment()",//商品零售价
-          goodsCostPrice: "@increment()",//商品成本价
-          goodsCoverImg: "@cname()",//商品图片
-          goodsDetailContent: "@cname()",//商品信息描述 
-          goodsIntro: "@cname()",//商品信息简介
-          createTime: "@datetime()",//创建时间
 
-        }],
-        suceess: true,
-        code: 200,
-        msg: "Success"
-      });
-      $.getJSON("http://127.0.0.1:5500/users", function (response) {
+      $.getJSON("/goods/info/"+getParams("goodsId"), function (response) {
         items = response.data;
         console.log(response.data)
         page = Math.ceil(items.length / 5);
@@ -272,17 +265,24 @@
           methods: {
             //加入购物车
             addshow: function () {
-              alert("加入成功");
-              $('#success').modal('show');
-              window.location.href="./salesman_shop_cart.html";
+              $.ajax({
+                url: "/api/shopping-cart/"+this.items.goodsId,
+                type:"get",
+                success: function () {
+                  $('#success').modal('show');
+                  window.location.href="./salesman_shop_cart.html";
+                },
+                error: function (xhr, status, error) {
+                  $('#editModal').modal('hide');
+                  $('#editFailModal').modal('show');
+                }
+              });
+
             },
       //查看购物车
             show: function () {
-              alert("查看购物车");
-              window.location.href="./salesman_shop_cart.html";
-
               $.ajax({
-                url: "/admin/emp/update",
+                url: "/api/shopping-cart/"+this.items.goodsId,
                 type: "post",
                 //将/jsON转化为字符串传递
                 dataType: 'json',
@@ -293,7 +293,7 @@
                 success: function () {
                   $('#editModal').modal('hide');
                   $('#success').modal('show');
-                  window.location.href = "/admin/admin_manage_members.html";
+                  window.location.href="./salesman_shop_cart.html";
                 },
                 error: function (xhr, status, error) {
                   $('#editModal').modal('hide');

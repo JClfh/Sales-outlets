@@ -39,7 +39,7 @@
     </button>
     <div class="btn-group" role="group" aria-label="Button group">
       <p class="btn"> 你好，无敌的 销售员！</p>
-      <a class="btn" href="/logout">
+      <a class="btn" href="/api/emp/logout">
         <i class="fa fa-share" aria-hidden="true"></i> &nbsp;退出</a>
     </div>
 
@@ -50,49 +50,47 @@
       <nav class="sidebar-nav ps ps--active-y">
         <ul class="nav">
           <br>
-          <br>
-
           <li class="nav-item nav-dropdown ">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-puzzle"></i> 客户信息</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_add_user.html">
+                <a class="nav-link" href="/salesman/salesman_add_user">
                   <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加客户</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_manage_user.html">
+                <a class="nav-link" href="/salesman/salesman_manage_user">
                   <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;查看客户</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-star"></i>商城</a>
             <ul class="nav-dropdown-items">
 
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_show_goods.html">
+                <a class="nav-link" href="/salesman/salesman_show_goods">
                   <i class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp;商品展示</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_manage_order.html">
+                <a class="nav-link" href="/salesman/salesman_manage_order">
                   <i class="icon-speech"></i>&nbsp;订单管理</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-cursor"></i>个人中心</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_security.html">
+                <a class="nav-link" href="/salesman/salesman_security">
                   <i class="icons cui-shield"></i> &nbsp;账号安全</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_personal_information.html">
+                <a class="nav-link" href="/salesman/salesman_personal_information">
                   <i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp;个人信息</a>
               </li>
 
@@ -140,7 +138,7 @@
                               <td>登录ID</td>
                               <td>
                                 <div class="col-md-9">
-                                  <input class="form-control" id="text-input" type="text" name="text-input"
+                                  <input class="form-control" id="empId" type="text" name="empId"
                                     v-model="items.empId" disabled="disabled" required>
                                 </div>
                               </td>
@@ -149,7 +147,7 @@
                               <td>原密码</td>
                               <td>
                                 <div class="col-md-9">
-                                  <input class="form-control" id="text-input" type="text" name="text-input"
+                                  <input class="form-control" id="empPwd" type="text" name="empPwd"
                                     v-model="edititems.empPwd" placeholder="原密码" required>
                                   <div class="invalid-feedback">
                                     原密码不能为空！
@@ -161,7 +159,7 @@
                               <td>新密码</td>
                               <td>
                                 <div class="col-md-9">
-                                  <input class="form-control" id="pwd1" type="text" name="text-input" placeholder="新密码"
+                                  <input class="form-control" id="pwd1" type="text" name="pwd1" placeholder="新密码"
                                     pattern="^.{6,20}$" required>
                                   <div class="invalid-feedback">
                                     密码个数6-20位！
@@ -173,7 +171,7 @@
                               <td>再次确认密码</td>
                               <td>
                                 <div class="col-md-9">
-                                  <input class="form-control" id="pwd2" type="text" name="text-input"
+                                  <input class="form-control" id="pwd2" type="text" name="pwd2"
                                     v-model="edititems.empnewPwd" placeholder="再次确认密码" required>
                                   <div class="invalid-feedback" >
                                     不能为空！
@@ -209,7 +207,7 @@
               </div>
               <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">否</button>
-                <button class="btn btn-danger" type="button" data-toggle="modal" v-on:click="addA()">确定</button>
+                <button class="btn btn-danger" type="button" data-toggle="modal" v-on:click="save()">确定</button>
               </div>
             </div>
           </div>

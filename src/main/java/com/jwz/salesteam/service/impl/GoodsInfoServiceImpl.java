@@ -99,7 +99,7 @@ public class GoodsInfoServiceImpl implements GoodsInfoService {
     }
 
     @Override
-    public GoodsInfo getGoodsInfo(Integer id) {
-        return goodsInfoMapper.getGoodsInfo(id);
+    public GoodsInfo getGoodsInfo(String goodsId) {
+        return goodsInfoMapper.selectByGoodsId(goodsId);
     }
 }

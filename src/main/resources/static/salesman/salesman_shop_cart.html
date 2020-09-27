@@ -41,7 +41,7 @@
     </button>
     <div class="btn-group" role="group" aria-label="Button group">
       <p class="btn"> 你好，无敌的销售员！</p>
-      <a class="btn" href="/logout">
+      <a class="btn" href="/api/emp/logout">
         <i class="fa fa-share" aria-hidden="true"></i> &nbsp;退出</a>
     </div>
 
@@ -54,49 +54,47 @@
       <nav class="sidebar-nav ps ps--active-y">
         <ul class="nav">
           <br>
-          <br>
-
           <li class="nav-item nav-dropdown ">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-puzzle"></i> 客户信息</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_add_user.html">
+                <a class="nav-link" href="/salesman/salesman_add_user">
                   <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加客户</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_manage_user.html">
+                <a class="nav-link" href="/salesman/salesman_manage_user">
                   <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;查看客户</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-star"></i>商城</a>
             <ul class="nav-dropdown-items">
 
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_show_goods.html">
+                <a class="nav-link" href="/salesman/salesman_show_goods">
                   <i class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp;商品展示</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_manage_order.html">
+                <a class="nav-link" href="/salesman/salesman_manage_order">
                   <i class="icon-speech"></i>&nbsp;订单管理</a>
               </li>
             </ul>
           </li>
-          <br><br><br>
+          <br><br>
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon icon-cursor"></i>个人中心</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_security.html">
+                <a class="nav-link" href="/salesman/salesman_security">
                   <i class="icons cui-shield"></i> &nbsp;账号安全</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./salesman_personal_information.html">
+                <a class="nav-link" href="/salesman/salesman_personal_information">
                   <i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp;个人信息</a>
               </li>
 
@@ -144,20 +142,20 @@
                   <tbody>
                     <tr class="protop" v-for="(item, index) in items"
                       v-if="index<=pageindex*5-1 && index>=(pageindex-1)*5">
-                      <td class="text-center proitem"><img v:src="{{item.goodsCoverImg}}" width="100" id="proImg">
+                      <td class="text-center proitem"  align="center" style=" vertical-align:middle"><img v-bind:src="item.goodsCoverImg" width="100" height="100" id="proImg">
                       </td>
-                      <td class="text-center proitem">{{item.goodsName}}</td>
-                      <td class="text-center proitem">{{item.goodsSellingPrice}} 元</td>
-                      <td class="text-center proitem">
-                        <input class="number" type="number" v-model="item.goodsNum" style="text-align: center" step="1"
-                          min="1" max="20" value=1 oninput="javascript:this.value=this.value.replace(/[^\d]/g,'')"
-                          onchange="numberChange(this)">
+                      <td class="text-center proitem" align="center" style=" vertical-align:middle">{{item.goodsName}}</td>
+                      <td class="text-center proitem" align="center" style=" vertical-align:middle">{{item.goodsSellingPrice}} 元</td>
+                      <td class="text-center proitem" align="center" style=" vertical-align:middle">
+                        <input class="number" type="number" v-model="item.goodsNum" style="text-align: center" step="1" v-model="item.goodsNum"
+                          min="1" max="5" value=1 oninput="javascript:this.value=this.value.replace(/[^\d]/g,'')"
+                               @change="numberChange(index)">
                       </td>
                       {{All}}
                       <!-- 小计 -->
-                      <td class="text-center proitem" style="color:#ff6700"><del>{{item.goodstakeInPrice}}元</del></td>
-                      <td class="text-center proitem" style="color:#ff6700">{{item.onetakeIn}}元</td>
-                      <td class="text-center proitem">
+                      <td class="text-center proitem" align="center" style="color:#ff6700;vertical-align:middle"><del>{{item.goodstakeInPrice}}元</del></td>
+                      <td class="text-center proitem"  align="center"style="color:#ff6700;vertical-align:middle">{{item.onetakeIn}}元</td>
+                      <td class="text-center proitem" align="center" style=" vertical-align:middle">
                         <button type="button" class="btn btn-square btn-light" aria-label="Close"
                           v-on:click="del(index)"><span aria-hidden="true">×</span></button>
 
@@ -197,7 +195,7 @@
 
 
               </div>
-              <div v-if="items.length==0">空空如也,快去购物吧骚年</div>
+              <div v-if="items.length===0">空空如也,快去购物吧骚年</div>
 
             </div>
           </div>
@@ -302,9 +300,9 @@
               </div>
               <div class="card-body">
                 <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="text-input">联系电话</label>
+                  <label class="col-md-3 col-form-label" for="userTel">联系电话</label>
                   <div class=" col-md-9 input-group">
-                    <input class="form-control" id="text-input" size="16" type="text" placeholder="联系电话"
+                    <input class="form-control" id="userTel" size="16" type="text" placeholder="联系电话"
                       v-model="edititems.userTel" pattern="^[0-9]+$" required>
                     <span class="input-group-append">
                       <button class="btn btn-secondary" type="button" v-on:click="GO()">Go!</button>
@@ -312,17 +310,17 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="text-input">姓名</label>
+                  <label class="col-md-3 col-form-label" for="userName">姓名</label>
                   <div class="col-md-9">
-                    <input class="form-control" id="text-input" type="text" name="text-input" placeholder="姓名"
+                    <input class="form-control" id="userName" type="text" name="userName" placeholder="姓名"
                       v-model="edititems.userName" required>
 
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="text-input">地址</label>
+                  <label class="col-md-3 col-form-label" for="userAddress">地址</label>
                   <div class="col-md-9">
-                    <input class="form-control" id="text-input" type="text" name="text-input" placeholder="地址"
+                    <input class="form-control" id="userAddress" type="text" name="userAddress" placeholder="地址"
                       v-model="edititems.userAddress" required>
 
                   </div>
@@ -361,18 +359,6 @@
   <script src="../vendors/mock.js/js/mock.min.js"></script>
   <script src="../vendors/vue.js/js/vue.min.js"></script>
   <script>
-    function numberChange(obj) {
-      var number = obj.value;
-      if (number > 20) {
-        obj.value = 20
-        swal({ title: "失败", text: "数量超过限制值", type: "warning" });
-
-      } else if (number <= 0) {
-        obj.value = 1
-      }
-    }
-  </script>
-  <script>
     var p, d, j;
     var app;
     var items;
@@ -390,7 +376,7 @@
         code: 200,
         msg: "Success"
       });
-      $.getJSON("http://127.0.0.1:5500/users", function (response) {
+      $.getJSON("/api/shoppingCartItem", function (response) {
         items = response.data;
 
         console.log(response.data)
@@ -438,12 +424,38 @@
             }
           },
           methods: {
-
+            numberChange: function(index){
+              var number = this.items[index].goodsNum;
+              if (number > 20) {
+                this.items[index].goodsNum = 20
+              } else if (number <= 0) {
+                this.items[index].goodsNum = 1
+              }
+              $.ajax({
+                url: "/api/shoppingCartItem/changeNum",
+                type:"get",
+                dataType: 'json',
+                data:{"goods_id":this.items[index].goodsId,"goods_num":this.items[index].goodsNum},
+                success: function () {
+                },
+                error: function (xhr, status, error) {
+                }
+              });
+            },
             // 删除
             del: function (index) {
-              $('#dangerModal').modal('show');
-              d = index;
+              // $('#dangerModal').modal('show');
+              // d = index;
               // alert(d)
+              $.ajax({
+                url: "/api/shoppingCartItem/delItem/"+this.items[index].goodsId,
+                type:"get",
+                dataType: 'json',
+                success: function () {
+                },
+                error: function (xhr, status, error) {
+                }
+              });
             },
             delCheck: function () {
 

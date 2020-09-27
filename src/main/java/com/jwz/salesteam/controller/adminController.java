@@ -3,9 +3,11 @@ package com.jwz.salesteam.controller;
 import com.jwz.salesteam.common.ServiceResultEnum;
 import com.jwz.salesteam.entity.EmpInfo;
 import com.jwz.salesteam.entity.GoodsInfo;
+import com.jwz.salesteam.entity.SupplierInfo;
 import com.jwz.salesteam.entity.UserInfo;
 import com.jwz.salesteam.service.EmpInfoService;
 import com.jwz.salesteam.service.GoodsInfoService;
+import com.jwz.salesteam.service.SupplierInfoService;
 import com.jwz.salesteam.service.UserInfoService;
 import com.jwz.salesteam.util.NumberUtil;
 import com.jwz.salesteam.util.Result;
@@ -13,11 +15,14 @@ import com.jwz.salesteam.util.ResultGenerator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import sun.misc.BASE64Decoder;
 
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.nio.Buffer;
 import java.util.Date;
@@ -30,7 +35,7 @@ import java.util.Objects;
  * @modified By：
  * @version: 1.0
  */
-@RestController
+@Controller
 @RequestMapping("/admin")
 @Api(value = "adminController|一个用来测试管理员注解的控制器")
 public class adminController {
@@ -43,6 +48,43 @@ public class adminController {
 
     @Autowired
     private UserInfoService userInfoService;
+
+    @Autowired
+    private SupplierInfoService supplierInfoService;
+
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value="登录")
+    public Result login(@RequestParam("emp_id") String emp_id,@RequestParam("emp_pwd") String emp_pwd, HttpSession httpSession) {
+
+        if (StringUtils.isEmpty(emp_id)) {
+            return ResultGenerator.genFailResult(ServiceResultEnum.EMP_ID_NULL.getResult());
+        }
+        if (StringUtils.isEmpty(emp_pwd)) {
+            return ResultGenerator.genFailResult(ServiceResultEnum.EMP_PWD_NULL.getResult());
+        }
+        String loginResult = empInfoService.Adminlogin(emp_id, emp_pwd,httpSession);
+        //登录成功
+        if (ServiceResultEnum.SUCCESS.getResult().equals(loginResult)) {
+            return ResultGenerator.genSuccessResult();
+        }
+        //登录失败
+        return ResultGenerator.genFailResult(loginResult);
+    }
+
+    /**
+     * 退出
+     * @param
+     * @return
+     */
+    @GetMapping("/logout")
+    @ApiOperation(value="退出")
+    public String logout( HttpSession httpSession) {
+        httpSession.removeAttribute("admin");
+        return "redirect:http://localhost:9091/admin/login";
+    }
+
     /**
      * 添加职员信息
      * @param empInfo
@@ -143,7 +185,7 @@ public class adminController {
     @RequestMapping(value = "/goods/save", method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation(value="添加商品信息")
-    public Result saveGoodsInfo(GoodsInfo goodsInfo) throws IOException {
+    public Result saveGoodsInfo(GoodsInfo goodsInfo)  {
         if (StringUtils.isEmpty(goodsInfo.getGoodsName())
                 || StringUtils.isEmpty(goodsInfo.getGoodsName())
                 || Objects.isNull(goodsInfo.getGoodsSellingPrice())
@@ -291,4 +333,122 @@ public class adminController {
         return ResultGenerator.genSuccessResult(userInfoService.findByUserName(user_name));
     }
 
+
+    /**
+     * 添加供应商信息
+     * @param supplierInfo
+     * @return
+     */
+    @RequestMapping(value = "/supplier/save", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value="添加供应商信息")
+    public Result saveSupplierInfo(@RequestBody SupplierInfo supplierInfo) {
+        if (StringUtils.isEmpty(supplierInfo.getSupplierName())) {
+            return ResultGenerator.genFailResult("参数异常！");
+        }
+
+        String result = supplierInfoService.saveSupplierInfo(supplierInfo);
+        if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult(result);
+        }
+    }
+
+    /**
+     * 修改供应商信息
+     * @param supplierInfo
+     * @return
+     */
+    @RequestMapping(value = "/supplier/update", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value="修改供应商信息")
+    public Result updateSupplierInfo(@RequestBody  SupplierInfo supplierInfo) {
+        if (StringUtils.isEmpty(supplierInfo.getSupplierName())
+                || StringUtils.isEmpty(supplierInfo.getSupplierId())) {
+            return ResultGenerator.genFailResult("参数异常！");
+        }
+        String result = supplierInfoService.updateSupplierInfo(supplierInfo);
+        if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult(result);
+        }
+    }
+
+    /**
+     * 删除供应商信息
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/supplier/del/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value="删除供应商信息")
+    public Result deleteSupplier(@PathVariable("id") Integer id) {
+
+        if (supplierInfoService.delSupplierInfo(id)>0) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult("删除失败");
+        }
+    }
+
+    /**
+     * 查询供应商信息列表
+     * @return
+     */
+    @RequestMapping(value = "/supplier/list", method = RequestMethod.GET)
+    @ResponseBody
+    @ApiOperation(value="查询供应商信息列表")
+    public Result getSupplierList() {
+        return ResultGenerator.genSuccessResult(supplierInfoService.getSupplierInfoList2());
+    }
+
+    /**
+     * 查询供应商信息（搜索)
+     * @param supplier_name
+     * @return
+     */
+    @RequestMapping(value = "/supplier/findByName/{supplier_name}", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value="查询供应商信息")
+    public Result supplierInfoFindByName(@PathVariable("supplier_name") String supplier_name) {
+        return ResultGenerator.genSuccessResult(supplierInfoService.findBySupplierName(supplier_name));
+    }
+
+    /**
+     * 修改职员信息（锁）
+     * @param id,isLock
+     * @return
+     */
+    @RequestMapping(value = "/emp/changelock", method = RequestMethod.POST)
+    @ResponseBody
+
+    public Result changelock(@Param("id") Integer id, @Param("isLock") Integer isLock) {
+
+        String result = empInfoService.changelock(id,isLock);
+        if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult(result);
+        }
+    }
+
+    /**
+     * 修改职员信息（锁）
+     * @param id,isLock
+     * @return
+     */
+    @RequestMapping(value = "/supplier/changelock", method = RequestMethod.POST)
+    @ResponseBody
+
+    public Result changeSupplierlock(@Param("id") Integer id, @Param("isDel") Integer isDel) {
+
+        String result = supplierInfoService.changeSupplierlock(id,isDel);
+        if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult(result);
+        }
+    }
 }

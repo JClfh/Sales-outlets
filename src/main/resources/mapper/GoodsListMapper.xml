@@ -111,4 +111,15 @@
     where goods_id = #{goods_id,jdbcType=VARCHAR} and order_id = #{order_id,jdbcType=VARCHAR}
   </select>
 
+  <select id="sumCountPriceByOrderId" resultType="java.lang.Integer">
+   select sum(goods_cost_price) from goods_list left join goods_info on goods_list.goods_id = goods_info.goods_id
+   where goods_list.order_id = #{order_id,jdbcType=VARCHAR};
+  </select>
+
+  <select id="selectByGoodsOrderId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from goods_list
+    where order_id = #{order_id,jdbcType=VARCHAR}
+  </select>
 </mapper>

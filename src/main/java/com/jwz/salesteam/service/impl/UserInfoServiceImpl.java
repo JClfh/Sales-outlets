@@ -70,8 +70,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 
         List<UserInfoVO> userInfoVOList =  BeanUtil.copyList(userInfoMapper.findUserInfoList(), UserInfoVO.class);
         for(UserInfoVO userInfoVO:userInfoVOList){
-            String firstEmpName = empInfoMapper.selectByPrimaryKey(userInfoVO.getFirstSaleman()).getEmpName();
-            String lastEmpName = empInfoMapper.selectByPrimaryKey(userInfoVO.getLastSaleman()).getEmpName();
+            String firstEmpName = userInfoVO.getFirstSaleman()==0 ? "无" :empInfoMapper.selectByPrimaryKey(userInfoVO.getFirstSaleman()).getEmpName();
+            String lastEmpName = userInfoVO.getLastSaleman()==0 ? "无" :empInfoMapper.selectByPrimaryKey(userInfoVO.getLastSaleman()).getEmpName();
             userInfoVO.setFirstSalemanName(firstEmpName);
             userInfoVO.setLastSalemanName(lastEmpName);
         }
@@ -82,8 +82,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     public List<UserInfoVO> findByUserName(String user_name) {
         List<UserInfoVO> userInfoVOList =  BeanUtil.copyList(userInfoMapper.findByUserName(user_name), UserInfoVO.class);
         for(UserInfoVO userInfoVO:userInfoVOList){
-            String firstEmpName = empInfoMapper.selectByPrimaryKey(userInfoVO.getFirstSaleman()).getEmpName();
-            String lastEmpName = empInfoMapper.selectByPrimaryKey(userInfoVO.getLastSaleman()).getEmpName();
+            String firstEmpName = userInfoVO.getFirstSaleman()==0 ? "无" :empInfoMapper.selectByPrimaryKey(userInfoVO.getFirstSaleman()).getEmpName();
+            String lastEmpName = userInfoVO.getLastSaleman()==0 ? "无" :empInfoMapper.selectByPrimaryKey(userInfoVO.getLastSaleman()).getEmpName();
             userInfoVO.setFirstSalemanName(firstEmpName);
             userInfoVO.setLastSalemanName(lastEmpName);
         }
@@ -112,5 +112,27 @@ public class UserInfoServiceImpl implements UserInfoService {
 //        return "出现未知错误";
     }
 
+    @Override
+    public List<UserInfoVO> selectByFirstEmpId(Integer empId) {
+        List<UserInfoVO> userInfoVOList =  BeanUtil.copyList(userInfoMapper.selectByFirstEmpId(empId), UserInfoVO.class);
+        for(UserInfoVO userInfoVO:userInfoVOList){
+            String firstEmpName = userInfoVO.getFirstSaleman()==0 ? "无" :empInfoMapper.selectByPrimaryKey(userInfoVO.getFirstSaleman()).getEmpName();
+            String lastEmpName = userInfoVO.getLastSaleman()==0 ? "无" :empInfoMapper.selectByPrimaryKey(userInfoVO.getLastSaleman()).getEmpName();
+            userInfoVO.setFirstSalemanName(firstEmpName);
+            userInfoVO.setLastSalemanName(lastEmpName);
+        }
+        return userInfoVOList;
+    }
 
+    @Override
+    public List<UserInfoVO> findByUserTelOrUserName(String search) {
+        List<UserInfoVO> userInfoVOList =  BeanUtil.copyList(userInfoMapper.findByUserTelOrUserName(search), UserInfoVO.class);
+        for(UserInfoVO userInfoVO:userInfoVOList){
+            String firstEmpName = userInfoVO.getFirstSaleman()==0 ? "无" :empInfoMapper.selectByPrimaryKey(userInfoVO.getFirstSaleman()).getEmpName();
+            String lastEmpName = userInfoVO.getLastSaleman()==0 ? "无" :empInfoMapper.selectByPrimaryKey(userInfoVO.getLastSaleman()).getEmpName();
+            userInfoVO.setFirstSalemanName(firstEmpName);
+            userInfoVO.setLastSalemanName(lastEmpName);
+        }
+        return userInfoVOList;
+    }
 }

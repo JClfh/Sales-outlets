@@ -53,7 +53,7 @@ public class PurchaseInfoServiceImpl implements PurchaseInfoService {
             orderListVO.setOrderId(orderId);
             List<PurchaseInfoVO> purchaseInfoList = BeanUtil.copyList(purchaseInfoMapper.selectByEmpId(emp_id), PurchaseInfoVO.class);
             for(PurchaseInfoVO purchaseInfoVO:purchaseInfoList){
-                String goodsName = goodsInfoMapper.selectByGoodsName(purchaseInfoVO.getGoodsId()).getGoodsName();
+                String goodsName = goodsInfoMapper.selectByGoodsId(purchaseInfoVO.getGoodsId()).getGoodsName();
                 Integer goodsNum = goodsListMapper.selectByGoodsIdAndOrderId(purchaseInfoVO.getGoodsId(),purchaseInfoVO.getOrderId());
                 purchaseInfoVO.setGoodsName(goodsName);
                 purchaseInfoVO.setGoodsNum(goodsNum);
@@ -75,7 +75,7 @@ public class PurchaseInfoServiceImpl implements PurchaseInfoService {
             orderListVO.setOrderId(orderId);
             List<PurchaseInfoVO> purchaseInfoList = BeanUtil.copyList(purchaseInfoMapper.selectByAccountEmpId(accountEmpId), PurchaseInfoVO.class);
             for(PurchaseInfoVO purchaseInfoVO:purchaseInfoList){
-                String goodsName = goodsInfoMapper.selectByGoodsName(purchaseInfoVO.getGoodsId()).getGoodsName();
+                String goodsName = goodsInfoMapper.selectByGoodsId(purchaseInfoVO.getGoodsId()).getGoodsName();
                 Integer goodsNum = goodsListMapper.selectByGoodsIdAndOrderId(purchaseInfoVO.getGoodsId(),purchaseInfoVO.getOrderId());
                 purchaseInfoVO.setGoodsName(goodsName);
                 purchaseInfoVO.setGoodsNum(goodsNum);
@@ -110,7 +110,7 @@ public class PurchaseInfoServiceImpl implements PurchaseInfoService {
             orderListVO.setOrderId(orderId);
             List<PurchaseInfoVO> purchaseInfoList = BeanUtil.copyList(purchaseInfoMapper.findPurchaseInfoByOrderId(orderId,0,null), PurchaseInfoVO.class);
             for(PurchaseInfoVO purchaseInfoVO:purchaseInfoList){
-                String goodsName = goodsInfoMapper.selectByGoodsName(purchaseInfoVO.getGoodsId()).getGoodsName();
+                String goodsName = goodsInfoMapper.selectByGoodsId(purchaseInfoVO.getGoodsId()).getGoodsName();
                 Integer goodsNum = goodsListMapper.selectByGoodsIdAndOrderId(purchaseInfoVO.getGoodsId(),purchaseInfoVO.getOrderId());
                 purchaseInfoVO.setGoodsName(goodsName);
                 purchaseInfoVO.setGoodsNum(goodsNum);
@@ -180,9 +180,9 @@ public class PurchaseInfoServiceImpl implements PurchaseInfoService {
             if(tempList.size()>0){
             List<PurchaseInfoVO> purchaseInfoList = BeanUtil.copyList(tempList, PurchaseInfoVO.class);
             for(PurchaseInfoVO purchaseInfoVO:purchaseInfoList){
-                String goodsName = goodsInfoMapper.selectByGoodsName(purchaseInfoVO.getGoodsId()).getGoodsName();
+                String goodsName = goodsInfoMapper.selectByGoodsId(purchaseInfoVO.getGoodsId()).getGoodsName();
                 Integer goodsNum = goodsListMapper.selectByGoodsIdAndOrderId(purchaseInfoVO.getGoodsId(),purchaseInfoVO.getOrderId());
-                Integer goodsCostPrice = goodsInfoMapper.selectByGoodsName(purchaseInfoVO.getGoodsId()).getGoodsCostPrice();
+                Integer goodsCostPrice = goodsInfoMapper.selectByGoodsId(purchaseInfoVO.getGoodsId()).getGoodsCostPrice();
                 purchaseInfoVO.setGoodsName(goodsName);
                 purchaseInfoVO.setGoodsNum(goodsNum);
                 purchaseInfoVO.setGoodsCostPrice(goodsCostPrice);

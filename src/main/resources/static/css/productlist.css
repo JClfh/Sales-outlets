@@ -61,17 +61,17 @@
 
 }
 /*第一个div*/
-.current .sale{
-      margin: 20px 8px 0px;
-      width: 340px;
-      height: 470px;
-      padding: 20px;
-      background-color: white;
-      border: 1px solid rgb(206, 197, 197);
-      float: left;
-      position: relative;
-      /* box-shadow: 0 0 5px 6px #666;  */
-  }
+/*.current .sale{*/
+/*      margin: 20px 8px 0px;*/
+/*      width: 360px;*/
+/*      height: 500px;*/
+/*      padding: 20px;*/
+/*      background-color: white;*/
+/*      border: 1px solid rgb(206, 197, 197);*/
+/*      float: left;*/
+/*      position: relative;*/
+/*      !* box-shadow: 0 0 5px 6px #666;  *!*/
+/*  }*/
   .current .sale a{
     color: black;
     text-decoration: none;/*去除下划线*/
@@ -90,8 +90,8 @@
  
 }
 .current img{
-    width: 270px;
-    height: 278px;
+    width: 250px;
+    height: 250px;
     position: relative;
 }
 

@@ -39,4 +39,7 @@ public interface EmpInfoService {
     EmpInfoVO getPersonSaleman(EmpInfo empInfo);
 
 
+    String Adminlogin(String emp_id, String emp_pwd, HttpSession httpSession);
+
+    String changelock(Integer id,Integer is_lock);
 }
